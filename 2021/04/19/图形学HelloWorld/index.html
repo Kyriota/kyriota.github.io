@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>图形学HelloWorld | KYRIOTA</title>
+  <meta name="author" content="KYRIOTA">
+  
+  <meta name="description" content="逛b站看到会转的甜甜圈，对图形学有点上头，自己拿蜥语言做个立方体玩玩">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="图形学HelloWorld"/>
+  <meta property="og:site_name" content="KYRIOTA"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/kyriota/favicon.ico" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/kyriota/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/kyriota/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/kyriota/atom.xml" title="KYRIOTA" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/kyriota/">KYRIOTA</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/kyriota/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/kyriota/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/kyriota/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/kyriota/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/kyriota/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 图形学HelloWorld</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>逛b站看到会转的甜甜圈，对图形学有点上头，自己拿蜥语言做个立方体玩玩</p>
+<img src="/images/图形学HelloWorld.gif" height="200" width="200" />
+
+<span id="more"></span>
+
+<h1 id="图形学HelloWorld"><a href="#图形学HelloWorld" class="headerlink" title="图形学HelloWorld"></a>图形学HelloWorld</h1><p>既然是HelloWorld那就没什么好解释的了O(∩_∩)O</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> size 51<span class="comment">//规定屏幕大小</span></span></span><br><span class="line"><span class="comment">////cal_r用来算个模长</span></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">cal_r</span><span class="params">(<span class="keyword">float</span> x,<span class="keyword">float</span> y,<span class="keyword">float</span> z)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sqrt</span>(x*x+y*y+z*z);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">char</span> shade[]=<span class="string">&quot;.,;!o*m0&amp;%@&quot;</span>;<span class="comment">//阴影字符集</span></span><br><span class="line"><span class="keyword">int</span> out_i[size][size];<span class="comment">//记录亮度，映射到字符集</span></span><br><span class="line"><span class="keyword">float</span> dyn=<span class="number">4.0</span>;<span class="comment">//开合幅度</span></span><br><span class="line"><span class="keyword">float</span> a=<span class="number">8.0</span>;<span class="comment">//立方体边长</span></span><br><span class="line"><span class="keyword">float</span> delta=<span class="number">0.75</span>;<span class="comment">//遍历立方体的步长</span></span><br><span class="line"><span class="keyword">float</span> move=(size<span class="number">-1</span>)/<span class="number">2</span>;<span class="comment">//从坐标原点偏移到屏幕中心所需的偏移量</span></span><br><span class="line"><span class="keyword">float</span> dis[size][size];<span class="comment">//记录最小距离，由此判断遮罩关系</span></span><br><span class="line"><span class="comment">//cal_shade用来算个阴影</span></span><br><span class="line"><span class="comment">//Par&#123;n_i是被选中相对不变的方向,相当于此方向穿过平面;n_j作为判定是上平面还是下平面的值，只可能是1或-1&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal_shade</span><span class="params">(<span class="keyword">float</span> *n,<span class="keyword">int</span> n_i,<span class="keyword">int</span> n_j,<span class="keyword">float</span> *ro_a,<span class="keyword">float</span> *ro_b,<span class="keyword">float</span> *ro_c,<span class="keyword">float</span> *light,<span class="keyword">float</span> rotate,<span class="keyword">int</span> *out_i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)n[i]=i==n_i?n_j:<span class="number">0</span>;<span class="comment">//确定原始法向量n[]</span></span><br><span class="line">    <span class="keyword">float</span> n_a[<span class="number">3</span>]=&#123;n[<span class="number">0</span>]*ro_a[<span class="number">0</span>]+n[<span class="number">1</span>]*ro_a[<span class="number">3</span>]+n[<span class="number">2</span>]*ro_a[<span class="number">6</span>],</span><br><span class="line">                   n[<span class="number">0</span>]*ro_a[<span class="number">1</span>]+n[<span class="number">1</span>]*ro_a[<span class="number">4</span>]+n[<span class="number">2</span>]*ro_a[<span class="number">7</span>],</span><br><span class="line">                   n[<span class="number">0</span>]*ro_a[<span class="number">2</span>]+n[<span class="number">1</span>]*ro_a[<span class="number">5</span>]+n[<span class="number">2</span>]*ro_a[<span class="number">8</span>]&#125;;<span class="comment">//法向量第一次旋转</span></span><br><span class="line">    <span class="keyword">float</span> n_b[<span class="number">3</span>]=&#123;n_a[<span class="number">0</span>]*ro_b[<span class="number">0</span>]+n_a[<span class="number">1</span>]*ro_b[<span class="number">3</span>]+n_a[<span class="number">2</span>]*ro_b[<span class="number">6</span>],</span><br><span class="line">                   n_a[<span class="number">0</span>]*ro_b[<span class="number">1</span>]+n_a[<span class="number">1</span>]*ro_b[<span class="number">4</span>]+n_a[<span class="number">2</span>]*ro_b[<span class="number">7</span>],</span><br><span class="line">                   n_a[<span class="number">0</span>]*ro_b[<span class="number">2</span>]+n_a[<span class="number">1</span>]*ro_b[<span class="number">5</span>]+n_a[<span class="number">2</span>]*ro_b[<span class="number">8</span>]&#125;;<span class="comment">//法向量第二次旋转</span></span><br><span class="line">    <span class="keyword">float</span> n_r[<span class="number">3</span>]=&#123;n_b[<span class="number">0</span>]*ro_c[<span class="number">0</span>]+n_b[<span class="number">1</span>]*ro_c[<span class="number">3</span>]+n_b[<span class="number">2</span>]*ro_c[<span class="number">6</span>],</span><br><span class="line">                   n_b[<span class="number">0</span>]*ro_c[<span class="number">1</span>]+n_b[<span class="number">1</span>]*ro_c[<span class="number">4</span>]+n_b[<span class="number">2</span>]*ro_c[<span class="number">7</span>],</span><br><span class="line">                   n_b[<span class="number">0</span>]*ro_c[<span class="number">2</span>]+n_b[<span class="number">1</span>]*ro_c[<span class="number">5</span>]+n_b[<span class="number">2</span>]*ro_c[<span class="number">8</span>]&#125;;</span><br><span class="line">    <span class="comment">//n_r[]作为绕三轴旋转rotate角度后的法向量</span></span><br><span class="line">    <span class="keyword">float</span> result=(n_r[<span class="number">0</span>]*light[<span class="number">0</span>]+n_r[<span class="number">1</span>]*light[<span class="number">1</span>]+n_r[<span class="number">2</span>]*light[<span class="number">2</span>]+<span class="number">1.0</span>)*<span class="number">0.5</span>;<span class="comment">//点积求反光强度(亮度)，并映射到[0,1]</span></span><br><span class="line">    <span class="keyword">float</span> co[<span class="number">3</span>];<span class="comment">//正方体的原始坐标，co意为coordinate</span></span><br><span class="line">    co[n_i]=dyn*<span class="built_in">cos</span>(rotate*<span class="number">2</span>);<span class="comment">//make it 20% cooler</span></span><br><span class="line">    <span class="keyword">int</span> co_a=n_i==<span class="number">0</span>?<span class="number">1</span>:n_i==<span class="number">1</span>?<span class="number">0</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> co_b=n_i==<span class="number">0</span>?<span class="number">2</span>:n_i==<span class="number">1</span>?<span class="number">2</span>:<span class="number">1</span>;<span class="comment">//确定了index为n_i的坐标是不需要被遍历的</span></span><br><span class="line">    co[n_i]+=move/<span class="number">2</span>;<span class="comment">//无需遍历的方向偏移1/4个屏幕边长</span></span><br><span class="line">    <span class="keyword">for</span>(co[co_a]=-a;co[co_a]&lt;=a;co[co_a]+=delta)</span><br><span class="line">        <span class="keyword">for</span>(co[co_b]=-a;co[co_b]&lt;=a;co[co_b]+=delta)&#123;</span><br><span class="line">            <span class="keyword">int</span> <span class="keyword">final</span>=(<span class="keyword">int</span>)(result*<span class="number">10.0</span>);<span class="comment">//把亮度int化</span></span><br><span class="line">            <span class="keyword">final</span>=(<span class="keyword">final</span>&gt;<span class="number">10</span>||<span class="keyword">final</span>)&lt;<span class="number">0</span>?<span class="keyword">final</span>&gt;<span class="number">10</span>?<span class="number">10</span>:<span class="number">0</span>:<span class="keyword">final</span>;<span class="comment">//保险，防止一些刁钻情况</span></span><br><span class="line">            <span class="keyword">float</span> x_a=co[<span class="number">0</span>]*ro_a[<span class="number">0</span>]+co[<span class="number">1</span>]*ro_a[<span class="number">3</span>]+co[<span class="number">2</span>]*ro_a[<span class="number">6</span>];</span><br><span class="line">            <span class="keyword">float</span> y_a=co[<span class="number">0</span>]*ro_a[<span class="number">1</span>]+co[<span class="number">1</span>]*ro_a[<span class="number">4</span>]+co[<span class="number">2</span>]*ro_a[<span class="number">7</span>];</span><br><span class="line">            <span class="keyword">float</span> z_a=co[<span class="number">0</span>]*ro_a[<span class="number">2</span>]+co[<span class="number">1</span>]*ro_a[<span class="number">5</span>]+co[<span class="number">2</span>]*ro_a[<span class="number">8</span>];<span class="comment">//坐标第一次旋转</span></span><br><span class="line">            <span class="keyword">float</span> x_b=x_a*ro_b[<span class="number">0</span>]+y_a*ro_b[<span class="number">3</span>]+z_a*ro_b[<span class="number">6</span>];</span><br><span class="line">            <span class="keyword">float</span> y_b=x_a*ro_b[<span class="number">1</span>]+y_a*ro_b[<span class="number">4</span>]+z_a*ro_b[<span class="number">7</span>];</span><br><span class="line">            <span class="keyword">float</span> z_b=x_a*ro_b[<span class="number">2</span>]+y_a*ro_b[<span class="number">5</span>]+z_a*ro_b[<span class="number">8</span>];<span class="comment">//坐标第二次旋转</span></span><br><span class="line">            <span class="keyword">float</span> x_r=x_b*ro_c[<span class="number">0</span>]+y_b*ro_c[<span class="number">3</span>]+z_b*ro_c[<span class="number">6</span>];</span><br><span class="line">            <span class="keyword">float</span> y_r=x_b*ro_c[<span class="number">1</span>]+y_b*ro_c[<span class="number">4</span>]+z_b*ro_c[<span class="number">7</span>];</span><br><span class="line">            <span class="keyword">float</span> z_r=x_b*ro_c[<span class="number">2</span>]+y_b*ro_c[<span class="number">5</span>]+z_b*ro_c[<span class="number">8</span>];</span><br><span class="line">            <span class="comment">//co_r作为绕三轴旋转rotate角度后的空间坐标</span></span><br><span class="line">            <span class="keyword">int</span> cox=(<span class="keyword">int</span>)(n_j*x_r+move);</span><br><span class="line">            <span class="keyword">int</span> coy=(<span class="keyword">int</span>)(n_j*z_r+move);<span class="comment">//找到投影到屏幕上的点在哪</span></span><br><span class="line">            <span class="keyword">if</span>(n_j*y_r&lt;dis[cox][coy])&#123;<span class="comment">//只有发现更近的点才替换亮度</span></span><br><span class="line">                out_i[cox*size+coy]=<span class="keyword">final</span>;</span><br><span class="line">                dis[cox][coy]=n_j*y_r;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> n[<span class="number">3</span>];<span class="comment">//原始法向量n[]</span></span><br><span class="line">    <span class="keyword">float</span> light[<span class="number">3</span>]=&#123;<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">1</span>&#125;;<span class="comment">//平行光向量</span></span><br><span class="line">    <span class="keyword">float</span> length=cal_r(light[<span class="number">0</span>],light[<span class="number">1</span>],light[<span class="number">2</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)light[i]/=length;<span class="comment">//单位化平行光向量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">float</span> rotate=<span class="number">0.0</span>;;rotate+=<span class="number">0.05</span>)&#123;<span class="comment">//rotate为旋转角度，增量即旋转速度</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size;i++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;size;j++)&#123;</span><br><span class="line">                out_i[i][j]=<span class="number">-1</span>;</span><br><span class="line">                dis[i][j]=(<span class="keyword">float</span>)(<span class="number">4.0</span>*size);</span><br><span class="line">                <span class="comment">//初始化亮度与距离</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">float</span> cos_ro=<span class="built_in">cos</span>(rotate),sin_ro=<span class="built_in">sin</span>(rotate);</span><br><span class="line">        <span class="keyword">float</span> ro_a[<span class="number">3</span>][<span class="number">3</span>]=&#123;&#123;<span class="number">1.0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,cos_ro,-sin_ro&#125;,&#123;<span class="number">0</span>,sin_ro,cos_ro&#125;&#125;;</span><br><span class="line">        <span class="keyword">float</span> ro_b[<span class="number">3</span>][<span class="number">3</span>]=&#123;&#123;cos_ro,<span class="number">0</span>,sin_ro&#125;,&#123;<span class="number">0</span>,<span class="number">1.0</span>,<span class="number">0</span>&#125;,&#123;-sin_ro,<span class="number">0</span>,cos_ro&#125;&#125;;</span><br><span class="line">        <span class="keyword">float</span> ro_c[<span class="number">3</span>][<span class="number">3</span>]=&#123;&#123;cos_ro,-sin_ro,<span class="number">0</span>&#125;,&#123;sin_ro,cos_ro,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1.0</span>&#125;&#125;;</span><br><span class="line">        <span class="comment">//旋转矩阵，ro表rotate</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;<span class="comment">//算个阴影，第三个参数控制对应面</span></span><br><span class="line">            cal_shade(&amp;n[<span class="number">0</span>],i,<span class="number">1</span>,&amp;ro_a[<span class="number">0</span>][<span class="number">0</span>],&amp;ro_b[<span class="number">0</span>][<span class="number">0</span>],&amp;ro_c[<span class="number">0</span>][<span class="number">0</span>],&amp;light[<span class="number">0</span>],rotate,&amp;out_i[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">            cal_shade(&amp;n[<span class="number">0</span>],i,<span class="number">-1</span>,&amp;ro_a[<span class="number">0</span>][<span class="number">0</span>],&amp;ro_b[<span class="number">0</span>][<span class="number">0</span>],&amp;ro_c[<span class="number">0</span>][<span class="number">0</span>],&amp;light[<span class="number">0</span>],rotate,&amp;out_i[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;size;j++) out_i[i][j]!=<span class="number">-1</span>?<span class="built_in">printf</span>(<span class="string">&quot;%c%c&quot;</span>,shade[out_i[i][j]],shade[out_i[i][j]]):<span class="built_in">printf</span>(<span class="string">&quot;  &quot;</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\x1b[2J&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\x1b[H&quot;</span>);</span><br><span class="line">        usleep(<span class="number">30000</span>);</span><br><span class="line">        <span class="comment">//跟着甜甜圈抄的，这样才能稳定住图像</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Dev C++下则调用Windows.h来解决图像刷新的问题</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">goto_O</span><span class="params">()</span><span class="comment">//CSDN上抄的函数，刷新一快光标就飘来飘去，看起来像噪点一样</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    HANDLE hOut;</span><br><span class="line">    hOut = GetStdHandle(STD_OUTPUT_HANDLE);</span><br><span class="line">    COORD pos = &#123;<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">    SetConsoleCursorPosition(hOut, pos);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/%E5%9B%BE%E5%BD%A2%E5%AD%A6HelloWorld.gif"></p>
+<p>最开始先写了个光源移动球</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">goto_xy</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">   HANDLE hOut;</span><br><span class="line">	hOut = GetStdHandle(STD_OUTPUT_HANDLE);</span><br><span class="line">   COORD pos = &#123;<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">   SetConsoleCursorPosition(hOut, pos);</span><br><span class="line">&#125;</span><br><span class="line">main()&#123;</span><br><span class="line">	<span class="keyword">int</span> size=<span class="number">45</span>;</span><br><span class="line">	<span class="keyword">double</span> g=<span class="number">0.01</span>;</span><br><span class="line">	<span class="keyword">double</span> move=(size<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">double</span> r=(<span class="keyword">double</span>(size)<span class="number">-4</span>)/<span class="number">2.0</span>;</span><br><span class="line">	<span class="keyword">double</span> light[<span class="number">3</span>]=&#123;<span class="number">-1.3</span>,<span class="number">1</span>,<span class="number">1</span>&#125;;</span><br><span class="line">	<span class="keyword">double</span> length=<span class="built_in">sqrt</span>(light[<span class="number">0</span>]*light[<span class="number">0</span>]+light[<span class="number">1</span>]*light[<span class="number">1</span>]+light[<span class="number">2</span>]*light[<span class="number">2</span>]);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">		light[i]=light[i]/length;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">char</span> shade[]=<span class="string">&quot;.;!o*m0&amp;%@&quot;</span>;</span><br><span class="line">	<span class="keyword">int</span> out_i[size][size]=&#123;&#125;;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">double</span> rotate=<span class="number">0.0</span>;;rotate+=<span class="number">0.05</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;size;j++)&#123;</span><br><span class="line">				out_i[i][j]=<span class="number">-1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">double</span> ro[<span class="number">3</span>][<span class="number">3</span>]=&#123;&#123;<span class="number">1.0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="built_in">cos</span>(rotate),-<span class="built_in">sin</span>(rotate)&#125;,&#123;<span class="number">0</span>,<span class="built_in">sin</span>(rotate),<span class="built_in">cos</span>(rotate)&#125;&#125;;</span><br><span class="line">		<span class="keyword">double</span> light_r[<span class="number">3</span>]=&#123;light[<span class="number">0</span>]*ro[<span class="number">0</span>][<span class="number">0</span>]+light[<span class="number">1</span>]*ro[<span class="number">1</span>][<span class="number">0</span>]+light[<span class="number">2</span>]*ro[<span class="number">2</span>][<span class="number">0</span>],</span><br><span class="line">								 light[<span class="number">0</span>]*ro[<span class="number">0</span>][<span class="number">1</span>]+light[<span class="number">1</span>]*ro[<span class="number">1</span>][<span class="number">1</span>]+light[<span class="number">2</span>]*ro[<span class="number">2</span>][<span class="number">1</span>],</span><br><span class="line">								 light[<span class="number">0</span>]*ro[<span class="number">0</span>][<span class="number">2</span>]+light[<span class="number">1</span>]*ro[<span class="number">1</span>][<span class="number">2</span>]+light[<span class="number">2</span>]*ro[<span class="number">2</span>][<span class="number">2</span>]&#125;;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">double</span> a=<span class="number">0.0</span>;a&lt;<span class="number">3.15</span>;a+=g)&#123;<span class="comment">//alpha </span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">double</span> b=<span class="number">0.0</span>;b&lt;<span class="number">3.15</span>;b+=g)&#123;<span class="comment">//beta </span></span><br><span class="line">				<span class="keyword">double</span> x=r*<span class="built_in">sin</span>(b)*<span class="built_in">cos</span>(a);</span><br><span class="line">				<span class="keyword">double</span> y=r*<span class="built_in">sin</span>(b)*<span class="built_in">sin</span>(a);</span><br><span class="line">				<span class="keyword">double</span> z=r*<span class="built_in">cos</span>(b);</span><br><span class="line">				<span class="keyword">double</span> result=(x/r*light_r[<span class="number">0</span>]+y/r*light_r[<span class="number">1</span>]+z/r*light_r[<span class="number">2</span>]+<span class="number">1.0</span>)*<span class="number">0.5</span>;</span><br><span class="line">				<span class="keyword">int</span> <span class="keyword">final</span>=<span class="keyword">int</span>(result*<span class="number">10.0</span><span class="number">-1</span>);</span><br><span class="line">				<span class="comment">/*</span></span><br><span class="line"><span class="comment">				if(final&gt;10||final&lt;0)&#123;</span></span><br><span class="line"><span class="comment">					if(final&gt;10)final=10;</span></span><br><span class="line"><span class="comment">					else if(final&lt;0)final=0;</span></span><br><span class="line"><span class="comment">				&#125;</span></span><br><span class="line"><span class="comment">				*/</span></span><br><span class="line">				<span class="keyword">int</span> cx=<span class="keyword">int</span>(x+move);</span><br><span class="line">				<span class="keyword">int</span> cy=<span class="keyword">int</span>(z+move);</span><br><span class="line">				<span class="keyword">if</span>(<span class="keyword">final</span>&gt;out_i[cx][cy])<span class="comment">//这种取最大亮度的写法明显是不好的，但这个例子特殊，用起来没问题</span></span><br><span class="line">					out_i[cx][cy]=<span class="keyword">final</span>;</span><br><span class="line">			&#125; </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;size;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;size;j++)&#123;</span><br><span class="line">				<span class="keyword">if</span>(out_i[i][j]!=<span class="number">-1</span>)</span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;%c%c&quot;</span>,shade[out_i[i][j]],shade[out_i[i][j]]);</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">					<span class="built_in">printf</span>(<span class="string">&quot;  &quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		goto_xy(); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附上甜甜圈的代码，写方块之前没仔细看过，所以我写的方块非常冗余（主要是想先独立尝试</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">float</span> A = <span class="number">0</span>, B = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> i, j;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line">    <span class="keyword">float</span> z[<span class="number">1760</span>];</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">1760</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\x1b[2J&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(;;) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(b,<span class="number">32</span>,<span class="number">1760</span>);</span><br><span class="line">        <span class="built_in">memset</span>(z,<span class="number">0</span>,<span class="number">7040</span>);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j &lt; <span class="number">6.28</span>; j += <span class="number">0.07</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>; i &lt; <span class="number">6.28</span>; i += <span class="number">0.02</span>) &#123;</span><br><span class="line">                <span class="keyword">float</span> c = <span class="built_in">sin</span>(i);</span><br><span class="line">                <span class="keyword">float</span> d = <span class="built_in">cos</span>(j);</span><br><span class="line">                <span class="keyword">float</span> e = <span class="built_in">sin</span>(A);</span><br><span class="line">                <span class="keyword">float</span> f = <span class="built_in">sin</span>(j);</span><br><span class="line">                <span class="keyword">float</span> g = <span class="built_in">cos</span>(A);</span><br><span class="line">                <span class="keyword">float</span> h = d + <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">float</span> D = <span class="number">1</span> / (c * h * e + f * g + <span class="number">5</span>);</span><br><span class="line">                <span class="keyword">float</span> l = <span class="built_in">cos</span>(i);</span><br><span class="line">                <span class="keyword">float</span> m = <span class="built_in">cos</span>(B);</span><br><span class="line">                <span class="keyword">float</span> n = <span class="built_in">sin</span>(B);</span><br><span class="line">                <span class="keyword">float</span> t = c * h * g - f * e;</span><br><span class="line">                <span class="keyword">int</span> x = <span class="number">40</span> + <span class="number">30</span> * D * (l * h * m - t * n);</span><br><span class="line">                <span class="keyword">int</span> y= <span class="number">12</span> + <span class="number">15</span> * D * (l * h * n + t * m);</span><br><span class="line">                <span class="keyword">int</span> o = x + <span class="number">80</span> * y;</span><br><span class="line">                <span class="keyword">int</span> N = <span class="number">8</span> * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n);</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">22</span> &gt; y &amp;&amp; y &gt; <span class="number">0</span> &amp;&amp; x &gt; <span class="number">0</span> &amp;&amp; <span class="number">80</span> &gt; x &amp;&amp; D &gt; z[o]) &#123;</span><br><span class="line">                    z[o] = D;</span><br><span class="line">                    b[o] = <span class="string">&quot;.,-~:;=!*#$@&quot;</span>[N &gt; <span class="number">0</span> ? N : <span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\x1b[H&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; <span class="number">1761</span>; k++) &#123;</span><br><span class="line">            <span class="built_in">putchar</span>(k % <span class="number">80</span> ? b[k] : <span class="number">10</span>);</span><br><span class="line">            A += <span class="number">0.00004</span>;</span><br><span class="line">            B += <span class="number">0.00002</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        usleep(<span class="number">30000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/kyriota/css/spoiler.css" type="text/css"><script src="/kyriota/js/spoiler.js" type="text/javascript" async></script>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/kyriota/2021/04/24/Hello-Dimension/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/kyriota/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/kyriota/2021/04/10/i春秋虎符2021/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-04-19 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/kyriota/categories/摸鱼/">摸鱼<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/kyriota/tags/图形学/">图形学<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2021 KYRIOTA
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/kyriota/js/jquery.imagesloaded.min.js"></script>
+<script src="/kyriota/js/gallery.js"></script>
+<script src="/kyriota/js/bootstrap.min.js"></script>
+<script src="/kyriota/js/main.js"></script>
+<script src="/kyriota/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/kyriota/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/kyriota/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/kyriota/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
