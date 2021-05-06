@@ -9,8 +9,7 @@
   <title>Web Basic Requirement | KYRIOTA</title>
   <meta name="author" content="KYRIOTA">
   
-  <meta name="description" content="系统性收录解决Web题目需要的前置知识，过于零碎的知识未整合
-目前做过的题目为 bugku Web1~Web41，待续">
+  <meta name="description" content="系统性收录解决Web题目需要的前置知识，过于零碎的知识未整合">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -138,17 +137,12 @@ var _hmt = _hmt || [];
 	  		
 
 	  <p>系统性收录解决Web题目需要的前置知识，过于零碎的知识未整合</p>
-<p>目前做过的题目为 <code>bugku Web1~Web41</code>，待续</p>
 <span id="more"></span>
 
-<h1 id="Web-Basic-Requirement"><a href="#Web-Basic-Requirement" class="headerlink" title="Web Basic Requirement"></a>Web Basic Requirement</h1><hr>
-<center>\||[====================]||/</center>
 
-<h2 id="PHP-amp-HTTP"><a href="#PHP-amp-HTTP" class="headerlink" title="PHP&amp;HTTP"></a><big><center>PHP&amp;HTTP</center></big></h2><center>\||[====================]||/</center>
+<h1 id="PHP-amp-HTTP"><a href="#PHP-amp-HTTP" class="headerlink" title="PHP&amp;HTTP"></a><big><center>PHP&amp;HTTP</center></big></h1><p align="right"><small>PHP is the best language in the world</small></p>
 
-<p align="right"><small>PHP is the best language in the world</small></p>
-
-<h3 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie,session,token"></a><big>cookie,session,token</big></h3><p>这三个东西的最基本的目的都是区分用户，标识身份，形式不同而已</p>
+<h2 id="cookie-session-token"><a href="#cookie-session-token" class="headerlink" title="cookie,session,token"></a><big>cookie,session,token</big></h2><p>这三个东西的最基本的目的都是区分用户，标识身份，形式不同而已</p>
 <ul>
 <li><p>cookie：小饼干，按F12就可以找到当前页面存放的cookie，本地缓存，由服务器生成，在下次请求时又发回服务器。由于cookie是存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的。由于cookie是人为设置的，所以cookie中可能藏有题目的hint</p>
 </li>
@@ -160,7 +154,7 @@ var _hmt = _hmt || [];
 <li>token：因为当用户更换访问的服务器时，若session没有同步到位，则用户又需要重新登陆，token 就解决了这个问题。它将状态保存在客户端，并且借助加密算法进行验证保证安全性</li>
 </ul>
 <p><img src="/images/token.jpg"></p>
-<h3 id="HEADER"><a href="#HEADER" class="headerlink" title="HEADER"></a><big>HEADER</big></h3><p>响应头，是服务器以HTTP协议传HTML资料到浏览器前所送出的字串，便于提前判断是否接受请求以及请求的大致信息与属性，按F12就可以查看当前页面的HEADER，HEADER可以自定义，可能包含了题目的hint</p>
+<h2 id="HEADER"><a href="#HEADER" class="headerlink" title="HEADER"></a><big>HEADER</big></h2><p>响应头，是服务器以HTTP协议传HTML资料到浏览器前所送出的字串，便于提前判断是否接受请求以及请求的大致信息与属性，按F12就可以查看当前页面的HEADER，HEADER可以自定义，可能包含了题目的hint</p>
 <p>其中有几个重要的HEADER需要了解</p>
 <ul>
 <li><code>X-Forwarded-for</code>：XFF头，含HTTP请求端的IP，但当仅使用这一响应头来验证请求段的真实IP时是不可靠的</li>
@@ -169,10 +163,10 @@ var _hmt = _hmt || [];
 </ul>
 <img src="/images/WebshellUpload.png" style="zoom: 67%;" />
 
-<h3 id="PHP标签写法"><a href="#PHP标签写法" class="headerlink" title="PHP标签写法"></a><big>PHP标签写法</big></h3><p>​    有时常见的 php标签会被过滤掉，这就需要尝试更换其他标签来进行尝试</p>
+<h2 id="PHP标签写法"><a href="#PHP标签写法" class="headerlink" title="PHP标签写法"></a><big>PHP标签写法</big></h2><p>​    有时常见的 php标签会被过滤掉，这就需要尝试更换其他标签来进行尝试</p>
 <p>​    &lt;?php echo ‘hi’; ?&gt;  标准写法</p>
 <p>​    &lt;script language=”php”&gt; echo 1; &lt;/script&gt;  长标签写法，在 php7.0后就不解析了</p>
-<h3 id="松散比较"><a href="#松散比较" class="headerlink" title="松散比较"></a><big>松散比较</big></h3><p>PHP中的比较分为弱比较（==，!=）与强比较（===，!==）两种方式，因为PHP中的变量不用声明其数据类型，导致了在弱比较中的适应性变化</p>
+<h2 id="松散比较"><a href="#松散比较" class="headerlink" title="松散比较"></a><big>松散比较</big></h2><p>PHP中的比较分为弱比较（==，!=）与强比较（===，!==）两种方式，因为PHP中的变量不用声明其数据类型，导致了在弱比较中的适应性变化</p>
 <img src="/images/PHP弱比较表.png" style="zoom: 50%;" />
 
 <p>需要补充的是数字与字符串的弱比较，在进行这类比较时，会先尝试将字符串转为数字，转换规则为：若为非数字开头，则转换为<code>0</code>，若为数字开头，则转换为开头的数字，以下为示例：</p>
@@ -188,7 +182,7 @@ var _hmt = _hmt || [];
 
 <p>这样的比较，尤其是字符串转数字时科学计数法的识别，为md5的绕过埋下伏笔</p>
 <p>而强比较会先判断数据类型是否一致，在若一致才进行对值的判断，否则直接返回false</p>
-<h3 id="MD5碰撞与绕过"><a href="#MD5碰撞与绕过" class="headerlink" title="MD5碰撞与绕过"></a><big>MD5碰撞与绕过</big></h3><p>MD5码由<code>32</code>个字母或数字组成，因其碰撞概率相对较大，现已是一种不太可靠的Hash算法。针对PHP中的弱比较，强比较，以及md5()函数的特性，有几种常用的绕过方式。</p>
+<h2 id="MD5碰撞与绕过"><a href="#MD5碰撞与绕过" class="headerlink" title="MD5碰撞与绕过"></a><big>MD5碰撞与绕过</big></h2><p>MD5码由<code>32</code>个字母或数字组成，因其碰撞概率相对较大，现已是一种不太可靠的Hash算法。针对PHP中的弱比较，强比较，以及md5()函数的特性，有几种常用的绕过方式。</p>
 <ul>
 <li><p>MD5弱比较：0e开头会被识别为科学计数法，<code>md5(aabg7XSs)</code>与 <code>md5(QNKCDZO)</code>的返回值均为 0e开头</p>
 </li>
@@ -200,7 +194,7 @@ var _hmt = _hmt || [];
 <li><p>MD5碰撞：最经典的是这两串16进制字符串</p>
   <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$hexString1</span>=<span class="string">&quot;4dc968ff0ee35c209572d4777b721587d36fa7b21bdc56b74a3dc0783e7b9518afbfa200a8284bf36e8e4b55b35f427593d849676da0d1555d8360fb5f07fea2&quot;</span>;</span><br><span class="line"><span class="variable">$hexString2</span>=<span class="string">&quot;4dc968ff0ee35c209572d4777b721587d36fa7b21bdc56b74a3dc0783e7b9518afbfa202a8284bf36e8e4b55b35f427593d849676da0d1d55d8360fb5f07fea2&quot;</span>;</span><br><span class="line"></span><br><span class="line">hex2bin(<span class="variable">$hexString1</span>)===hex2bin(<span class="variable">$hexString2</span>);<span class="comment">//False</span></span><br><span class="line">md5(hex2bin(<span class="variable">$hexString1</span>))===md5(hex2bin(<span class="variable">$hexString2</span>));<span class="comment">//True</span></span><br><span class="line"><span class="comment">//都是008ee33a9d58b51cfeb425b0959121c9</span></span><br><span class="line"><span class="comment">//hex2bin()，十六进制字符串转二进制字符串，要求php version&gt;=5.4</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="超全局变量"><a href="#超全局变量" class="headerlink" title="超全局变量"></a><big>超全局变量</big></h3><p>之所以叫做超全局变量，是因为它们在一个脚本的全部作用域中都可用，常见的超全局变量有：</p>
+<h2 id="超全局变量"><a href="#超全局变量" class="headerlink" title="超全局变量"></a><big>超全局变量</big></h2><p>之所以叫做超全局变量，是因为它们在一个脚本的全部作用域中都可用，常见的超全局变量有：</p>
 <center><code>$_GET,$_POST,$_REQUEST,$GLOBALS等</code></center>
 
 <ul>
@@ -214,7 +208,7 @@ var _hmt = _hmt || [];
 <p>  <img src="/images/%E5%89%8D%E7%AB%AF%E8%87%B3%E5%90%8E%E7%AB%AF%E4%BC%A0%E5%8F%82%E8%BF%87%E7%A8%8B.png"></p>
 </li>
 </ul>
-<h3 id="正则表达-regex"><a href="#正则表达-regex" class="headerlink" title="正则表达-regex"></a><big><a target="_blank" rel="noopener" href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md">正则表达-regex</a></big></h3><p>​    <em>基本的正则表达参考链接，在 PHP中存在非常规的正则表达标识，如下表</em></p>
+<h2 id="正则表达-regex"><a href="#正则表达-regex" class="headerlink" title="正则表达-regex"></a><big><a target="_blank" rel="noopener" href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md">正则表达-regex</a></big></h2><p>​    <em>基本的正则表达参考链接，在 PHP中存在非常规的正则表达标识，如下表</em></p>
 <table>
 <thead>
 <tr>
@@ -259,14 +253,14 @@ var _hmt = _hmt || [];
 <td>Printable characters: ‘[:alnum:]’, ‘[:punct:]’, and space.</td>
 </tr>
 </tbody></table>
-<h3 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a><big>一句话木马</big></h3><center><code>&lt;?php @eval($_P0ST['key']) ?&gt;</code></center>
+<h2 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a><big>一句话木马</big></h2><center><code>&lt;?php @eval($_P0ST['key']) ?&gt;</code></center>
 
 <p><del>因为直接写上去会被报毒，手动把数字0改为字母O就行</del></p>
 <p>原理在于：当有写入了这样代码的文件能够被服务器解析，且解析文件的页面可以访问，我们就可以向该页面POST一个key，其值设为任意希望服务器执行的PHP代码然后被eval执行；基于此，菜刀，蚁剑等 Webshell工具可以连接服务器后台</p>
-<h3 id="swp备份文件"><a href="#swp备份文件" class="headerlink" title=".swp备份文件"></a><big>.swp备份文件</big></h3><p>Linux中 Vim编辑器产生的临时文件，用于备份被编辑的内容以防非正常退出</p>
+<h2 id="swp备份文件"><a href="#swp备份文件" class="headerlink" title=".swp备份文件"></a><big>.swp备份文件</big></h2><p>Linux中 Vim编辑器产生的临时文件，用于备份被编辑的内容以防非正常退出</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vim -r original_file_name.file_type.swp	#终端输入此命令可以查看文件</span><br><span class="line">:w file_name.file_type	#Vim中输入此命令可以保存文件到终端运行目录</span><br></pre></td></tr></table></figure>
 
-<h3 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a><big>文件包含漏洞</big></h3><p align="right"><small>特征：xxx.php/?file=xxx</small></p>
+<h2 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a><big>文件包含漏洞</big></h2><p align="right"><small>特征：xxx.php/?file=xxx</small></p>
 
 <p>include()函数：检索文件中的php代码，若存在，则执行；反之则输出原文。原本用于优化代码的重用性，但其特性使得这个函数就是造成漏洞的根本</p>
 <ul>
@@ -278,7 +272,7 @@ var _hmt = _hmt || [];
 </li>
 <li>文件上传+文件包含：当用户可以上传文件且文件目录可知，同时还存在文件包含，则用户可以通过上传任意包含了一句话木马的文件扔给include()来解析</li>
 </ul>
-<h3 id="反序列化逃逸"><a href="#反序列化逃逸" class="headerlink" title="反序列化逃逸"></a><big>反序列化逃逸</big></h3><p>用户输入要传输到服务器，常需要过滤与序列化，但当过滤步骤放在序列化之后，则可能因为字符串逃逸而造成对象注入</p>
+<h2 id="反序列化逃逸"><a href="#反序列化逃逸" class="headerlink" title="反序列化逃逸"></a><big>反序列化逃逸</big></h2><p>用户输入要传输到服务器，常需要过滤与序列化，但当过滤步骤放在序列化之后，则可能因为字符串逃逸而造成对象注入</p>
 <ul>
 <li><p>原理：过滤函数造成了序列化返回的字符串内容减少或增加的现象，但没有修改数据长度的标记（如 “php”被替换为 “NONONO”；或 “WHERE”被替换为 “MARK”），又反序列化通过识别 “;}“闭合，后面冗余的内容会被丢弃</p>
 </li>
@@ -292,15 +286,13 @@ var _hmt = _hmt || [];
 <li><p>确定了需要构造的对象即为上文中的输出</p>
   <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#此处用户只能控制User类中的$username与$passwd</span></span><br><span class="line"><span class="comment">#却可以通过逃逸修改Admin类中的$Key</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Admin</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$Key</span>=<span class="string">&quot;onlyAdminKnow&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$Key</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;Key=<span class="variable">$Key</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;Key,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$username</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$passwd</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$username</span>, <span class="variable">$passwd</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="variable">$username</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;passwd = <span class="variable">$passwd</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filterLess</span>(<span class="params"><span class="variable">$s</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$s</span>=str_replace(<span class="string">&#x27;FLAG&#x27;</span>,<span class="string">&#x27;NO&#x27;</span>,<span class="variable">$s</span>);<span class="comment">#减少2个字符</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$s</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filterMore</span>(<span class="params"><span class="variable">$s</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$s</span>=str_replace(<span class="string">&#x27;FLAG&#x27;</span>,<span class="string">&#x27;_JESUS_&#x27;</span>,<span class="variable">$s</span>);<span class="comment">#增加3个字符</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$s</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># BASIC:↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$iusername</span>=<span class="string">&#x27;guest&#x27;</span>;</span><br><span class="line"><span class="variable">$ipasswd</span>=<span class="string">&#x27;guestpass&#x27;</span>;</span><br><span class="line"><span class="variable">$data</span>=serialize(<span class="keyword">new</span> User(<span class="variable">$iusername</span>,<span class="variable">$ipasswd</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$data</span>,<span class="string">&quot;\n&quot;</span>;<span class="comment">//O:4:&quot;User&quot;:2:&#123;s:8:&quot;username&quot;;s:5:&quot;guest&quot;;s:6:&quot;passwd&quot;;s:9:&quot;guestpass&quot;;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">HACK:</span>↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$target</span>=<span class="string">&#x27;&quot;;s:6:&quot;passwd&quot;;O:5:&quot;Admin&quot;:1:&#123;s:3:&quot;Key&quot;;s:4:&quot;hack&quot;;&#125;&#125;&#x27;</span>;</span><br><span class="line"><span class="comment">#这就是希望注入的内容，修改Admin类中的$Key为hack</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LESS:↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;======LESS START======&#x27;</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#思想在于：标记长度不变的情况下数据减少了</span></span><br><span class="line">    <span class="comment">#也就是说会有与减少量相等的字符数量被吞并为变量的value</span></span><br><span class="line">    <span class="variable">$dataEatenByLess</span>=<span class="string">&#x27;&quot;;s:6:&quot;passwd&quot;;s:41:&quot;&#x27;</span>;</span><br><span class="line">    <span class="comment">#希望被filterLess吃掉的字符串如上</span></span><br><span class="line">    <span class="keyword">echo</span> strlen(<span class="variable">$dataEatenByLess</span>),<span class="string">&quot;\n&quot;</span>;<span class="comment">//21</span></span><br><span class="line">    <span class="comment">#每个FLAG吞2字符，在passwd补一位凑3的倍数</span></span><br><span class="line">    <span class="comment">#11个FLAG吞完，吞完后要改什么变量就随心所欲了</span></span><br><span class="line">    <span class="variable">$payloadPasswd</span>=<span class="string">&#x27;0&#x27;</span>.<span class="variable">$target</span>;</span><br><span class="line">    <span class="variable">$payloadLess</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="number">11</span>;<span class="variable">$i</span>++)</span><br><span class="line">        <span class="variable">$payloadLess</span>.=<span class="string">&#x27;FLAG&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>=serialize(<span class="keyword">new</span> User(<span class="variable">$payloadLess</span>,<span class="variable">$payloadPasswd</span>));</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$data</span>,<span class="string">&quot;\n&quot;</span>;<span class="comment">//O:4:&quot;User&quot;:2:&#123;s:8:&quot;username&quot;;s:44:&quot;FLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAG&quot;;s:6:&quot;passwd&quot;;s:54:&quot;0&quot;;s:6:&quot;passwd&quot;;O:5:&quot;Admin&quot;:1:&#123;s:3:&quot;Key&quot;;s:4:&quot;hack&quot;;&#125;&#125;&quot;;&#125;</span></span><br><span class="line">    unserialize(filterLess(<span class="variable">$data</span>));<span class="comment">//O:4:&quot;User&quot;:2:&#123;s:8:&quot;username&quot;;s:44:&quot;NONONONONONONONONONONO&quot;;s:6:&quot;passwd&quot;;s:54:&quot;0&quot;;s:6:&quot;passwd&quot;;O:5:&quot;Admin&quot;:1:&#123;s:3:&quot;Key&quot;;s:4:&quot;hack&quot;;&#125;&#125;&quot;;&#125;</span></span><br><span class="line">    <span class="comment">//hack</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># MORE:↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;======MORE START======&#x27;</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#思想在于：标记长度不变的情况下数据增加了</span></span><br><span class="line">    <span class="comment">#计算好需要逃逸的量，使其刚好与增加量相等，这些字符就跑到变量的value之外了</span></span><br><span class="line">    <span class="keyword">echo</span> strlen(<span class="variable">$target</span>),<span class="string">&quot;\n&quot;</span>;<span class="comment">//53</span></span><br><span class="line">    <span class="comment">#每个FLAG溢出3个字符，需要逃逸53个字符</span></span><br><span class="line">    <span class="comment">#在逃逸字符闭合后面加上任意一个字符凑成3的倍数，18个FLAG达到溢出量</span></span><br><span class="line">    <span class="variable">$dataOverflow</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>;<span class="variable">$i</span>&lt;<span class="number">18</span>;<span class="variable">$i</span>++)</span><br><span class="line">        <span class="variable">$dataOverflow</span>.=<span class="string">&#x27;FLAG&#x27;</span>;</span><br><span class="line">    <span class="variable">$dataOverflow</span>.=<span class="variable">$target</span>.<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    <span class="variable">$data</span>=serialize(<span class="keyword">new</span> User(<span class="variable">$dataOverflow</span>,<span class="string">&#x27;anything&#x27;</span>));</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$data</span>,<span class="string">&quot;\n&quot;</span>;<span class="comment">//O:4:&quot;User&quot;:2:&#123;s:8:&quot;username&quot;;s:126:&quot;FLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAGFLAG&quot;;s:6:&quot;passwd&quot;;O:5:&quot;Admin&quot;:1:&#123;s:3:&quot;Key&quot;;s:4:&quot;hack&quot;;&#125;&#125;0&quot;;s:6:&quot;passwd&quot;;s:8:&quot;anything&quot;;&#125;</span></span><br><span class="line">    unserialize(filterMore(<span class="variable">$data</span>));<span class="comment">//&#123;s:8:&quot;username&quot;;s:126:&quot;_JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS__JESUS_&quot;;s:6:&quot;passwd&quot;;O:5:&quot;Admin&quot;:1:&#123;s:3:&quot;Key&quot;;s:4:&quot;hack&quot;;&#125;&#125;0&quot;;s:6:&quot;passwd&quot;;s:8:&quot;anything&quot;;&#125;</span></span><br><span class="line">    <span class="comment">//hack</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="PHP太怪了"><a href="#PHP太怪了" class="headerlink" title="PHP太怪了"></a>PHP太怪了</h3><h4 id="变量套变量"><a href="#变量套变量" class="headerlink" title="变量套变量"></a>变量套变量</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span>=<span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="variable">$hello</span>=<span class="string">&#x27;world&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$$a</span>;<span class="comment">//输出 world</span></span><br></pre></td></tr></table></figure>
+<h2 id="PHP太怪了"><a href="#PHP太怪了" class="headerlink" title="PHP太怪了"></a>PHP太怪了</h2><h3 id="变量套变量"><a href="#变量套变量" class="headerlink" title="变量套变量"></a>变量套变量</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span>=<span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"><span class="variable">$hello</span>=<span class="string">&#x27;world&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$$a</span>;<span class="comment">//输出 world</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="变量套函数"><a href="#变量套函数" class="headerlink" title="变量套函数"></a>变量套函数</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showstr</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">showstr();</span><br><span class="line"><span class="comment">//正常的调用方法</span></span><br><span class="line"><span class="variable">$action</span> = <span class="string">&quot;showstr&quot;</span>;</span><br><span class="line"><span class="variable">$action</span>();<span class="comment">//实际调用了showstr()函数</span></span><br></pre></td></tr></table></figure>
+<h3 id="变量套函数"><a href="#变量套函数" class="headerlink" title="变量套函数"></a>变量套函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showstr</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">showstr();</span><br><span class="line"><span class="comment">//正常的调用方法</span></span><br><span class="line"><span class="variable">$action</span> = <span class="string">&quot;showstr&quot;</span>;</span><br><span class="line"><span class="variable">$action</span>();<span class="comment">//实际调用了showstr()函数</span></span><br></pre></td></tr></table></figure>
 
-<center>\||[====================]||/</center>
 
-<h2 id="PHP-func-DICT"><a href="#PHP-func-DICT" class="headerlink" title="PHP func DICT"></a><big><center>PHP <i>func</i> DICT</center></big></h2><center>\||[====================]||/</center>
 
-<p><code>error_reporting(0)</code>    # 关闭错误报告</p>
+<h1 id="PHP-func-DICT"><a href="#PHP-func-DICT" class="headerlink" title="PHP func DICT"></a><big><center>PHP <i>func</i> DICT</center></big></h1><p><code>error_reporting(0)</code>    # 关闭错误报告</p>
 <p><code>print()</code>/<code>print_r()</code>/<code>echo</code>    # echo更像是如 if，while这样的语言结构，没有返回值，且可以直接打印多个变量；print()与 print_r()是函数，存在返回值 true；其中 print_r()相比 print()可以传入的变量范围更大，数组也可以用 print_r()打印出来</p>
 <p><code>var_dump($var)</code>    # 展示$var的value与type</p>
 <p><code>eval($str)</code>    # 执行参数中包含的PHP代码</p>
@@ -361,13 +353,12 @@ no2</blockquote>
 <blockquote>[Out]//原本无换行符与任何空格，为了可读性而手动添加<br>O:7:"Kyriota":6:{<br>&emsp;s:3:"sex";s:4:"male";<br>&emsp;s:3:"age";i:25;<br>&emsp;s:6:"weight";d:60.5;<br>&emsp;s:7:"LoveCTF";b:1;<br>&emsp;s:15:"thingsDoentLike";N;<br>&emsp;s:13:"%00Kyriota%00tags";a:3:{<br>&emsp;&emsp;i:0;s:5:"Steam";<br>&emsp;&emsp;i:1;i:1990;<br>&emsp;&emsp;i:2;s:8:"Aperture";<br>&emsp;}<br>}</blockquote>
 
 <ul>
-<li><code>__wakeup()</code>与<code>__sleep()</code>    # 在 serialize()的时候先执行__sleep()，对数据预处理；在 unserialize()执行的时候先执行__wakeup()，对数据再处理。函数命名非常形象，序列化后变量与对象不再被解析，称其为sleep与wakeup非常合适</li>
-<li>__wakeup()绕过：当序列化字符串表示的对象属性个数大于真是个数时就会跳过 __wakeup()执行，例如下面是一正常序列化后的文本，而当3被篡改为任何大于3的数后，反序列化时将不执行__wakeup()：</li>
-</ul>
-<center><code>O:7:”Student”:3:&#123;s:9:”full_name”;s:8:”zhangsan”;s:5:”score”;i:150;s:6:”grades”;a:0:&#123;&#125;&#125;</code></center>
-
-<ul>
-<li><code>__construct()</code>与<code>__destruct()</code>    # 在创建对象时construct，在对象销毁时destruct</li>
+<li><p><code>__wakeup()</code>与<code>__sleep()</code>    # 在 serialize()的时候先执行__sleep()，对数据预处理；在 unserialize()执行的时候先执行__wakeup()，对数据再处理。函数命名非常形象，序列化后变量与对象不再被解析，称其为sleep与wakeup非常合适</p>
+</li>
+<li><p>__wakeup()绕过：当序列化字符串表示的对象属性个数大于真是个数时就会跳过 __wakeup()执行，例如下面是一正常序列化后的文本，而当3被篡改为任何大于3的数后，反序列化时将不执行__wakeup()：</p>
+<center><code>O:7:”Student”:3:&#123;s:9:”full_name”;s:8:”zhangsan”;s:5:”score”;i:150;s:6:”grades”;a:0:&#123;&#125;&#125;</code></center></li>
+<li><p><code>__construct()</code>与<code>__destruct()</code>    # 在创建对象时construct，在对象销毁时destruct</p>
+</li>
 </ul>
 <p>一个程序即可解释序列化以及上述相关函数</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$username</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$password</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$username</span>, <span class="variable">$password</span></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;__construct~&#x27;</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;username = <span class="variable">$username</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password = <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;__destrcut~&#x27;</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;__wakeup~&#x27;</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__sleep</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;__sleep~&#x27;</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">array</span>(<span class="string">&#x27;username&#x27;</span>,<span class="string">&#x27;password&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$s</span>=serialize(<span class="keyword">new</span> User(<span class="string">&#x27;admin&#x27;</span>,<span class="string">&#x27;psswd&#x27;</span>));</span><br><span class="line"><span class="variable">$s_edited</span>=<span class="string">&#x27;O:4:&quot;User&quot;:3:&#123;s:8:&quot;username&quot;;s:5:&quot;admin&quot;;s:8:&quot;password&quot;;s:5:&quot;psswd&quot;;&#125;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$s</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">unserialize(<span class="variable">$s</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;↑↑↑unserialized with wakeup and destruct&#x27;</span>,<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">var_dump(unserialize(<span class="variable">$s_edited</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;↑↑↑unserialized, only destruct whithout wakeup above this one&#x27;</span>;</span><br></pre></td></tr></table></figure>
@@ -423,12 +414,11 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 </tr>
 </tbody></table>
 <hr>
-<center>\||[====================]||/</center>
-
-<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a><big><center>SQL</center></big></h2><center>\||[====================]||/</center>
-
-<h3 id="MySQL基础命令"><a href="#MySQL基础命令" class="headerlink" title="MySQL基础命令"></a><big>MySQL基础命令</big></h3><ul>
+<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a><big><center>SQL</center></big></h1><h2 id="MySQL基础命令"><a href="#MySQL基础命令" class="headerlink" title="MySQL基础命令"></a><big>MySQL基础命令</big></h2><ul>
 <li><p>通过命令行输入 mysql -u root -p，然后输入密码即可登录</p>
+<ul>
+<li>若报错，可能是 mysql 服务未启动，也可能是需要管理员权限的 cmd</li>
+</ul>
 </li>
 <li><p>SHOW DATABASES; #查看当前数据库</p>
 </li>
@@ -465,7 +455,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 </li>
 </ul>
 <p>注意：当数字型字符或MySQL关键字作为字段、表、库名查询时，应该用反单引号括起来，如 SELECT * FROM &#96;2333&#96; WHERE &#96;from&#96;=&#96;8080&#96;;其中的2333作为表名，from作为字段名，8080作为字段内容 </p>
-<h3 id="MySQL-DICT"><a href="#MySQL-DICT" class="headerlink" title="MySQL DICT"></a><big>MySQL DICT</big></h3><ul>
+<h2 id="MySQL-DICT"><a href="#MySQL-DICT" class="headerlink" title="MySQL DICT"></a><big>MySQL DICT</big></h2><ul>
 <li><p><code>UNION</code>：用于合并两个或多个 SELECT语句的结果集</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">select uname,passwd from users</span><br><span class="line">union</span><br><span class="line">select &#39;Union&#39;,233;</span><br><span class="line">        #+----------+-------------+</span><br><span class="line">        #| uname    | passwd      |</span><br><span class="line">        #+----------+-------------+</span><br><span class="line">        #| Kyriota  | kyriotayyds |</span><br><span class="line">        #| 0test    | 0test       |</span><br><span class="line">        #| 233test  | 233test     |</span><br><span class="line">        #| admin    | adpasswd    |</span><br><span class="line">        #| Dr.Who   | Doctor      |</span><br><span class="line">        #| Union    | 233         |</span><br><span class="line">        #+----------+-------------+</span><br></pre></td></tr></table></figure></li>
 <li><p><code>ORDER BY col</code>：以某一列来升序排列，需要降序排列时加上DESC即可，通常通过附加此函数验证数据表有多少列，因为用int表示根据第几个column排序时，超过实际存在的列数会报错</p>
@@ -507,7 +497,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 <li><p><code>SLEEP()</code>：延迟函数，单位为秒</p>
 </li>
 </ul>
-<h3 id="information-schema"><a href="#information-schema" class="headerlink" title="information_schema"></a><big>information_schema</big></h3><p>信息数据库，保存着关于mysql服务器所维护的所有其他数据库的信息，该数据库中又有几个重要的数据表，而当需要跨数据库访问时，则与类成员的访问相似，如对于COLUMNS：information_schema.COLUMNS</p>
+<h2 id="information-schema"><a href="#information-schema" class="headerlink" title="information_schema"></a><big>information_schema</big></h2><p>信息数据库，保存着关于mysql服务器所维护的所有其他数据库的信息，该数据库中又有几个重要的数据表，而当需要跨数据库访问时，则与类成员的访问相似，如对于COLUMNS：information_schema.COLUMNS</p>
 <ul>
 <li><p>SCHEMATA：提供了当前mysql实例中所有数据库的信息</p>
 <ul>
@@ -531,10 +521,10 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 </ul>
 </li>
 </ul>
-<h3 id="基于约束的攻击"><a href="#基于约束的攻击" class="headerlink" title="基于约束的攻击"></a><big>基于约束的攻击</big></h3><blockquote>在MySQL的配置选项中，有一个sql_mode选项。当MySQL的sql_mode设置为default时，即没有开启STRICT_ALL_TABLES选项时，MySQL对于用户插入的超长值只会提示warning，而不是error（如果是error则插入不成功），这可能会导致发生一些“截断”问题 ———— 道哥</blockquote>
+<h2 id="基于约束的攻击"><a href="#基于约束的攻击" class="headerlink" title="基于约束的攻击"></a><big>基于约束的攻击</big></h2><blockquote>在MySQL的配置选项中，有一个sql_mode选项。当MySQL的sql_mode设置为default时，即没有开启STRICT_ALL_TABLES选项时，MySQL对于用户插入的超长值只会提示warning，而不是error（如果是error则插入不成功），这可能会导致发生一些“截断”问题 ———— 道哥</blockquote>
 
 <p>因为在sql执行字符串处理时，字符串末尾的空格符将会被删除，导致 “admin”与 “admin     ”是等效的。当使用如 “admin                       x”这样的超长字符串，或末尾直接是空格的“admin   ”注册成功，前者会因为截断，和后者一样可以达到越权获取权限</p>
-<h3 id="SQL查询与比较"><a href="#SQL查询与比较" class="headerlink" title="SQL查询与比较"></a><big>SQL查询与比较</big></h3><p>str与int的比较：与PHP一样，非数字开头的str被当成 0，数字开头的会被当成那个开头的数字，这使得在输入 user=0或 user=’’时返回所有非 0开头的 user</p>
+<h2 id="SQL查询与比较"><a href="#SQL查询与比较" class="headerlink" title="SQL查询与比较"></a><big>SQL查询与比较</big></h2><p>str与int的比较：与PHP一样，非数字开头的str被当成 0，数字开头的会被当成那个开头的数字，这使得在输入 user=0或 user=’’时返回所有非 0开头的 user</p>
 <p>SQL连等：阴间语法，如 where user=’admin’=’admin’=1，可理解为做异或取反 (同或)运算</p>
 <blockquote>查第一个admin，查询对象是原本的数据表，结果为{admin：1，其他：0}
     此时还没有到返回admin并打印出来的时候，因为后面的连等还没有比较完</blockquote>
@@ -543,13 +533,13 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 
 <blockquote>第三次查1，显然匹配到其他，故最终返回为处admin外的所有成员</blockquote>
 
-<h3 id="万-能-钥-匙"><a href="#万-能-钥-匙" class="headerlink" title="万 能 钥 匙"></a><big>万 能 钥 匙</big></h3><p>最基础的SQL注入：admin’ or ‘1’=’1</p>
-<h3 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a><big>宽字节注入</big></h3><p align='right'><small>特征：gbk等宽字节编码</small></p>
+<h2 id="万-能-钥-匙"><a href="#万-能-钥-匙" class="headerlink" title="万 能 钥 匙"></a><big>万 能 钥 匙</big></h2><p>最基础的SQL注入：admin’ or ‘1’=’1</p>
+<h2 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a><big>宽字节注入</big></h2><p align='right'><small>特征：gbk等宽字节编码</small></p>
 
 <p>通常的在sql语句前面使用了一个addslashes()，将$id的值转义。这是通常对sql注入进行的操作，只要我们的输入参数在单引号中，就逃逸不出单引号的限制，无法注入</p>
 <p>宽字节注入是利用mysql的一个特性，mysql在使用GBK编码的时候，会认为两个字符是一个汉字（前提是前一个ASCII码大于128，这样才能达到汉字的范围，如%df之类的）</p>
 <p>示例payload：<code>/?id=hello%df' union select 'admin','pass'#</code></p>
-<h3 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a><big>盲注</big></h3><p align='right'><small>SQLI-LAB</small></p>
+<h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a><big>盲注</big></h2><p align='right'><small>SQLI-LAB</small></p>
 
 <p>对无回显页面的注入叫做盲注，大多数时候都是遇见的这样的页面，分为布尔盲注和时间盲注，但本质上差别不大。原理大致可理解为不断猜测字符的过程，通过注入后返回的信息判断猜对与否，有点暴力破解的意思。由于盲注的重复性，手注在盲注中最多用于盲注类型的判断，猜测过程则交给脚本，burp，sqlmap等完成</p>
 <p>通常盲注时先跑数据库名的长度，再跑数据库名，然后又跑表名的长度…如果有需要甚至可爆整个数据库，也可以不跑长度而直接开始跑内容，因为知道长度的作用只是心里有个底。布尔盲注和时间盲注的区别就只是在于返回信息不同，布尔盲注通过返回两种状态信息判断，时间盲注则根据响应时间判断</p>
@@ -575,14 +565,14 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 </ul>
 </li>
 </ul>
-<h3 id="预处理语句"><a href="#预处理语句" class="headerlink" title="预处理语句"></a><big>预处理语句</big></h3><p>所谓预处理指的就是将SQL语句中的关键字(如 SELECT…FROM…)与数据(如字段名，数据表名)分离,使得针对不同数据的相同SQL语句的执行开销更小，同时又可防止SQL注入的攻击</p>
+<h2 id="预处理语句"><a href="#预处理语句" class="headerlink" title="预处理语句"></a><big>预处理语句</big></h2><p>所谓预处理指的就是将SQL语句中的关键字(如 SELECT…FROM…)与数据(如字段名，数据表名)分离,使得针对不同数据的相同SQL语句的执行开销更小，同时又可防止SQL注入的攻击</p>
 <p>传统方式的SQL语句，在执行时每条SQL都需要经过分析、编译和优化的步骤；预处理方式则是利用客户端与服务器的二进制协议，预先编译一次客户端发送的SQL语句模板,然后再根据客户端发送给服务器相应数量的变量进行执行操作，并旦针对一条SQL语句模板可以执行多次,还无需考虑数据中含有未转义的SQI引号和分隔符字符</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PREPARE stmt FROM &#39;SELECT * FROM user WHERE uname&#x3D;?&#39;;</span><br><span class="line">SET @uname&#x3D;&#39;admin&#39;;</span><br><span class="line">EXECUTE stmt USING @uname;</span><br><span class="line">DEALLOCATE &#x2F; DROP PREPARE stmt;</span><br></pre></td></tr></table></figure>
 
 <p>以此，可以在能堆叠注入时候绕过对SELECT等关键字的过滤</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET @sqlvar&#x3D;CONCAT(&#39;SE&#39;,&#39;LECT * FROM user&#39;);</span><br><span class="line">PREPARE myquery FROM @sqlvar;</span><br><span class="line">EXECUTE myquery;</span><br></pre></td></tr></table></figure>
 
-<h3 id="❀花式绕过❀"><a href="#❀花式绕过❀" class="headerlink" title="❀花式绕过❀"></a><big>❀花式绕过❀</big></h3><ul>
+<h2 id="❀花式绕过❀"><a href="#❀花式绕过❀" class="headerlink" title="❀花式绕过❀"></a><big>❀花式绕过❀</big></h2><ul>
 <li><p>双写关键字：某些简单的waf中，将关键字<code>select</code>等只使用<code>replace()</code>函数置换为空，这时候可以使用双写关键字绕过。例如<code>select</code>变成<code>seleselectct</code>，在经waf的处理之后又变成<code>select</code>，达到绕过的要求</p>
 </li>
 <li><p>过滤select：当存在回显时，可以基于报错注入。常用函数为两个操作XML文档的函数</p>
@@ -658,11 +648,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 </li>
 </ul>
 <hr>
-<center>\||[====================]||/</center>
-
-<h2 id="git"><a href="#git" class="headerlink" title="git"></a><big><center>git</center></big></h2><center>\||[====================]||/</center>
-
-<h3 id="git基础"><a href="#git基础" class="headerlink" title="git基础"></a><big>git基础</big></h3><p>HEAD：指向你正在工作中的本地分支的指针，可以将HEAD想象为当前分支的别名</p>
+<h1 id="git"><a href="#git" class="headerlink" title="git"></a><big><center>git</center></big></h1><h2 id="git基础"><a href="#git基础" class="headerlink" title="git基础"></a><big>git基础</big></h2><p>HEAD：指向你正在工作中的本地分支的指针，可以将HEAD想象为当前分支的别名</p>
 <p>git reflog：查看引用日志，记录分支和HEAD指向的历史，这些日志可以被删除，并非硬性</p>
 <p>CommitID：reflog中会记录提交 ID，作为reset的参数可以退回到指定的提交处</p>
 <p>git checkout – file_path_name：用于放弃单个文件的修改，注意 –两边有空格</p>
@@ -672,30 +658,44 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 <p><img src="/images/git%E6%8C%87%E4%BB%A4%E5%8F%AF%E8%A7%86%E5%8C%96.png"></p>
 <center style="color:#C0C0C0;text-decoration:underline">对应的Git流程区域分别为    工作区 / 缓存区 / 提交历史</center>
 
-<h3 id="git泄漏"><a href="#git泄漏" class="headerlink" title="git泄漏"></a><big>git泄漏</big></h3><p>在网页更新，上传过程中由于操作失误可能导致 git泄漏</p>
+<h2 id="git泄漏"><a href="#git泄漏" class="headerlink" title="git泄漏"></a><big>git泄漏</big></h2><p>在网页更新，上传过程中由于操作失误可能导致 git泄漏</p>
 <p>特征：/.git可以访问，或遗留了 .swp，.php.bak，.php~ 等备份文件</p>
 <p>对于 /.git可以访问的页面，尝试用 GitHack或 Linux中 wget命令下载 .git文件夹</p>
 <p>GitHack依赖Python2.7环境：<code>python2 githack.py address/.git/</code></p>
 <p>-r参数为递归下载，整站爬取：<code>wget -r address/.git</code></p>
 <hr>
-<center>\||[====================]||/</center>
-
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a><big><center>Linux</center></big></h2><center>\||[====================]||/</center>
-
-<h3 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a><big>Linux基础</big></h3><p>../ 与 ./：父级目录与当前目录</p>
-<p>pwd：显示当前目录</p>
-<p>dir与 ls：显示指定目录内容，默认为当前目录</p>
+<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a><big><center>Linux</center></big></h1><h2 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a><big>Linux基础</big></h2><p>pwd：显示当前目录</p>
+<p>dir 与 ls：显示指定目录内容，默认为当前目录</p>
+<p>wget：下载命令，其中 -r参数为递归下载，相当于整站下载</p>
+<p>浏览文件：</p>
+<ul>
+<li><p>cat：连接文件并打印</p>
+</li>
+<li><p>tac：连接文件，倒序打印</p>
+</li>
+<li><p>nl：链接文件并带行号打印</p>
+</li>
+<li><p>head：连接文件，打印开头几行</p>
+</li>
+<li><p>tail：连接文件，打印最后几行</p>
+</li>
+<li><p>more：逐页显示内容，便于阅读，自带 +/string 搜索功能，当 string 是 int 时会从那一行开始显示</p>
+</li>
+<li><p>less：目前理解为更高级的 more</p>
+</li>
+</ul>
+<p>chmod u+x：提升文件权限，当出现 zsh permission 权限低时可用</p>
+<p>grep：查找文件里符合条件的字符串（可正则），全称 Global Regular Expression Print，可直接对文件内容进行搜索，如在’/usr/src/Linux/Doc’目录下搜索带字符 串’magic’的文件：<code>grep magic /usr/src/Linux/Doc/*</code></p>
+<p>../ 与 ./：父级目录与当前目录</p>
 <p>&gt;：重定向输出，覆盖原有内容，<code>echo 'this is flag' > flag.txt</code> #若flag.txt不存在，则创建；若存在，则覆盖</p>
 <p>&gt;&gt;：重定向输出，追加新内容</p>
 <p>&lt;：从文件中获取输入</p>
-<p>cat file_name：连接文件并打印到标准输出设备上</p>
 <p>|：管道 (pipe)，以上一条命令的输出作为下一条命令的参数或输入</p>
 <p>||：上一条命令执行失败后才执行下一条命令</p>
 <p>&amp;&amp;：上一条命令执行成功后才执行下一条命令</p>
-<p>wget：下载命令，其中 -r参数为递归下载，相当于整站下载</p>
 <p>?：通配符，匹配任意单个字符</p>
-<p>$：</p>
-<h3 id="❀花式catFlag❀"><a href="#❀花式catFlag❀" class="headerlink" title="❀花式catFlag❀"></a><big>❀花式catFlag❀</big></h3><ul>
+<p>$：声明变量</p>
+<h2 id="❀花式catFlag❀"><a href="#❀花式catFlag❀" class="headerlink" title="❀花式catFlag❀"></a><big>❀花式catFlag❀</big></h2><ul>
 <li><p>过滤空格：<code>\&lt;</code>，<code>\&gt;</code>，<code>\&lt;/</code>，<code>&#123; , &#125;</code>，<code>\$&#123;IFS&#125;</code>，<code>\$IFS\$1</code> - [数字随意]</p>
   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cat flag.txt</span><br><span class="line"><span class="meta">cat$</span><span class="bash">&#123;IFS&#125;flag.txt</span></span><br><span class="line"><span class="meta">cat$</span><span class="bash">IFS<span class="variable">$9flag</span>.txt</span></span><br><span class="line">cat&lt;flag.txt</span><br><span class="line">cat&lt;&gt;flag.txt</span><br><span class="line">&#123;cat,flag.txt&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>堆叠：当只有一个语句的时候，末尾无需分号，最后一个语句后面也无需分号</p>
@@ -714,11 +714,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 </li>
 </ul>
 <hr>
-<center>\||[====================]||/</center>
-
-<h2 id="Tool"><a href="#Tool" class="headerlink" title="Tool"></a><big><center>Tool</center></big></h2><center>\||[====================]||/</center>
-
-<h3 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a><big>sqlmap</big></h3><p>全自动 SQL扫描工具，<code>--batch</code> 一键开启全自动模式</p>
+<h1 id="Tool"><a href="#Tool" class="headerlink" title="Tool"></a><big><center>Tool</center></big></h1><h2 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a><big>sqlmap</big></h2><p>全自动 SQL扫描工具，<code>--batch</code> 一键开启全自动模式</p>
 <ul>
 <li>注入检测<ul>
 <li><code>-u url</code>——检查GET参数注入点</li>
@@ -734,19 +730,15 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 </ul>
 </li>
 </ul>
-<h3 id="cURL"><a href="#cURL" class="headerlink" title="cURL"></a><big>cURL</big></h3><p>利用 URL语法在命令行下工作的文件传输工具，Windows自带，GET，POST，HEADERS等 curl都支持，和python中的requests差不多<code>curl baidu.com</code>，详情可以 curl –help</p>
+<h2 id="cURL"><a href="#cURL" class="headerlink" title="cURL"></a><big>cURL</big></h2><p>利用 URL语法在命令行下工作的文件传输工具，Windows自带，GET，POST，HEADERS等 curl都支持，和python中的requests差不多<code>curl baidu.com</code>，详情可以 curl –help</p>
 <p>也可以访问本地文件：<code>curl file:///MyPhoto.png</code></p>
 <p>还可以一行命令，多个访问：<code>curl baidu.com google.com</code></p>
 <p>当服务端自身使用 curl发送 GET请求，且 GET内容可控时，可以获取服务端本地 flag</p>
 <p>服务端的情况：<code>curl address.com/?key=$_GET['key']</code></p>
 <p>利用多个访问与本地访问，传参为：<code>server.com/?key=anything file:///flag</code></p>
-<h3 id="pip指定版本的包"><a href="#pip指定版本的包" class="headerlink" title="pip指定版本的包"></a><big>pip指定版本的包</big></h3><p><code>pip install lib==version</code></p>
+<h2 id="pip指定版本的包"><a href="#pip指定版本的包" class="headerlink" title="pip指定版本的包"></a><big>pip指定版本的包</big></h2><p><code>pip install lib==version</code></p>
 <hr>
-<center>\||[====================]||/</center>
-
-<h2 id="ENCRYPT"><a href="#ENCRYPT" class="headerlink" title="ENCRYPT"></a><big><center>ENCRYPT</center></big></h2><center>\||[====================]||/</center>
-
-<h3 id="CBC字符翻转攻击"><a href="#CBC字符翻转攻击" class="headerlink" title="CBC字符翻转攻击"></a><big>CBC字符翻转攻击</big></h3><p align='right'><small>还不太懂，暂先收录</small></p>
+<h1 id="ENCRYPT"><a href="#ENCRYPT" class="headerlink" title="ENCRYPT"></a><big><center>ENCRYPT</center></big></h1><h2 id="CBC字符翻转攻击"><a href="#CBC字符翻转攻击" class="headerlink" title="CBC字符翻转攻击"></a><big>CBC字符翻转攻击</big></h2><p align='right'><small>还不太懂，暂先收录</small></p>
 
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013577244/article/details/86310881?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&depth_1-utm_source=distribute.pc_relevant.no">CSDN相关文章</a></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Type: text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="comment">#计算cipher</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	明文1：a:2:&#123;s:8:&quot;userna		//r</span></span><br><span class="line"><span class="comment">	明文2：me&quot;;s:5:&quot;admil&quot;;		//l字母在第14个字节</span></span><br><span class="line"><span class="comment">	明文3：s:8:&quot;password&quot;;s</span></span><br><span class="line"><span class="comment">	明文4：:3:&quot;123&quot;;&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="variable">$cipher</span>=base64_decode(urldecode(<span class="string">&#x27;f0csYAAWDy%2FGlSsvWLr6NlCBad4p2U%2BXm2Rr2X07iytKd4r8V5tbO7%2FcxIib96eRDGUOMQclQgvxw2SZXOobWQ%3D%3D&#x27;</span>));</span><br><span class="line"><span class="variable">$temp</span>=<span class="variable">$cipher</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	设密文1[13]=A,	解密(密文2)[13]=B,	明文2[13]=C,	</span></span><br><span class="line"><span class="comment">	将A修改为A ^ C,则:</span></span><br><span class="line"><span class="comment">	A ^ B = A ^ C ^ B = B ^ B = 0 = C</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line"><span class="comment">//						A				  C			 X</span></span><br><span class="line"><span class="variable">$cipher</span>[<span class="number">13</span>]=chr(ord(<span class="variable">$cipher</span>[<span class="number">13</span>]) ^ ord(<span class="string">&#x27;l&#x27;</span>) ^ ord(<span class="string">&#x27;n&#x27;</span>));</span><br><span class="line"><span class="keyword">echo</span> urlencode(base64_encode(<span class="variable">$cipher</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算iv</span></span><br><span class="line"><span class="variable">$res</span>=base64_decode(<span class="string">&#x27;yeiydaYLG5RNzOPWaQgOkG1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjM6IjEyMyI7fQ==&#x27;</span>);	<span class="comment">//这里放burp放回的base64数据</span></span><br><span class="line"><span class="variable">$iv</span>=base64_decode(urldecode(<span class="string">&#x27;TD9FI%2FvbrZn%2FSjbSD9bfSQ%3D%3D&#x27;</span>)); <span class="comment">//这里放cookie中的iv</span></span><br><span class="line"><span class="variable">$plaintext</span>=<span class="string">&#x27;a:2:&#123;s:8:&quot;userna&#x27;</span>;</span><br><span class="line"><span class="variable">$new_iv</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">16</span>; <span class="variable">$i</span> ++)&#123;</span><br><span class="line">    <span class="variable">$new_iv</span>=<span class="variable">$new_iv</span>.chr(ord(<span class="variable">$iv</span>[<span class="variable">$i</span>])^ord(<span class="variable">$res</span>[<span class="variable">$i</span>])^ord(<span class="variable">$plaintext</span>[<span class="variable">$i</span>]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> urlencode(base64_encode(<span class="variable">$new_iv</span>));</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/kyriota/css/spoiler.css" type="text/css"><script src="/kyriota/js/spoiler.js" type="text/javascript" async></script>	  
@@ -816,7 +808,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/kyriota/tags/Web/">Web<span>3</span></a></li> <li><a href="/kyriota/tags/bugku/">bugku<span>1</span></a></li>
+  <li><a href="/kyriota/tags/Web/">Web<span>3</span></a></li>
     </ul>
 	</div>
 		
@@ -827,7 +819,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Web-Basic-Requirement"><span class="toc-article-text">Web Basic Requirement</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#PHP-amp-HTTP"><span class="toc-article-text">PHP&amp;HTTP</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#cookie-session-token"><span class="toc-article-text">cookie,session,token</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#HEADER"><span class="toc-article-text">HEADER</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#PHP%E6%A0%87%E7%AD%BE%E5%86%99%E6%B3%95"><span class="toc-article-text">PHP标签写法</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%9D%BE%E6%95%A3%E6%AF%94%E8%BE%83"><span class="toc-article-text">松散比较</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#MD5%E7%A2%B0%E6%92%9E%E4%B8%8E%E7%BB%95%E8%BF%87"><span class="toc-article-text">MD5碰撞与绕过</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%B6%85%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-article-text">超全局变量</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE-regex"><span class="toc-article-text">正则表达-regex</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-article-text">一句话木马</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#swp%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="toc-article-text">.swp备份文件</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="toc-article-text">文件包含漏洞</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8"><span class="toc-article-text">反序列化逃逸</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#PHP%E5%A4%AA%E6%80%AA%E4%BA%86"><span class="toc-article-text">PHP太怪了</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%8F%98%E9%87%8F%E5%A5%97%E5%8F%98%E9%87%8F"><span class="toc-article-text">变量套变量</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%8F%98%E9%87%8F%E5%A5%97%E5%87%BD%E6%95%B0"><span class="toc-article-text">变量套函数</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#PHP-func-DICT"><span class="toc-article-text">PHP func DICT</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#SQL"><span class="toc-article-text">SQL</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#MySQL%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-article-text">MySQL基础命令</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#MySQL-DICT"><span class="toc-article-text">MySQL DICT</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#information-schema"><span class="toc-article-text">information_schema</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%9F%BA%E4%BA%8E%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%94%BB%E5%87%BB"><span class="toc-article-text">基于约束的攻击</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#SQL%E6%9F%A5%E8%AF%A2%E4%B8%8E%E6%AF%94%E8%BE%83"><span class="toc-article-text">SQL查询与比较</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%B8%87-%E8%83%BD-%E9%92%A5-%E5%8C%99"><span class="toc-article-text">万 能 钥 匙</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5"><span class="toc-article-text">宽字节注入</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%9B%B2%E6%B3%A8"><span class="toc-article-text">盲注</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5"><span class="toc-article-text">预处理语句</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E2%9D%80%E8%8A%B1%E5%BC%8F%E7%BB%95%E8%BF%87%E2%9D%80"><span class="toc-article-text">❀花式绕过❀</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#git"><span class="toc-article-text">git</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#git%E5%9F%BA%E7%A1%80"><span class="toc-article-text">git基础</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#git%E6%B3%84%E6%BC%8F"><span class="toc-article-text">git泄漏</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Linux"><span class="toc-article-text">Linux</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Linux%E5%9F%BA%E7%A1%80"><span class="toc-article-text">Linux基础</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E2%9D%80%E8%8A%B1%E5%BC%8FcatFlag%E2%9D%80"><span class="toc-article-text">❀花式catFlag❀</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Tool"><span class="toc-article-text">Tool</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#sqlmap"><span class="toc-article-text">sqlmap</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#cURL"><span class="toc-article-text">cURL</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#pip%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84%E5%8C%85"><span class="toc-article-text">pip指定版本的包</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#ENCRYPT"><span class="toc-article-text">ENCRYPT</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#CBC%E5%AD%97%E7%AC%A6%E7%BF%BB%E8%BD%AC%E6%94%BB%E5%87%BB"><span class="toc-article-text">CBC字符翻转攻击</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#PHP-amp-HTTP"><span class="toc-article-text">PHP&amp;HTTP</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#cookie-session-token"><span class="toc-article-text">cookie,session,token</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#HEADER"><span class="toc-article-text">HEADER</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#PHP%E6%A0%87%E7%AD%BE%E5%86%99%E6%B3%95"><span class="toc-article-text">PHP标签写法</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9D%BE%E6%95%A3%E6%AF%94%E8%BE%83"><span class="toc-article-text">松散比较</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#MD5%E7%A2%B0%E6%92%9E%E4%B8%8E%E7%BB%95%E8%BF%87"><span class="toc-article-text">MD5碰撞与绕过</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%B6%85%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="toc-article-text">超全局变量</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE-regex"><span class="toc-article-text">正则表达-regex</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC"><span class="toc-article-text">一句话木马</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#swp%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="toc-article-text">.swp备份文件</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E"><span class="toc-article-text">文件包含漏洞</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8"><span class="toc-article-text">反序列化逃逸</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#PHP%E5%A4%AA%E6%80%AA%E4%BA%86"><span class="toc-article-text">PHP太怪了</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%8F%98%E9%87%8F%E5%A5%97%E5%8F%98%E9%87%8F"><span class="toc-article-text">变量套变量</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%8F%98%E9%87%8F%E5%A5%97%E5%87%BD%E6%95%B0"><span class="toc-article-text">变量套函数</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#PHP-func-DICT"><span class="toc-article-text">PHP func DICT</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#SQL"><span class="toc-article-text">SQL</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#MySQL%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-article-text">MySQL基础命令</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#MySQL-DICT"><span class="toc-article-text">MySQL DICT</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#information-schema"><span class="toc-article-text">information_schema</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%9F%BA%E4%BA%8E%E7%BA%A6%E6%9D%9F%E7%9A%84%E6%94%BB%E5%87%BB"><span class="toc-article-text">基于约束的攻击</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#SQL%E6%9F%A5%E8%AF%A2%E4%B8%8E%E6%AF%94%E8%BE%83"><span class="toc-article-text">SQL查询与比较</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%B8%87-%E8%83%BD-%E9%92%A5-%E5%8C%99"><span class="toc-article-text">万 能 钥 匙</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5"><span class="toc-article-text">宽字节注入</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%9B%B2%E6%B3%A8"><span class="toc-article-text">盲注</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5"><span class="toc-article-text">预处理语句</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E2%9D%80%E8%8A%B1%E5%BC%8F%E7%BB%95%E8%BF%87%E2%9D%80"><span class="toc-article-text">❀花式绕过❀</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#git"><span class="toc-article-text">git</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#git%E5%9F%BA%E7%A1%80"><span class="toc-article-text">git基础</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#git%E6%B3%84%E6%BC%8F"><span class="toc-article-text">git泄漏</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Linux"><span class="toc-article-text">Linux</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Linux%E5%9F%BA%E7%A1%80"><span class="toc-article-text">Linux基础</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E2%9D%80%E8%8A%B1%E5%BC%8FcatFlag%E2%9D%80"><span class="toc-article-text">❀花式catFlag❀</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Tool"><span class="toc-article-text">Tool</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#sqlmap"><span class="toc-article-text">sqlmap</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#cURL"><span class="toc-article-text">cURL</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#pip%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84%E5%8C%85"><span class="toc-article-text">pip指定版本的包</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#ENCRYPT"><span class="toc-article-text">ENCRYPT</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#CBC%E5%AD%97%E7%AC%A6%E7%BF%BB%E8%BD%AC%E6%94%BB%E5%87%BB"><span class="toc-article-text">CBC字符翻转攻击</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>
