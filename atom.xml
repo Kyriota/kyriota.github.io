@@ -3,11 +3,11 @@
   <title>KYRIOTA</title>
   
   
-  <link href="https://kyriota.gitee.io/atom.xml" rel="self"/>
+  <link href="https://kyriota.github.io/atom.xml" rel="self"/>
   
-  <link href="https://kyriota.gitee.io/"/>
+  <link href="https://kyriota.github.io/"/>
   <updated>2021-05-04T15:43:39.977Z</updated>
-  <id>https://kyriota.gitee.io/</id>
+  <id>https://kyriota.github.io/</id>
   
   <author>
     <name>KYRIOTA</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Hello Dimension</title>
-    <link href="https://kyriota.gitee.io/2021/04/24/Hello_Dimension/"/>
-    <id>https://kyriota.gitee.io/2021/04/24/Hello_Dimension/</id>
+    <link href="https://kyriota.github.io/2021/04/24/Hello_Dimension/"/>
+    <id>https://kyriota.github.io/2021/04/24/Hello_Dimension/</id>
     <published>2021-04-24T09:28:20.000Z</published>
     <updated>2021-05-04T15:43:39.977Z</updated>
     
@@ -32,17 +32,17 @@
     
     
     
-    <category term="摸鱼" scheme="https://kyriota.gitee.io/categories/%E6%91%B8%E9%B1%BC/"/>
+    <category term="摸鱼" scheme="https://kyriota.github.io/categories/%E6%91%B8%E9%B1%BC/"/>
     
     
-    <category term="图形学" scheme="https://kyriota.gitee.io/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    <category term="图形学" scheme="https://kyriota.github.io/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>图形学HelloWorld</title>
-    <link href="https://kyriota.gitee.io/2021/04/19/%E5%9B%BE%E5%BD%A2%E5%AD%A6HelloWorld/"/>
-    <id>https://kyriota.gitee.io/2021/04/19/%E5%9B%BE%E5%BD%A2%E5%AD%A6HelloWorld/</id>
+    <link href="https://kyriota.github.io/2021/04/19/%E5%9B%BE%E5%BD%A2%E5%AD%A6HelloWorld/"/>
+    <id>https://kyriota.github.io/2021/04/19/%E5%9B%BE%E5%BD%A2%E5%AD%A6HelloWorld/</id>
     <published>2021-04-18T17:24:55.000Z</published>
     <updated>2021-04-20T18:19:18.368Z</updated>
     
@@ -54,17 +54,17 @@
     
     
     
-    <category term="摸鱼" scheme="https://kyriota.gitee.io/categories/%E6%91%B8%E9%B1%BC/"/>
+    <category term="摸鱼" scheme="https://kyriota.github.io/categories/%E6%91%B8%E9%B1%BC/"/>
     
     
-    <category term="图形学" scheme="https://kyriota.gitee.io/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    <category term="图形学" scheme="https://kyriota.github.io/tags/%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>i春秋虎符2021 web</title>
-    <link href="https://kyriota.gitee.io/2021/04/10/i%E6%98%A5%E7%A7%8B%E8%99%8E%E7%AC%A62021/"/>
-    <id>https://kyriota.gitee.io/2021/04/10/i%E6%98%A5%E7%A7%8B%E8%99%8E%E7%AC%A62021/</id>
+    <link href="https://kyriota.github.io/2021/04/10/i%E6%98%A5%E7%A7%8B%E8%99%8E%E7%AC%A62021/"/>
+    <id>https://kyriota.github.io/2021/04/10/i%E6%98%A5%E7%A7%8B%E8%99%8E%E7%AC%A62021/</id>
     <published>2021-04-09T16:35:02.000Z</published>
     <updated>2021-05-03T06:53:42.223Z</updated>
     
@@ -79,17 +79,17 @@
     
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/categories/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/categories/Web/"/>
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/tags/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title>PHP奇怪的目录访问机制</title>
-    <link href="https://kyriota.gitee.io/2021/03/28/PHP%E5%A5%87%E6%80%AA%E7%9A%84%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E6%9C%BA%E5%88%B6/"/>
-    <id>https://kyriota.gitee.io/2021/03/28/PHP%E5%A5%87%E6%80%AA%E7%9A%84%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E6%9C%BA%E5%88%B6/</id>
+    <link href="https://kyriota.github.io/2021/03/28/PHP%E5%A5%87%E6%80%AA%E7%9A%84%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E6%9C%BA%E5%88%B6/"/>
+    <id>https://kyriota.github.io/2021/03/28/PHP%E5%A5%87%E6%80%AA%E7%9A%84%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E6%9C%BA%E5%88%B6/</id>
     <published>2021-03-28T13:14:32.000Z</published>
     <updated>2021-04-11T07:08:21.496Z</updated>
     
@@ -100,21 +100,21 @@
     
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/categories/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/categories/Web/"/>
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/tags/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/tags/Web/"/>
     
-    <category term="PHP" scheme="https://kyriota.gitee.io/tags/PHP/"/>
+    <category term="PHP" scheme="https://kyriota.github.io/tags/PHP/"/>
     
-    <category term="wp" scheme="https://kyriota.gitee.io/tags/wp/"/>
+    <category term="wp" scheme="https://kyriota.github.io/tags/wp/"/>
     
   </entry>
   
   <entry>
     <title>miniL p</title>
-    <link href="https://kyriota.gitee.io/2021/03/25/miniL_web_p/"/>
-    <id>https://kyriota.gitee.io/2021/03/25/miniL_web_p/</id>
+    <link href="https://kyriota.github.io/2021/03/25/miniL_web_p/"/>
+    <id>https://kyriota.github.io/2021/03/25/miniL_web_p/</id>
     <published>2021-03-25T15:40:17.000Z</published>
     <updated>2021-05-14T10:31:11.801Z</updated>
     
@@ -126,21 +126,21 @@
     
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/categories/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/categories/Web/"/>
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/tags/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/tags/Web/"/>
     
-    <category term="wp" scheme="https://kyriota.gitee.io/tags/wp/"/>
+    <category term="wp" scheme="https://kyriota.github.io/tags/wp/"/>
     
-    <category term="miniL" scheme="https://kyriota.gitee.io/tags/miniL/"/>
+    <category term="miniL" scheme="https://kyriota.github.io/tags/miniL/"/>
     
   </entry>
   
   <entry>
     <title>bugku 社工-初步收集</title>
-    <link href="https://kyriota.gitee.io/2021/03/24/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86/"/>
-    <id>https://kyriota.gitee.io/2021/03/24/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86/</id>
+    <link href="https://kyriota.github.io/2021/03/24/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86/"/>
+    <id>https://kyriota.github.io/2021/03/24/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86/</id>
     <published>2021-03-23T16:40:39.000Z</published>
     <updated>2021-05-14T10:31:52.800Z</updated>
     
@@ -152,21 +152,21 @@
     
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/categories/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/categories/Web/"/>
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/tags/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/tags/Web/"/>
     
-    <category term="wp" scheme="https://kyriota.gitee.io/tags/wp/"/>
+    <category term="wp" scheme="https://kyriota.github.io/tags/wp/"/>
     
-    <category term="bugku" scheme="https://kyriota.gitee.io/tags/bugku/"/>
+    <category term="bugku" scheme="https://kyriota.github.io/tags/bugku/"/>
     
   </entry>
   
   <entry>
     <title>Web Basic Requirement</title>
-    <link href="https://kyriota.gitee.io/2021/03/16/Web_Basic_Requirement/"/>
-    <id>https://kyriota.gitee.io/2021/03/16/Web_Basic_Requirement/</id>
+    <link href="https://kyriota.github.io/2021/03/16/Web_Basic_Requirement/"/>
+    <id>https://kyriota.github.io/2021/03/16/Web_Basic_Requirement/</id>
     <published>2021-03-16T08:33:52.000Z</published>
     <updated>2021-05-06T11:28:26.958Z</updated>
     
@@ -177,10 +177,10 @@
     
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/categories/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/categories/Web/"/>
     
     
-    <category term="Web" scheme="https://kyriota.gitee.io/tags/Web/"/>
+    <category term="Web" scheme="https://kyriota.github.io/tags/Web/"/>
     
   </entry>
   
