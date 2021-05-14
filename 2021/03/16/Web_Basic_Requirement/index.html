@@ -23,18 +23,18 @@
 
   
   
-    <link href="/kyriota.github.io/favicon.ico" rel="icon">
+    <link href="/favicon.ico" rel="icon">
   
   
-  <link rel="stylesheet" href="/kyriota.github.io/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <script src="/kyriota.github.io/js/jquery-2.0.3.min.js"></script>
+  <script src="/js/jquery-2.0.3.min.js"></script>
 
   <!-- analytics -->
   
@@ -60,7 +60,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/kyriota.github.io/atom.xml" title="KYRIOTA" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="KYRIOTA" type="application/atom+xml">
 </head>
 
  <body>  
@@ -72,36 +72,36 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="/kyriota.github.io/">KYRIOTA</a>
+	  <a class="navbar-brand" href="/">KYRIOTA</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/kyriota.github.io/archives" title="All the articles.">
+			<a href="/archives" title="All the articles.">
 			  <i class=""></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/categories" title="All the categories.">
+			<a href="/categories" title="All the categories.">
 			  <i class=""></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/tags" title="All the tags.">
+			<a href="/tags" title="All the tags.">
 			  <i class=""></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/about" title="About me.">
+			<a href="/about" title="About me.">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe me.">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -743,7 +743,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 <h1 id="ENCRYPT"><a href="#ENCRYPT" class="headerlink" title="ENCRYPT"></a><big><center>ENCRYPT</center></big></h1><h2 id="CBC字符翻转攻击"><a href="#CBC字符翻转攻击" class="headerlink" title="CBC字符翻转攻击"></a><big>CBC字符翻转攻击</big></h2><p align='right'><small>还不太懂，暂先收录</small></p>
 
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013577244/article/details/86310881?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-3.not_use_machine_learn_pai&depth_1-utm_source=distribute.pc_relevant.no">CSDN相关文章</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Type: text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="comment">#计算cipher</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	明文1：a:2:&#123;s:8:&quot;userna		//r</span></span><br><span class="line"><span class="comment">	明文2：me&quot;;s:5:&quot;admil&quot;;		//l字母在第14个字节</span></span><br><span class="line"><span class="comment">	明文3：s:8:&quot;password&quot;;s</span></span><br><span class="line"><span class="comment">	明文4：:3:&quot;123&quot;;&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="variable">$cipher</span>=base64_decode(urldecode(<span class="string">&#x27;f0csYAAWDy%2FGlSsvWLr6NlCBad4p2U%2BXm2Rr2X07iytKd4r8V5tbO7%2FcxIib96eRDGUOMQclQgvxw2SZXOobWQ%3D%3D&#x27;</span>));</span><br><span class="line"><span class="variable">$temp</span>=<span class="variable">$cipher</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	设密文1[13]=A,	解密(密文2)[13]=B,	明文2[13]=C,	</span></span><br><span class="line"><span class="comment">	将A修改为A ^ C,则:</span></span><br><span class="line"><span class="comment">	A ^ B = A ^ C ^ B = B ^ B = 0 = C</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line"><span class="comment">//						A				  C			 X</span></span><br><span class="line"><span class="variable">$cipher</span>[<span class="number">13</span>]=chr(ord(<span class="variable">$cipher</span>[<span class="number">13</span>]) ^ ord(<span class="string">&#x27;l&#x27;</span>) ^ ord(<span class="string">&#x27;n&#x27;</span>));</span><br><span class="line"><span class="keyword">echo</span> urlencode(base64_encode(<span class="variable">$cipher</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算iv</span></span><br><span class="line"><span class="variable">$res</span>=base64_decode(<span class="string">&#x27;yeiydaYLG5RNzOPWaQgOkG1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjM6IjEyMyI7fQ==&#x27;</span>);	<span class="comment">//这里放burp放回的base64数据</span></span><br><span class="line"><span class="variable">$iv</span>=base64_decode(urldecode(<span class="string">&#x27;TD9FI%2FvbrZn%2FSjbSD9bfSQ%3D%3D&#x27;</span>)); <span class="comment">//这里放cookie中的iv</span></span><br><span class="line"><span class="variable">$plaintext</span>=<span class="string">&#x27;a:2:&#123;s:8:&quot;userna&#x27;</span>;</span><br><span class="line"><span class="variable">$new_iv</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">16</span>; <span class="variable">$i</span> ++)&#123;</span><br><span class="line">    <span class="variable">$new_iv</span>=<span class="variable">$new_iv</span>.chr(ord(<span class="variable">$iv</span>[<span class="variable">$i</span>])^ord(<span class="variable">$res</span>[<span class="variable">$i</span>])^ord(<span class="variable">$plaintext</span>[<span class="variable">$i</span>]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> urlencode(base64_encode(<span class="variable">$new_iv</span>));</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/kyriota.github.io/css/spoiler.css" type="text/css"><script src="/kyriota.github.io/js/spoiler.js" type="text/javascript" async></script>	  
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">header(<span class="string">&quot;Content-Type: text/html;charset=utf-8&quot;</span>);</span><br><span class="line"><span class="comment">#计算cipher</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	明文1：a:2:&#123;s:8:&quot;userna		//r</span></span><br><span class="line"><span class="comment">	明文2：me&quot;;s:5:&quot;admil&quot;;		//l字母在第14个字节</span></span><br><span class="line"><span class="comment">	明文3：s:8:&quot;password&quot;;s</span></span><br><span class="line"><span class="comment">	明文4：:3:&quot;123&quot;;&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="variable">$cipher</span>=base64_decode(urldecode(<span class="string">&#x27;f0csYAAWDy%2FGlSsvWLr6NlCBad4p2U%2BXm2Rr2X07iytKd4r8V5tbO7%2FcxIib96eRDGUOMQclQgvxw2SZXOobWQ%3D%3D&#x27;</span>));</span><br><span class="line"><span class="variable">$temp</span>=<span class="variable">$cipher</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	设密文1[13]=A,	解密(密文2)[13]=B,	明文2[13]=C,	</span></span><br><span class="line"><span class="comment">	将A修改为A ^ C,则:</span></span><br><span class="line"><span class="comment">	A ^ B = A ^ C ^ B = B ^ B = 0 = C</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line"><span class="comment">//						A				  C			 X</span></span><br><span class="line"><span class="variable">$cipher</span>[<span class="number">13</span>]=chr(ord(<span class="variable">$cipher</span>[<span class="number">13</span>]) ^ ord(<span class="string">&#x27;l&#x27;</span>) ^ ord(<span class="string">&#x27;n&#x27;</span>));</span><br><span class="line"><span class="keyword">echo</span> urlencode(base64_encode(<span class="variable">$cipher</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">#计算iv</span></span><br><span class="line"><span class="variable">$res</span>=base64_decode(<span class="string">&#x27;yeiydaYLG5RNzOPWaQgOkG1lIjtzOjU6ImFkbWluIjtzOjg6InBhc3N3b3JkIjtzOjM6IjEyMyI7fQ==&#x27;</span>);	<span class="comment">//这里放burp放回的base64数据</span></span><br><span class="line"><span class="variable">$iv</span>=base64_decode(urldecode(<span class="string">&#x27;TD9FI%2FvbrZn%2FSjbSD9bfSQ%3D%3D&#x27;</span>)); <span class="comment">//这里放cookie中的iv</span></span><br><span class="line"><span class="variable">$plaintext</span>=<span class="string">&#x27;a:2:&#123;s:8:&quot;userna&#x27;</span>;</span><br><span class="line"><span class="variable">$new_iv</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">16</span>; <span class="variable">$i</span> ++)&#123;</span><br><span class="line">    <span class="variable">$new_iv</span>=<span class="variable">$new_iv</span>.chr(ord(<span class="variable">$iv</span>[<span class="variable">$i</span>])^ord(<span class="variable">$res</span>[<span class="variable">$i</span>])^ord(<span class="variable">$plaintext</span>[<span class="variable">$i</span>]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> urlencode(base64_encode(<span class="variable">$new_iv</span>));</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
 
 	<div>
@@ -752,11 +752,11 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 
     
     
-    <a href="/kyriota.github.io/2021/03/24/社工-初步收集/" type="button" class="btn btn-default"><i
+    <a href="/2021/03/24/社工-初步收集/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
-    <a href="/kyriota.github.io/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
     <a type="button" class="btn btn-default disabled">Next<i class="fa fa-arrow-circle-o-right"></i></a>
     
@@ -797,7 +797,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/kyriota.github.io/categories/Web/">Web<span>5</span></a></li>
+    <li><a href="/categories/Web/">Web<span>5</span></a></li>
   </li>
 
     </ul>
@@ -810,7 +810,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/kyriota.github.io/tags/Web/">Web<span>5</span></a></li>
+  <li><a href="/tags/Web/">Web<span>5</span></a></li>
     </ul>
 	</div>
 		
@@ -856,15 +856,15 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
   <span>⬆︎TOP</span>
 </a>
 
-<script src="/kyriota.github.io/js/jquery.imagesloaded.min.js"></script>
-<script src="/kyriota.github.io/js/gallery.js"></script>
-<script src="/kyriota.github.io/js/bootstrap.min.js"></script>
-<script src="/kyriota.github.io/js/main.js"></script>
-<script src="/kyriota.github.io/js/search.js"></script> 
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/kyriota.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/kyriota.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -878,7 +878,7 @@ PHP Notice:  unserialize(): Error at offset 68 of 69 bytes on line 27</blockquot
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/kyriota.github.io/" + search_path;
+	 var path = "/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
