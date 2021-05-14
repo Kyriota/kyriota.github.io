@@ -23,18 +23,18 @@
 
   
   
-    <link href="/kyriota.github.io/favicon.ico" rel="icon">
+    <link href="/Kyriota/favicon.ico" rel="icon">
   
   
-  <link rel="stylesheet" href="/kyriota.github.io/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota.github.io/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/Kyriota/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/Kyriota/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/Kyriota/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/Kyriota/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/Kyriota/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/Kyriota/css/google-fonts.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <script src="/kyriota.github.io/js/jquery-2.0.3.min.js"></script>
+  <script src="/Kyriota/js/jquery-2.0.3.min.js"></script>
 
   <!-- analytics -->
   
@@ -60,7 +60,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/kyriota.github.io/atom.xml" title="KYRIOTA" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/Kyriota/atom.xml" title="KYRIOTA" type="application/atom+xml">
 </head>
 
  <body>  
@@ -72,36 +72,36 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="/kyriota.github.io/">KYRIOTA</a>
+	  <a class="navbar-brand" href="/Kyriota/">KYRIOTA</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/kyriota.github.io/archives" title="All the articles.">
+			<a href="/Kyriota/archives" title="All the articles.">
 			  <i class=""></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/categories" title="All the categories.">
+			<a href="/Kyriota/categories" title="All the categories.">
 			  <i class=""></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/tags" title="All the tags.">
+			<a href="/Kyriota/tags" title="All the tags.">
 			  <i class=""></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/about" title="About me.">
+			<a href="/Kyriota/about" title="About me.">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota.github.io/atom.xml" title="Subscribe me.">
+			<a href="/Kyriota/atom.xml" title="Subscribe me.">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -153,7 +153,7 @@ var _hmt = _hmt || [];
 
 <p>附上甜甜圈的代码，写方块之前没仔细看过，所以我写的方块非常冗余（主要是想先独立尝试</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">float</span> A = <span class="number">0</span>, B = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> i, j;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line">    <span class="keyword">float</span> z[<span class="number">1760</span>];</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">1760</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\x1b[2J&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(;;) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(b,<span class="number">32</span>,<span class="number">1760</span>);</span><br><span class="line">        <span class="built_in">memset</span>(z,<span class="number">0</span>,<span class="number">7040</span>);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j &lt; <span class="number">6.28</span>; j += <span class="number">0.07</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>; i &lt; <span class="number">6.28</span>; i += <span class="number">0.02</span>) &#123;</span><br><span class="line">                <span class="keyword">float</span> c = <span class="built_in">sin</span>(i);</span><br><span class="line">                <span class="keyword">float</span> d = <span class="built_in">cos</span>(j);</span><br><span class="line">                <span class="keyword">float</span> e = <span class="built_in">sin</span>(A);</span><br><span class="line">                <span class="keyword">float</span> f = <span class="built_in">sin</span>(j);</span><br><span class="line">                <span class="keyword">float</span> g = <span class="built_in">cos</span>(A);</span><br><span class="line">                <span class="keyword">float</span> h = d + <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">float</span> D = <span class="number">1</span> / (c * h * e + f * g + <span class="number">5</span>);</span><br><span class="line">                <span class="keyword">float</span> l = <span class="built_in">cos</span>(i);</span><br><span class="line">                <span class="keyword">float</span> m = <span class="built_in">cos</span>(B);</span><br><span class="line">                <span class="keyword">float</span> n = <span class="built_in">sin</span>(B);</span><br><span class="line">                <span class="keyword">float</span> t = c * h * g - f * e;</span><br><span class="line">                <span class="keyword">int</span> x = <span class="number">40</span> + <span class="number">30</span> * D * (l * h * m - t * n);</span><br><span class="line">                <span class="keyword">int</span> y= <span class="number">12</span> + <span class="number">15</span> * D * (l * h * n + t * m);</span><br><span class="line">                <span class="keyword">int</span> o = x + <span class="number">80</span> * y;</span><br><span class="line">                <span class="keyword">int</span> N = <span class="number">8</span> * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n);</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">22</span> &gt; y &amp;&amp; y &gt; <span class="number">0</span> &amp;&amp; x &gt; <span class="number">0</span> &amp;&amp; <span class="number">80</span> &gt; x &amp;&amp; D &gt; z[o]) &#123;</span><br><span class="line">                    z[o] = D;</span><br><span class="line">                    b[o] = <span class="string">&quot;.,-~:;=!*#$@&quot;</span>[N &gt; <span class="number">0</span> ? N : <span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\x1b[H&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; <span class="number">1761</span>; k++) &#123;</span><br><span class="line">            <span class="built_in">putchar</span>(k % <span class="number">80</span> ? b[k] : <span class="number">10</span>);</span><br><span class="line">            A += <span class="number">0.00004</span>;</span><br><span class="line">            B += <span class="number">0.00002</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        usleep(<span class="number">30000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="/kyriota.github.io/css/spoiler.css" type="text/css"><script src="/kyriota.github.io/js/spoiler.js" type="text/javascript" async></script>	  
+<link rel="stylesheet" href="/Kyriota/css/spoiler.css" type="text/css"><script src="/Kyriota/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
 
 	<div>
@@ -162,13 +162,13 @@ var _hmt = _hmt || [];
 
     
     
-    <a href="/kyriota.github.io/2021/04/24/Hello_Dimension/" type="button" class="btn btn-default"><i
+    <a href="/Kyriota/2021/04/24/Hello_Dimension/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
-    <a href="/kyriota.github.io/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    <a href="/Kyriota/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/kyriota.github.io/2021/04/10/i春秋虎符2021/" type="button" class="btn btn-default ">Next<i
+    <a href="/Kyriota/2021/04/10/i春秋虎符2021/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -208,7 +208,7 @@ var _hmt = _hmt || [];
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/kyriota.github.io/categories/摸鱼/">摸鱼<span>2</span></a></li>
+    <li><a href="/Kyriota/categories/摸鱼/">摸鱼<span>2</span></a></li>
   </li>
 
     </ul>
@@ -221,7 +221,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/kyriota.github.io/tags/图形学/">图形学<span>2</span></a></li>
+  <li><a href="/Kyriota/tags/图形学/">图形学<span>2</span></a></li>
     </ul>
 	</div>
 		
@@ -261,15 +261,15 @@ var _hmt = _hmt || [];
   <span>⬆︎TOP</span>
 </a>
 
-<script src="/kyriota.github.io/js/jquery.imagesloaded.min.js"></script>
-<script src="/kyriota.github.io/js/gallery.js"></script>
-<script src="/kyriota.github.io/js/bootstrap.min.js"></script>
-<script src="/kyriota.github.io/js/main.js"></script>
-<script src="/kyriota.github.io/js/search.js"></script> 
+<script src="/Kyriota/js/jquery.imagesloaded.min.js"></script>
+<script src="/Kyriota/js/gallery.js"></script>
+<script src="/Kyriota/js/bootstrap.min.js"></script>
+<script src="/Kyriota/js/main.js"></script>
+<script src="/Kyriota/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/kyriota.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/kyriota.github.io/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/Kyriota/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/Kyriota/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -283,7 +283,7 @@ var _hmt = _hmt || [];
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/kyriota.github.io/" + search_path;
+	 var path = "/Kyriota/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
