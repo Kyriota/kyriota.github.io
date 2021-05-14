@@ -6,15 +6,16 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>PHP奇怪的目录访问机制 | KYRIOTA</title>
+  <title>bugku 社工-初步收集 | KYRIOTA</title>
   <meta name="author" content="KYRIOTA">
   
-  <meta name="description" content="来自于BUUCTF_Web解决数最多的[HCTF 2018]WarmUp，小记一下此题被我疏忽的零碎知识以及出题人的脑洞（虽然不大，但是我认为此题不面向wp而是硬做的话不会有这么多解决数 ¯\_(ツ)_/¯">
+  <meta name="description" content="虽然和Web其实没什么关系，但是真的是非常有趣啊👍
+作者说这个题更像是MISC类...yysy，qs">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="PHP奇怪的目录访问机制"/>
+  <meta property="og:title" content="bugku 社工-初步收集"/>
   <meta property="og:site_name" content="KYRIOTA"/>
 
   
@@ -119,7 +120,7 @@ var _hmt = _hmt || [];
 
 	
 		<div class="page-header">
-			<h1> PHP奇怪的目录访问机制</h1>
+			<h1> bugku 社工-初步收集</h1>
 		</div>
 	
 
@@ -136,14 +137,33 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <p>来自于BUUCTF_Web解决数最多的[HCTF 2018]WarmUp，小记一下此题被我疏忽的零碎知识以及出题人的脑洞（虽然不大，但是我认为此题不面向wp而是硬做的话不会有这么多解决数 ¯\_(ツ)_/¯</p>
+	  <p>虽然和Web其实没什么关系，但是真的是非常有趣啊👍</p>
+<p align='right'><small>作者说这个题更像是MISC类...yysy，qs</small></p>
+
 <span id="more"></span>
 
-<h1 id="PHP奇怪的目录访问机制"><a href="#PHP奇怪的目录访问机制" class="headerlink" title="PHP奇怪的目录访问机制"></a>PHP奇怪的目录访问机制</h1><p>首先是脑洞，本题hint：<code>flag not here, and flag in ffffllllaaaagggg</code>，这个别致的flag传达的是：flag在上翻4级目录下。这个题上翻4级目录恰好到 linux 根目录，所以有些wp中堆叠很多个<code>../</code>也可以highlight到flag（大概是为了降低脑洞因素的存在感</p>
-<p>再就是本文标题，本题需要在<code>highlight_file(__FILE__)</code>的情况下构造payload绕过其过滤，最后由<code>include</code>包含进来。但是为了绕过其过滤，传给include的路径是：<code>file=hint.php?/../../../../../ffffllllaaaagggg</code>，此路径能打开ffffllllaaaagggg的原因在于<code>hint.php?</code>这个文件并不存在，则php将其视为一个文件夹，flag在上翻 4 层后的目录下，因为已经进了 hint.php? 则还需退回 5 层</p>
-<blockquote>这种访问不存在的目录然后又退回来的操作在linux的shell环境下并不支持，所以说令我感到奇怪</blockquote>
+<h1 id="社工-初步收集"><a href="#社工-初步收集" class="headerlink" title="社工-初步收集"></a>社工-初步收集</h1><h2 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h2><ul>
+<li><p>进来发现是刷钻软件的index，其中有一地址可以下载一个易语言写的exe</p>
+<p>  <img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-index.PNG"></p>
+</li>
+<li><p>手动添加admin发现管理页面存在，但是一旦尝试注入就会卡死(至少我是这样的)</p>
+</li>
+</ul>
+<p>至此，其他的信息均为干扰，再没有发现任何线索，很显然刷钻exe才是关键</p>
+<h2 id="exe分析"><a href="#exe分析" class="headerlink" title="exe分析"></a>exe分析</h2><h3 id="方法一：抓smtp包"><a href="#方法一：抓smtp包" class="headerlink" title="方法一：抓smtp包"></a>方法一：抓smtp包</h3><p>先看本体，就是一个钓鱼软件</p>
+<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-exe.PNG"></p>
+<p>最简单也是最常见的钓鱼就是用smtp发邮件出去，但在通过smtp送信时是需要smtp授权码的，故只要抓个smtp包看邮箱和密码即可</p>
+<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-pack.PNG"></p>
+<p>关键字<code>AUTH LOGIN</code>登录认证，将下文的发送的字段b64decode一下，得到邮箱与密码</p>
+<h3 id="方法二：IDA"><a href="#方法二：IDA" class="headerlink" title="方法二：IDA"></a>方法二：IDA</h3><p>除了抓包查看邮箱与密码，在exe中的邮箱和密码也是保存为静态字段的，拖进IDA去字符串页面找即可</p>
+<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-IDA.PNG"></p>
+<h2 id="登录邮箱"><a href="#登录邮箱" class="headerlink" title="登录邮箱"></a>登录邮箱</h2><p>需要注意的是我们找到的是smtp授权码，而非邮箱的登陆密码，故不能在网易邮箱直接登录（别问，问就是虽然知道smtp授权码和登陆密码是两码事，但是还是试了好久），面向搜索引擎解题我们得知应该用第三方的邮箱客户端，并选择使用smtp协议登录，例如<code>FoxMail</code>，登录后可以找到管理员补档的被删除的eml格式的附件，foxmail本身或微软自带邮箱就可以打开</p>
+<blockquote>EML格式是微软公司在Outlook中所使用的一种遵循RFC822及其后续扩展的文件格式，并成为各类电子邮件软件的通用格式——百度百科</blockquote>
 
-<p><img src="/images/PHP%E5%A5%87%E6%80%AA%E7%9A%84%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E6%9C%BA%E5%88%B6_LinuxShell.PNG"></p>
+<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-mail.PNG"></p>
+<p>打开附件后为邮件对话截图，好心的管理还画出了关键信息，结合题目中提到“社工”，显然此处交代了后台管理的用户名即为发件人署名，密码为生日密码，以此登录后台后稍微翻翻就看到flag啦~</p>
+<p align='right'><small>非常有趣</small></p>
+
 <link rel="stylesheet" href="/kyriota/css/spoiler.css" type="text/css"><script src="/kyriota/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
 
@@ -153,13 +173,13 @@ var _hmt = _hmt || [];
 
     
     
-    <a href="/kyriota/2021/04/10/i春秋虎符2021/" type="button" class="btn btn-default"><i
+    <a href="/kyriota/2021/03/25/miniL_web_p/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/kyriota/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/kyriota/2021/03/25/miniL_web_p/" type="button" class="btn btn-default ">Next<i
+    <a href="/kyriota/2021/03/16/Web_Basic_Requirement/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -188,7 +208,7 @@ var _hmt = _hmt || [];
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2021-03-28 
+	2021-03-24 
 	</div>
 	
 
@@ -212,13 +232,19 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/kyriota/tags/Web/">Web<span>5</span></a></li> <li><a href="/kyriota/tags/PHP/">PHP<span>1</span></a></li> <li><a href="/kyriota/tags/wp/">wp<span>3</span></a></li>
+  <li><a href="/kyriota/tags/Web/">Web<span>5</span></a></li> <li><a href="/kyriota/tags/wp/">wp<span>3</span></a></li> <li><a href="/kyriota/tags/bugku/">bugku<span>1</span></a></li>
     </ul>
 	</div>
 		
 
 	<!-- toc -->
 	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86"><span class="toc-article-text">社工-初步收集</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BD%91%E9%A1%B5%E5%88%86%E6%9E%90"><span class="toc-article-text">网页分析</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#exe%E5%88%86%E6%9E%90"><span class="toc-article-text">exe分析</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E6%8A%93smtp%E5%8C%85"><span class="toc-article-text">方法一：抓smtp包</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9AIDA"><span class="toc-article-text">方法二：IDA</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%99%BB%E5%BD%95%E9%82%AE%E7%AE%B1"><span class="toc-article-text">登录邮箱</span></a></li></ol></li></ol>
+		</div>
 	
 	</div>
 	
