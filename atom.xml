@@ -6,7 +6,7 @@
   <link href="https://kyriota.github.io/atom.xml" rel="self"/>
   
   <link href="https://kyriota.github.io/"/>
-  <updated>2021-05-27T14:41:48.098Z</updated>
+  <updated>2021-09-14T02:37:12.809Z</updated>
   <id>https://kyriota.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浪潮俱乐部密码免试题</title>
+    <link href="https://kyriota.github.io/2021/09/14/%E6%B5%AA%E6%BD%AE%E4%BF%B1%E4%B9%90%E9%83%A8%E5%AF%86%E7%A0%81%E5%85%8D%E8%AF%95%E9%A2%98/"/>
+    <id>https://kyriota.github.io/2021/09/14/%E6%B5%AA%E6%BD%AE%E4%BF%B1%E4%B9%90%E9%83%A8%E5%AF%86%E7%A0%81%E5%85%8D%E8%AF%95%E9%A2%98/</id>
+    <published>2021-09-14T02:15:29.000Z</published>
+    <updated>2021-09-14T02:37:12.809Z</updated>
+    
+    <content type="html"><![CDATA[<p>根据miniL2021中当时我没解出来的密码题asr改编的题目</p><span id="more"></span><h1 id="浪潮俱乐部密码免试题"><a href="#浪潮俱乐部密码免试题" class="headerlink" title="浪潮俱乐部密码免试题"></a>浪潮俱乐部密码免试题</h1><p>博客已经积灰了，假期家里出了点事情，自己的CTF竞赛力已经大幅下滑了，心情复杂</p><p>此题面向新生且作为压轴题，exp将在面时结束后追加到本文</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line">bit=<span class="number">128</span></span><br><span class="line">p = getPrime(bit)</span><br><span class="line">q = getPrime(bit)</span><br><span class="line">n = p*q</span><br><span class="line">xor = p^q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">print(<span class="built_in">pow</span>(bytes_to_long(flag),e,n))</span><br><span class="line">print(n)</span><br><span class="line">print(xor)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">57928739525594987887296575374030551510625601525690046551520041216593791573788</span></span><br><span class="line"><span class="string">80432855143052017312586077102716651699179063179625801734127439450003104378453</span></span><br><span class="line"><span class="string">57489605936489517513414513696072421348</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># Hint: 二叉树与二进制</span></span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;根据miniL2021中当时我没解出来的密码题asr改编的题目&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Crypto" scheme="https://kyriota.github.io/categories/Crypto/"/>
+    
+    
+    <category term="Crypto" scheme="https://kyriota.github.io/tags/Crypto/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello Dimension</title>
