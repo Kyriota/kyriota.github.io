@@ -166,7 +166,7 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>其实当真的敲代码的时候会发现约束鱼群的规则都非常简单，但是多个个体所组成的系统确实复杂的</p>
 </blockquote>
-<h2 id="Getting-Start"><a href="#Getting-Start" class="headerlink" title="Getting Start"></a>Getting Start</h2><p>因为我自己也是Unity入门，对于里面的Rigibody之类的内置力学系统不太了解，也不知道通常的处理这类力学问题的解决方案，恰好我手上拿到的油管dalao的示例代码用的是公式法，即将速度，加速度都作为变量保存在变量里，我就照搬他的做法了</p>
+<h2 id="Getting-Start"><a href="#Getting-Start" class="headerlink" title="Getting Start"></a>Getting Start</h2><p>因为我自己也是Unity入门，对于里面的Rigibody之类的内置力学系统不太了解，也不知道通常的处理这类力学问题的解决方案，恰好我手上拿到的油管dalao的示例代码用的是公式法，即将速度，加速度都保存在变量里，我就照搬他的做法了</p>
 <p>为了后期的调参便利（调参真的是一个很麻烦的事情），我将根据三条规则所产生的加速度捆绑为一种类型的加速度，再将规避障碍物的加速度捆绑为另一种加速度，然后对每种类型的加速度分别进行更细致的权重分配</p>
 <p>为了便于管理鱼群的行为，将 处理当前的鱼与其他剩余的鱼的代码 与 鱼自身Update的代码 分开编辑是很重要的，不管是编辑的便利还是运行的效率，每次查找其他鱼的时候都<code>FindObjectsOfType&lt;Boid&gt;()</code>一个新的列表是完全没有必要的，所以把这部分与其他鱼产生联系的代码抽象为一个<code>BoidManager</code>类，把更新自身速度等信息的代码放在<code>Boid</code>自己的类里面作为成员才是合理的</p>
 <ul>
@@ -189,7 +189,8 @@ var _hmt = _hmt || [];
 <p>其中引入了几个Radius作为是否影响当对象的阈值以限制鱼的视力范围</p>
 <p>应用了三个规则后可以如下GIF的效果</p>
 <p><img src="/images/Boid_Rules.gif"></p>
-<p><small>（红色的那条是0号鱼，也就是初号机，为的是便于从个体的视角观察动向）</small></p>
+<center><small>（红色的那条是0号鱼(初号机)，为的是便于从个体的视角观察动向）</small></center>
+
 <p>我在一个圆内在随机的位置以随机的朝向生成了一些鱼，不难发现他们很快就会根据自己的位置与朝向形成几个鱼群，但这些鱼群都十分稳定，这是因为虽然他们受群聚规则的限制，但没有一个外力来破坏这一规则限制出的稳定结构，我们想看到的必然不是一个稳定结构的鱼群</p>
 <p>对于外力，我们可以选择增加一个驱逐者来追赶鱼群，类似于 <a href="www.bilibili.com/video/BV1tq4y1j7TW">这个视频</a>，也可以增加障碍物来阻挡鱼群，在此为了场景的多样性，我选择后者</p>
 <h2 id="Obstacle-Avoidance"><a href="#Obstacle-Avoidance" class="headerlink" title="Obstacle Avoidance"></a>Obstacle Avoidance</h2><p>其实上述的鱼群行动规则非常简单，不管是字面上看起来还是代码上敲起来，这也使得在空旷环境中的鱼群看起来很没意思，所以加入一个避障的function来使它更有趣吧</p>
@@ -225,12 +226,12 @@ var _hmt = _hmt || [];
 <p><code>[numthreads(1,1,1)]</code>：规定了使用的线程组大小，这里使用的是单线程，默认是<code>(8,8,1)</code>，线程数量为<code>8x8x1</code>，也就是64线程作为一个线程组。<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38884324/article/details/80570160">更多地了解numthreads</a> 会发现里面东西挺多，涉及到显卡的硬件</p>
 <img src="/images/Boid_ThreadGroup.png" alt="Boid_ThreadGroup" style="zoom:50%;" />
 
-<p>如上图，<code>numthreads</code>规定了一个Group(线程组)中的线程数量，关于线程组的数量，则是由<code>Dispatch()</code>方法确定的，<code>Dispatch()</code>作为C#脚本调用ComputeShader的交互方式，与<code>numthread</code>有一些联系，在介绍完Unity的官方ComputeShader示例后会提到。至于为什么大小由一个三维数组确定，是为了在访问2D或者3D的数据结构的时候更加方便操作(大概是吧)</p>
+<p>如上图，<code>numthreads</code>规定了一个Group(线程组)中的线程数量，<code>Dispatch()</code>作为C#脚本调用ComputeShader的交互方式，与<code>numthread</code>有一些联系，在介绍完Unity的官方ComputeShader示例后会提到。至于为什么大小由一个三维数组确定，是为了在访问2D或者3D的数据结构的时候更加方便操作(大概是吧)</p>
 <blockquote>
 <p>The ability to specify the size of the thread group across three dimensions allows individual threads to be accessed in a manner that logically 2D and 3D data structures</p>
-<p align="right"><a herf="https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/sm5-attributes-numthreads">--Microsoft Doc</p>
+<p align="right"><a herf="https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/sm5-attributes-numthreads">--Microsoft Doc</a></p>
 </blockquote>
-<p>在实际使用中，一般不会使<code>numthreads</code>小于32，这会导致达不到最低线程数导致多核围观；但也不能超过1024，应该也是硬件层面的限制。根据之前提到的CSDN上的建议：</p>
+<p>在实际使用中，一般不会使<code>numthreads</code>小于32，这会达不到最低线程数导致多核围观；但也不能超过1024，应该也是硬件层面的限制。根据之前提到的CSDN上的建议：</p>
 <blockquote>
 <p>AMD：ThreadSize 使用 64 的倍數 ( wavefront 架構 )<br>NVIDIA：ThreadSize 使用 32 的倍數 ( SIMD32 (Warp) 架構 )</p>
 </blockquote>
