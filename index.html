@@ -142,6 +142,34 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2021/10/02/Ant_Colony_Optimization/" >Ant Colony Optimization</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2021-10-02  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>蚁群优化算法，最直观的一个示例用途是解决TPS（TravelingSealsmanProblem）问题，快速寻找一个可观的解，但需要你调的一手好参</p>
+<p>//配个图</p>
+	
+	</div>
+  <a type="button" href="/2021/10/02/Ant_Colony_Optimization/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2021/09/23/Unity-ComputeShaderAndBoid/" >Unity - Compute Shader and Boid</a>
 		</h3>
 		</div>
@@ -184,7 +212,19 @@ var _hmt = _hmt || [];
   <div class="row">
 	
 	
-		<p>根据miniL2021中当时我没解出来的密码题asr改编的题目</p>
+		<p>一个面向新人的简单密码题</p>
+<h1 id="浪潮俱乐部密码免试题"><a href="#浪潮俱乐部密码免试题" class="headerlink" title="浪潮俱乐部密码免试题"></a>浪潮俱乐部密码免试题</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> secret <span class="keyword">import</span> flag</span><br><span class="line">bit=<span class="number">128</span></span><br><span class="line">p = getPrime(bit)</span><br><span class="line">q = getPrime(bit)</span><br><span class="line">n = p*q</span><br><span class="line">xor = p^q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">print(<span class="built_in">pow</span>(bytes_to_long(flag),e,n))</span><br><span class="line">print(n)</span><br><span class="line">print(xor)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">57928739525594987887296575374030551510625601525690046551520041216593791573788</span></span><br><span class="line"><span class="string">80432855143052017312586077102716651699179063179625801734127439450003104378453</span></span><br><span class="line"><span class="string">57489605936489517513414513696072421348</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># Hint: 二叉树与二进制</span></span><br></pre></td></tr></table></figure>
+
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        exp
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">n=<span class="string">&#x27;1011000111010011011000011111101000100011101111000010000100001000011101000101010010101110001010111000000001110000110100000101010010001110010100000101001111000010101100000000101111010001100000001000001011110011110111000000111101010101111100001010111001010101&#x27;</span></span><br><span class="line">xor=<span class="string">&#x27;00101011010000000001100001101001010001110001100110010011010010001011110100111000100110000111101110111010011100100100111111100100&#x27;</span></span><br><span class="line">count=<span class="number">0</span></span><br><span class="line">att=<span class="number">0</span></span><br><span class="line">qq=[]</span><br><span class="line">pp=[]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">q,p,index</span>):</span></span><br><span class="line">    <span class="keyword">global</span> count</span><br><span class="line">    <span class="keyword">if</span> index&gt;<span class="number">128</span>:</span><br><span class="line">        <span class="keyword">if</span> q <span class="keyword">not</span> <span class="keyword">in</span> qq <span class="keyword">and</span> q <span class="keyword">not</span> <span class="keyword">in</span> pp:</span><br><span class="line">            <span class="comment">#print(&#x27;q&#x27;,q,&#x27;p&#x27;,p)</span></span><br><span class="line">            qq.append(q)</span><br><span class="line">            pp.append(p)</span><br><span class="line">            count+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">global</span> xor</span><br><span class="line">    i=xor[-index]</span><br><span class="line">    <span class="keyword">if</span> i == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">bin</span>(<span class="built_in">int</span>(<span class="string">&#x27;1&#x27;</span>+q,<span class="number">2</span>)*<span class="built_in">int</span>(<span class="string">&#x27;1&#x27;</span>+p,<span class="number">2</span>))[-index:]==n[-index:]:</span><br><span class="line">            f(<span class="string">&#x27;1&#x27;</span>+q,<span class="string">&#x27;1&#x27;</span>+p,index+<span class="number">1</span>)</span><br><span class="line">        zeroResult = <span class="built_in">bin</span>(<span class="built_in">int</span>(<span class="string">&#x27;0&#x27;</span>+q,<span class="number">2</span>)*<span class="built_in">int</span>(<span class="string">&#x27;0&#x27;</span>+p,<span class="number">2</span>))[-index:]</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;b&#x27;</span> <span class="keyword">in</span> zeroResult:</span><br><span class="line">            zeroResult = <span class="string">&#x27;0&#x27;</span> + zeroResult[<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">if</span> zeroResult==n[-index:]:</span><br><span class="line">            f(<span class="string">&#x27;0&#x27;</span>+q,<span class="string">&#x27;0&#x27;</span>+p,index+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">bin</span>(<span class="built_in">int</span>(<span class="string">&#x27;1&#x27;</span>+q,<span class="number">2</span>)*<span class="built_in">int</span>(<span class="string">&#x27;0&#x27;</span>+p,<span class="number">2</span>))[-index:]==n[-index:]:</span><br><span class="line">            f(<span class="string">&#x27;1&#x27;</span>+q,<span class="string">&#x27;0&#x27;</span>+p,index+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">bin</span>(<span class="built_in">int</span>(<span class="string">&#x27;0&#x27;</span>+q,<span class="number">2</span>)*<span class="built_in">int</span>(<span class="string">&#x27;1&#x27;</span>+p,<span class="number">2</span>))[-index:]==n[-index:]:</span><br><span class="line">            f(<span class="string">&#x27;0&#x27;</span>+q,<span class="string">&#x27;1&#x27;</span>+p,index+<span class="number">1</span>)</span><br><span class="line">f(<span class="string">&#x27;&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="number">1</span>)</span><br><span class="line">print(count)</span><br><span class="line">n = <span class="built_in">int</span>(n,<span class="number">2</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(count):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">int</span>(pp[i],<span class="number">2</span>)*<span class="built_in">int</span>(qq[i],<span class="number">2</span>)==n:</span><br><span class="line">        phi=(<span class="built_in">int</span>(pp[i],<span class="number">2</span>)-<span class="number">1</span>)*(<span class="built_in">int</span>(qq[i],<span class="number">2</span>)-<span class="number">1</span>)</span><br><span class="line">        e=<span class="number">65537</span></span><br><span class="line">        c=<span class="number">57928739525594987887296575374030551510625601525690046551520041216593791573788</span></span><br><span class="line">        d =inverse(e,phi)</span><br><span class="line">        print(long_to_bytes(<span class="built_in">pow</span>(c,d,n)))</span><br></pre></td></tr></table></figure>
+
+    </div>
+</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
 	
 	</div>
   <a type="button" href="/2021/09/14/浪潮俱乐部密码免试题/#more" class="btn btn-default more">Read More</a>
@@ -426,13 +466,13 @@ var _hmt = _hmt || [];
 		<h4>Categories</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Crypto/">Crypto<span>1</span></a></li>
+			<li><a href="/categories/Crypyt/">Crypyt<span>1</span></a></li>
 		
 			<li><a href="/categories/Unity/">Unity<span>1</span></a></li>
 		
 			<li><a href="/categories/Web/">Web<span>5</span></a></li>
 		
-			<li><a href="/categories/摸鱼/">摸鱼<span>2</span></a></li>
+			<li><a href="/categories/摸鱼/">摸鱼<span>3</span></a></li>
 		
 		</ul>
 	</div>
@@ -443,21 +483,23 @@ var _hmt = _hmt || [];
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/miniL/">miniL<span>1</span></a></li>
-		
 			<li><a href="/tags/Web/">Web<span>5</span></a></li>
-		
-			<li><a href="/tags/Unity/">Unity<span>1</span></a></li>
-		
-			<li><a href="/tags/PHP/">PHP<span>1</span></a></li>
-		
-			<li><a href="/tags/图形学/">图形学<span>2</span></a></li>
-		
-			<li><a href="/tags/bugku/">bugku<span>1</span></a></li>
 		
 			<li><a href="/tags/Crypto/">Crypto<span>1</span></a></li>
 		
+			<li><a href="/tags/图形学/">图形学<span>2</span></a></li>
+		
+			<li><a href="/tags/PHP/">PHP<span>1</span></a></li>
+		
+			<li><a href="/tags/Algorithm/">Algorithm<span>1</span></a></li>
+		
+			<li><a href="/tags/miniL/">miniL<span>1</span></a></li>
+		
 			<li><a href="/tags/wp/">wp<span>3</span></a></li>
+		
+			<li><a href="/tags/Unity/">Unity<span>2</span></a></li>
+		
+			<li><a href="/tags/bugku/">bugku<span>1</span></a></li>
 		
 		 
 		</ul>
@@ -469,6 +511,10 @@ var _hmt = _hmt || [];
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2021/10/02/Ant_Colony_Optimization/" ><i class="fa fa-file-o"></i>Ant Colony Optimization</a>
+      </li>
     
       <li>
         <a href="/2021/09/23/Unity-ComputeShaderAndBoid/" ><i class="fa fa-file-o"></i>Unity - Compute Shader and ...</a>
@@ -484,10 +530,6 @@ var _hmt = _hmt || [];
     
       <li>
         <a href="/2021/04/19/图形学HelloWorld/" ><i class="fa fa-file-o"></i>图形学HelloWorld</a>
-      </li>
-    
-      <li>
-        <a href="/2021/04/10/i春秋虎符2021/" ><i class="fa fa-file-o"></i>i春秋虎符2021 web</a>
       </li>
     
   </ul>
