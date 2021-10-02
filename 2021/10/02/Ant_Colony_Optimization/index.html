@@ -173,7 +173,7 @@ var _hmt = _hmt || [];
 </ul>
 <h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><p>由于算法的计算过程比较零碎，就不拿出来说了，在最后会直接放源码，这里主要解释一些参数</p>
 <h3 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h3><p>点之间距离的表格是对称的</p>
-<img src="E:\MyDocument\kyrblog\source\images\ACO_disGraph.png" style="zoom:50%;" />
+<img src="/images/ACO_disGraph.png" style="zoom:50%;" />
 
 <p>为了只读写一个数据，只取表格的一半就够了，然后写一个函数，输入两个点的index，返回对应的表格中路径的index</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">GetPathIndex</span>(<span class="params"><span class="built_in">int</span> cur1, <span class="built_in">int</span> cur2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (cur1 &gt; cur2)&#123;</span><br><span class="line">        <span class="built_in">int</span> tmp = cur1;</span><br><span class="line">        cur1 = cur2;</span><br><span class="line">        cur2 = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= cur1; i++) index += numPoint - i;</span><br><span class="line">    index += cur2 - cur1 - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -213,7 +213,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h4 id="Weight"><a href="#Weight" class="headerlink" title="Weight"></a>Weight</h4><p>蚁群优化算法的核心就在于调整每条路径的概率，而概率由下面的公式决定</p>
-<img src="E:\MyDocument\kyrblog\source\images\ACO_formula.png" alt="ACO_formula" style="zoom: 50%;" />
+<img src="/images/ACO_formula.png" alt="ACO_formula" style="zoom: 50%;" />
 
 <p>其中，<code>τ</code>=信息素浓度，<code>η</code>=1/距离，<code>α</code>与<code>β</code>就是俩权重的参数</p>
 <p><code>phePow</code>，即<code>α</code></p>
@@ -225,7 +225,7 @@ var _hmt = _hmt || [];
 <p>Recommended Value：6</p>
 </blockquote>
 <h2 id="Improvement"><a href="#Improvement" class="headerlink" title="Improvement"></a>Improvement</h2><h3 id="Crossing"><a href="#Crossing" class="headerlink" title="Crossing"></a>Crossing</h3><p>最开始说过：交叉的路线明显不是最优解</p>
-<p><img src="E:\MyDocument\kyrblog\source\images\ACO_crossing.png" alt="ACO_crossing"></p>
+<p><img src="/images/ACO_crossing.png"></p>
 <p>但通常在最开始的时候都会出现交叉路线，而且随着点的数目增加，交叉路线被消除的概率逐步减小。所以我每次在看到最优解的图中一直有一个交叉线半天不动时就会非常难受，所以我们需要考虑如何让蚂蚁自动规避交叉</p>
 <ul>
 <li>在寻路时规避交叉：降低选择到 会与已选择的路径交叉的 点的概率</li>
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>应用以上两条，可以使路径快速迭代至一个没有交叉的状态</p>
 <h3 id="Small-Angle"><a href="#Small-Angle" class="headerlink" title="Small Angle"></a>Small Angle</h3><p>路线中出现极小的角度也是非常不理想的一件事</p>
-<img src="E:\MyDocument\kyrblog\source\images\ACO_smallAngle.png" alt="ACO_smallAngle" style="zoom:67%;" />
+<img src="/images/ACO_smallAngle.png" alt="ACO_smallAngle" style="zoom:67%;" />
 
 <p>说实话目前没有什么很好的解决方案，目前我做的也仅仅是不去强化这个路径之类的，但不能快速处理掉这种情形</p>
 <h3 id="Annealing"><a href="#Annealing" class="headerlink" title="Annealing"></a>Annealing</h3><p>调参时会发现许多参数需要动态调整，如初期应增加信息素浓度的权重，而后期却需要信息素与距离的平衡下进行优化，否则就容易自闭收敛，停滞不前；再比如初期应使信息素衰减速率较大，以促进收敛，而后期却需要额外的信息素来减少自闭的概率</p>
