@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>西湖论剑 GlobalNoise | KYRIOTA</title>
+  <meta name="author" content="KYRIOTA">
+  
+  <meta name="description" content="近期CTF赛事里面AI对抗题出现频率逐渐升高，作为一个摸了好久的web人，正好之前自己有一点MachineLearning的基础，准备尝试一下这个领域">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="西湖论剑 GlobalNoise"/>
+  <meta property="og:site_name" content="KYRIOTA"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="KYRIOTA" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">KYRIOTA</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 西湖论剑 GlobalNoise</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>近期CTF赛事里面AI对抗题出现频率逐渐升高，作为一个摸了好久的web人，正好之前自己有一点MachineLearning的基础，准备尝试一下这个领域</p>
+<p><img src="/images/GlobalNoise_Universal.png"></p>
+<span id="more"></span>
+
+<!--toc-->
+
+<h1 id="AI对抗启蒙——西湖论剑GlobalNoise"><a href="#AI对抗启蒙——西湖论剑GlobalNoise" class="headerlink" title="AI对抗启蒙——西湖论剑GlobalNoise"></a>AI对抗启蒙——西湖论剑GlobalNoise</h1><p>本文面向的对象是：</p>
+<ul>
+<li>对Machine Learning原理有基本理解的入门AI人</li>
+<li>吃瓜群众</li>
+</ul>
+<p>（机器学习相关的前置知识建议看吴恩达，然后不调库自己写一点逻辑回归线性回归的基本分类器就够了（至少我在这之前只有这点基础</p>
+<p>（技术拉跨，如有错误还请指出</p>
+<h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p>概述：提供了一个训练好的model和一份mnist数据集，要求对其中的100份样本进行一个全局性的较小扰动（对向量的范数进行了限制），使得这100份样本的分类正确率低于5%</p>
+<p>下载：</p>
+<p>（当时没有存题面啊啊啊啊啊啊啊啊啊啊啊啊啊，并非完整原题，只是我根据回忆和需要的条件摸出来的一个题面</p>
+<h3 id="题面分析"><a href="#题面分析" class="headerlink" title="题面分析"></a>题面分析</h3><p>将题目给出的100个样本过一个目会发现是7和9的______</p>
+<p><img src="/images/GlobalNoise_testSet.png"></p>
+<p>如果你说是<code>二分类</code>就完全不对了昂，因为你是不可能用一个噪音把大部分7糊弄到9，然后把大部分9糊弄到7的（好多人一看到都说二分类hhhhhhhhhhh</p>
+<p>所以人家本来就是有10个类别（0~9），你完全可以把9和7糊弄到除他俩之外的classes里面去</p>
+<p>此题很明显关键在于Global，也正是这个Global和对范数的限制拦住了很多像我这样的半吊子</p>
+<blockquote>
+<p>之前做过0CTF-final中的boyNextDoor，是一个人脸识别的题，正解是用梯度构造noise，还需要Expectation over Transformation (EOT) 来绕过dlib的随即抖动，当时属于是无知者无畏，直接随机改单像素给爆出来了，由于只需要构造人脸图片，所以对于噪音范数和噪音鲁棒性没有要求，只要他能识别到人脸位置即可</p>
+</blockquote>
+<p>但是当我想在这个题用半吊子手法去解决时，很明显在范数限制和鲁棒性上都遇到了问题，通常来说根据梯度构造的噪音会比满足条件的随机噪音的L2(模长)小10~100倍，而且随机噪音只对单个样本有效，完全不能Global</p>
+<p>所以人还是要进步，必须得理解正确构造噪音的方法</p>
+<h2 id="UniversalAdversarialPerturbation"><a href="#UniversalAdversarialPerturbation" class="headerlink" title="UniversalAdversarialPerturbation"></a>UniversalAdversarialPerturbation</h2><p>这是一篇关于全局扰动的文章：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2005.08087.pdf%EF%BC%8C%E7%9C%8B%E4%B8%80%E5%8D%8A%E5%A4%A7%E6%A6%82%E5%B0%B1%E8%83%BD%E7%9F%A5%E9%81%93%E6%9E%84%E9%80%A0%E5%85%A8%E5%B1%80%E6%89%B0%E5%8A%A8%E7%9A%84%E5%8E%9F%E7%90%86%E4%BA%86%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9Fqs%E4%B8%8D%E9%9A%BE%E7%90%86%E8%A7%A3%EF%BC%8C%E4%BD%86%E4%BD%A0%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E5%85%88%E7%90%86%E8%A7%A3%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8">https://arxiv.org/pdf/2005.08087.pdf，看一半大概就能知道构造全局扰动的原理了，其实也qs不难理解，但你可能需要先理解模型的训练过程以及使用</a></p>
+<ul>
+<li><p>在训练时：这个过程就是在寻找一个最优的 线性(or非线性?) 的变换，使得你的输入经过这个变换之后能够落到集中的位置，这样就可以根据一些界限（决策边界）来划分你的输入，并给出模型的判断</p>
+</li>
+<li><p>在预测时：你的 输入/数据 交给一个训练好的模型进行分类的时候，其实也就进行了一个映射，比如此处的mnist数据集是28x28的图片，那其实就是长度为784的向量，假设模型是f，那么f(x)就是模型对你的输入向量x预测的分类结果</p>
+</li>
+<li><p>决策边界：其实在我个人目前的理解中，决策边界其实就指</p>
+<blockquote>
+<p>在这个闭合的边界内，所有落到这里面的f(x)都会被判定为某一个分类</p>
+</blockquote>
+</li>
+</ul>
+<p>所以现在再回来看文中的图：</p>
+<p><img src="/images/GlobalNoise_Universal.png"></p>
+<p>他描述的其实就是：</p>
+<ul>
+<li>在红，绿，蓝，三个决策边界内（二维扁平化的决策空间只是为了方便演示和理解），分别有三个样点x1（在红色边界内）,x2（在蓝色边界内）,x3（在绿色边界内）</li>
+<li>为了视觉上方便理解，把这三个点以及他们的决策空间重合在一起（原本的决策空间绝一般不会相互重叠，因为边界上正是预测结果改变的临界处，如果有一个模型存在太多这样的临界状况，那说明他这个模型不太行）</li>
+<li>对f(x)，使用梯度下降法，获取一个noise，这个noise可以最快地把x1送到红色的决策边界</li>
+<li>这时noise可以把原本落在红色这个决策空间内的x1直接送出到决策边界外去，但对于蓝色决策空间中的x2来说则不太好说</li>
+<li>故重复这一过程，但x2应更新为<code>x2+=noise</code>，对更新后的x2求一个能把x2送出决策边界的新noise，然后更新noise为<code>noise+=newNoise</code></li>
+<li>对x3重复这一过程</li>
+</ul>
+<p>这样就获得了一个可以把x1,x2,x3都送出决策空间的噪音（当然，求这个噪音的顺序会对最终得到的噪音有影响</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><h3 id="预处理"><a href="#预处理" class="headerlink" title="预处理"></a>预处理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow <span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> numpy.linalg <span class="keyword">import</span> norm</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line">model = keras.models.load_model(<span class="string">&#x27;model.h5&#x27;</span>)</span><br><span class="line">test_set=[<span class="number">13616</span>, <span class="number">4189</span>, <span class="number">3206</span>, <span class="number">51839</span>, <span class="number">30560</span>, <span class="number">45045</span>, <span class="number">51389</span>, <span class="number">59638</span>, <span class="number">10487</span>, <span class="number">5233</span>, <span class="number">48889</span>, <span class="number">10247</span>, <span class="number">1547</span>, <span class="number">3914</span>, <span class="number">44182</span>, <span class="number">9990</span>, <span class="number">26276</span>, <span class="number">28283</span>, <span class="number">52481</span>, <span class="number">46609</span>, <span class="number">18757</span>, <span class="number">26954</span>, <span class="number">26322</span>, <span class="number">18819</span>, <span class="number">29463</span>, <span class="number">34489</span>, <span class="number">51248</span>, <span class="number">53986</span>, <span class="number">25872</span>, <span class="number">42855</span>, <span class="number">49719</span>, <span class="number">31176</span>, <span class="number">38292</span>, <span class="number">48100</span>, <span class="number">52763</span>, <span class="number">3904</span>, <span class="number">46879</span>, <span class="number">9810</span>, <span class="number">51583</span>, <span class="number">39760</span>, <span class="number">21245</span>, <span class="number">13728</span>, <span class="number">33834</span>, <span class="number">23968</span>, <span class="number">28781</span>, <span class="number">33134</span>, <span class="number">35277</span>, <span class="number">18562</span>, <span class="number">21344</span>, <span class="number">8396</span>, <span class="number">36000</span>, <span class="number">43427</span>, <span class="number">24477</span>, <span class="number">36678</span>, <span class="number">56218</span>, <span class="number">32945</span>, <span class="number">17707</span>, <span class="number">36763</span>, <span class="number">611</span>, <span class="number">12668</span>, <span class="number">31312</span>, <span class="number">28053</span>, <span class="number">35696</span>, <span class="number">9876</span>, <span class="number">33329</span>, <span class="number">56107</span>, <span class="number">19929</span>, <span class="number">35636</span>, <span class="number">21704</span>, <span class="number">35807</span>, <span class="number">28645</span>, <span class="number">16522</span>, <span class="number">15192</span>, <span class="number">43890</span>, <span class="number">14710</span>, <span class="number">11805</span>, <span class="number">4754</span>, <span class="number">33660</span>, <span class="number">13270</span>, <span class="number">25465</span>, <span class="number">20267</span>, <span class="number">4141</span>, <span class="number">40391</span>, <span class="number">14287</span>, <span class="number">15545</span>, <span class="number">56458</span>, <span class="number">6121</span>, <span class="number">19663</span>, <span class="number">15709</span>, <span class="number">52825</span>, <span class="number">25933</span>, <span class="number">4091</span>, <span class="number">17861</span>, <span class="number">37773</span>, <span class="number">22450</span>, <span class="number">8669</span>, <span class="number">4447</span>, <span class="number">22022</span>, <span class="number">40046</span>, <span class="number">32738</span>]</span><br><span class="line"></span><br><span class="line">dict_mnist = np.load(<span class="string">&quot;mnist.npz&quot;</span>)</span><br><span class="line">x_train = dict_mnist[<span class="string">&quot;x_train&quot;</span>]</span><br><span class="line">y_train = dict_mnist[<span class="string">&quot;y_train&quot;</span>]</span><br><span class="line">x_test = dict_mnist[<span class="string">&quot;x_test&quot;</span>]</span><br><span class="line">y_test = dict_mnist[<span class="string">&quot;y_test&quot;</span>]</span><br><span class="line">dict_mnist.close()</span><br><span class="line">x_train = np.expand_dims(x_train, axis=<span class="number">3</span>)</span><br><span class="line">x_test = np.expand_dims(x_test, axis=<span class="number">3</span>)</span><br><span class="line"><span class="comment">#normalize</span></span><br><span class="line">x_train = (x_train-np.amin(x_train))/(np.amax(x_train)-np.amin(x_train))</span><br><span class="line">x_test = (x_test-np.amin(x_test))/(np.amax(x_test)-np.amin(x_test))</span><br><span class="line"></span><br><span class="line">test_x_data = []</span><br><span class="line">test_y_data = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> test_set:</span><br><span class="line">    test_x_data.append(x_train[i])</span><br><span class="line">    test_y_data.append(y_train[i])</span><br><span class="line">test_x_data = np.array(test_x_data)</span><br><span class="line">test_y_data = np.array(test_y_data)</span><br><span class="line">test_x_data = test_x_data.astype(np.float32)</span><br><span class="line">test_y_data = test_y_data.astype(np.float32)</span><br></pre></td></tr></table></figure>
+
+<h3 id="获取梯度"><a href="#获取梯度" class="headerlink" title="获取梯度"></a>获取梯度</h3><p>会用tensorFlow的gradientTape就很好办嗯：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GetGrad</span>(<span class="params">myData, classIndex = -<span class="number">1</span></span>):</span></span><br><span class="line">    data = copy.deepcopy(myData)</span><br><span class="line">    data = data.reshape(-<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>)</span><br><span class="line">    data = tf.cast(data, tf.float32)</span><br><span class="line">    <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:</span><br><span class="line">        tape.watch(data)</span><br><span class="line">        pred = model(data)</span><br><span class="line">        loss = tf.norm(pred, axis=<span class="number">1</span>, <span class="built_in">ord</span>=<span class="number">2</span>) <span class="keyword">if</span> classIndex == -<span class="number">1</span> <span class="keyword">else</span> pred[<span class="number">0</span>][classIndex]</span><br><span class="line">    grad = tape.gradient(loss, data)</span><br><span class="line">    <span class="keyword">return</span> np.array(grad).reshape(<span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="梯度下降求noise"><a href="#梯度下降求noise" class="headerlink" title="梯度下降求noise"></a>梯度下降求noise</h3><p>这样求出来的noise通常能以最小的Lp将样本送出去</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GradDes</span>(<span class="params">myData, foolRate = <span class="number">0.5</span>, step = <span class="number">0.05</span>, maxIteration = <span class="number">500</span></span>):</span></span><br><span class="line">    minGrad = <span class="number">0.05</span></span><br><span class="line">    data = copy.deepcopy(myData)</span><br><span class="line">    arg = np.argmax(model.predict(data.reshape(-<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>)))</span><br><span class="line">    print(<span class="string">&quot;GetPert init arg : &quot;</span> + <span class="built_in">str</span>(arg))</span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    pert = copy.deepcopy(data / np.inf)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        cnt += <span class="number">1</span></span><br><span class="line">        rate = model.predict(data.reshape(-<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>) + pert.reshape(-<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>))[<span class="number">0</span>][arg]</span><br><span class="line">        print(<span class="string">&quot;\r - Iteration : &quot;</span> + <span class="built_in">str</span>(cnt) + <span class="string">&quot; rate : &quot;</span> + <span class="built_in">str</span>(rate), end = <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> rate &lt; foolRate <span class="keyword">or</span> cnt == maxIteration:</span><br><span class="line">            result = model.predict(data.reshape(-<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>) + pert.reshape(-<span class="number">1</span>, <span class="number">28</span>, <span class="number">28</span>, <span class="number">1</span>))[<span class="number">0</span>]</span><br><span class="line">            print(<span class="string">&quot;\n - pert result : &quot;</span> + <span class="built_in">str</span>(np.argmax(result)) + <span class="string">&quot; : &quot;</span> + <span class="built_in">str</span>(np.amax(result)))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        grad = GetGrad(data + pert)</span><br><span class="line">        <span class="keyword">if</span> norm(grad) &lt; minGrad:</span><br><span class="line">            <span class="keyword">if</span> norm(grad) == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">&quot;ERROR: grad is zero&quot;</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            grad *= minGrad / norm(grad)</span><br><span class="line">        pert -= grad * step</span><br><span class="line">    <span class="keyword">return</span> pert</span><br></pre></td></tr></table></figure>
+
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><p>这样求算数平均值得方法其实有点问题，如果恰好有一个反向的pert，那不直接抵消哩，而且我用到的样本里面还有一个是一开始本来就被分类器误分类的点= =…但是既然他得出的结果能用那就先在这里这么写，然后再讨论更好的解法嗯</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pert = [<span class="number">0</span>] * <span class="number">6</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    pert[i] = GradDes(test_x_data[np.argwhere(test_y_data == <span class="number">9</span>)[i][<span class="number">0</span>]])</span><br><span class="line">    pert[i] = GradDes(test_x_data[np.argwhere(test_y_data == <span class="number">7</span>)[i][<span class="number">0</span>]] + pert[i])</span><br><span class="line">    pert[<span class="number">2</span> * i] = GradDes(test_x_data[np.argwhere(test_y_data == <span class="number">7</span>)[<span class="number">2</span> * i][<span class="number">0</span>]])</span><br><span class="line">    pert[<span class="number">2</span> * i] = GradDes(test_x_data[np.argwhere(test_y_data == <span class="number">9</span>)[<span class="number">2</span> * i][<span class="number">0</span>]] + pert[<span class="number">2</span> * i])</span><br><span class="line">pertSum = pert[<span class="number">0</span>]/np.inf</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> pert:</span><br><span class="line">    pertSum += i</span><br><span class="line">pert = pertSum/<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="exp优化"><a href="#exp优化" class="headerlink" title="exp优化"></a>exp优化</h2><p>main中用了算数平均值来求noise，这其实没有鲁棒性</p>
+<p>我目前的想法是：最好是通过求：将样本带到不同的边界的noise（比如本题中就是求出将样本7和9带到0,1,2,3,4,5,6,8的noise），然后比较这些noise在方向与范数上的差异，获得最优的noise，此时求算数平均值就没有问题了</p>
+<p>但是在具体实现上遇到的问题就是：在梯度上升求noise的时候会陷入局部最优解（尤其是相差较大的class），然后我目前虽然知道什么退化遗传蚁群啥的，但我还没有想过具体到底怎么弄</p>
+<p>但：对每一个class都求一个noise，使得某一特定样本偏移到其他的任意class是可行的</p>
+<p>而对于这种白盒的模型，防御上可以弄一个噪音把梯度扰乱一下，就能避免我这种半吊子来梯度下降了awa</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2021/11/17/Uncertainty/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-11-25 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Misc/">Misc<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/MachineLearning/">MachineLearning<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#AI%E5%AF%B9%E6%8A%97%E5%90%AF%E8%92%99%E2%80%94%E2%80%94%E8%A5%BF%E6%B9%96%E8%AE%BA%E5%89%91GlobalNoise"><span class="toc-article-text">AI对抗启蒙——西湖论剑GlobalNoise</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%A2%98%E9%9D%A2"><span class="toc-article-text">题面</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E9%A2%98%E9%9D%A2%E5%88%86%E6%9E%90"><span class="toc-article-text">题面分析</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#UniversalAdversarialPerturbation"><span class="toc-article-text">UniversalAdversarialPerturbation</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-article-text">具体实现</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-article-text">预处理</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%8E%B7%E5%8F%96%E6%A2%AF%E5%BA%A6"><span class="toc-article-text">获取梯度</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B1%82noise"><span class="toc-article-text">梯度下降求noise</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#main"><span class="toc-article-text">main</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#exp%E4%BC%98%E5%8C%96"><span class="toc-article-text">exp优化</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2021 KYRIOTA
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
