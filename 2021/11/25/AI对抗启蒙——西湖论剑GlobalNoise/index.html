@@ -150,7 +150,7 @@ var _hmt = _hmt || [];
 <p>（机器学习相关的前置知识建议看吴恩达，然后不调库自己写一点逻辑回归线性回归的基本分类器就够了（至少我在这之前只有这点基础</p>
 <p>（技术拉跨，如有错误还请指出</p>
 <h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p>概述：提供了一个训练好的model和一份mnist数据集，要求对其中的100份样本进行一个全局性的较小扰动（对向量的范数进行了限制），使得这100份样本的分类正确率低于5%</p>
-<p>下载：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/15GYFzJU7vv3ToAeV3rcUWQ">https://pan.baidu.com/s/15GYFzJU7vv3ToAeV3rcUWQ</a> ，提取码：<code>kyrt</code></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/15GYFzJU7vv3ToAeV3rcUWQ">下载链接</a>，提取码：<code>kyrt</code></p>
 <p>（当时没有存题面啊啊啊啊啊啊啊啊啊啊啊啊啊，并非完整原题，只是我根据回忆和需要的条件摸出来的一个题面</p>
 <h3 id="题面分析"><a href="#题面分析" class="headerlink" title="题面分析"></a>题面分析</h3><p>将题目给出的100个样本过一个目会发现是7和9的______</p>
 <p><img src="/images/GlobalNoise_testSet.png"></p>
@@ -162,7 +162,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>但是当我想在这个题用半吊子手法去解决时，很明显在范数限制和鲁棒性上都遇到了问题，通常来说根据梯度构造的噪音会比满足条件的随机噪音的L2(模长)小10~100倍，而且随机噪音只对单个样本有效，完全不能Global</p>
 <p>所以人还是要进步，必须得理解正确构造噪音的方法</p>
-<h2 id="一篇论文"><a href="#一篇论文" class="headerlink" title="一篇论文"></a>一篇论文</h2><p>这是一篇关于全局扰动的文章：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2005.08087.pdf%EF%BC%8C%E7%9C%8B%E4%B8%80%E5%8D%8A%E5%A4%A7%E6%A6%82%E5%B0%B1%E8%83%BD%E7%9F%A5%E9%81%93%E6%9E%84%E9%80%A0%E5%85%A8%E5%B1%80%E6%89%B0%E5%8A%A8%E7%9A%84%E5%8E%9F%E7%90%86%E4%BA%86%EF%BC%8C%E5%85%B6%E5%AE%9E%E4%B9%9Fqs%E4%B8%8D%E9%9A%BE%E7%90%86%E8%A7%A3%EF%BC%8C%E4%BD%86%E4%BD%A0%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E5%85%88%E7%90%86%E8%A7%A3%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8">https://arxiv.org/pdf/2005.08087.pdf，看一半大概就能知道构造全局扰动的原理了，其实也qs不难理解，但你可能需要先理解模型的训练过程以及使用</a></p>
+<h2 id="一篇论文"><a href="#一篇论文" class="headerlink" title="一篇论文"></a>一篇论文</h2><p>这是一篇关于全局扰动的<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2005.08087.pdf">文章</a>，看一半大概就能知道构造全局扰动的原理了，其实也qs不难理解，但你可能需要先理解模型的训练过程以及使用</p>
 <ul>
 <li><p>在训练时：这个过程就是在寻找一个最优的 线性(or非线性?) 的变换，使得你的输入经过这个变换之后能够落到集中的位置，这样就可以根据一些界限（决策边界）来划分你的输入，并给出模型的判断</p>
 </li>
@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
 
 <h2 id="exp优化"><a href="#exp优化" class="headerlink" title="exp优化"></a>exp优化</h2><p>main中用了算数平均值来求noise，这其实没有鲁棒性</p>
 <p>我目前的想法是：最好是通过求：将样本带到不同的边界的noise（比如本题中就是求出将样本7和9带到0,1,2,3,4,5,6,8的noise），然后比较这些noise在方向与范数上的差异，获得最优的noise，此时求算数平均值就没有问题了</p>
-<p>但是在具体实现上遇到的问题就是：在梯度上升求noise的时候会陷入局部最优解（尤其是相差较大的class），然后我目前虽然知道什么退化遗传蚁群啥的，但我还没有想过具体到底怎么弄</p>
+<p>但是在具体实现上遇到的问题就是：在梯度上升求noise的时候会陷入局部最优解（尤其是相差较大的class），然后我目前虽然知道什么退🔥遗传🐜群啥的，但我还没有想过具体到底怎么弄</p>
 <p>但：对每一个class都求一个noise，使得某一特定样本偏移到其他的任意class是可行的</p>
 <p>而对于这种白盒的模型，防御上可以弄一个噪音把梯度扰乱一下，就能避免我这种半吊子来梯度下降了awa</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
