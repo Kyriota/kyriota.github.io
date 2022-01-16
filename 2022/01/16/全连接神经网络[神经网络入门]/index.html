@@ -200,7 +200,7 @@ var _hmt = _hmt || [];
 
 <p>看起来比较复杂，但画一个抛物线来表示均方误差函数，再画一下log的图像理解交叉熵函数就差不多了</p>
 <p>交叉熵好处都有啥：收敛快，局部最优点少，知道就行</p>
-<h3 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h3><p>首先明确常量：训练时用的样本（<code>X</code>）是固定不变的，样本对应的<code>lable</code>（<code>y</code>）也是不变的，唯一变化的就只有网络中间连接各个层级的权重（<code>w</code>）（偏置<code>b</code>包含在权重里边，因为偏置的具体大小由连接的权重控制），以及因为权重变化而跟着一起变化的预测结果，还有中间量<code>A</code>和<code>Z</code>，一切变化都来自于权重<code>w</code>的变化</p>
+<h3 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h3><p>首先明确常量：训练时用的样本<code>X</code>是固定不变的，样本对应的<code>lable</code>，或记作<code>y</code>，也是不变的，唯一变化的就只有网络中间连接各个层级的权重<code>w</code>（偏置<code>b</code>包含在权重里边，因为偏置的具体大小由连接的权重控制），以及因为权重变化而跟着一起变化的预测结果，还有中间量<code>A</code>和<code>Z</code>，一切变化都来自于权重<code>w</code>的变化</p>
 <p>问题现在则应该理解成：找到合适的<code>w</code>，使得<code>J</code>最小</p>
 <p>具体点，就是：对<code>J(w)</code>求关于<code>w</code>的偏导，获取<code>J(w)</code>的梯度，然后更新权重<code>w</code>为<code>w-=rate*dw</code>，其中，<code>dw</code>为<code>J(w)</code>的梯度，<code>rate</code>为学习率，控制了一次下降多少，学习率过低会导致训练缓慢，学习率过高则容易各种<code>NAN</code>或者反复横跳无法收敛，需要一定的试错成本来确定合适的学习率，一般在10e-6到1之间</p>
 <p>由于这部分内容网上资源挺多的，就不赘述了（懒</p>
