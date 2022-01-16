@@ -178,13 +178,13 @@ var _hmt = _hmt || [];
 <img src="/images/FCNN_neuronExample.png"/>
 
 <p>而问号的下面那个神经元的值，是<code>-0.3+0.05+(-0.12)+(-0.4)=-0.77</code></p>
-<p>（由于偏置作为一个神经元包含进上一层的输出，就不在式子中单独加上一个<code>b</code>了）</p>
 <h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><p>如果直接把线性计算得到的<code>Z</code>作为该神经元的输出传递到下一层，那么得到的网络也将是一个线性网络，这样的网络不管是十层还是百层都只能相当于一层</p>
 <p>为了得到一个非线性的网络，在除了输入层之外的每一层都会在<code>Z</code>的基础上再套一个激活函数<code>A</code>，激活函数以<code>Z</code>作为输入，即神经元的输出其实是<code>A(Z)</code></p>
 <p>常见的激活函数有：<code>ReLU</code>，<code>tanh</code>，<code>sigmoid</code>等，就不附图了搜一下就有（懒</p>
 <p>那么，更新一以下之前提到的<code>Z</code>的式子，应该是</p>
 <center><code>Z[2][0]=∑w[2][i][0]*A[2][i], i for i in range(0,6)</code></center><br>
 
+<p>（由于偏置作为一个神经元包含进上一层的输出，就不在式子中单独加上一个<code>b</code>了）</p>
 <p>对于输出层，激活函数则要根据具体问题来选择，例如MNIST手写数字集是分类0至9的数字，有多个类别，则会选用<code>softMax</code>作为输出的激活函数，其特征是累加之和为1，这符合多分类的问题的期望解，更具体的东西，比如<code>softMax</code>的求偏导，具体公式之类的，就不赘述了（懒</p>
 <h3 id="流程梳理"><a href="#流程梳理" class="headerlink" title="流程梳理"></a>流程梳理</h3><p>以下梳理一下数据传递的整体流程</p>
 <ul>
