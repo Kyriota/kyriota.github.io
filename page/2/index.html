@@ -70,7 +70,7 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="/">KYRIOTA</a>
+	  <a class="navbar-brand" href="/">Home</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
@@ -113,24 +113,34 @@ var _hmt = _hmt || [];
   <div class="container">
   	<div class="content">
     	 <div class="page-header logo">
-  <h1>KYRIOTA<span class="blink-fast">∎</span></h1>
+    <img id="logo" src="../favicon.png" width="200" class="nofancybox" />
+    <center>
+        <h1>&nbsp;&nbsp;
+            K Y R I O T A
+                        &nbsp;<span class="blink-fast">_</span></h1>
+    </center>
+    <center>
+        <font color="#f378bf">\ WE DO WHAT WE MUST /</font>
+    </center><br>
+    <center>
+        <font color="#f378bf">\ BECAUSE WE CAN /</font>
+    </center>
+    <img src="../images/memes/p2cube.png" width="30" style="float: center; clear: both;" class="nofancybox" />
 </div>
-
+<script type="text/javascript" src="../js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.rotate.js"></script>
+<script>
+    var angle = 0;
+    setInterval(function() {
+        angle += 0.25;
+        angle = angle % 360;
+        $("#logo").rotate(angle);
+    }, 10);
+</script>
 <div class="row page">
-
 	
 	<div class="col-md-9">
 	
-
-		<div class="slogan">
-
-
-		<i class="fa fa-heart blink-slow"></i>
-
-		W3 D0 WH47 W3 MU57, B3CU2 W3 C4N
-
-</div>    
-
 		<div id="top_search"></div>
 		<div class="mypage">
 		

@@ -72,7 +72,7 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="/">KYRIOTA</a>
+	  <a class="navbar-brand" href="/">Home</a>
       <div class="collapse navbar-collapse nav-menu">
 		<ul class="nav navbar-nav">
 		  
@@ -165,7 +165,7 @@ var _hmt = _hmt || [];
 <h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>exp的思路很简单，的确只需要比较随便的选择开局的词语就可以了，甚至第一个词“一丁不识”在最后算出来的信息熵排名里面都很靠前，只要不是“可口可乐”这种奇怪的词，就可以在运气的加持下直接出flag，说实话这个flag是必须要运气的，因为就算是我最后算出来的信息熵最高的词他也不能保证4轮出结果，我得到的平均轮次大概是2.62轮（和题目条件一样随机抽取测试512次），而被我目击到的最大轮次是6轮，虽然我写的这个脚本优化比较烂，但是还是不影响我说：这个题他应该看你到最后的平均轮次是否合格，而不是看最大轮次 = =</p>
 <p>在的<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU5Njg1NzMyNw==&mid=2247484500&idx=1&sn=35e43e11b29119544045fa7dfd56c10a&chksm=fe5d1cd4c92a95c208c93921a0b8f328cb92daf0630bc8a5ed7eaaafc30500fc44768beb0b6f&mpshare=1&scene=23&srcid=0324Ct2tOV94yqxYEa60Rbey&sharer_sharetime=1648094683578&sharer_shareid=c69a4128c20e54a8749107dca4adf514#rd">官方wp</a>里对他自己的exp表示：</p>
 <blockquote>
-<p>这个脚本也不是必成功，但是体感成功率非常高，平均猜词次数是 2.72，也许换个起始词可以把最大次数压到 3</p>
+<p>这个脚本也不是必成功，但是体感成功率非常高，平均猜词次数 2.72，也许换个起始词可以把最大次数压到 3</p>
 </blockquote>
 <p>哥你得有数据啊不要凭感觉啊，出题人可能是觉得他随便选了个词就可以把平均猜词数压倒2.72，所以优化一下应该能轻松压得很低，但是问题就是其实这些词语的信息熵的分布总体来看都算是比较高的了，总共不到2.6w个词，2.1w个词的信息熵在10以上，最高的信息熵也就12.8755，意思是你随便选中那2.1w个信息熵在10以上的词的时候，理论上剩下的词数的期望就只有25.3个，但3b1b讲wordle的视频里有句话说得好，就，“期望是期望，实际是实际”（大概是这个意思），所以还是那句话，最好就存一下选手的轮次信息，最后算一下平均轮次够不够小</p>
 <p>在我抽的512抽里面大概是这么个分布</p>
