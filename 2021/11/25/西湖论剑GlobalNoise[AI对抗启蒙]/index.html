@@ -213,7 +213,9 @@ var _hmt = _hmt || [];
 <h2 id="exp优化"><a href="#exp优化" class="headerlink" title="exp优化"></a>exp优化</h2><p>目前的想法是：最好是通过求：将样本带到不同的边界的noise（比如本题中就是求出将样本7和9带到0,1,2,3,4,5,6,8的noise），然后比较这些noise在方向与范数上的差异，获得最优的noise，此时求算数平均值就没有问题了</p>
 <p>但是在具体实现上遇到的问题就是：在梯度上升求noise的时候会陷入局部最优解（尤其是相差较大的class），然后目前虽然知道什么退🔥遗传🐜群啥的，但还没有想过具体到底怎么弄</p>
 <p>但：对每一个class都求一个noise，使得某一特定样本偏移到其他的任意class是可行的</p>
-<p>而对于这种白盒的模型，防御上可以弄一个噪音把梯度扰乱一下，就能避免我这种半吊子来梯度下降了</p>
+<blockquote>
+<p>2022.4.6补充：根据最近了解的信息看来，陷入局部最优解大部分原因是因为卡在鞍点，换成更好的优化算法，如Adam等即可</p>
+</blockquote>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
 	</div>
 
