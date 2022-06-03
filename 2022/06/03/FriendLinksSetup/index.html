@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>FriendLinksSetup | KYRIOTA</title>
+  <meta name="author" content="KYRIOTA">
+  
+  <meta name="description" content="记录一下友链Page的Setup过程，非常无脑，搬砖就完了，感谢前辈的经验">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="FriendLinksSetup"/>
+  <meta property="og:site_name" content="KYRIOTA"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="KYRIOTA" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Home</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friends" title="My friends.">
+			  <i class=""></i>Friends
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> FriendLinksSetup</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>记录一下友链Page的Setup过程，非常无脑，搬砖就完了，感谢前辈的经验</p>
+<span id="more"></span>
+
+<h1 id="Friend-Links-Setup"><a href="#Friend-Links-Setup" class="headerlink" title="Friend Links Setup"></a>Friend Links Setup</h1><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>代码来自<a target="_blank" rel="noopener" href="https://finisky.github.io/simplestblogroll/">这篇博客</a></p>
+<p>关于获取QQ头像的<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/415485011">知乎专栏</a></p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        CSS Source
+    </div>
+    <div class='spoiler-content'>
+        <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;post-body&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;links&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">         .links-content&#123;</span><br><span class="line"><span class="css">         <span class="attribute">margin-top</span>:<span class="number">1rem</span>;</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="css">         <span class="selector-class">.link-navigation</span><span class="selector-pseudo">::after</span> &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">content</span>: <span class="string">&quot; &quot;</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">display</span>: block;</span></span><br><span class="line"><span class="css">         <span class="attribute">clear</span>: both;</span></span><br><span class="line">         &#125;</span><br><span class="line">         .card &#123;</span><br><span class="line"><span class="css">         <span class="attribute">width</span>: <span class="number">45%</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">font-size</span>: <span class="number">1rem</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">20px</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">transition-duration</span>: <span class="number">0.15s</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">margin-bottom</span>: <span class="number">1rem</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">display</span>:flex;</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="css">         <span class="selector-class">.card</span><span class="selector-pseudo">:nth-child</span>(odd) &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">float</span>: left;</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="css">         <span class="selector-class">.card</span><span class="selector-pseudo">:nth-child</span>(even) &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">float</span>: right;</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="css">         <span class="selector-class">.card</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.1</span>);</span></span><br><span class="line"><span class="css">         <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">2px</span> <span class="number">6px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.12</span>), <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="number">0</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.04</span>);</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="css">         <span class="selector-class">.card</span> <span class="selector-tag">a</span> &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">border</span>:none;</span></span><br><span class="line">         &#125;</span><br><span class="line">         .card .ava &#123;</span><br><span class="line"><span class="css">         <span class="attribute">width</span>: <span class="number">3rem</span><span class="meta">!important</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">height</span>: <span class="number">3rem</span><span class="meta">!important</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">margin</span>:<span class="number">0</span><span class="meta">!important</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">margin-right</span>: <span class="number">1em</span><span class="meta">!important</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">border-radius</span>:<span class="number">4px</span>;</span></span><br><span class="line">         &#125;</span><br><span class="line">         .card .card-header &#123;</span><br><span class="line"><span class="css">         <span class="attribute">font-style</span>: italic;</span></span><br><span class="line"><span class="css">         <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="css">         <span class="attribute">width</span>: <span class="number">100%</span>;</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="css">         <span class="selector-class">.card</span> <span class="selector-class">.card-header</span> <span class="selector-tag">a</span> &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">font-style</span>: normal;</span></span><br><span class="line"><span class="css">         <span class="attribute">color</span>: <span class="number">#2bbc8a</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">font-weight</span>: bold;</span></span><br><span class="line"><span class="css">         <span class="attribute">text-decoration</span>: none;</span></span><br><span class="line">         &#125;</span><br><span class="line"><span class="css">         <span class="selector-class">.card</span> <span class="selector-class">.card-header</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123;</span></span><br><span class="line"><span class="css">         <span class="attribute">color</span>: <span class="number">#d480aa</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">text-decoration</span>: none;</span></span><br><span class="line">         &#125;</span><br><span class="line">         .card .card-header .info &#123;</span><br><span class="line"><span class="css">         <span class="attribute">font-style</span>:normal;</span></span><br><span class="line"><span class="css">         <span class="attribute">color</span>:<span class="number">#a3a3a3</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">font-size</span>:<span class="number">14px</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">min-width</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="css">         <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="css">         <span class="attribute">white-space</span>: nowrap;</span></span><br><span class="line">         &#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;links-content&quot;</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;link-navigation&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card&quot;</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;ava&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://q.qlogo.cn/g?b=qq&amp;k=7PD14jYzQNoQ0KvkgCT3Xw&amp;s=640&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-header&quot;</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">                     <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://blog.woooo.tech/&quot;</span>&gt;</span>Reverier<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;info&quot;</span>&gt;</span>XDSEC2019[Reverse、开发]<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card&quot;</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;ava&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://q.qlogo.cn/g?b=qq&amp;k=UDUVtLNg8WvYmkaibG4wtIg&amp;s=640&quot;</span> /&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;card-header&quot;</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">                     <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://d33b4t0.com/&quot;</span>&gt;</span>Deebato<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;info&quot;</span>&gt;</span>XDSEC2020[Crypto]<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+</div>
+
+<p>获取Key：<a target="_blank" rel="noopener" href="https://ptlogin2.qq.com/getface?&amp;imgtype=1&amp;uin=123456">https://ptlogin2.qq.com/getface?&amp;imgtype=1&amp;uin=123456</a></p>
+<p>通过Key获取头像：<a target="_blank" rel="noopener" href="https://q.qlogo.cn/g?b=qq&amp;k=xyOnRe5ML3Aw96iaaQ1hh6w&amp;s=640">https://q.qlogo.cn/g?b=qq&amp;k=xyOnRe5ML3Aw96iaaQ1hh6w&amp;s=640</a></p>
+<p>通过QQ号获取头像：<a target="_blank" rel="noopener" href="https://q.qlogo.cn/g?b=qq&amp;nk=123456&amp;s=640">https://q.qlogo.cn/g?b=qq&amp;nk=123456&amp;s=640</a></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2077/07/07/Pinned/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2022/05/27/游戏制作前准备工作的重要性/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2022-06-03 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Other/">Other<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2022 KYRIOTA
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
