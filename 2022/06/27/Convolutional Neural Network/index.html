@@ -162,7 +162,7 @@ var _hmt = _hmt || [];
 <p>In conclusion, in CNN, the goal of a convolutional layer is extracting features from a rather huge input. And the goal of a FC layer in the end of CNN is to learn classification by giving features just as normal AI things would do.</p>
 <h3 id="Back-Prop"><a href="#Back-Prop" class="headerlink" title="Back Prop"></a>Back Prop</h3><p>I used to be quite curios about the back propagation in convolutional layer, and pooling layers also made me confused. But actually they are basically the same as back prop in FCNN if you expand all formulas.</p>
 <p>This <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=Lakz2MoHy6o&t=1097s">Video</a> explained how back prop in convolutional layer works.</p>
-<p><img src="CNN_BackProp.png"></p>
+<p><img src="/images/CNN_BackProp.png"></p>
 <p>As for max pooling, since it’s just doing linear calculation, when doing back prop, just implement the gradient to the max <code>A</code> of the previous one if there is a max pooling layer between them, and others’ gradients are 0.</p>
 <h2 id="CNN-Example"><a href="#CNN-Example" class="headerlink" title="CNN Example"></a>CNN Example</h2><p>Following this <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eMMZpas-zX0">video</a>, I coded a simple CNN example with <code>TensorFlow</code> to classify <code>CIFAR10</code>, a dataset with 10 classes as following.</p>
 <blockquote>
