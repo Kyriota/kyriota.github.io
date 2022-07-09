@@ -1757,17 +1757,9 @@ ins {
     color: #fff
 }
 
-small {
-    text-transform: lowercase
-}
-
 del:hover,
 s:hover {
     color: #aaa
-}
-
-small:before {
-    content: '*note: '
 }
 
 ins:before {
@@ -1786,10 +1778,6 @@ u:after {
 em:before,
 em:after {
     content: '/'
-}
-
-strong {
-    text-transform: uppercase
 }
 
 .list-unstyled {
@@ -8586,7 +8574,7 @@ p {
 
 small,
 .small {
-    font-size: 18px
+    font-size: 13px
 }
 
 mark,
@@ -8756,17 +8744,9 @@ ins {
     color: #fff
 }
 
-small {
-    text-transform: lowercase
-}
-
 del:hover,
 s:hover {
     color: #aaa
-}
-
-small:before {
-    content: '*note: '
 }
 
 ins:before {
@@ -8785,10 +8765,6 @@ u:after {
 em:before,
 em:after {
     content: '/'
-}
-
-strong {
-    text-transform: uppercase
 }
 
 .list-unstyled {

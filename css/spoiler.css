@@ -23,11 +23,11 @@
 }
 
 .spoiler.collapsed .spoiler-title:before {
-    content: "▶≡ [显示内容] ";
+    content: "-≡ [ Folded ] ";
 }
 
 .spoiler.expanded .spoiler-title:before {
-    content: "▲≡ [收起内容] ";
+    content: "+≡ [Expanded] ";
 }
 
 .spoiler .spoiler-content {
