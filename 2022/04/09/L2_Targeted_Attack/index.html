@@ -145,8 +145,6 @@ var _hmt = _hmt || [];
 	  <p>终于是把这玩意儿自己实现了一遍，恰逢miniL CTF，这文章虽然是22.04.09写的，但是估计博客得等到五月多才会更新，届时将也再补充一些在miniL CTF中本题的情况</p>
 <span id="more"></span>
 
-<!--toc-->
-
 <h1 id="L2-Targeted-Attack"><a href="#L2-Targeted-Attack" class="headerlink" title="L2 Targeted Attack"></a>L2 Targeted Attack</h1><p><strong>前置知识：<a target="_blank" rel="noopener" href="https://kyriota.com/2022/01/16/%E5%85%A8%E8%BF%9E%E6%8E%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C[%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%85%A5%E9%97%A8]/">全连接神经网络</a></strong></p>
 <p><strong>参考文献：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1608.04644">Towards Evaluating the Robustness</a></strong></p>
 <blockquote>
@@ -215,7 +213,7 @@ var _hmt = _hmt || [];
 <p>宏观感受如下</p>
 <img src="/images/L2TarAtt_Attacked.png">
 
-<p>对比Carlini的论文中的L2数据，我认为这样的结果是勉强可以接受的</p>
+<p>对比Carlini的论文中的L2数据，我认为这样的结果勉强可以接受，但鉴于视觉效果仍然不佳，之后可能会考虑在更大规模的model和dataset上做adversarial attack方面的种种实验</p>
 <h2 id="DumbAss"><a href="#DumbAss" class="headerlink" title="DumbAss"></a>DumbAss</h2><p>一开始还想着靠单纯的梯度下降直接，硬着提高target的自信度，但是导致的问题就是各种梯度消失梯度过缓之类的，比如我当时的<code>loss</code>是这样下降的</p>
 <img src="/images/L2TarAtt_fig.png">
 
