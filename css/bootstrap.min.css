@@ -7046,7 +7046,8 @@ abbr[title] {
 
 b,
 strong {
-    font-weight: normal
+    color: rgb(255, 255, 255);
+    font-weight: bolder
 }
 
 dfn {

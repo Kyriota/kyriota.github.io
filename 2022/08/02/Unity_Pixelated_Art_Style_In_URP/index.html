@@ -1,0 +1,405 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Unity Pixelated Art Style In URP | KYRIOTA</title>
+  <meta name="author" content="KYRIOTA">
+  
+  <meta name="description" content="I’m considering diving into game dev for a rather long period from now on, and was managing to find a possible way to build a traditional RPG that can be handled only by myself from any aspect such as assets like models, animation and sound design, and complexity of coding the game loop system. I think I should write down my progress and tech details in the future, so that I can feel my speed directly and share my experience to help those who are struggling like I did.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Unity Pixelated Art Style In URP"/>
+  <meta property="og:site_name" content="KYRIOTA"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="KYRIOTA" type="application/atom+xml">
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Home</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friends" title="My friends.">
+			  <i class=""></i>Friends
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Unity Pixelated Art Style In URP</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>I’m considering diving into game dev for a rather long period from now on, and was managing to find a possible way to build a traditional RPG that can be handled only by myself from any aspect such as assets like models, animation and sound design, and complexity of coding the game loop system. I think I should write down my progress and tech details in the future, so that I can feel my speed directly and share my experience to help those who are struggling like I did.</p>
+<img height="333" width="515" src="/images/Unity_Pixelated_Art_Style_Final.png" >
+
+<span id="more"></span>
+
+<h1 id="Unity-Pixelated-Art-Style-In-URP"><a href="#Unity-Pixelated-Art-Style-In-URP" class="headerlink" title="Unity Pixelated Art Style In URP"></a>Unity Pixelated Art Style In URP</h1><blockquote>
+<p>This post maybe too garrulous in implementing part, which I’m really sorry about, but I really desire to record my feeling in this experience because it’s so 生草 (weird but funny) from my aspect.</p>
+</blockquote>
+<p>Currently I’m trying to find a suitable and simple art style for this project to work with, and I saw some pixelated 3D art style created by <a target="_blank" rel="noopener" href="https://twitter.com/t3ssel8r">@t3ssel8r</a> by coincidence. Though he didn’t offer any tutorial for beginners to work with, <del>however I am not beginner at all,</del> <small>(Nope)</small> I can still get some information from the comments below his video or twitter especially on how he managed all those amazing works.</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_t3ssel8r.png"></p>
+<center><small>@t3ssel8r's recent work</small></center>
+
+<p>In order to get a harmonious pixelated art style like t3ssel8r’s, I tried to do some breakdown to his final result like the one above.</p>
+<ul>
+<li>Cel shading (also called toon shading, which is more familiar to most developers), a necessity since it can reduce the color range, which is quite important for pixel art in its definition.</li>
+<li>Down sampling, but I find his outcome differ from those pixelated style made by down sampling from camera output, because his method keeps pixel moving smoothly in screen rather than making the whole screen low resolution, so I think he may used some custom render pileline, which is still an unknown area for me to conquer.</li>
+<li>Outliner, also a significant element in most pixel art, <strong>[WIP, WILL BE MORE DETAILS LATER]</strong></li>
+</ul>
+<h2 id="Cel-Shading"><a href="#Cel-Shading" class="headerlink" title="Cel Shading"></a>Cel Shading</h2><p>I started to work with cel shading first, and found a developer <a target="_blank" rel="noopener" href="https://www.youtube.com/c/RobinSeibold">@Robin Seibold</a> uploaded a cel shader graph with great expansibility in this <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=gw31oF9qITw">video</a> (BTW his video editing is absolutely fabulous). So I copied one from his video (great thanks to Robin) and modified the shader to suit my own needs (just added more borders to the shadow rather than only one border between lit area and unlit area). I’ve also tried to implement gooch shading.</p>
+<blockquote>
+<p>Gooch shading is a non-photorealistic rendering technique for shading objects. It is also known as “cool to warm” shading, and is widely used in technical illustration — WIKI</p>
+</blockquote>
+<p>I tried to make my shading looks more unique by following this <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=tvKLXbhVBnw">video</a> about gooch shading, but I failed after several hours of trying in making it supports multiple light source and keep the shading smooth, though I may try adding this visual effect later since I’m a big fan of it.</p>
+<p>However, when I really diving into shader programing (and in this case is just coding a HLSL include for custom function in shader graph), problems blowout.</p>
+<p>To follow the tutorial by Robin, I found my URP version so old that doesn’t include some file that the tutorial may use. Mine is only about URP v10.x.x because that’s already the highest version Unity 2020 can support according to this <a target="_blank" rel="noopener" href="https://github.com/Unity-Technologies/Graphics">official GitHub repo</a>. So I upgraded my Unity to the newest LST 2021.3, which supports URP 12.x.x and dynamic additional light shadows, and made my environment as close to the tutorial as possible. But I was still stuck at the beginning after the upgrades.</p>
+<h3 id="Custom-Function-Node"><a href="#Custom-Function-Node" class="headerlink" title="Custom Function Node"></a>Custom Function Node</h3><p>When coding the HLSL include file, I found the custom function node in the shader graph never stops throwing out errors that I can’t understand like this:</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_CustomFuctionError.png"></p>
+<p>Any programmer can never allow any red or yellow stuff in his code, so I tried really hard to locate the error, but find nothing useful at the end. There’s little information about how I can get rid of this error, until I accidently folded the preview in the node by referring an unsolved post on unity forum questioning that “why is my custom function node keeps throwing out errors though <strong>THE OVERALL SHADER IS WORKING FINE</strong> ?” and the error disappears. My feeling was so mixed and in chaos at that moment. It seems that you cannot call functions or use structs in URP Library directly, that’s why <code>SHADERGRAPH_PREVIEW</code> is defined when node tries to draw preview image. Referring some other shader graph custom functions like the one below, we can see that they hard code the variables that should use functions in URP Library to get (such as <code>GetMainLight()</code>) to get a preview from the node (maybe also for performance in node preview).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, out float DistanceAtten, out float ShadowAtten)</span><br><span class="line">&#123;</span><br><span class="line">    #if SHADERGRAPH_PREVIEW</span><br><span class="line">        Direction &#x3D; float3(-0.5, 0.5, 0);</span><br><span class="line">        Color &#x3D; float3(1, 0.95, 0.8);</span><br><span class="line">        DistanceAtten &#x3D; 1;</span><br><span class="line">        ShadowAtten &#x3D; 1;</span><br><span class="line">    #else</span><br><span class="line">        #if SHADOWS_SCREEN</span><br><span class="line">            float4 clipPos &#x3D; TransformWorldToHClip(WorldPos);</span><br><span class="line">            float4 shadowCoord &#x3D; ComputeScreenPos(clipPos);</span><br><span class="line">        #else</span><br><span class="line">            float4 shadowCoord &#x3D; TransformWorldToShadowCoord(WorldPos);</span><br><span class="line">        #endif</span><br><span class="line">        Light mainLight &#x3D; GetMainLight(shadowCoord);</span><br><span class="line">        Direction &#x3D; mainLight.direction;</span><br><span class="line">        Color &#x3D; mainLight.color;</span><br><span class="line">        DistanceAtten &#x3D; mainLight.distanceAttenuation;</span><br><span class="line">        ShadowAtten &#x3D; mainLight.shadowAttenuation;</span><br><span class="line">    #endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>However, the final preview (usually at right bottom corner) is not the same as the preview in nodes, so when you see errors from your custom node, check the final preview out to see whether your code actually works.</p>
+<p>In case you didn’t notice, the function name in the custom function node should be the same as the name in your HLSL file. For example, if you put the code above to the node, you should type in <code>MainLight</code> in the function name input box. The <code>_float</code> after the function name is describing the precision of your data, it’s either <code>_float</code> or <code>_half</code> in shader graph, and you should also change the precision select box in the graph setting to match your precision in the function.</p>
+<h3 id="Outcome"><a href="#Outcome" class="headerlink" title="Outcome"></a>Outcome</h3><p>For a basic cel material like this one I made below:</p>
+<img height="300" width="300" src="/images/Unity_Pixelated_Art_Style_CelMatPreview.png" >
+
+<p>It is coded by following <a target="_blank" rel="noopener" href="https://www.youtube.com/c/RobinSeibold">@Robin Seibold</a>‘s tutorial I mentioned before, and added a effect that create a certain number of shadow edges, which can be done by just tweaking the diffuse stuff.</p>
+<p>I found a <a target="_blank" rel="noopener" href="https://sketchfab.com/3d-models/higokumaru-honkai-impact-3rd-0e903387170846f5939adaa0c277b91b">free model</a> of Honkai Impact 3rd on Sketchfab to test out the cel shading:</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_CelTest.png"></p>
+<p>And I think the effect reaches my desire. This model contains too much details which I can never create in limited time. Currently I just care that whether the shadows, rim, specular looks nice after pixelate, which seems not bad at least.</p>
+<h2 id="Seamless-Outline"><a href="#Seamless-Outline" class="headerlink" title="Seamless Outline"></a>Seamless Outline</h2><p>I used to think outline easy and handy, but this time, it takes me 3 or 4 days to nearly get everything right.</p>
+<img height="200" width="200" src="/images/Unity_Pixelated_Art_Style_Outline.png">
+
+<p>Outline is not edge case like “Pixel Perfect Cam”, so I found quite a lot source as reference:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/c/RobinSeibold">@Robin Seibold</a> again, he built a clean outline and taught how to write a renderer feature in URP, which is used to render a normal texture and cover the outline output at last.</li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCEk8HlMSyA-nkZgFDf5kDEQ">@James King</a>, he implemented <a target="_blank" rel="noopener" href="https://twitter.com/t3ssel8r">@t3ssel8r</a>‘s outline and pixelated art style in his Three JS project and put it on GitHub.</li>
+</ul>
+<p>This <a target="_blank" rel="noopener" href="https://omar-shehata.medium.com/how-to-render-outlines-in-webgl-8253c14724f9">article</a> explained how to draw outline with depth texture and normal texture like the following image does (image from that article)</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_DepthNormalProcess.png"></p>
+<p>To get start with edge detection algorithm, we need the reference to those two textures first.</p>
+<h3 id="Depth-Texture"><a href="#Depth-Texture" class="headerlink" title="Depth Texture"></a>Depth Texture</h3><p>Depth texture is much easier to get than normal texture. In order to make URP render a depth texture, check “Depth Texture” in URP Assets. After so, the <code>_CameraDepthTexture</code> should be rendered and can be seen through <code>Frame Debugger</code>. In shader graph, <code>Scene Depth</code> node is also provided to access depth conveniently.</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_URPAsset.png"></p>
+<p>To know more about depth in game, make sure to check this <a target="_blank" rel="noopener" href="https://www.cyanilux.com/tutorials/depth/">article</a>.</p>
+<p>It’s noticeable that in orthographic cam, raw depth is already linear01, so you shouldn’t use <code>linear01</code> mode or <code>eye</code> mode in shader graph when using depth node.</p>
+<h3 id="Normal-Texture"><a href="#Normal-Texture" class="headerlink" title="Normal Texture"></a>Normal Texture</h3><p>There’re several ways to get a normal texture:</p>
+<ul>
+<li><code>G-Buffer</code> in deferred rendering</li>
+<li><code>_CameraNormalsTexture</code> requested by <code>ConfigureInput(ScriptableRenderPassInput.Normal)</code></li>
+<li>Draw your own normal texture with <code>ScriptableRendererFeature</code> by overriding material on every objects (another version of replacement shader)</li>
+</ul>
+<p>It’s worth notice that <code>G-Buffer</code> and <code>_CameraNormalsTexture</code> stores <strong>world normal</strong> since those data are usually used to calculate shading / lighting stuff. By drawing your own texture with <code>ScriptableRendererFeature</code> may give you more customizable result, and of course you can draw view normal directly by this method. However, since override material / replacement shader will override your original shaders, vertex displacement resulted by vertex shader will not be applied, nor normal map and any stuff to do with your original material. As screenshot shows below, <code>_CameraNormalsTexture</code> and <code>G-Buffer</code> holds details and vertex modifications which <code>ScriptableRendererFeature</code> doesn’t.</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_NormalMap.png"></p>
+<center><small>L: world normal from G-Buffer<br>R: view normal by override material</small></center>
+
+<h4 id="G-Buffer"><a href="#G-Buffer" class="headerlink" title="G-Buffer"></a>G-Buffer</h4><p>The easiest one is select <code>Rendering Path</code> as <code>Deferred</code> in <code>URP renderer data</code>, and set camera depth texture mode to <code>DepthNormal</code>.</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_URPRendererData.png"></p>
+<p>Because deferred rendering generate <code>G-Buffer</code>, which is used to save scene info in GPU to assist shading computations. The normal texture of the scene can be read from it. With URP 12, it is stored in <code>_GBuffer2</code>.</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_GBuffer2.png"></p>
+<p>The normal texture in G-Buffer is world normal, and it stores negative values, which means even though some pixels are pitch black visually, it still stores normal information which can be transformed to view normal by matrix.</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_CameraNormal.png"></p>
+<center><small>L: world normal from G-Buffer<br>R: view normal converted</small></center>
+
+<h4 id="Scriptable-Render-Pass-Input"><a href="#Scriptable-Render-Pass-Input" class="headerlink" title="Scriptable Render Pass Input"></a>Scriptable Render Pass Input</h4><p>World normal texture can be get not only in deferred rendering, but also in forward rendering if you requested in a renderer feature. Only one line of code can do it: <code>ConfigureInput(ScriptableRenderPassInput.Normal);</code></p>
+<p>After adding this renderer feature to the URP renderer data, <code>_CameraNormalsTexture</code> will be rendered just the same as the normal texture in <code>G-Buffer</code>.</p>
+<h4 id="Override-Material"><a href="#Override-Material" class="headerlink" title="Override Material"></a>Override Material</h4><p>In <code>Built-in</code> pipeline, you can use <code>Replacement Shader</code> to render the whole scene in a single material. But you can’t use it to control the camera in URP since this function is not contained in <code>Camera</code> class, instead you can use override material to achieve same result.</p>
+<p>To do so, a basic understanding to renderer feature work flow is required. Here is a <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/115080701">Chinese reference</a> about it.</p>
+<p>In a word, you may wanna use a view normal material as override material and render your scene into a render texture you created. I’m not that familiar with these currently, so just some ambiguous guidance below.</p>
+<ul>
+<li><p>To create a render target:</p>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> RenderTargetHandle normals;</span><br><span class="line">normals.Init(<span class="string">&quot;_SceneViewSpaceNormals&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li><p>A customized <code>RenderTextureDescriptor</code> can offer options like color format, texture size, etc. It contains all the information required to create a render texture.</p>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copy from cam settings</span></span><br><span class="line">RenderTextureDescriptor normalsTextureDescriptor = cameraTextureDescriptor;</span><br><span class="line"><span class="comment">// Customization</span></span><br><span class="line">normalsTextureDescriptor.colorFormat = RenderTextureFormat.ARGB32;</span><br></pre></td></tr></table></figure></li>
+<li><p>Creates a temporary render texture with given parameters, and sets it up as a global shader property with nameID. Then redirect render target to the temporary RT, and clear the attachment into the color or depth/stencil values given (depending on the format of this attachment)</p>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd.GetTemporaryRT(normals.id, normalsTextureDescriptor, FilterMode.Bilinear);</span><br><span class="line">ConfigureTarget(normals.Identifier());</span><br><span class="line">ConfigureClear(ClearFlag.All, Color.black);</span><br></pre></td></tr></table></figure></li>
+<li><p>Create drawing settings and set override material</p>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DrawingSettings drawSettings = CreateDrawingSettings(shaderTagIdList, <span class="keyword">ref</span> renderingData, renderingData.cameraData.defaultOpaqueSortFlags);</span><br><span class="line">drawSettings.overrideMaterial = normalsMaterial;</span><br><span class="line">FilteringSettings filteringSettings = <span class="keyword">new</span> FilteringSettings(RenderQueueRange.opaque, layerMask);</span><br><span class="line">context.DrawRenderers(renderingData.cullResults, <span class="keyword">ref</span> drawSettings, <span class="keyword">ref</span> filteringSettings);</span><br></pre></td></tr></table></figure></li>
+<li><p>Release temporary RT</p>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnCameraCleanup</span>(<span class="params">CommandBuffer cmd</span>)</span></span><br><span class="line"><span class="function"></span>	&#123;</span><br><span class="line">	    cmd.ReleaseTemporaryRT(normals.id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">### Opaque Texture</span></span><br><span class="line"></span><br><span class="line">`_CameraOpaqueTexture` provides a snapshot of the scene right before URP renders any transparent meshes. In shader graph, `SceneColor` node would sample <span class="keyword">this</span> texture <span class="keyword">as</span> output.</span><br><span class="line"></span><br><span class="line">By enabling the opaque texture, we can draw outline <span class="keyword">with</span> reference to the original pixel color. This texture can be also used to create effects like frosted glass, water refraction, <span class="keyword">or</span> heat waves.</span><br><span class="line"></span><br><span class="line">To enable <span class="keyword">this</span> texture, check the checkbox under depth texture checkbox <span class="keyword">in</span> URP asset.</span><br><span class="line"></span><br><span class="line"><span class="meta">### Edge Detection</span></span><br><span class="line"></span><br><span class="line">After preparations of view normal texture, depth texture, opaque texture, it<span class="string">&#x27;s time to do real edge detections with these references.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Edge detection in game is using basically the same tech in image edge detection. You sample a pixel and its neighbors, comparing their difference. However, since we got both normal and depth textures, it&#x27;</span>s possible to achieve more complicated effect <span class="keyword">by</span> combining them together. [@James King](https:<span class="comment">//www.youtube.com/channel/UCEk8HlMSyA-nkZgFDf5kDEQ) is doing a really nice job in this, and made the outline only one pixel wide, which is a significant factor contributing to the overall appearance of the scene. So I&#x27;d explain his logic below and talk about issues I encountered when implementing his method in Unity.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#### Depth Edge</span></span><br><span class="line"></span><br><span class="line">* **Preprocess**</span><br><span class="line"></span><br><span class="line">	As I said before, raw depth <span class="keyword">in</span> orthographic cam <span class="keyword">is</span> already linear01, but the issue <span class="keyword">is</span> that <span class="keyword">when</span> far plane <span class="keyword">and</span> near plane are far away <span class="keyword">from</span> each other, the difference between two depth <span class="keyword">value</span> <span class="keyword">in</span> the texture becomes too tiny to work <span class="keyword">with</span>. After my experimenting, it would be clear <span class="keyword">and</span> reasonable <span class="keyword">when</span> `far plane - near plane = <span class="number">20</span>`, so I made a multiplier <span class="keyword">by</span> referencing far plane <span class="keyword">and</span> near plane to change my depth scale making it reasonable. </span><br><span class="line"></span><br><span class="line">	Depth values would be difference depending <span class="keyword">on</span> the platform:</span><br><span class="line"></span><br><span class="line">	- Direct3D-like, Reversed Z Buffer : **<span class="number">1</span>** at the near plane, **<span class="number">0</span>** at the far plane</span><br><span class="line">	- OpenGL-like, Z Buffer : **<span class="number">0</span>** at the near plane, **<span class="number">1</span>** at the far plane</span><br><span class="line"></span><br><span class="line">	This reverse flag <span class="keyword">is</span> stored <span class="keyword">in</span> `_ProjectionParams.x`, it can also be accessed <span class="keyword">in</span> `Camera` node <span class="keyword">in</span> shader graph.</span><br><span class="line"></span><br><span class="line">* **Process**</span><br><span class="line"></span><br><span class="line">	Now sample a few points around the original pixel, <span class="keyword">and</span> <span class="keyword">get</span> the bias <span class="keyword">by</span> `bias = neibor - center`. If use <span class="keyword">this</span> bias directly, both edges inside the <span class="built_in">object</span> <span class="keyword">and</span> outside the <span class="built_in">object</span> will be draw, which result <span class="keyword">in</span> at least <span class="number">2</span> pixel wide depth outline. But <span class="keyword">this</span> can be <span class="keyword">fixed</span> <span class="keyword">by</span> clamping bias to [<span class="number">0</span>, <span class="number">1</span>] <span class="keyword">or</span> [<span class="number">-1</span>, <span class="number">0</span>], leaving only one pixel wide outline that either nearer <span class="keyword">or</span> farther one. After so, use `smoothstep` to control the visibility of edges <span class="keyword">with</span> different biases.</span><br><span class="line"></span><br><span class="line">Then we are done <span class="keyword">with</span> it.</span><br><span class="line"></span><br><span class="line">```c<span class="meta">#</span></span><br><span class="line"><span class="comment">// Pseudo Code</span></span><br><span class="line"><span class="function"><span class="built_in">float</span> <span class="title">GetDepthStrength</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">float</span> difference = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="built_in">float</span> bias <span class="keyword">in</span> depthBiases)</span><br><span class="line">        difference += clamp(bias, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> smoothstep(<span class="number">0.01f</span>, <span class="number">0.02f</span>, difference);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Normal-Edge"><a href="#Normal-Edge" class="headerlink" title="Normal Edge"></a>Normal Edge</h4><ul>
+<li><p><strong>Preprocess</strong></p>
+<p>  If you generate view normal texture by overriding materials, you should remap your view normal material from [-1, 1] to [0, 1] since when rendering to the render texture, negative values will be set to 0. By doing so you won’t lose any normal information.</p>
+</li>
+<li><p><strong>Edge Sharpness</strong></p>
+<p>  The sharpness is the easiest one to understand in the following parts. <code>sharpness = 1 - dot (normal, neighborNormal)</code></p>
+</li>
+<li><p><strong>Normal Indicator</strong></p>
+<p>  Similar to depth edges, we’d like to get normal biases between it’s neighbors first: <code>bias = normal - neighborNormal</code>. Since the bias is a <code>float3</code>, it can’t be simply clamped to cut one side of outline (the normal outline is also 2 pixels wide as shown below)</p>
+<p>  <img src="/images/Unity_Pixelated_Art_Style_RobinOutline.png"></p>
+<p>  To make the normal outline also one pixel wide, James declared a direction vector3 (like float3(1, 1, 1)) as parameter and get the dot product of which and normal bias: <code>dot(bias, parameter)</code>. Since the normal texture is in view space, such dot product can cull edges on faces in opposite direction of the direction parameter.</p>
+<p>  <img src="/images/Unity_Pixelated_Art_Style_ViewNormal.png"></p>
+<p>  This dot product can then be passed in <code>smoothstep</code> to get control of edge strength and cull the undesired edges. For example, if the direction parameter is <code>float3(1, 1, 1)</code>, then only edges on faces towards up-right and points out of screen will be drawn.</p>
+</li>
+<li><p><strong>Depth Indicator</strong></p>
+<p>  Applying one pixel outline though, it’s unsurprised to find that normal edges shows up outside the object, and it also draws outlines on concave edges.</p>
+<p>  <img src="/images/Unity_Pixelated_Art_Style_DepthIndicator.png"></p>
+  <center><small>Even two cubes have no contact<br>The normal texture indeed has difference there<br>And happen to match the requirement of the direction parameter</small></center>
+
+<p>  <img src="/images/Unity_Pixelated_Art_Style_ConcaveEdge.png"></p>
+  <center><small>The two concave edges are not desired in most pixel art</small></center>
+  
+  To eliminate these outlines, we can make only the shallower pixel detects the normal edge. So depth bias is required here to calculate the depth indicator. Get the average depth bias of the original pixel, if the value is negative, it means the pixel is farther than its neighbors, which should culled when detecting normal edges; otherwise it counts.</li>
+</ul>
+<p>So the final normal edge strength can be represented as follows:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Pseudo Code</span></span><br><span class="line"><span class="function"><span class="built_in">float</span> <span class="title">GetNormalStrength</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">float</span> normalIndicator = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (float3 neighborNormal <span class="keyword">in</span> neighborNormals)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">float</span> sharpness = (<span class="number">1</span> - dot(normal, neighborNormal));</span><br><span class="line">        <span class="built_in">float</span> normalIndicator = smoothstep(<span class="number">-0.01f</span>, <span class="number">0.01f</span>, dot(normalBias, directionPara));</span><br><span class="line">        normalIndicator += sharpness * normalIndicator;</span><br><span class="line">    &#125;</span><br><span class="line">   	<span class="built_in">float</span> avgDepthBias = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="built_in">float</span> bias <span class="keyword">in</span> depthBiases)</span><br><span class="line">		avgDepthBias += bias;</span><br><span class="line">   	avgDepthBias /= neighborPointCount;</span><br><span class="line">    <span class="keyword">return</span> step(<span class="number">0.1f</span>, normalIndicator * clamp(sign(avgDepthBias), <span class="number">0</span>, <span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Outcome-1"><a href="#Outcome-1" class="headerlink" title="Outcome"></a>Outcome</h4><p>Two parameters to control depth and normal edge strength may be wanted. Usually, our brain would like the outline of an object darker, and the normal edges brighter:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">float</span> strength =</span><br><span class="line">	depthEdgeStrength &gt; <span class="number">0</span> ?</span><br><span class="line">	(<span class="number">1</span> - _depthStrengthPara * depthEdgeStrength) :</span><br><span class="line">	(<span class="number">1</span> + _normalStrengthPara * normalEdgeStrength);</span><br><span class="line">_color = float3(<span class="number">.5</span>f, <span class="number">.5</span>f, <span class="number">.5</span>f) * strength;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Unity_Pixelated_Art_Style_FinalOutline.png"></p>
+<p>To add scene color to the outline, I analysed the pros and cons of <code>_color = _texel * strength</code> and <code>_color = pow(_texel, strength)</code>, and found the method below is my favorite.</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_color =</span><br><span class="line">    dei &gt; <span class="number">0</span> ?</span><br><span class="line">    _texel * (<span class="number">1</span> - _depthStrength * dei) :</span><br><span class="line">	pow(_texel, <span class="number">1</span> - _normalStrength * nei);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Unity_Pixelated_Art_Style_Final.gif"></p>
+<h2 id="HLSL-Note"><a href="#HLSL-Note" class="headerlink" title="HLSL Note"></a>HLSL Note</h2><p>When I was coding the outline HLSL file, I declared a float parameter outside the main function without marking it <code>static</code>. In HLSL, if you use the variable out of function without marking it static, then:</p>
+<p><img src="/images/Unity_Pixelated_Art_Style_HLSLStatic.png"></p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-variable-syntax">Official document</a> is good, but sometimes I just don’t know if it’s a feature of the language or a bug.</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2077/07/07/Pinned/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2022/06/27/Convolutional Neural Network/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2022-08-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Unity/">Unity<span>5</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Unity-Pixelated-Art-Style-In-URP"><span class="toc-article-text">Unity Pixelated Art Style In URP</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Cel-Shading"><span class="toc-article-text">Cel Shading</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Custom-Function-Node"><span class="toc-article-text">Custom Function Node</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Outcome"><span class="toc-article-text">Outcome</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Seamless-Outline"><span class="toc-article-text">Seamless Outline</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Depth-Texture"><span class="toc-article-text">Depth Texture</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Normal-Texture"><span class="toc-article-text">Normal Texture</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#G-Buffer"><span class="toc-article-text">G-Buffer</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Scriptable-Render-Pass-Input"><span class="toc-article-text">Scriptable Render Pass Input</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Override-Material"><span class="toc-article-text">Override Material</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Normal-Edge"><span class="toc-article-text">Normal Edge</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Outcome-1"><span class="toc-article-text">Outcome</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#HLSL-Note"><span class="toc-article-text">HLSL Note</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2022 KYRIOTA
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
+     <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

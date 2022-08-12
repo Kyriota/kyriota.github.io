@@ -452,9 +452,9 @@ a:-webkit-any-link:hover {
 }
 
 .toc {
-    font-size: 10pt;
+    font-size: 5pt;
     width: auto;
-    padding: 10px;
+    padding: 5px;
     background: #1d1e25
 }
 
@@ -466,7 +466,7 @@ a:-webkit-any-link:hover {
     list-style: circle;
     line-height: 1.8em;
     margin-bottom: 0;
-    padding: 10px 20px
+    padding: 10px 10px
 }
 
 .toc-article li {
@@ -476,12 +476,12 @@ a:-webkit-any-link:hover {
 
 .toc-article ol {
     list-style: square;
-    padding: 5px 20px
+    padding: 5px 10px
 }
 
 .toc-article ol ol {
     list-style: circle;
-    padding: 5px 20px
+    padding: 5px 10px
 }
 
 .line {
