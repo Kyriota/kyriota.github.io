@@ -95,19 +95,19 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/about" title="Yo, wanna know more bout me huh?">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/friends" title="My friends.">
+			<a href="/friends" title="Friendship is magic❤">
 			  <i class=""></i>Friends
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe?">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -131,18 +131,18 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
+    <div class="row post">
+        <!-- cols -->
+        
+            <div id="top_meta"></div>
+            <div class="col-md-9">
+                
 
-	<!-- content -->
-	<div class="mypage">		
-	  		
+                            <!-- content -->
+                            <div class="mypage">
+                                
 
-	  <p>I’m considering diving into game dev for a rather long period from now on, and was managing to find a possible way to build a traditional RPG that can be handled only by myself from any aspect such as assets like models, animation, sound design, and system. I think I should write down my progress and tech details in the future, so that I can feel the speed of my progress and share my experience to help those who are struggling like I was.</p>
+                                        <p>I’m considering diving into game dev for a rather long period from now on, and was managing to find a possible way to build a traditional RPG that can be handled only by myself from any aspect such as assets like models, animation, sound design, and system. I think I should write down my progress and tech details in the future, so that I can feel the speed of my progress and share my experience to help those who are struggling like I was.</p>
 <img height="333" width="515" src="/images/Unity_Pixelated_Art_Style_Final.png" >
 
 <span id="more"></span>
@@ -277,12 +277,12 @@ var _hmt = _hmt || [];
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_color =</span><br><span class="line">    dei &gt; <span class="number">0</span> ?</span><br><span class="line">    _texel * (<span class="number">1</span> - _depthStrength * dei) :</span><br><span class="line">    pow(_texel, <span class="number">1</span> - _normalStrength * nei);</span><br></pre></td></tr></table></figure>
 
 <p><img src="/images/Unity_Pixelated_Art_Style_Final.gif"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
-	</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                            </div>
 
-	<div>
-  	<center>
-	<div class="pagination">
+                            <div>
+                                <center>
+                                    <div class="pagination">
 
     
     
@@ -299,11 +299,11 @@ var _hmt = _hmt || [];
     
 </div>
 
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
+                                </center>
+                            </div>
+
+                            <!-- comment -->
+                            
 <section id="comment">
     <h2 class="title">Comments</h2>
 
@@ -311,11 +311,12 @@ var _hmt = _hmt || [];
 </section>
 
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+                    </div>
+                    <!-- col-md-9/col-md-12 -->
+
+                    
+                        <div id="side_meta">
+                            <div class="col-md-3" id="post_meta"> 
 
 	<!-- date -->
 	
@@ -357,13 +358,31 @@ var _hmt = _hmt || [];
 	
 </div><!-- col-md-3 -->
 
-	</div>
-		
+                        </div>
+                        
 
-</div><!-- row -->
+            </div>
+            <!-- row -->
+            
 
 
-
+                
+                    <div id="gitalk-container"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '91155bbf0d150664c4e8',
+        clientSecret: 'a6ace36b45921480fe64e5a8d76de241d197bb15',
+        repo: 'kyriota.github.io',
+        owner: 'Kyriota',
+        admin: 'Kyriota',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+                        
 	</div>
   </div>
   <div class="container-narrow">

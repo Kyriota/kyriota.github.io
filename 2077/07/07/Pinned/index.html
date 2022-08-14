@@ -95,19 +95,19 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/about" title="Yo, wanna know more bout me huh?">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/friends" title="My friends.">
+			<a href="/friends" title="Friendship is magic❤">
 			  <i class=""></i>Friends
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe?">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -131,18 +131,18 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
+    <div class="row post">
+        <!-- cols -->
+        
+            <div id="top_meta"></div>
+            <div class="col-md-9">
+                
 
-	<!-- content -->
-	<div class="mypage">		
-	  		
+                            <!-- content -->
+                            <div class="mypage">
+                                
 
-	  <p>🕊 <code>NO PENGUINS</code> 🕊</p>
+                                        <p>🕊 <code>NO PENGUINS</code> 🕊</p>
 <span id="more"></span>
 
 <h2 id="目前感兴趣的东西"><a href="#目前感兴趣的东西" class="headerlink" title="目前感兴趣的东西"></a>目前感兴趣的东西</h2><p>好好混Unity吧</p>
@@ -191,12 +191,12 @@ var _hmt = _hmt || [];
 <p>润和不润就是两种大致的个性延伸出的两种对立立场，润的人和不润的人本质上也都还是在上层的指示下分化出的两种行为模式，既然大家都是普罗群众，那就没有优越之分。区分这种优越的人也许应该自省一下，对方和自己是否都是ambiguous policy的受害者，既然都是同一个层级的人，铁拳挥向受害者时认为受害者有罪，那铁拳挥向自己时你是否也期待他人认为你不是无辜的？问：真正有罪的是什么？自己选择了润或者不润，却并没有在选择之前拿出充足的理由的人，也许在下次做一件事情之前应该进行更细致的考虑，明确自己做一件事情的动机才能做好“走自己的路”</p>
 
     </div>
-</div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
-	</div>
+</div><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                            </div>
 
-	<div>
-  	<center>
-	<div class="pagination">
+                            <div>
+                                <center>
+                                    <div class="pagination">
 
     
     
@@ -212,11 +212,11 @@ var _hmt = _hmt || [];
     
 </div>
 
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
+                                </center>
+                            </div>
+
+                            <!-- comment -->
+                            
 <section id="comment">
     <h2 class="title">Comments</h2>
 
@@ -224,11 +224,12 @@ var _hmt = _hmt || [];
 </section>
 
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+                    </div>
+                    <!-- col-md-9/col-md-12 -->
+
+                    
+                        <div id="side_meta">
+                            <div class="col-md-3" id="post_meta"> 
 
 	<!-- date -->
 	
@@ -253,13 +254,31 @@ var _hmt = _hmt || [];
 	
 </div><!-- col-md-3 -->
 
-	</div>
-		
+                        </div>
+                        
 
-</div><!-- row -->
+            </div>
+            <!-- row -->
+            
 
 
-
+                
+                    <div id="gitalk-container"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '91155bbf0d150664c4e8',
+        clientSecret: 'a6ace36b45921480fe64e5a8d76de241d197bb15',
+        repo: 'kyriota.github.io',
+        owner: 'Kyriota',
+        admin: 'Kyriota',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+                        
 	</div>
   </div>
   <div class="container-narrow">

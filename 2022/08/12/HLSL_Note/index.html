@@ -9,8 +9,7 @@
   <title>HLSL Note | KYRIOTA</title>
   <meta name="author" content="KYRIOTA">
   
-  <meta name="description" content="A post to record HLSL stuff related to unity shader graph programing.
-&amp;lt;The date of this post will be changed once it updates&amp;gt;">
+  <meta name="description" content="The date of this post will be upgraded once it updates">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -96,19 +95,19 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/about" title="Yo, wanna know more bout me huh?">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/friends" title="My friends.">
+			<a href="/friends" title="Friendship is magic❤">
 			  <i class=""></i>Friends
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe?">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -132,19 +131,25 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
+    <div class="row post">
+        <!-- cols -->
+        
+            <div id="top_meta"></div>
+            <div class="col-md-9">
+                
 
-	<!-- content -->
-	<div class="mypage">		
-	  		
+                            <!-- content -->
+                            <div class="mypage">
+                                
+                                    <div class="alert alert-success description">
+                                        <i class="fa fa-info-circle"></i>
+                                        The date of this post will be upgraded once it updates
+                                    </div>
+                                    <!-- alert -->
+                                    
 
-	  <p>A post to record HLSL stuff related to unity shader graph programing.</p>
-<p><code><small>&lt;The date of this post will be changed once it updates&gt;</small></code></p>
+                                        <p><code><small>&lt;Long Term Post&gt;</small></code></p>
+<p>A post to record HLSL stuff related to unity shader graph programing.</p>
 <span id="more"></span>
 
 <h1 id="HLSL-Note"><a href="#HLSL-Note" class="headerlink" title="HLSL Note"></a>HLSL Note</h1><h2 id="Custom-Function-Node"><a href="#Custom-Function-Node" class="headerlink" title="Custom Function Node"></a>Custom Function Node</h2><p>When coding the HLSL include file, I found the custom function node in the shader graph never stops throwing out errors that I can’t understand like this:</p>
@@ -159,12 +164,12 @@ var _hmt = _hmt || [];
 <h2 id="Static-Variable"><a href="#Static-Variable" class="headerlink" title="Static Variable"></a>Static Variable</h2><p>When I was coding the outline HLSL file, I declared a float parameter outside the main function without marking it <code>static</code>. In HLSL, if you use the variable out of function without marking it static, then:</p>
 <p><img src="/images/HLSLNote_Static.png"></p>
 <p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-variable-syntax">Official document</a> is good, but sometimes I just don’t know if it’s a feature of the language or a bug.</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
-	</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                            </div>
 
-	<div>
-  	<center>
-	<div class="pagination">
+                            <div>
+                                <center>
+                                    <div class="pagination">
 
     
     
@@ -181,11 +186,11 @@ var _hmt = _hmt || [];
     
 </div>
 
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
+                                </center>
+                            </div>
+
+                            <!-- comment -->
+                            
 <section id="comment">
     <h2 class="title">Comments</h2>
 
@@ -193,11 +198,12 @@ var _hmt = _hmt || [];
 </section>
 
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+                    </div>
+                    <!-- col-md-9/col-md-12 -->
+
+                    
+                        <div id="side_meta">
+                            <div class="col-md-3" id="post_meta"> 
 
 	<!-- date -->
 	
@@ -239,13 +245,31 @@ var _hmt = _hmt || [];
 	
 </div><!-- col-md-3 -->
 
-	</div>
-		
+                        </div>
+                        
 
-</div><!-- row -->
+            </div>
+            <!-- row -->
+            
 
 
-
+                
+                    <div id="gitalk-container"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '91155bbf0d150664c4e8',
+        clientSecret: 'a6ace36b45921480fe64e5a8d76de241d197bb15',
+        repo: 'kyriota.github.io',
+        owner: 'Kyriota',
+        admin: 'Kyriota',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+                        
 	</div>
   </div>
   <div class="container-narrow">

@@ -573,7 +573,8 @@ figure {
 }
 
 .alert-success {
-    color: #fefe54
+    color: #fefe54;
+    background-color: rgb(111, 212, 243)
 }
 
 .thumbnail {

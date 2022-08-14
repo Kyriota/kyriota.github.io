@@ -95,19 +95,19 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/about" title="Yo, wanna know more bout me huh?">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/friends" title="My friends.">
+			<a href="/friends" title="Friendship is magic❤">
 			  <i class=""></i>Friends
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe?">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -131,18 +131,18 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
+    <div class="row post">
+        <!-- cols -->
+        
+            <div id="top_meta"></div>
+            <div class="col-md-9">
+                
 
-	<!-- content -->
-	<div class="mypage">		
-	  		
+                            <!-- content -->
+                            <div class="mypage">
+                                
 
-	  <p>最近刷油管看到一个关于生物群模拟的Unity小项目，其中提到了使用ComputeShader来实现多线程的并行计算，感觉很适合入门，就做了一些尝试和改良</p>
+                                        <p>最近刷油管看到一个关于生物群模拟的Unity小项目，其中提到了使用ComputeShader来实现多线程的并行计算，感觉很适合入门，就做了一些尝试和改良</p>
 <p><img src="/images/Boid_Cover.png"></p>
 <span id="more"></span>
 
@@ -315,12 +315,12 @@ var _hmt = _hmt || [];
 <p>之后只需要在这个平面的表面做两层不同细节程度的水面Normal Map的反向滚动，再加入由噪声控制的平面顶点坐标的起伏即可</p>
 <h2 id="Final-Result"><a href="#Final-Result" class="headerlink" title="Final Result"></a>Final Result</h2><p>Check the final result if you want, a gif about 10 Mb</p>
 <p><img src="/images/Boid_Final.gif"></p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
-	</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                            </div>
 
-	<div>
-  	<center>
-	<div class="pagination">
+                            <div>
+                                <center>
+                                    <div class="pagination">
 
     
     
@@ -337,11 +337,11 @@ var _hmt = _hmt || [];
     
 </div>
 
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
+                                </center>
+                            </div>
+
+                            <!-- comment -->
+                            
 <section id="comment">
     <h2 class="title">Comments</h2>
 
@@ -349,11 +349,12 @@ var _hmt = _hmt || [];
 </section>
 
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+                    </div>
+                    <!-- col-md-9/col-md-12 -->
+
+                    
+                        <div id="side_meta">
+                            <div class="col-md-3" id="post_meta"> 
 
 	<!-- date -->
 	
@@ -395,13 +396,31 @@ var _hmt = _hmt || [];
 	
 </div><!-- col-md-3 -->
 
-	</div>
-		
+                        </div>
+                        
 
-</div><!-- row -->
+            </div>
+            <!-- row -->
+            
 
 
-
+                
+                    <div id="gitalk-container"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '91155bbf0d150664c4e8',
+        clientSecret: 'a6ace36b45921480fe64e5a8d76de241d197bb15',
+        repo: 'kyriota.github.io',
+        owner: 'Kyriota',
+        admin: 'Kyriota',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+                        
 	</div>
   </div>
   <div class="container-narrow">

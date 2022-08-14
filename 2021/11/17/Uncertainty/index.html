@@ -95,19 +95,19 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/about" title="Yo, wanna know more bout me huh?">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/friends" title="My friends.">
+			<a href="/friends" title="Friendship is magic❤">
 			  <i class=""></i>Friends
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe?">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -131,18 +131,18 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
+    <div class="row post">
+        <!-- cols -->
+        
+            <div id="top_meta"></div>
+            <div class="col-md-9">
+                
 
-	<!-- content -->
-	<div class="mypage">		
-	  		
+                            <!-- content -->
+                            <div class="mypage">
+                                
 
-	  <p>Welcome to BadAperture.Inc！</p>
+                                        <p>Welcome to BadAperture.Inc！</p>
 <p><img src="/images/Uncertainty_cover.png"></p>
 <span id="more"></span>
 
@@ -152,12 +152,12 @@ var _hmt = _hmt || [];
 </blockquote>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>本作品中仍然存在诸多不足，还请玩家多多包容，另外，由于时间不足，本作不包含任何音频，文字部分还请您耐心阅读，其中也许包含了线索及提示，我们对所有未处理得当的地方深表歉意</p>
 <p>这是我们第一次尝试游戏制作（之前是一块整音乐的😂），之所以会在jam中选择制作一个小体量的3D游戏，主要还是因为相对于正常的gameJam，他们给的时间实在是太多了（貌似是三个周，然后在线下展示了之后又继续完善了一个周），于是我们就做出了这么一个大胆的尝试</p>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
-	</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                            </div>
 
-	<div>
-  	<center>
-	<div class="pagination">
+                            <div>
+                                <center>
+                                    <div class="pagination">
 
     
     
@@ -174,11 +174,11 @@ var _hmt = _hmt || [];
     
 </div>
 
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
+                                </center>
+                            </div>
+
+                            <!-- comment -->
+                            
 <section id="comment">
     <h2 class="title">Comments</h2>
 
@@ -186,11 +186,12 @@ var _hmt = _hmt || [];
 </section>
 
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+                    </div>
+                    <!-- col-md-9/col-md-12 -->
+
+                    
+                        <div id="side_meta">
+                            <div class="col-md-3" id="post_meta"> 
 
 	<!-- date -->
 	
@@ -226,13 +227,31 @@ var _hmt = _hmt || [];
 	
 </div><!-- col-md-3 -->
 
-	</div>
-		
+                        </div>
+                        
 
-</div><!-- row -->
+            </div>
+            <!-- row -->
+            
 
 
-
+                
+                    <div id="gitalk-container"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '91155bbf0d150664c4e8',
+        clientSecret: 'a6ace36b45921480fe64e5a8d76de241d197bb15',
+        repo: 'kyriota.github.io',
+        owner: 'Kyriota',
+        admin: 'Kyriota',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+                        
 	</div>
   </div>
   <div class="container-narrow">

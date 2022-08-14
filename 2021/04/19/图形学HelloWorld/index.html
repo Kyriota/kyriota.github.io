@@ -95,19 +95,19 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/about" title="Yo, wanna know more bout me huh?">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/friends" title="My friends.">
+			<a href="/friends" title="Friendship is magic❤">
 			  <i class=""></i>Friends
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe?">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -131,18 +131,18 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
+    <div class="row post">
+        <!-- cols -->
+        
+            <div id="top_meta"></div>
+            <div class="col-md-9">
+                
 
-	<!-- content -->
-	<div class="mypage">		
-	  		
+                            <!-- content -->
+                            <div class="mypage">
+                                
 
-	  <p>逛b站看到会转的甜甜圈，对图形学有点上头，自己拿蜥语言做个立方体玩玩</p>
+                                        <p>逛b站看到会转的甜甜圈，对图形学有点上头，自己拿蜥语言做个立方体玩玩</p>
 <img src="/images/图形学HelloWorld.gif" height="200" width="200" />
 
 <span id="more"></span>
@@ -159,12 +159,12 @@ var _hmt = _hmt || [];
 
 <p>附上甜甜圈的代码，写方块之前没仔细看过，所以我写的方块非常冗余（主要是想先独立尝试</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">float</span> A = <span class="number">0</span>, B = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">float</span> i, j;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line">    <span class="keyword">float</span> z[<span class="number">1760</span>];</span><br><span class="line">    <span class="keyword">char</span> b[<span class="number">1760</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\x1b[2J&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(;;) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(b,<span class="number">32</span>,<span class="number">1760</span>);</span><br><span class="line">        <span class="built_in">memset</span>(z,<span class="number">0</span>,<span class="number">7040</span>);</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>; j &lt; <span class="number">6.28</span>; j += <span class="number">0.07</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">0</span>; i &lt; <span class="number">6.28</span>; i += <span class="number">0.02</span>) &#123;</span><br><span class="line">                <span class="keyword">float</span> c = <span class="built_in">sin</span>(i);</span><br><span class="line">                <span class="keyword">float</span> d = <span class="built_in">cos</span>(j);</span><br><span class="line">                <span class="keyword">float</span> e = <span class="built_in">sin</span>(A);</span><br><span class="line">                <span class="keyword">float</span> f = <span class="built_in">sin</span>(j);</span><br><span class="line">                <span class="keyword">float</span> g = <span class="built_in">cos</span>(A);</span><br><span class="line">                <span class="keyword">float</span> h = d + <span class="number">2</span>;</span><br><span class="line">                <span class="keyword">float</span> D = <span class="number">1</span> / (c * h * e + f * g + <span class="number">5</span>);</span><br><span class="line">                <span class="keyword">float</span> l = <span class="built_in">cos</span>(i);</span><br><span class="line">                <span class="keyword">float</span> m = <span class="built_in">cos</span>(B);</span><br><span class="line">                <span class="keyword">float</span> n = <span class="built_in">sin</span>(B);</span><br><span class="line">                <span class="keyword">float</span> t = c * h * g - f * e;</span><br><span class="line">                <span class="keyword">int</span> x = <span class="number">40</span> + <span class="number">30</span> * D * (l * h * m - t * n);</span><br><span class="line">                <span class="keyword">int</span> y= <span class="number">12</span> + <span class="number">15</span> * D * (l * h * n + t * m);</span><br><span class="line">                <span class="keyword">int</span> o = x + <span class="number">80</span> * y;</span><br><span class="line">                <span class="keyword">int</span> N = <span class="number">8</span> * ((f * e - c * d * g) * m - c * d * e - f * g - l * d * n);</span><br><span class="line">                <span class="keyword">if</span>(<span class="number">22</span> &gt; y &amp;&amp; y &gt; <span class="number">0</span> &amp;&amp; x &gt; <span class="number">0</span> &amp;&amp; <span class="number">80</span> &gt; x &amp;&amp; D &gt; z[o]) &#123;</span><br><span class="line">                    z[o] = D;</span><br><span class="line">                    b[o] = <span class="string">&quot;.,-~:;=!*#$@&quot;</span>[N &gt; <span class="number">0</span> ? N : <span class="number">0</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\x1b[H&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(k = <span class="number">0</span>; k &lt; <span class="number">1761</span>; k++) &#123;</span><br><span class="line">            <span class="built_in">putchar</span>(k % <span class="number">80</span> ? b[k] : <span class="number">10</span>);</span><br><span class="line">            A += <span class="number">0.00004</span>;</span><br><span class="line">            B += <span class="number">0.00002</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        usleep(<span class="number">30000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
-	</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                            </div>
 
-	<div>
-  	<center>
-	<div class="pagination">
+                            <div>
+                                <center>
+                                    <div class="pagination">
 
     
     
@@ -181,11 +181,11 @@ var _hmt = _hmt || [];
     
 </div>
 
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
+                                </center>
+                            </div>
+
+                            <!-- comment -->
+                            
 <section id="comment">
     <h2 class="title">Comments</h2>
 
@@ -193,11 +193,12 @@ var _hmt = _hmt || [];
 </section>
 
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+                    </div>
+                    <!-- col-md-9/col-md-12 -->
+
+                    
+                        <div id="side_meta">
+                            <div class="col-md-3" id="post_meta"> 
 
 	<!-- date -->
 	
@@ -233,13 +234,31 @@ var _hmt = _hmt || [];
 	
 </div><!-- col-md-3 -->
 
-	</div>
-		
+                        </div>
+                        
 
-</div><!-- row -->
+            </div>
+            <!-- row -->
+            
 
 
-
+                
+                    <div id="gitalk-container"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '91155bbf0d150664c4e8',
+        clientSecret: 'a6ace36b45921480fe64e5a8d76de241d197bb15',
+        repo: 'kyriota.github.io',
+        owner: 'Kyriota',
+        admin: 'Kyriota',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+                        
 	</div>
   </div>
   <div class="container-narrow">

