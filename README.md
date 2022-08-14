@@ -1,5 +1,6 @@
 # README
 
-Hi, Kyriota here
+Hi, Kyriota here~
 
-Since you've already found this repo, give me a star plzzzzz~ ❤
+Since you've already found the repo of [My Blog](kyriota.com), give me a star plzzzzz~ ❤
+
