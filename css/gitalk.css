@@ -1023,13 +1023,13 @@
   font-size: 0.875em;
   word-wrap: break-word;
   resize: vertical;
-  background-color: #000000;
+  background-color: #1b1d26;
   outline: none;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
 }
 .gt-container .gt-header-textarea:hover {
-  background-color: #222222;
+  background-color: #101116;
 }
 .gt-container .gt-header-preview {
   padding: 0.75em;
@@ -1127,7 +1127,7 @@
           flex: 1;
   margin-left: 1.25em;
   padding: 0.75em 1em;
-  background-color: #f9f9f9;
+  background-color: #1b1d26;
   overflow: auto;
   -webkit-transition: all ease 0.25s;
   transition: all ease 0.25s;
@@ -1226,7 +1226,7 @@
   display: block;
 }
 .gt-container .gt-comment-admin .gt-comment-content {
-  background-color: #000000;
+  background-color: #1b1d26;
 }
 @-webkit-keyframes gt-kf-rotate {
   0% {
