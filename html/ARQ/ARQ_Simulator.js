@@ -1,9 +1,9 @@
 // Simulate the Selective Repeat ARQ protocol
 
 // Frame format:
-// |  flag  | destination | source | sequence |       data       |   CRC    |  flag  |
-// |01111110|   2 bits    | 2 bits |  4 bits  |  at least 1 byte |  8 bits  |01111110|
-// |  0x7E  |   0 - 3     | 0 - 3  |  0 - 15  |                  |          |  0x7E  |
+// |  flag  | destination | source | sequence |      data       |   CRC    |  flag  |
+// |01111110|   2 bits    | 2 bits |  4 bits  | at least 1 byte |  8 bits  |01111110|
+// |  0x7E  |   0 - 3     | 0 - 3  |  0 - 15  |                 |          |  0x7E  |
 // flag: marking the start and end of a frame
 // destination: destination address
 // source: source address
@@ -17,16 +17,13 @@ const FrameSenderStatus = {
     Queuing: 0,
     Sending: 1,
     WaitingAck: 2,
-    Timeout: 3
+    Timeout: 3,
+    Acked: 4,
 }
 
 function sleep(ms) {
     console.log("Sleep " + ms + " ms")
     return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function GetTime() {
-    return Date.now() - START_TIME;
 }
 
 function bin2bytes(bin) {
@@ -101,6 +98,16 @@ function binArray2CubeText(bin) {
     // replace 0 with ▢ and 1 with ▩
     str = str.replace(/0/g, "▢").replace(/1/g, "▩");
     return str;
+}
+
+function CubeText2binArray(str) {
+    // replace ▢ with 0 and ▩ with 1 and make it bin array
+    str = str.replace(/▢/g, "0").replace(/▩/g, "1").replace(/ /g, "");
+    var bin = [];
+    for (var i = 0; i < str.length; i++) {
+        bin.push(parseInt(str[i]));
+    }
+    return bin;
 }
 
 function crc8(data) {
@@ -213,11 +220,11 @@ class FrameHelper {
         return frames;
     }
 
-    static ExtractFrame(frame) {
+    static ExtractFrame(frame, checkFrame = true) {
         // Extract the frame into destination, source, sequence and data
         // frame: binary array
         // return: object {destination, source, sequence, data}
-        if (!FrameHelper.CheckFrame(frame))
+        if (checkFrame && !FrameHelper.CheckFrame(frame))
             return null;
 
         var payload = BitDestuffing(frame.slice(8, -8));
@@ -293,6 +300,8 @@ class Host {
         this.UpperLayerFunc = UpperLayerFunc;
         this.tickFlag = false;
         this.ui = null;
+        this.sendingFrame = false;
+        this.tickCnt = 0;
 
         this.sentBitCnt = 0;
         this.processedBitCnt = 0;
@@ -320,6 +329,7 @@ class Host {
         this.tickFlag = true;
         this.SendListener();
         this.ReceiveListener();
+        this.tickCnt++;
         this.tickFlag = false;
     }
 
@@ -370,17 +380,22 @@ class Host {
     HandleControlFrame(extractedFrame) {
         for (var i = 0; i < this.sim.para.winLen; i++) {
             var fs = this.frameSender[i];
-            if (fs == null)
-                continue;
-            if (fs.sequence != extractedFrame.sequence)
+            if (fs == null || fs.sequence != extractedFrame.sequence)
                 continue;
             fs.timeout = null;
+            fs.feedback = true;
             if (extractedFrame.data[0] == 0x01) {
-                console.log("    🟢Host " + this.id + " received ACK frame " + extractedFrame.sequence + " from host " + extractedFrame.source);
-                fs.feedback = true;
+                console.log("    👮🟢Host " + this.id + " received ACK frame " + extractedFrame.sequence + " from host " + extractedFrame.source);
+                if (this.ui) {
+                    this.ui.LogInfo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;👮‍🟢 Received ACK frame" + extractedFrame.sequence, "frameSenderBufferLog");
+                }
+                fs.status = FrameSenderStatus.Acked;
                 break;
             }
-            console.log("    🟡Host " + this.id + " received NAK frame " + extractedFrame.sequence + " from host " + extractedFrame.source);
+            console.log("    👮🔴Host " + this.id + " received NAK frame " + extractedFrame.sequence + " from host " + extractedFrame.source);
+            if (this.ui) {
+                this.ui.LogInfo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;👮🔴 Received NAK frame " + extractedFrame.sequence, "frameSenderBufferLog");
+            }
             fs.binIndex = 0;
             break;
         }
@@ -406,12 +421,29 @@ class Host {
         this.PushToReceiveFrameBuffer(extractedFrame);
     }
 
+    HandleCorruptedFrame(extractedFrame) {
+        // check if the sender id is in the host list, if so, send NAK frame to the source
+        if (this.sim.FindHostById(extractedFrame.source) != null) {
+            var fbFrame = FrameHelper.MakeFrame(
+                extractedFrame.source,
+                this.id,
+                extractedFrame.sequence, [0x00]
+            );
+            this.LoadFrameToSender(fbFrame);
+            if (this.ui) {
+                this.ui.LogInfo("&nbsp;&nbsp;✋🏻 Sent NAK to " + extractedFrame.source + " about frame " + extractedFrame.sequence, "receiveBinBufferLog");
+            }
+        } else if (this.ui) {
+            this.ui.LogInfo("&nbsp;&nbsp;❌ Source info corrupted, dropped", "receiveBinBufferLog");
+        }
+    }
+
     ReceiveListener() {
         // Listen to the receive bin buffer, extract frame and push to receive frame buffer
 
         // Check if the first 8 bytes are a valid flag
         if (
-            this.receiveBinBuffer.length == 8 &&
+            this.receiveBinBuffer.length >= 8 &&
             this.receiveBinBuffer.slice(0, 8).join("") != "01111110"
         ) {
             // If not, remove the first byte
@@ -425,12 +457,15 @@ class Host {
 
         // Check if there is valid flag at the middle of the buffer
         if (
-            this.receiveBinBuffer.length == 40 &&
-            this.receiveBinBuffer.slice(1, -1).join("").indexOf("01111110") != -1
+            this.receiveBinBuffer.length >= 40 &&
+            this.receiveBinBuffer.slice(1, this.receiveBinBuffer.length - 1).join("").indexOf("01111110") != -1
         ) {
             // If yes, remove the bytes before the flag
-            var flagIndex = this.receiveBinBuffer.slice(1, -1).join("").indexOf("01111110");
-            this.receiveBinBuffer = this.receiveBinBuffer.slice(flagIndex + 1);
+            if (this.ui) {
+                this.ui.LogInfo("♊ Two or more flag in first " + this.sim.para.minFrLen + " bits", "receiveBinBufferLog");
+            }
+            var flagIndex = this.receiveBinBuffer.slice(1, this.receiveBinBuffer.length - 1).join("").indexOf("01111110");
+            this.receiveBinBuffer = this.receiveBinBuffer.slice(flagIndex);
             this.processedBitCnt += flagIndex;
             return;
         }
@@ -454,13 +489,21 @@ class Host {
                 this.HandleControlFrame(extractedFrame);
             } else {
                 this.HandleDataFrame(extractedFrame);
+                if (this.ui) {
+                    this.ui.LogInfo("📧 Valid data frame " + extractedFrame.sequence + " found, sent it to Frame Receive Buffer", "receiveBinBufferLog");
+                }
             }
         } else { // if the frame is corrupted, try to extract and send NAK
             console.warn("[CORRUPTED] Host " + this.id + " received corrupted frame");
             console.warn("[CORRUPTED] frame: ", frame);
-        }
 
-        // Listen to the receive frame buffer, slide the window whenever possible
+            if (this.ui) {
+                this.ui.LogInfo("❓ Corrupted frame received, trying to handle", "receiveBinBufferLog");
+            }
+
+            var extractedFrame = FrameHelper.ExtractFrame(frame, false);
+            this.HandleCorruptedFrame(extractedFrame);
+        }
     }
 
     LoadFrameToSender(frame) {
@@ -483,13 +526,27 @@ class Host {
             return;
         }
 
+        // when not sending frame, check if there is any control frame, if so, make the first control frame found the top of the buffer
+        for (var i = 0; i < this.frameSender.length && !this.sendingFrame; i++) {
+            if (this.frameSender[i].controlFrame == true) {
+                console.log("👆👆👆Contorl frame has moved to the top of the buffer")
+                if (this.ui) {
+                    this.ui.LogInfo("👆👆👆 Contorl frame has moved to the top of the buffer", "frameSenderBufferLog");
+                }
+                this.frameSender.unshift(this.frameSender.splice(i, 1)[0]);
+                break;
+            }
+        }
+
         while (
             this.frameSender.length > 0 &&
-            (this.frameSender[0].feedback || this.frameSender[0].controlFrame) &&
-            this.frameSender[0].binIndex == this.frameSender[0].frame.length
+            this.frameSender[0].status == FrameSenderStatus.Acked
         ) {
             console.log("      🚮 Host " + this.id + " Removed frame " + this.frameSender[0].sequence + " from sender buffer");
             console.log("👀 Host " + this.id + " Now the send window is at " + this.frameSender[0].sequence)
+            if (this.ui) {
+                this.ui.LogInfo("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🚮 Removed frame " + this.frameSender[0].sequence, "frameSenderBufferLog");
+            }
             this.frameSender.shift();
         }
 
@@ -501,8 +558,14 @@ class Host {
                 currentFS.timeout == null &&
                 (currentFS.feedback == false || currentFS.binIndex != currentFS.frame.length)
             ) {
-                currentFrameIndex = i;
-                break;
+                if (!currentFS.feedback) {
+                    currentFrameIndex = i;
+                    break;
+                }
+                if (!this.sendingFrame) {
+                    currentFrameIndex = i;
+                    break;
+                }
             }
         }
 
@@ -511,12 +574,17 @@ class Host {
             // Check time out in the window range
             for (var i = 0; i < this.sim.para.winLen && i < this.frameSender.length; i++) {
                 var currentFS = this.frameSender[i];
-                if (currentFS.timeout != null && (GetTime() > currentFS.timeout)) {
+                if (currentFS.timeout != null && (this.tickCnt > currentFS.timeout)) {
                     // If time out, reset the frame and send it again
-                    currentFS.status = FrameSenderStatus.Timeout;
+
                     console.log("⏰Host " + this.id + " time out frame " + currentFS.sequence + " to host " + currentFS.receiverID);
                     console.log(currentFS.timeout)
-                    console.log(GetTime())
+                    console.log(this.tickCnt)
+                    if (this.ui) {
+                        this.ui.LogInfo("⏰ Time out frame " + currentFS.sequence, "frameSenderBufferLog");
+                    }
+
+                    currentFS.status = FrameSenderStatus.Timeout;
                     currentFS.binIndex = 0;
                     currentFS.timeout = null;
                     currentFrameIndex = i;
@@ -526,6 +594,7 @@ class Host {
         }
 
         if (currentFrameIndex == -1) {
+            this.sendingFrame = false;
             return;
         }
 
@@ -537,11 +606,14 @@ class Host {
         if (currentFS.binIndex != currentFS.frame.length) {
 
             if (currentFS.binIndex == 0) {
+                this.sendingFrame = true;
                 var frameContent = bytes2str(FrameHelper.ExtractFrame(currentFS.frame).data);
                 console.log("📡Host " + this.id + " sending frame:  \"" + frameContent + "\"  to host " + currentFS.receiverID + " (sequence: " + currentFS.sequence);
-                if (currentFS.status == FrameSenderStatus.Queuing) {
-                    currentFS.status = FrameSenderStatus.Sending;
+                if (this.ui) {
+                    this.ui.LogInfo("📡 Sending frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "frameSenderBufferLog");
                 }
+                currentFS.status = FrameSenderStatus.Sending;
+                currentFS.feedback = false;
             }
 
             destination.receiveBinBuffer.push(currentFS.frame[currentFS.binIndex])
@@ -570,37 +642,55 @@ class Host {
                     console.warn("🔴Host " + this.id + " corrupted the checksum of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
                 } else {
                     console.warn("🔴Host " + this.id + " corrupted the end of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
-                    // // Not ready for this kind of corruption, reverting the change
-                    // destination.receiveBinBuffer[destination.receiveBinBuffer.length - 1] = 1 - destination.receiveBinBuffer[destination.receiveBinBuffer.length - 1];
+                }
+
+                var anotherUI = this.sim.hostList[this.id == 0 ? 1 : 0].ui;
+                if (anotherUI) {
+                    if (currentFS.binIndex < 8) {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { header } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    } else if (currentFS.binIndex < 10) {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { destination } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    } else if (currentFS.binIndex < 12) {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { source } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    } else if (currentFS.binIndex < 16) {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { sequence } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    } else if (currentFS.binIndex < currentFS.frame.length - 16) {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { data } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    } else if (currentFS.binIndex < currentFS.frame.length - 8) {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { checksum } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    } else {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { end } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    }
                 }
 
                 if (destHost.ui) {
                     destHost.ui.errorArr.push(this.sentBitCnt - 1)
-                    console.log(destHost.ui.errorArr)
                 }
 
             }
             // ================================================================================
 
             currentFS.binIndex++;
-            if (currentFS.controlFrame == true && currentFS.binIndex == currentFS.frame.length - 1)
-                console.log("  🔵Host" + this.id + " sent ACK frame " + currentFS.sequence + " to host " + currentFS.receiverID);
+            if (currentFS.controlFrame == true && currentFS.binIndex == currentFS.frame.length) {
+                console.log("  🔵Host" + this.id + " sent control frame " + currentFS.sequence + " to host " + currentFS.receiverID);
+                if (this.ui) {
+                    this.ui.LogInfo("&nbsp;&nbsp;🔵 Sent control frame " + currentFS.sequence, "frameSenderBufferLog");
+                }
+                // remove current frame from the buffer due to it's control frame and has been sent
+                this.frameSender.splice(currentFrameIndex, 1);
+            }
         } else {
+            
+            this.sendingFrame = false;
 
             if (currentFS.timeout == null && currentFS.feedback == false) {
-                currentFS.timeout = GetTime() + this.sim.para.timeout;
+                currentFS.timeout = this.tickCnt + this.sim.para.timeout;
                 // log a message to say that timeout is set
                 console.log("  ⌚Host " + this.id + " timer started for frame " + currentFS.sequence + " to host " + currentFS.receiverID);
-                currentFS.status = FrameSenderStatus.WaitingAck;
-            }
-
-            // check if there is any control frame, if so, make it the top of the buffer
-            for (var i = currentFrameIndex + 1; i < this.frameSender.length; i++) {
-                if (this.frameSender[i].controlFrame == true) {
-                    console.log("👆👆👆Contorl frame has moved to the top of the buffer")
-                    this.frameSender.unshift(this.frameSender.splice(i, 1)[0]);
-                    break;
+                if (this.ui) {
+                    this.ui.LogInfo("&nbsp;&nbsp;⌚ Timer started for frame " + currentFS.sequence, "frameSenderBufferLog");
                 }
+                currentFS.status = FrameSenderStatus.WaitingAck;
             }
         }
     }
@@ -620,15 +710,6 @@ class Simulator {
         // JS grammar trap: even these parameters have default values, you can't use foo(a,c=xxx) to escape parameter b
         // so why don't I use {} to wrap the parameters
 
-        // parameters:
-        // initHostNum: number of hosts in the network
-        // seq: sequence number in frame should has 4 bits if SEQ = 16
-        // windowlen: window length of ARQ protocol
-        // tick: tick in milliseconds
-        // minFrameLen: minimum frame length
-        // maxFrameLen: maximum frame length
-        // corruptionRate: corruption rate of the channel
-
         this.hostList = [];
         var timeout = para.timeout;
         console.log("Timeout is: " + timeout + "ms according to the tick and frame length")
@@ -639,7 +720,7 @@ class Simulator {
             minFrLen: para.minFrameLen, // Minimum frame length
             maxFrLen: para.maxFrameLen, // Maximum frame length
             corRate: para.corruptionRate, // Corruption rate of the channel
-            timeout: timeout // Timeout in milliseconds
+            timeout: timeout // Timeout in tick, meaning after how many ticks the sender will resend the frame
         };
 
         for (var i = 0; i < initHostNum; i++) {
@@ -683,22 +764,36 @@ class HostUI {
             }
         }
 
-        host.UpperLayerFunc = (message) => {
-            this.messageUI.value = "";
-            var date = new Date();
-            var time = date.toLocaleTimeString();
-            this.messageBuffer.push({ message: message, time: time });
-            for (var i = 0; i < this.messageBuffer.length; i++) {
-                this.messageUI.value += this.messageBuffer[i].time + " | " + bytes2str(this.messageBuffer[i].message) + "\n";
-            }
-            // scroll to the bottom
-            this.messageUI.scrollTop = this.messageUI.scrollHeight;
-        }
+        host.UpperLayerFunc = this.ShowInMessageUI.bind(this);
 
         // set interval to update the UI
         this.uiTicker = setInterval(() => {
             this.Update();
         }, this.sim.para.tick / 2);
+    }
+
+    LogInfo(message, logger) {
+        // log a message to the host_{logger}
+        // logger: frameSenderBufferLog, receiveBinBufferLog
+        var logUI = document.getElementById("host" + this.host.id + "_" + logger);
+        if (logUI != null) {
+            var date = new Date();
+            var time = date.toLocaleTimeString() + ": ";
+            logUI.innerHTML += message + "<br>";
+            logUI.scrollTop = logUI.scrollHeight;
+        }
+    }
+
+    ShowInMessageUI(message) {
+        this.messageUI.value = "";
+        var date = new Date();
+        var time = date.toLocaleTimeString();
+        this.messageBuffer.push({ message: message, time: time });
+        for (var i = 0; i < this.messageBuffer.length; i++) {
+            this.messageUI.value += this.messageBuffer[i].time + " | " + bytes2str(this.messageBuffer[i].message) + "\n";
+        }
+        // scroll to the bottom
+        this.messageUI.scrollTop = this.messageUI.scrollHeight;
     }
 
     Update() {
@@ -722,13 +817,15 @@ class HostUI {
             frameUI.style.fontSize = 3 + "px";
             // adjust text color
             if (frSenderInfo.status == FrameSenderStatus.Sending) {
-                frameUI.style.color = "rgb(51, 204, 255)";
-            } else if (frSenderInfo.status == FrameSenderStatus.WaitingAck) {
-                frameUI.style.color = "rgb(51, 255, 0)";
+                frameUI.style.color = "rgb(51, 204, 255)"; // blue
+            } else if (frSenderInfo.status == FrameSenderStatus.Acked) {
+                frameUI.style.color = "rgb(51, 255, 0)"; // green
             } else if (frSenderInfo.status == FrameSenderStatus.Queuing) {
                 frameUI.style.color = "white";
             } else if (frSenderInfo.status == FrameSenderStatus.Timeout) {
-                frameUI.style.color = "rgb(255, 51, 51)";
+                frameUI.style.color = "rgb(255, 51, 51)"; // red
+            } else if (frSenderInfo.status == FrameSenderStatus.WaitingAck) {
+                frameUI.style.color = "rgb(255, 236, 139)"; // yellow
             }
             this.frameSenderUI.appendChild(frameUI);
         }
@@ -783,15 +880,16 @@ class HostUI {
             var frameUI = document.createElement("div");
             frameUI.className = "tempFrame";
             if (extractedFrame == null) {
-                frameUI.innerHTML = "{ ------------------------ }";
+                frameUI.innerHTML = "{ ----------------------------------- }";
             } else {
                 var dataStr = bytes2str(extractedFrame.data);
-                if (dataStr.length > 20) {
-                    dataStr = dataStr.substr(0, 20) + "...";
+                if (dataStr.length > 25) {
+                    dataStr = dataStr.slice(0, 25) + "...";
                 }
                 frameUI.innerHTML = "{ " + dataStr + " }";
             }
             frameUI.style.textAlign = "center";
+            frameUI.style.fontSize = 5 + "px";
             this.frameReceiverUI.appendChild(frameUI);
         }
     }
@@ -800,11 +898,11 @@ class HostUI {
 var sim = new Simulator(2, {
     seq: 16,
     windowlen: 4,
-    tick: 10,
+    tick: 5,
     minFrameLen: 40,
-    maxFrameLen: 100,
-    timeout: 3000,
-    corruptionRate: 0.0005
+    maxFrameLen: 60,
+    timeout: 500,
+    corruptionRate: 0.002
 });
 var h0 = sim.FindHostById(0);
 var h1 = sim.FindHostById(1);
