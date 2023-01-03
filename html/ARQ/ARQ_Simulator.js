@@ -1,10 +1,11 @@
 // Simulate the Selective Repeat ARQ protocol
 
 // Frame format:
-// |  flag  | destination | source | sequence |      data       |   CRC    |  flag  |
-// |01111110|   2 bits    | 2 bits |  4 bits  | at least 1 byte |  8 bits  |01111110|
-// |  0x7E  |   0 - 3     | 0 - 3  |  0 - 15  |                 |          |  0x7E  |
+// |  flag   | type  | destination | source | sequence |      data       |   CRC    |  flag  |
+// |01111110 | 1 bit |   2 bits    | 2 bits |  4 bits  | at least 1 byte |  8 bits  |01111110|
+// |  0x7E   |       |   0 - 3     | 0 - 3  |  0 - 15  |                 |          |  0x7E  |
 // flag: marking the start and end of a frame
+// type: 0 for data frame, 1 for control frame
 // destination: destination address
 // source: source address
 // sequence: sequence number, used to identify the frame in a window
@@ -21,9 +22,9 @@ const FrameSenderStatus = {
     Acked: 4,
 }
 
-function sleep(ms) {
-    console.log("Sleep " + ms + " ms")
-    return new Promise(resolve => setTimeout(resolve, ms));
+const FrameType = {
+    Data: 0,
+    Control: 1,
 }
 
 function bin2bytes(bin) {
@@ -57,7 +58,7 @@ function bytes2bin(bytes) {
 
 function str2bytes(str) {
     // Convert a string to an array of bytes
-    // Support UTF-8
+    // UTF-8 Supported
     var bytes = [];
     for (var i = 0; i < str.length; i++) {
         var charCode = str.charCodeAt(i);
@@ -77,7 +78,7 @@ function str2bytes(str) {
 
 function bytes2str(bytes) {
     // Convert an array of bytes to a string
-    // Support UTF-8 and Chinese characters
+    // UTF-8 Supported
     var str = "";
     for (var i = 0; i < bytes.length; i++) {
         if (bytes[i] < 0x80) {
@@ -125,16 +126,16 @@ function crc8(data) {
     return (crc ^ XOROUT) & 0xFF;
 }
 
-function BitStuffing(binData) {
+function BitStuffing(binArr) {
     var stuffed = [];
     var count = 0;
-    for (var i = 0; i < binData.length; i++) {
-        if (binData[i] == 1) {
+    for (var i = 0; i < binArr.length; i++) {
+        if (binArr[i] == 1) {
             count++;
         } else {
             count = 0;
         }
-        stuffed.push(binData[i]);
+        stuffed.push(binArr[i]);
         if (count == 5) {
             stuffed.push(0);
             count = 0;
@@ -143,16 +144,16 @@ function BitStuffing(binData) {
     return stuffed;
 }
 
-function BitDestuffing(binData) {
+function BitDestuffing(binArr) {
     var destuffed = [];
     var count = 0;
-    for (var i = 0; i < binData.length; i++) {
-        if (binData[i] == 1) {
+    for (var i = 0; i < binArr.length; i++) {
+        if (binArr[i] == 1) {
             count++;
         } else {
             count = 0;
         }
-        destuffed.push(binData[i]);
+        destuffed.push(binArr[i]);
         if (count == 5) {
             i++;
             count = 0;
@@ -180,23 +181,25 @@ class FrameHelper {
         return true;
     }
 
-    static MakeFrame(destination, source, seq, data) {
+    static MakeFrame(destination, source, seq, byteData, type = FrameType.Data) {
         // return: binary array
 
         if (destination > 3 || destination < 0 || source > 3 || source < 0 || seq > 15 || seq < 0)
             throw "Invalid destination, source or sequence";
-        if (data.length == 0)
+        if (byteData.length == 0)
             throw "Data cannot be empty";
+        if (type > FrameType.MAX || type < 0)
+            throw "Invalid frame type";
 
         var frame = [];
         var flag = bytes2bin(0x7E)
-        var control = (destination << 6) | (source << 4) | seq;
-        var binData = bytes2bin(data);
+        var control = [type, (destination << 6) | (source << 4) | seq];
+        var binData = bytes2bin(byteData);
         if (binData.length < 8)
             binData = Array(8 - binData.length).fill(0).concat(binData);
-        var crc = crc8([control].concat(bin2bytes(binData)));
+        var crc = crc8(control.concat(byteData));
 
-        var payload = bytes2bin(control).concat(binData).concat(bytes2bin(crc));
+        var payload = bytes2bin(control).slice(7).concat(binData).concat(bytes2bin(crc));
         payload = BitStuffing(payload);
 
         frame = frame.concat(flag);
@@ -211,7 +214,7 @@ class FrameHelper {
         var frames = [];
         var data = str2bytes(text);
         var seq = startSeq;
-        var maxDataSize = maxFrameSize - 24;
+        var maxDataSize = maxFrameSize - 33;
         for (var i = 0; i < data.length; i += maxDataSize) {
             var frameData = data.slice(i, i + maxDataSize);
             frames.push(FrameHelper.MakeFrame(destination, source, seq, frameData));
@@ -229,12 +232,14 @@ class FrameHelper {
 
         var payload = BitDestuffing(frame.slice(8, -8));
 
-        var destination = bin2bytes(payload.slice(0, 2))[0];
-        var source = bin2bytes(payload.slice(2, 4))[0];
-        var sequence = bin2bytes(payload.slice(4, 8))[0];
-        var data = bin2bytes(payload.slice(8, -8));
+        var type = payload[0];
+        var destination = bin2bytes(payload.slice(1, 3))[0];
+        var source = bin2bytes(payload.slice(3, 5))[0];
+        var sequence = bin2bytes(payload.slice(5, 9))[0];
+        var data = bin2bytes(payload.slice(9, -8));
 
         return {
+            type: type,
             destination: destination,
             source: source,
             sequence: sequence,
@@ -249,7 +254,7 @@ class FrameHelper {
         var frameObj = FrameHelper.ExtractFrame(frame);
         if (frameObj == null)
             return null;
-        if (frameObj.data.length == 1) {
+        if (frameObj.type == FrameType.Control) {
             if (frameObj.data[0] == 0x01)
                 return " x Sequence: " + frameObj.sequence + split + "ACK Frame" + end;
             else if (frameObj.data[0] == 0x00)
@@ -306,8 +311,6 @@ class Host {
         this.sentBitCnt = 0;
         this.processedBitCnt = 0;
 
-        simulator.hostList.push(this);
-
         this.receiveBinBuffer = []; // binary array
 
         this.sendWinSeq = 0;
@@ -316,6 +319,8 @@ class Host {
 
         this.receiveFrameBuffer = Array(this.sim.para.winLen).fill(null);
         this.receiveWinSeq = 0; // sequence number of the first frame in the receive window
+
+        this.sim.hostList.push(this);
 
         this.Ticker = setInterval(() => {
             if (!this.tickFlag)
@@ -331,16 +336,6 @@ class Host {
         this.ReceiveListener();
         this.tickCnt++;
         this.tickFlag = false;
-    }
-
-    CheckACK(frameData) {
-        // Check if the frame is an ACK or NAK frame
-        // return: boolean
-        if (frameData.length != 1)
-            return false;
-        if (frameData[0] == 0x00 || frameData[0] == 0x01)
-            return true;
-        return false;
     }
 
     PushToReceiveFrameBuffer(extractedFrame) {
@@ -413,7 +408,9 @@ class Host {
         var fbFrame = FrameHelper.MakeFrame(
             extractedFrame.source,
             this.id,
-            extractedFrame.sequence, [0x01]
+            extractedFrame.sequence,
+            [0x01],
+            FrameType.Control,
         );
         this.LoadFrameToSender(fbFrame);
 
@@ -427,7 +424,9 @@ class Host {
             var fbFrame = FrameHelper.MakeFrame(
                 extractedFrame.source,
                 this.id,
-                extractedFrame.sequence, [0x00]
+                extractedFrame.sequence,
+                [0x00],
+                FrameType.Control,
             );
             this.LoadFrameToSender(fbFrame);
             if (this.ui) {
@@ -483,7 +482,16 @@ class Host {
         if (FrameHelper.CheckFrame(frame)) { // if the frame is valid
             var extractedFrame = FrameHelper.ExtractFrame(frame);
 
-            if (this.CheckACK(extractedFrame.data)) {
+            if (extractedFrame.destination != this.id) {
+                console.warn("[DESTINATION] Host " + this.id + " received frame for host " + extractedFrame.destination);
+                console.warn("[DESTINATION] frame: ", frame);
+                if (this.ui) {
+                    this.ui.LogInfo("🤷‍♂️ Not frame for this host, dropped", "receiveBinBufferLog");
+                }
+                return;
+            }
+
+            if (extractedFrame.type == FrameType.Control) {
                 // If it's a ACK or NAK frame, check frame sender and update the buffer
                 // This also shows the host is the sender in this conversation
                 this.HandleControlFrame(extractedFrame);
@@ -502,6 +510,16 @@ class Host {
             }
 
             var extractedFrame = FrameHelper.ExtractFrame(frame, false);
+
+            if (extractedFrame.destination != this.id) {
+                console.warn("[DESTINATION] Host " + this.id + " received frame for host " + extractedFrame.destination);
+                console.warn("[DESTINATION] frame: ", frame);
+                if (this.ui) {
+                    this.ui.LogInfo("🤷‍♂️ Not frame for this host, dropped", "receiveBinBufferLog");
+                }
+                return;
+            }
+
             this.HandleCorruptedFrame(extractedFrame);
         }
     }
@@ -514,7 +532,7 @@ class Host {
             binIndex: 0,
             sequence: extractedFrame.sequence,
             feedback: false,
-            controlFrame: this.CheckACK(extractedFrame.data),
+            controlFrame: extractedFrame.type == FrameType.Control,
             timeout: null, // timeout = null means the frame is not sent yet
             status: FrameSenderStatus.Queuing,
         });
@@ -630,11 +648,13 @@ class Host {
                 // Judge which part of the frame is corrupted
                 if (currentFS.binIndex < 8) {
                     console.warn("🔴Host " + this.id + " corrupted the header of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
-                } else if (currentFS.binIndex < 10) {
+                } else if (currentFS.binIndex < 9) {
+                    console.warn("🔴Host " + this.id + " corrupted the type of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
+                } else if (currentFS.binIndex < 11) {
                     console.warn("🔴Host " + this.id + " corrupted the destination of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
-                } else if (currentFS.binIndex < 12) {
+                } else if (currentFS.binIndex < 13) {
                     console.warn("🔴Host " + this.id + " corrupted the source of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
-                } else if (currentFS.binIndex < 16) {
+                } else if (currentFS.binIndex < 17) {
                     console.warn("🔴Host " + this.id + " corrupted the sequence of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
                 } else if (currentFS.binIndex < currentFS.frame.length - 16) {
                     console.warn("🔴Host " + this.id + " corrupted the data of frame " + currentFS.sequence + " to host " + currentFS.receiverID);
@@ -648,11 +668,13 @@ class Host {
                 if (anotherUI) {
                     if (currentFS.binIndex < 8) {
                         anotherUI.LogInfo("🔴 Manually corrupted a bit { header } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
-                    } else if (currentFS.binIndex < 10) {
+                    } else if (currentFS.binIndex < 9) {
+                        anotherUI.LogInfo("🔴 Manually corrupted a bit { type } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
+                    } else if (currentFS.binIndex < 11) {
                         anotherUI.LogInfo("🔴 Manually corrupted a bit { destination } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
-                    } else if (currentFS.binIndex < 12) {
+                    } else if (currentFS.binIndex < 13) {
                         anotherUI.LogInfo("🔴 Manually corrupted a bit { source } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
-                    } else if (currentFS.binIndex < 16) {
+                    } else if (currentFS.binIndex < 17) {
                         anotherUI.LogInfo("🔴 Manually corrupted a bit { sequence } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
                     } else if (currentFS.binIndex < currentFS.frame.length - 16) {
                         anotherUI.LogInfo("🔴 Manually corrupted a bit { data } of frame " + currentFS.sequence + (currentFS.controlFrame ? " (control frame)" : ""), "receiveBinBufferLog");
@@ -680,7 +702,7 @@ class Host {
                 this.frameSender.splice(currentFrameIndex, 1);
             }
         } else {
-            
+
             this.sendingFrame = false;
 
             if (currentFS.timeout == null && currentFS.feedback == false) {
@@ -899,9 +921,9 @@ var sim = new Simulator(2, {
     seq: 16,
     windowlen: 4,
     tick: 5,
-    minFrameLen: 40,
-    maxFrameLen: 60,
-    timeout: 500,
+    minFrameLen: 41,
+    maxFrameLen: 65,
+    timeout: 750,
     corruptionRate: 0.002
 });
 var h0 = sim.FindHostById(0);
