@@ -1775,11 +1775,6 @@ u:after {
     content: '_'
 }
 
-em:before,
-em:after {
-    content: '/'
-}
-
 .list-unstyled {
     padding-left: 0;
     list-style: none
@@ -8720,9 +8715,12 @@ ol ol {
     margin-bottom: 0
 }
 
+em {
+    font-style: italic;
+}
+
 i,
 cite,
-em,
 var,
 address,
 dfn,
@@ -8761,11 +8759,6 @@ ins:after {
 u:before,
 u:after {
     content: '_'
-}
-
-em:before,
-em:after {
-    content: '/'
 }
 
 .list-unstyled {
