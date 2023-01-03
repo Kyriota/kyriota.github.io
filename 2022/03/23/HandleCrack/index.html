@@ -238,7 +238,11 @@ var _hmt = _hmt || [];
     </div>
 </div>
 
-<p>还有就是这令人发指的运行速度，不会多核多线程优化所以没办法，但是可以加入计时函数量化我的痛苦 :)</p>
+<p>还有就是这令人发指的运行速度，不会多核多线程优化所以没办法</p>
+<blockquote>
+<p>学了OS后的补充：现在会了</p>
+</blockquote>
+<p>但是可以加入计时函数量化我的痛苦 :)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">CheckTime</span><span class="params">(<span class="keyword">clock_t</span> &amp;start, <span class="keyword">clock_t</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> delta = <span class="keyword">double</span>(end - start) / CLOCKS_PER_SEC;</span><br><span class="line">    start = end;</span><br><span class="line">    <span class="keyword">return</span> delta;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">clock_t</span> clockStart;</span><br><span class="line">    clockStart = clock();</span><br><span class="line">    <span class="comment">// ... sth.</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;time length: &quot;</span> &lt;&lt; CheckTime(clockStart, clock()) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>windows下g++编译，<code>depth=0</code>跑完<code>16</code>个大约是<code>12s</code>，<code>depth=1</code>跑完<code>4</code>个大约是<code>32s</code>，我大概是花了4~5h跑完所有数据</p>
@@ -265,7 +269,7 @@ var _hmt = _hmt || [];
 
     
     
-    <a href="/2022/04/09/L2_Targeted_Attack/" type="button" class="btn btn-default"><i
+    <a href="/2022/04/09/L2-TargetedAttack/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
@@ -377,7 +381,7 @@ var _hmt = _hmt || [];
   <footer> <p>
     
         &copy;
-        2022
+        2023
             KYRIOTA
                 
                                 Powered By <a href="http://hexo.io/" target="_blank">Hexo</a>, Modified From <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.
