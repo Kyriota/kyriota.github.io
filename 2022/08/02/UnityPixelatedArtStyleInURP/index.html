@@ -23,7 +23,7 @@
 
   
   
-    <link href="/favicon.ico" rel="icon">
+    <link href="/img/icon.ico" rel="icon">
   
   
   <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
@@ -63,7 +63,7 @@ var _hmt = _hmt || [];
 <meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="KYRIOTA" type="application/atom+xml">
 </head>
 
- <body>  
+ <body>
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
 <h3 id="Outcome"><a href="#Outcome" class="headerlink" title="Outcome"></a>Outcome</h3><p>For a basic cel material like this one I made below:</p>
 <img height="300" width="300" src="/images/Unity_Pixelated_Art_Style_CelMatPreview.png" >
 
-<p>It is coded by following <a target="_blank" rel="noopener" href="https://www.youtube.com/c/RobinSeibold">@Robin Seibold</a>‘s tutorial I mentioned before, and added a effect that create a certain number of shadow edges, which can be done by just tweaking the diffuse stuff.</p>
+<p>It is coded by following <a target="_blank" rel="noopener" href="https://www.youtube.com/c/RobinSeibold">@Robin Seibold</a>‘s tutorial I mentioned before, and added an effect that create a certain number of shadow edges, which can be done by just tweaking the diffuse stuff.</p>
 <p>I found a <a target="_blank" rel="noopener" href="https://sketchfab.com/3d-models/higokumaru-honkai-impact-3rd-0e903387170846f5939adaa0c277b91b">free model</a> of Honkai Impact 3rd on Sketchfab to test out the cel shading:</p>
 <p><img src="/images/Unity_Pixelated_Art_Style_CelTest.png"></p>
 <p>And I think the effect reaches my desire. This model contains too much details which I can never create in limited time. Currently I just care that whether the shadows, rim, specular looks nice after pixelate, which seems not bad at least.</p>
@@ -178,21 +178,21 @@ var _hmt = _hmt || [];
 <p>This <a target="_blank" rel="noopener" href="https://omar-shehata.medium.com/how-to-render-outlines-in-webgl-8253c14724f9">article</a> explained how to draw outline with depth texture and normal texture like the following image does (image from that article)</p>
 <p><img src="/images/Unity_Pixelated_Art_Style_DepthNormalProcess.png"></p>
 <p>To get start with edge detection algorithm, we need the references to a few textures first.</p>
-<h3 id="Depth-Texture"><a href="#Depth-Texture" class="headerlink" title="Depth Texture"></a>Depth Texture</h3><p>Depth texture is much easier to get than normal texture. In order to make URP render a depth texture, check “Depth Texture” in URP Assets. After so, the <code>_CameraDepthTexture</code> should be rendered and can be seen through <code>Frame Debugger</code>. In shader graph, <code>Scene Depth</code> node is also provided to access depth conveniently.</p>
+<h3 id="Textures"><a href="#Textures" class="headerlink" title="Textures"></a>Textures</h3><h4 id="Depth-Texture"><a href="#Depth-Texture" class="headerlink" title="Depth Texture"></a>Depth Texture</h4><p>Depth texture is much easier to get than normal texture. In order to make URP render a depth texture, check “Depth Texture” in URP Assets. After so, the <code>_CameraDepthTexture</code> should be rendered and can be seen through <code>Frame Debugger</code>. In shader graph, <code>Scene Depth</code> node is also provided to access depth conveniently.</p>
 <p><img src="/images/Unity_Pixelated_Art_Style_URPAsset.png"></p>
 <p>To know more about depth in game, make sure to check this <a target="_blank" rel="noopener" href="https://www.cyanilux.com/tutorials/depth/">article</a>.</p>
-<p>It’s noticeable that in orthographic cam, raw depth is already linear01, so you shouldn’t use <code>linear01</code> mode or <code>eye</code> mode in shader graph when using depth node.</p>
-<h3 id="Normal-Texture"><a href="#Normal-Texture" class="headerlink" title="Normal Texture"></a>Normal Texture</h3><p>There’re several ways to get a normal texture:</p>
+<p>It’s noticeable that in orthographic cam, raw depth is already linear01, so you shouldn’t use <code>linear01</code> mode nor <code>eye</code> mode in shader graph when using depth node.</p>
+<h4 id="Normal-Texture"><a href="#Normal-Texture" class="headerlink" title="Normal Texture"></a>Normal Texture</h4><p>There’re several ways to get a normal texture:</p>
 <ul>
 <li><code>G-Buffer</code> in deferred rendering</li>
 <li><code>_CameraNormalsTexture</code> requested by <code>ConfigureInput(ScriptableRenderPassInput.Normal)</code></li>
 <li>Draw your own normal texture with <code>ScriptableRendererFeature</code> by overriding material on every objects (another version of replacement shader)</li>
 </ul>
-<p>It’s worth notice that <code>G-Buffer</code> and <code>_CameraNormalsTexture</code> stores <strong>world normal</strong> since those data are usually used to calculate shading / lighting stuff. Drawing your own texture with <code>ScriptableRendererFeature</code> may give you more customizable result, and of course you can draw view normal directly by this method. However, since override material / replacement shader will override your original shaders, vertex displacement resulted by vertex shader will not be applied, nor normal map or any stuff to do with your original material. As screenshot shows below, <code>_CameraNormalsTexture</code> and <code>G-Buffer</code> holds details and vertex modifications which <code>ScriptableRendererFeature</code> doesn’t.</p>
+<p>It’s worth notice that <code>G-Buffer</code> and <code>_CameraNormalsTexture</code> stores <strong>world normal</strong> since those data are usually used to calculate shading / lighting stuff. Drawing your own texture with <code>ScriptableRendererFeature</code> may give you more customizable result, and of course you can draw view normal directly by using this method. However, since override material / replacement shader will override your original shaders, vertex displacement resulted by vertex shader will not be applied, nor normal map or any stuff to do with your original material. As screenshot shows below, <code>_CameraNormalsTexture</code> and <code>G-Buffer</code> hold details and vertex modifications which <code>ScriptableRendererFeature</code> doesn’t.</p>
 <p><img src="/images/Unity_Pixelated_Art_Style_NormalMap.png"></p>
 <center><small>L: world normal from G-Buffer<br>R: view normal by override material</small></center>
 
-<h4 id="G-Buffer"><a href="#G-Buffer" class="headerlink" title="G-Buffer"></a>G-Buffer</h4><p>The easiest one is selecting <code>Rendering Path</code> as <code>Deferred</code> in <code>URP renderer data</code>, and set camera depth texture mode to <code>DepthNormal</code> in script.</p>
+<h5 id="G-Buffer"><a href="#G-Buffer" class="headerlink" title="G-Buffer"></a>G-Buffer</h5><p>The easiest one is selecting <code>Rendering Path</code> as <code>Deferred</code> in <code>URP renderer data</code>, and set camera depth texture mode to <code>DepthNormal</code> in script.</p>
 <p><img src="/images/Unity_Pixelated_Art_Style_URPRendererData.png"></p>
 <p>Because deferred rendering generate <code>G-Buffer</code>, which is used to save scene info in GPU to assist shading computations. The normal texture of the scene can be read from it. With URP 12, it is stored in <code>_GBuffer2</code>.</p>
 <p><img src="/images/Unity_Pixelated_Art_Style_GBuffer2.png"></p>
@@ -200,9 +200,9 @@ var _hmt = _hmt || [];
 <p><img src="/images/Unity_Pixelated_Art_Style_CameraNormal.png"></p>
 <center><small>L: world normal from G-Buffer<br>R: view normal converted</small></center>
 
-<h4 id="Scriptable-Render-Pass-Input"><a href="#Scriptable-Render-Pass-Input" class="headerlink" title="Scriptable Render Pass Input"></a>Scriptable Render Pass Input</h4><p>World normal texture can be get not only in deferred rendering, but also in forward rendering if you requested in a renderer feature. Only one line of code can do it: <code>ConfigureInput(ScriptableRenderPassInput.Normal);</code></p>
+<h5 id="Scriptable-Render-Pass-Input"><a href="#Scriptable-Render-Pass-Input" class="headerlink" title="Scriptable Render Pass Input"></a>Scriptable Render Pass Input</h5><p>World normal texture can be get not only in deferred rendering, but also in forward rendering if you requested in a renderer feature. Only one line of code can do it: <code>ConfigureInput(ScriptableRenderPassInput.Normal);</code></p>
 <p>After adding this renderer feature to the URP renderer data, <code>_CameraNormalsTexture</code> will be rendered just the same as the normal texture in <code>G-Buffer</code>.</p>
-<h4 id="Override-Material"><a href="#Override-Material" class="headerlink" title="Override Material"></a>Override Material</h4><p>In <code>Built-in</code> pipeline, you can use <code>Replacement Shader</code> to render the whole scene in a single material. But you can’t use it to control the camera in URP since this function is not contained in <code>Camera</code> class, instead you can use override material to achieve same result.</p>
+<h5 id="Override-Material"><a href="#Override-Material" class="headerlink" title="Override Material"></a>Override Material</h5><p>In <code>Built-in</code> pipeline, you can use <code>Replacement Shader</code> to render the whole scene in a single material. But you can’t use it to control the camera in URP since this function is not contained in <code>Camera</code> class, instead you can use override material to achieve same result.</p>
 <p>To do so, a basic understanding to renderer feature work flow is required. Here is a <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/115080701">Chinese reference</a> about it.</p>
 <p>In a word, you may wanna use a view normal material as override material and render your scene into a render texture you created. I’m not that familiar with these currently, so just some ambiguous guidance below.</p>
 <ul>
@@ -210,27 +210,27 @@ var _hmt = _hmt || [];
   <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> RenderTargetHandle normals;</span><br><span class="line">normals.Init(<span class="string">&quot;_SceneViewSpaceNormals&quot;</span>);</span><br></pre></td></tr></table></figure></li>
 <li><p>A customized <code>RenderTextureDescriptor</code> can offer options like color format, texture size, etc. It contains all the information required to create a render texture.</p>
   <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Copy from cam settings</span></span><br><span class="line">RenderTextureDescriptor normalsTextureDescriptor = cameraTextureDescriptor;</span><br><span class="line"><span class="comment">// Customization</span></span><br><span class="line">normalsTextureDescriptor.colorFormat = RenderTextureFormat.ARGB32;</span><br></pre></td></tr></table></figure></li>
-<li><p>Create a temporary render texture with given parameters, and set it up as a global shader property with nameID. Then redirect render target to the temporary RT, and clear the attachment into the color or depth/stencil values given (depending on the format of this attachment)</p>
+<li><p>Create a temporary render texture with given parameters, and set it up as a global shader property with nameID. Then redirect render target to the temporary RT, and clear the attachment into the color or depth/stencil values (depending on the format of this attachment)</p>
   <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd.GetTemporaryRT(normals.id, normalsTextureDescriptor, FilterMode.Bilinear);</span><br><span class="line">ConfigureTarget(normals.Identifier());</span><br><span class="line">ConfigureClear(ClearFlag.All, Color.black);</span><br></pre></td></tr></table></figure></li>
 <li><p>Create drawing settings and set override material</p>
   <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DrawingSettings drawSettings = CreateDrawingSettings(shaderTagIdList, <span class="keyword">ref</span> renderingData, renderingData.cameraData.defaultOpaqueSortFlags);</span><br><span class="line">drawSettings.overrideMaterial = normalsMaterial;</span><br><span class="line">FilteringSettings filteringSettings = <span class="keyword">new</span> FilteringSettings(RenderQueueRange.opaque, layerMask);</span><br><span class="line">context.DrawRenderers(renderingData.cullResults, <span class="keyword">ref</span> drawSettings, <span class="keyword">ref</span> filteringSettings);</span><br></pre></td></tr></table></figure></li>
 <li><p>Release temporary RT after usage</p>
   <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnCameraCleanup</span>(<span class="params">CommandBuffer cmd</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cmd.ReleaseTemporaryRT(normals.id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h3 id="Opaque-Texture"><a href="#Opaque-Texture" class="headerlink" title="Opaque Texture"></a>Opaque Texture</h3><p><code>_CameraOpaqueTexture</code> provides a snapshot of the scene right before URP renders any transparent meshes. In shader graph, <code>SceneColor</code> node would sample this texture as output.</p>
+<h4 id="Opaque-Texture"><a href="#Opaque-Texture" class="headerlink" title="Opaque Texture"></a>Opaque Texture</h4><p><code>_CameraOpaqueTexture</code> provides a snapshot of the scene right before URP renders any transparent meshes. In shader graph, <code>SceneColor</code> node would sample this texture as return value.</p>
 <p>By enabling the opaque texture, we can draw outline with reference to the original pixel color. This texture can be also used to create effects like frosted glass, water refraction, or heat waves.</p>
 <p>To enable this texture, check the checkbox under depth texture checkbox in URP asset.</p>
 <h3 id="Edge-Detection"><a href="#Edge-Detection" class="headerlink" title="Edge Detection"></a>Edge Detection</h3><p>After preparations of view normal texture, depth texture, opaque texture, it’s time to do real edge detections with these references.</p>
 <p>Edge detection in game is using basically the same tech in image edge detection. You sample a pixel and its neighbors, comparing their difference. However, since we got both normal and depth textures, it’s possible to achieve more complicated effect by combining them together. <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCEk8HlMSyA-nkZgFDf5kDEQ">@James King</a> is doing a really nice job on this, and made the outline only one pixel wide, which is a significant factor contributing to the overall appearance of the scene. So I’d explain his logic and talk about issues I encountered when implementing his method in Unity.</p>
 <h4 id="Depth-Edge"><a href="#Depth-Edge" class="headerlink" title="Depth Edge"></a>Depth Edge</h4><ul>
 <li><p><strong>Preprocess</strong></p>
-<p>  As I said before, raw depth in orthographic cam is already linear01, but the issue is that when far plane and near plane are far away from each other, the difference between two depth value in the texture becomes too tiny to work with. After my experimenting, it would be clear and reasonable when <code>far plane - near plane = 20</code>, so I made a multiplier by referencing far plane and near plane to change my depth scale making it reasonable. </p>
-<p>  Depth values would be difference depending on the platform:</p>
+<p>As I said before, raw depth in orthographic cam is already linear01, but the issue is that when far plane and near plane are far away from each other, the difference between two depth value in the texture becomes too tiny to work with. After my experimenting, it would be clear and reasonable when <code>far plane - near plane = 20</code>, so I made a multiplier by referencing far plane and near plane to change my depth scale making it reasonable. </p>
+<p>Depth values would be difference depending on the platform:</p>
 <ul>
 <li>Direct3D-like, Reversed Z Buffer : <strong>1</strong> at the near plane, <strong>0</strong> at the far plane</li>
 <li>OpenGL-like, Z Buffer : <strong>0</strong> at the near plane, <strong>1</strong> at the far plane</li>
 </ul>
-<p>  This reverse flag is stored in <code>_ProjectionParams.x</code>, it can also be accessed in <code>Camera</code> node in shader graph.</p>
+<p>This reverse flag is stored in <code>_ProjectionParams.x</code>, it can also be accessed in <code>Camera</code> node in shader graph.</p>
 </li>
 <li><p><strong>Process</strong></p>
 <p>  Now sample a few points around the original pixel, and get the bias by <code>bias = neighbor - center</code>. If using this bias directly, both edges inside the object and outside the object will be drawn, which results in at least 2 pixel wide depth outline. But this can be fixed by clamping bias to [0, 1] or [-1, 0], leaving only one pixel wide outline that either nearer or farther one. After so, use <code>smoothstep</code> to control the visibility of edges with different biases.</p>
@@ -250,7 +250,7 @@ var _hmt = _hmt || [];
 <p>Similar to depth edges, we’d like to get normal biases between it’s neighbors: <code>bias = normal - neighborNormal</code>. Since the bias is a <code>float3</code>, it can’t be simply clamped to cut one side of outline (the normal outline is also 2 pixels wide as shown below)</p>
 <img height="200" width="200" src="/images/Unity_Pixelated_Art_Style_RobinOutlineNormal.png">
 
-<p>To make the normal outline also one pixel wide, James declared a direction vector3 (e.g. float3(1, 1, 1)) as parameter and get the dot product of which and normal bias: <code>dot(bias, parameter)</code>. Since the normal texture is in view space, such dot product can cull edges on faces in opposite direction of the direction parameter.</p>
+<p>To make the normal outline also one pixel wide, James declared a direction vector3 (e.g. float3(1, 1, 1)) as parameter and get the dot product of which and normal bias: <code>dot(bias, direction vector)</code>. Since the normal texture is in view space, such dot product can cull edges on faces in opposite direction of the direction parameter.</p>
 <p><img src="/images/Unity_Pixelated_Art_Style_ViewNormal.png"></p>
 <center><small>View Space Normal</small></center>
 
@@ -316,20 +316,20 @@ var _hmt = _hmt || [];
 
                     
                         <div id="side_meta">
-                            <div class="col-md-3" id="post_meta"> 
+                            <div class="col-md-3" id="post_meta">
 
 	<!-- date -->
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2022-08-02 
+	2022-08-02
 	</div>
 	
 
 	<!-- categories -->
     
 	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
@@ -341,7 +341,7 @@ var _hmt = _hmt || [];
 	
 
 	<!-- tags -->
-		
+	
 
 	<!-- toc -->
 	<div class="meta-widget">
@@ -349,7 +349,7 @@ var _hmt = _hmt || [];
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Unity-Pixelated-Art-Style-In-URP"><span class="toc-article-text">Unity Pixelated Art Style In URP</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Cel-Shading"><span class="toc-article-text">Cel Shading</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Outcome"><span class="toc-article-text">Outcome</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Seamless-Outline"><span class="toc-article-text">Seamless Outline</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Depth-Texture"><span class="toc-article-text">Depth Texture</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Normal-Texture"><span class="toc-article-text">Normal Texture</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#G-Buffer"><span class="toc-article-text">G-Buffer</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Scriptable-Render-Pass-Input"><span class="toc-article-text">Scriptable Render Pass Input</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Override-Material"><span class="toc-article-text">Override Material</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Opaque-Texture"><span class="toc-article-text">Opaque Texture</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Edge-Detection"><span class="toc-article-text">Edge Detection</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Depth-Edge"><span class="toc-article-text">Depth Edge</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Normal-Edge"><span class="toc-article-text">Normal Edge</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Outcome-1"><span class="toc-article-text">Outcome</span></a></li></ol></li></ol></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Unity-Pixelated-Art-Style-In-URP"><span class="toc-article-text">Unity Pixelated Art Style In URP</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Cel-Shading"><span class="toc-article-text">Cel Shading</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Outcome"><span class="toc-article-text">Outcome</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Seamless-Outline"><span class="toc-article-text">Seamless Outline</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Textures"><span class="toc-article-text">Textures</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Depth-Texture"><span class="toc-article-text">Depth Texture</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Normal-Texture"><span class="toc-article-text">Normal Texture</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-5"><a class="toc-article-link" href="#G-Buffer"><span class="toc-article-text">G-Buffer</span></a></li><li class="toc-article-item toc-article-level-5"><a class="toc-article-link" href="#Scriptable-Render-Pass-Input"><span class="toc-article-text">Scriptable Render Pass Input</span></a></li><li class="toc-article-item toc-article-level-5"><a class="toc-article-link" href="#Override-Material"><span class="toc-article-text">Override Material</span></a></li></ol></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Opaque-Texture"><span class="toc-article-text">Opaque Texture</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Edge-Detection"><span class="toc-article-text">Edge Detection</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Depth-Edge"><span class="toc-article-text">Depth Edge</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Normal-Edge"><span class="toc-article-text">Normal Edge</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Outcome-1"><span class="toc-article-text">Outcome</span></a></li></ol></li></ol></li></ol></li></ol>
 		</div>
 	
 	</div>

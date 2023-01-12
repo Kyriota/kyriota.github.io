@@ -23,7 +23,7 @@
 
   
   
-    <link href="/favicon.ico" rel="icon">
+    <link href="/img/icon.ico" rel="icon">
   
   
   <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
@@ -63,7 +63,7 @@ var _hmt = _hmt || [];
 <meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="KYRIOTA" type="application/atom+xml">
 </head>
 
- <body>  
+ <body>
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -202,7 +202,7 @@ var _hmt = _hmt || [];
 <li><code>F</code>∈[0,2]，最好设置成动态的</li>
 <li><code>CR</code>∈(0,1)</li>
 <li><code>popSize</code>：通常在50以内，但理论上越大则越有可能找到全局最优解，但太大了会导致收益不足以弥补计算速度过慢带来的损失</li>
-<li><code>maxIter</code>：如果采用动态<code>F</code>，则需要斟酌一下，因为<code>F=alpha*(np.exp(maxIter/(maxIter+iterCnt))-1)</code></li>
+<li><code>maxIter</code>：如果采用动态<code>F</code>，则需要斟酌一下，例如我的<code>F</code>就与<code>maxIter</code>有关<code>F=alpha*(np.exp(maxIter/(maxIter+iterCnt))-1)</code></li>
 </ul>
 <h2 id="Copilot带来的问题"><a href="#Copilot带来的问题" class="headerlink" title="Copilot带来的问题"></a>Copilot带来的问题</h2><p>在最开始用魔改版Copilot生成的DE解决这个题目时，经常遇到的一个问题：在某一时刻（通常是演化的初期），突然整个族群都进行了一次演化，即在一次进化中，整个族群都更新了，但在这之后，就不再有任何一个向量在演化中改变</p>
 <blockquote>
@@ -250,7 +250,7 @@ var _hmt = _hmt || [];
 <p>通过以上各个参数的迭代次数可见，族群大小对这个算法的收效甚微，只要不是太小的族群，在算法正确的情况下一般是没有问题的，比如上述的不同族群大小中，<code>popSize=20</code>时两三秒就可以进行一次迭代，而<code>popSize=200</code>时一次迭代就要几分钟，故而盲目追求大族群是得不偿失的，不如用小族群多跑几遍</p>
 <p>然后是这个输出的结果，每次基本都是在猫耳朵的位置修改像素，得到goldfish的label，意味着Persian Cat的决策范围边上就是Goldfish，而且距离之近或者说梯度之大只需要一个像素就可以扰动成功</p>
 <p><img src="/images/OnePixelAttackWithDE_Out1.png"></p>
-<h2 id="性能比较"><a href="#性能比较" class="headerlink" title="性能比较"></a>性能比较</h2><p>copy了一份论文link的github上的<a target="_blank" rel="noopener" href="https://github.com/Hyperparticle/one-pixel-attack-keras">代码</a>，进行了一下性能的对比，这种带运气成分的算法需要大量统计才能做出比较，直观感觉上来说，相同种群大小下，他的一次迭代比我的慢得多，他的代码和我的一样有运气好几次迭代直接出和迭代半天一直不出的情况，但是从原理上说，只要一直挂着跑，失败了自动重启继续跑，都肯定可以跑出来的</p>
+<h2 id="性能比较"><a href="#性能比较" class="headerlink" title="性能比较"></a>性能比较</h2><p>copy了一份论文link的github上的<a target="_blank" rel="noopener" href="https://github.com/Hyperparticle/one-pixel-attack-keras">代码</a>，进行了一下性能的对比，这种带运气成分的算法需要大量统计才能做出比较，直观感觉上来说，相同种群大小下，他的一次迭代比我的慢得多，他的代码和我的一样有运气好几次迭代直接出和运气差迭代半天一直不出的情况，但是从原理上说，只要一直挂着跑，失败了自动重启继续跑，都肯定可以跑出来的</p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         popSize=15，maxIter=100
@@ -320,20 +320,20 @@ var _hmt = _hmt || [];
 
                     
                         <div id="side_meta">
-                            <div class="col-md-3" id="post_meta"> 
+                            <div class="col-md-3" id="post_meta">
 
 	<!-- date -->
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2022-12-12 
+	2022-12-12
 	</div>
 	
 
 	<!-- categories -->
     
 	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>
     <ul id="categorys" class="tag_box list-unstyled collapse in">
           
   <li>
@@ -345,7 +345,7 @@ var _hmt = _hmt || [];
 	
 
 	<!-- tags -->
-		
+	
 
 	<!-- toc -->
 	<div class="meta-widget">
