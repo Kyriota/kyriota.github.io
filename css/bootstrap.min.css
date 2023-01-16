@@ -8717,6 +8717,7 @@ ol ol {
 
 em {
     font-style: italic;
+    margin-right: 4px;
 }
 
 i,
@@ -9756,7 +9757,7 @@ pre code {
 }
 
 table {
-    background-color: transparent
+    background-color: transparent;
 }
 
 caption {

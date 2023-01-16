@@ -491,19 +491,27 @@ a:-webkit-any-link:hover {
 table {
     border-collapse: separate;
     border-spacing: 0;
-    vertical-align: middle
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
 }
 
 th {
     padding: 12px 10px 12px 10px;
-    border-bottom: 1px dashed #4088b8
+    border: 1px dashed #4088b8;
+    border-bottom: 3px solid #4088b8;
+    font-weight: bolder;
+    font-size: 0.8em;
 }
 
 td {
     padding: 7px 10px 7px 10px;
     text-align: left;
     font-weight: normal;
-    vertical-align: middle
+    vertical-align: middle;
+    border: 1px dashed #4088b8;
+    font-size: 0.8em;
 }
 
 .cf:before,
