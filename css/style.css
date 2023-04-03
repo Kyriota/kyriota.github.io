@@ -499,8 +499,8 @@ table {
 
 th {
     padding: 12px 10px 12px 10px;
-    border: 1px dashed #4088b8;
-    border-bottom: 3px solid #4088b8;
+    border: 1px dashed #414558;
+    border-bottom: 3px solid #414558;
     font-weight: bolder;
     font-size: 0.8em;
 }
@@ -510,7 +510,7 @@ td {
     text-align: left;
     font-weight: normal;
     vertical-align: middle;
-    border: 1px dashed #4088b8;
+    border: 1px dashed #414558;
     font-size: 0.8em;
 }
 

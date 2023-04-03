@@ -174,7 +174,7 @@ var _hmt = _hmt || [];
 <p>首先明确，FCNN是一个多层次结构，包含了输入层，隐藏层，输出层</p>
 <p>单个神经元的机理很简单，观察隐藏层<code>Dense #2</code>中的第0个神经元，它也是一个函数，记作<code>Z[2][0]</code>，其中，<code>Z</code>表示神经元函数本身，<code>[2]</code>表示其在第二层，<code>[0]</code>表示其是第一个神经元，由图可知，它的输入是其上一层的所有神经元的输出，它的输出会传递到下一层的每一个神经元，这也是“全连接”的直接体现（你要是看到图里面他没有全连接起来，那多半是我抠图的时候魔棒不小心扣没了）</p>
 <p>而神经元之间的信号传递其实是一个线性的过程，类比<code>y=kx+b</code>，即</p>
-<center><code>Z[2][0]=∑w[2][i][0]*Z[1][i], i for i in range(0,6)</code></center><br><center><b>WARNING: 这个式子是错的，但暂时先这样理解</b></center><br>
+<center><code>Z[2][0]=∑w[2][i][0]*Z[1][i] for i in range(0,6)</code></center><br><center><b>WARNING: 这个式子是错的，但暂时先这样理解</b></center><br>
 
 <p>在<code>w[2][i][0]</code>中，<code>w</code>表示权重（类比k，具体点，可以把w相成是神经元之间连接的线），<code>[2]</code>表示该权重是第一层与第二层之间的，<code>[i]</code>表示上一层中的第i个，<code>[0]</code>表示下一层中的第0个（表达上有点繁琐，但并不难理解）</p>
 <h3 id="偏置"><a href="#偏置" class="headerlink" title="偏置"></a>偏置</h3><p>显然相对于<code>y=kx+b</code>，还少了其中的<code>b</code>，为了补上<code>b</code>，在FCNN中，会给除了输出层之外的每一层补上一个神经元作为<code>bias</code>，又称偏置，这是一个特殊的神经元，其不接受任何输入，然后对下一层中的每一个神经元都稳定输出一个<code>+1</code>，然后下一层中偏置对每个神经元影响的大小再由对应的权重来调整，具体的连接方式如图白色部分所示</p>
