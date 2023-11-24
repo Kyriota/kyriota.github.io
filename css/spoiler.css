@@ -8,7 +8,7 @@
 }
 
 .spoiler .spoiler-title {
-    background: #bbbbbb;
+    background: #E5E5E5;
     margin: 0 -15px;
     padding: 5px 15px;
     color: #353535;
@@ -23,11 +23,11 @@
 }
 
 .spoiler.collapsed .spoiler-title:before {
-    content: "-≡ [ Folded ] ";
+    content: "Show ";
 }
 
 .spoiler.expanded .spoiler-title:before {
-    content: "+≡ [Expanded] ";
+    content: "Hide ";
 }
 
 .spoiler .spoiler-content {
@@ -51,6 +51,7 @@
 }
 
 .spoiler.expanded .spoiler-content {
+    max-height: 3000px;
     overflow: hidden;
 }
 

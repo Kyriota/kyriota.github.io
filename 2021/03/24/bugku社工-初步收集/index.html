@@ -147,26 +147,25 @@ var _hmt = _hmt || [];
 <p align='right'><small>作者说这个题更像是MISC类...yysy，qs</small></p>
 
 <span id="more"></span>
-
 <h1 id="社工-初步收集"><a href="#社工-初步收集" class="headerlink" title="社工-初步收集"></a>社工-初步收集</h1><h2 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h2><ul>
 <li><p>进来发现是刷钻软件的index，其中有一地址可以下载一个易语言写的exe</p>
-<p>  <img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-index.PNG"></p>
+<p>  <img src="/images/社工-初步收集-index.PNG" alt=""></p>
 </li>
 <li><p>手动添加admin发现管理页面存在，但是一旦尝试注入就会卡死(至少我是这样的)</p>
 </li>
 </ul>
 <p>至此，其他的信息均为干扰，再没有发现任何线索，很显然刷钻exe才是关键</p>
 <h2 id="exe分析"><a href="#exe分析" class="headerlink" title="exe分析"></a>exe分析</h2><h3 id="方法一：抓smtp包"><a href="#方法一：抓smtp包" class="headerlink" title="方法一：抓smtp包"></a>方法一：抓smtp包</h3><p>先看本体，就是一个钓鱼软件</p>
-<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-exe.PNG"></p>
+<p><img src="/images/社工-初步收集-exe.PNG" alt=""></p>
 <p>最简单也是最常见的钓鱼就是用smtp发邮件出去，但在通过smtp送信时是需要smtp授权码的，故只要抓个smtp包看邮箱和密码即可</p>
-<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-pack.PNG"></p>
+<p><img src="/images/社工-初步收集-pack.PNG" alt=""></p>
 <p>关键字<code>AUTH LOGIN</code>登录认证，将下文的发送的字段b64decode一下，得到邮箱与密码</p>
 <h3 id="方法二：IDA"><a href="#方法二：IDA" class="headerlink" title="方法二：IDA"></a>方法二：IDA</h3><p>除了抓包查看邮箱与密码，在exe中的邮箱和密码也是保存为静态字段的，拖进IDA去字符串页面找即可</p>
-<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-IDA.PNG"></p>
+<p><img src="/images/社工-初步收集-IDA.PNG" alt=""></p>
 <h2 id="登录邮箱"><a href="#登录邮箱" class="headerlink" title="登录邮箱"></a>登录邮箱</h2><p>需要注意的是我们找到的是smtp授权码，而非邮箱的登陆密码，故不能在网易邮箱直接登录（别问，问就是虽然知道smtp授权码和登陆密码是两码事，但是还是试了好久），面向搜索引擎解题我们得知应该用第三方的邮箱客户端，并选择使用smtp协议登录，例如<code>FoxMail</code>，登录后可以找到管理员补档的被删除的eml格式的附件，foxmail本身或微软自带邮箱就可以打开</p>
 <blockquote>EML格式是微软公司在Outlook中所使用的一种遵循RFC822及其后续扩展的文件格式，并成为各类电子邮件软件的通用格式——百度百科</blockquote>
 
-<p><img src="/images/%E7%A4%BE%E5%B7%A5-%E5%88%9D%E6%AD%A5%E6%94%B6%E9%9B%86-mail.PNG"></p>
+<p><img src="/images/社工-初步收集-mail.PNG" alt=""></p>
 <p>打开附件后为邮件对话截图，好心的管理还画出了关键信息，结合题目中提到“社工”，显然此处交代了后台管理的用户名即为发件人署名，密码为生日密码，以此登录后台后稍微翻翻就看到flag啦~</p>
 <p align='right'><small>非常有趣</small></p>
 

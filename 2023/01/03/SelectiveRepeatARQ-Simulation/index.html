@@ -145,11 +145,9 @@ var _hmt = _hmt || [];
 
                                         <p>My homework in a course about computer network, coded in javascript in order to put it on my blog and give it a HTML UI to show the detailed process.</p>
 <p>Just a simple version of selective repeat ARQ, but maybe helpful for you to understand the algorithm further.</p>
-<p><img src="/images/ARQ_preview.png"></p>
+<p><img src='/images/ARQ_preview.png' style="zoom:40%;" ></p>
 <span id="more"></span>
-
 <!--toc-->
-
 <h1 id="Selective-Repeat-ARQ-Simulation"><a href="#Selective-Repeat-ARQ-Simulation" class="headerlink" title="Selective Repeat ARQ Simulation"></a>Selective Repeat ARQ Simulation</h1><p>First of all, you may wanna check the final result of the simulation: <a target="_blank" rel="noopener" href="https://kyriota.com/html/ARQ">Portal to the final result</a></p>
 <h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><p>To understand how selective repeat ARQ algorithm was implemented in my program, I recommend you understand the algorithm itself first, so that the following content can be much easier to understand.</p>
 <blockquote>
@@ -178,8 +176,7 @@ var _hmt = _hmt || [];
 </li>
 <li><p>frame corrupted when transmitting</p>
 </li>
-<li><p><code>B</code> found it corrupted by doing CRC and dropped it</p>
-</li>
+<li><code>B</code> found it corrupted by doing CRC and dropped it</li>
 <li><p><code>A</code> keeps sending following frames, and comes with another frame with sequence <code>X</code></p>
 </li>
 <li><p>Under such situation, <code>B</code> could take this frame and think it the frame that <code>B</code> found corrupted</p>
@@ -190,15 +187,19 @@ var _hmt = _hmt || [];
 <li><p>With window and ACK (Acknowledge character) frame implemented, pretend sequence number takes 3 bits, and windows size is 3. The following text indicates sequence of sender(L) and receiver(R), contents in brackets indicates frames that are in current window:</p>
 <ul>
 <li><p>At the beginning:</p>
-<center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => &#123; |?|?|?| &#125;</code></center></li>
+<center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => &#123; |?|?|?| &#125;</code></center>
+</li>
 <li><p><code>A</code> sends frame 0 and starts a timer for frame 0</p>
 </li>
 <li><p><code>B</code> received it properly</p>
-  <center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => &#123; |0|?|?| &#125;</code></center></li>
+  <center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => &#123; |0|?|?| &#125;</code></center>
+</li>
 <li><p>Because frame 0 is in the correct order, <code>B</code> transmits frame 0 to upper layer to do further process and removes frame 0 from its buffer (in order to make the process clearer, the frame 0 is still texted in the buffer), at the same time, <code>B</code> shifts its window forward and sends ACK frame 0 to <code>A</code></p>
-  <center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => |0| &#123; |?|?|?| &#125;</code></center></li>
+  <center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => |0| &#123; |?|?|?| &#125;</code></center>
+</li>
 <li><p><code>A</code> received ACK frame 0, so <code>A</code> removes frame 0 from its buffer, stops timer for frame 0, and shifts the window forward</p>
-  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |?|?|?| &#125;</code></center></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |?|?|?| &#125;</code></center>
+</li>
 <li><p><code>A</code> sends frame 1 and starts a timer for frame 1</p>
 </li>
 <li><p>frame 1 corrupted when transmitting</p>
@@ -206,17 +207,21 @@ var _hmt = _hmt || [];
 <li><p><code>B</code> received corrupted frame and drops it</p>
 </li>
 <li><p><code>A</code> sent frame 2, frame3, and <code>B</code> received them properly and sent ACK frame 2, 3 to <code>A</code>. But due to the first element in the window is not received, <code>B</code> could not shift the window</p>
-  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |?|2|3| &#125;</code></center></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |?|2|3| &#125;</code></center>
+</li>
 <li><p>Also, because the first element in the window didn’t receive an ACK frame, <code>A</code> cannot move the window neither. Because <code>A</code> finished sending mission in the window, <code>A</code> stops sending the next frame, which is frame 4, and waits for <code>B</code> to send ACK frame 1</p>
 </li>
 <li><p>Timer for frame 1 found frame 1 overtime, so <code>A</code> sends frame 1 again</p>
 </li>
 <li><p><code>B</code> received it properly</p>
-  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |1|2|3| &#125;</code></center></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |1|2|3| &#125;</code></center>
+</li>
 <li><p><code>B</code> shifts the window, transmits frame 1, 2, 3 to upper layer, and sends ACK frame 1 to <code>A</code></p>
-  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0|1|2|3| &#123; |?|?|?| &#125;</code></center></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0|1|2|3| &#123; |?|?|?| &#125;</code></center>
+</li>
 <li><p><code>A</code> removes frame 1, 2, 3 from buffer and shifts the window</p>
-  <center><code>|0|1|2|3| &#123; |4|5|6| &#125; |7|0|1|2|3|... => |0|1|2|3| &#123; |?|?|?| &#125;</code></center></li>
+  <center><code>|0|1|2|3| &#123; |4|5|6| &#125; |7|0|1|2|3|... => |0|1|2|3| &#123; |?|?|?| &#125;</code></center>
+</li>
 </ul>
 </li>
 <li><p>Under such implementation, there is nearly no problems for <code>A</code> and <code>B</code> can communicate with each other. But the overtime machinic seems too time consuming if ever time a frame is corrupted <code>A</code> will wait for a certain period. So we can make <code>B</code> send a NAK (Negative Acknowledgment) frame to make <code>A</code> resend faster (if <code>B</code> can recognize the sender and sequence number of the corrupted frame)</p>
@@ -282,7 +287,6 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         Host Class
@@ -292,7 +296,6 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         Simulator Class
@@ -302,7 +305,6 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         HostUI Class
@@ -312,7 +314,6 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <p>For <code>index.html</code></p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
@@ -323,7 +324,6 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <h2 id="Postscript"><a href="#Postscript" class="headerlink" title="Postscript"></a>Postscript</h2><p>I highly recommend using emoji or something intuitive in your log text when possible, which can increase your reading speed of log text significantly</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                             </div>

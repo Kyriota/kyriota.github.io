@@ -144,7 +144,6 @@ var _hmt = _hmt || [];
 
                                         <p>之前一起打了CISCN 2023初赛，因为周末睡懒觉晚到了两三个小时导致做这个题的时间不充裕了，最后在比赛结束后半个小时出了，主要原因还是因为没有玩过Yolo，当时记得这个题的解题数是很低的（或者好像是零解的？反正截止至我开始写这篇WP的时间[2023-08-07 18:30]，我在网上并没有搜到WP），本题在选手机器学习底子坚实的前提下主要考验选手入手新的模型和领域的速度以及将对抗样本训练应用上来的速度。</p>
 <span id="more"></span>
-
 <h1 id="CISCN2023初赛-AdvDetPatch-WriteUp"><a href="#CISCN2023初赛-AdvDetPatch-WriteUp" class="headerlink" title="CISCN2023初赛 AdvDetPatch WriteUp"></a>CISCN2023初赛 AdvDetPatch WriteUp</h1><h2 id="题干"><a href="#题干" class="headerlink" title="题干"></a>题干</h2><blockquote>
 <p>本次竞赛要求选手针对目标检测模型进行对抗攻击。题目提供了1张样例图片（/home/adv/images/stop.png），要求选手在给定的图片中添加一些对抗性补丁，上传带有补丁的图片和代表补丁位置的mask，要求：</p>
 <ol>
@@ -155,26 +154,25 @@ var _hmt = _hmt || [];
 </ol>
 </blockquote>
 <p>以下为需要选手攻击的图片</p>
-<p><img src="/images/CISCN_2023_stop.png"></p>
+<p><img src="/images/CISCN_2023_stop.png" alt=""></p>
 <h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><h3 id="初步验证"><a href="#初步验证" class="headerlink" title="初步验证"></a>初步验证</h3><p>由于我是第一次玩Yolo，先自己跑一下看看能否得到正确的输出，通过在<code>fool_me.py</code>中<code>print(pred)</code>得到如下输出</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tensor([[3.38821e+02, 1.65334e+02, 5.22038e+02, 4.83467e+02, 9.34208e-01, 1.10000e+01],</span><br><span class="line">        [4.66704e+02, 2.09673e+02, 6.39832e+02, 5.45919e+02, 9.33491e-01, 1.10000e+01],</span><br><span class="line">        [2.00159e+02, 2.04222e+02, 3.79344e+02, 5.11239e+02, 9.25105e-01, 1.10000e+01],</span><br><span class="line">        [7.07512e+01, 2.37424e+02, 2.40440e+02, 5.33154e+02, 9.14894e-01, 1.10000e+01],</span><br><span class="line">        [7.70359e-01, 2.53848e+02, 1.03618e+02, 5.43242e+02, 9.01769e-01, 1.10000e+01],</span><br><span class="line">        [1.41904e+01, 3.93319e+02, 4.42650e+01, 4.40926e+02, 6.95912e-01, 2.40000e+01],</span><br><span class="line">        [1.30602e+01, 3.96193e+02, 4.70077e+01, 4.42493e+02, 4.05268e-01, 1.10000e+01]])</span><br></pre></td></tr></table></figure>
-
 <p>对此我们需要确定此Tensor中每个Dimension的含义</p>
 <p>我们查阅关于Yolo的资料可知，每个向量中前四个元素代表了Bounding Box的范围，第五维代表了置信度，第六维代表了Class(Label)</p>
 <p>据此我们可以写出可视化脚本来可视化模型的输出结果，可视化如下</p>
-<p><img src="/images/CISCN_2023_Yolo_Example.png"></p>
+<p><img src="/images/CISCN_2023_Yolo_Example.png" alt=""></p>
 <p>可见根据出题人给出的代码跑出的输出可以正确地被用于在原始图像上标记出所有Stop Sign的范围</p>
 <p>接下来我们需要做的就是攻击这个模型，使得没有物体被检测到了</p>
 <h3 id="查找资料"><a href="#查找资料" class="headerlink" title="查找资料"></a>查找资料</h3><p>根据题目标题，我们正在做的是Adversarial Patch，对抗性补丁，按照我的理解，这与之前看过的在一个图像上贴一个不透明的同时只覆盖部分原始图像的技术是一个东西</p>
 <p>目前这项技术比较流行的是在现实世界中的Adv Patch，如下图，挂有Adv Patch的人无法被模型识别出是人类</p>
-<p><img src="/images/CISCN_2023_Yolo_Adv_Patch_Example.png"></p>
+<p><img src="/images/CISCN_2023_Yolo_Adv_Patch_Example.png" alt=""></p>
 <p>根据中英文关键词（Yolo Adversarial Attack; Yolo Adversarial Patch; Yolo 对抗补丁; Yolo 对抗攻击），查找到了一篇题为Sparse Adversarial Attack to Object Detection<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2012.13692">预印本文章</a>，这篇文章正好提供了我们需要的信息，我们只需要看文章中的两张图就知道如何攻击了</p>
-<p><img src="/images/CISCN_2023_Paper_Fig_1.png"></p>
+<p><img src="/images/CISCN_2023_Paper_Fig_1.png" alt=""></p>
 <p>上图介绍了攻击的流程，比如确定Mask的形状，通过反向传播获取增加到图像上的扰动等。其中他有两个Preprocess我没太明白，但这不影响我们理解攻击的方式</p>
-<p><img src="/images/CISCN_2023_Paper_Fig_2.png"></p>
+<p><img src="/images/CISCN_2023_Paper_Fig_2.png" alt=""></p>
 <p>上图展示了被攻击成功的图像，请注意图像中类似杂讯的十字，这可能需要对图像进行放大才能清晰地看见。我们可以由此认识到：其实Adv Patch就是在最基础的对抗攻击中限制了可以攻击的图像面积，并且被攻击的像素是替换而不是叠加</p>
 <h3 id="Exp"><a href="#Exp" class="headerlink" title="Exp"></a>Exp</h3><p>首先需要获取一个Mask，在调试题目的代码后，我发现题目对修改像素的数量其实比较宽松，所以我们采用米字形的Mask以更好地对需要攻击的部分进行扰动，这个Mask可以通过PS绘图后使用Python将灰色像素给去掉（因为题目限制了Mask的像素必须非0即255，所以需要去掉灰色的像素）</p>
-<p><img src="/images/CISCN_2023_mask.png"></p>
+<p><img src="/images/CISCN_2023_mask.png" alt=""></p>
 <p>有了这个Mask我们就可以开始攻击了，现在移步<code>fool_me.py</code>进行代码修改</p>
 <p>首先我们使用随机噪声填充这个Mask</p>
 <div class='spoiler collapsed'>
@@ -186,7 +184,6 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <p>然后我们需要修改原本验证图像是否攻击成功的代码，其实就是对输入图像求个梯度，然后累加这个梯度，直到攻击成功</p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
@@ -197,13 +194,11 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <p>至此，通常来说题目应该已经被Mark为Solved了，但我们得到的输出并不这么认为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">------------------Initializing detector-------------------</span><br><span class="line">Fusing layers... </span><br><span class="line">Model Summary: 367 layers, 46533693 parameters, 0 gradients</span><br><span class="line">libpng warning: iCCP: known incorrect sRGB profile</span><br><span class="line">---------------------Start detecting----------------------</span><br><span class="line">tensor([[2.31950e+02, 1.63722e+02, 6.37381e+02, 5.43151e+02, 5.21886e-01, 1.10000e+01],</span><br><span class="line">        [4.71159e+02, 2.11284e+02, 6.39552e+02, 5.44185e+02, 4.40381e-01, 1.10000e+01],</span><br><span class="line">        [1.06963e+00, 2.29302e+02, 2.94475e+02, 5.46162e+02, 4.39895e-01, 1.10000e+01]], grad_fn&#x3D;&lt;IndexBackward0&gt;)</span><br><span class="line">True True</span><br><span class="line">C:\Users\Kyriota\AppData\Local\Programs\Python\Python39\lib\site-packages\torch\autograd\__init__.py:276: UserWarning: Error detected in struct torch::autograd::CopySlices. Traceback of forward call that caused the error:</span><br><span class="line">  File &quot;C:\Users\Kyriota\AppData\Local\Programs\Python\Python39\lib\runpy.py&quot;, line 197, in _run_module_as_main</span><br><span class="line">    return _run_code(code, main_globals, None,</span><br><span class="line">  File &quot;C:\Users\Kyriota\AppData\Local\Programs\Python\Python39\lib\runpy.py&quot;, line 87, in _run_code</span><br><span class="line">    exec(code, run_globals)</span><br><span class="line">  File &quot;c:\Users\Kyriota\.vscode\extensions\ms-python.python-2023.14.0\pythonFiles\lib\python\debugpy\__main__.py&quot;, line 39, in &lt;module&gt;</span><br><span class="line">    cli.main()</span><br><span class="line">  File &quot;c:\Users\Kyriota\.vscode\extensions\ms-python.python-2023.14.0\pythonFiles\lib\python\debugpy&#x2F;..\debugpy\server\cli.py&quot;, line 430, in main</span><br><span class="line">    run()</span><br><span class="line">  File &quot;c:\Users\Kyriota\.vscode\extensions\ms-python.python-2023.14.0\pythonFiles\lib\python\debugpy&#x2F;..\debugpy\server\cli.py&quot;, line 284, in run_file        </span><br><span class="line">    runpy.run_path(target, run_name&#x3D;&quot;__main__&quot;)</span><br><span class="line">  File &quot;c:\Users\Kyriota\.vscode\extensions\ms-python.python-2023.14.0\pythonFiles\lib\python\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_runpy.py&quot;, line 321, in run_path</span><br><span class="line">    return _run_module_code(code, init_globals, run_name,</span><br><span class="line">  File &quot;c:\Users\Kyriota\.vscode\extensions\ms-python.python-2023.14.0\pythonFiles\lib\python\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_runpy.py&quot;, line 135, in _run_module_code</span><br><span class="line">    _run_code(code, mod_globals, init_globals,</span><br><span class="line">  File &quot;c:\Users\Kyriota\.vscode\extensions\ms-python.python-2023.14.0\pythonFiles\lib\python\debugpy\_vendored\pydevd\_pydevd_bundle\pydevd_runpy.py&quot;, line 124, in _run_code</span><br><span class="line">    exec(code, run_globals)</span><br><span class="line">  File &quot;C:\Users\Kyriota\Desktop\CISCN\ciscn2023_AdvDetPatch\adv\exp.py&quot;, line 181, in &lt;module&gt;</span><br><span class="line">    main(opt)</span><br><span class="line">  File &quot;C:\Users\Kyriota\Desktop\CISCN\ciscn2023_AdvDetPatch\adv\exp.py&quot;, line 176, in main</span><br><span class="line">    run(**vars(opt))</span><br><span class="line">  File &quot;C:\Users\Kyriota\Desktop\CISCN\ciscn2023_AdvDetPatch\adv\exp.py&quot;, line 117, in run</span><br><span class="line">    pred &#x3D; non_max_suppression(pred, 0.2, iou_thres, classes, agnostic_nms, max_det&#x3D;max_det) # make conf_thres smaller</span><br><span class="line">  File &quot;C:\Users\Kyriota\Desktop\CISCN\ciscn2023_AdvDetPatch\adv\utils\general.py&quot;, line 697, in non_max_suppression</span><br><span class="line">    x[:, 5:] *&#x3D; x[:, 4:5]  # conf &#x3D; obj_conf * cls_conf</span><br><span class="line"> (Triggered internally at  C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\torch\csrc\autograd\python_anomaly_mode.cpp:104.)</span><br><span class="line">  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass</span><br><span class="line">[*]Please remove the object!</span><br></pre></td></tr></table></figure>
-
 <p>在这份报错中，我们关注的是<code>adv\utils\general.py</code>的报错</p>
 <blockquote>
-<p>x[:, 5:] *= x[:, 4:5]  # conf = obj_conf * cls_conf</p>
+<p>x[:, 5:] <em>= x[:, 4:5]  # conf = obj_conf </em> cls_conf</p>
 </blockquote>
 <p>见到了<code>*=</code>操作符以及<code>[]</code>直接对元素的操作，都表明了这是一个inplace操作，inplace操作是PyTorch为了节省内存，提高运行速度而直接在原始变量上进行修改和计算的一种操作方式，详情可以自行Google：<code>Inplace PyTorch</code>，这种操作方式有一个很大的问题就是无法进行AutoGrad自动求梯度，而此处我们恰好需要进行AutoGrad，所以我们需要将此处的Inplace操作修改为非Inplace的操作，具体需要修改的是<code>adv\utils\general.py</code>的<code>Line 696-739</code>，需要将原本的<code>x</code>进行<code>clone()</code>，在clone出的<code>new_x</code>上进行操作，并避免对<code>new_x</code>、<code>x</code>的任意一方进行inplace操作，<code>new_x[:, 5:] = x[:, 5:] * x[:, 4:5]</code>就顺利地避免了这件事</p>
 <div class='spoiler collapsed'>
@@ -215,7 +210,6 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <p>在修改了<code>adv\utils\general.py</code>中的inplace操作后，我们的exp就可以正常运行啦</p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
@@ -226,11 +220,10 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-
 <p>至此，本题被Mark为Solved</p>
 <p>下面的两张图分别为Patch以及被攻击后的图像的可视化检测结果</p>
-<p><img src="/images/CISCN_2023_patch.png"></p>
-<p><img src="/images/CISCN_2023_Yolo_Patched_Example.png"></p>
+<p><img src="/images/CISCN_2023_patch.png" alt=""></p>
+<p><img src="/images/CISCN_2023_Yolo_Patched_Example.png" alt=""></p>
 <p>可以看见被攻击后的图像中检测到的物体置信度都在0.2以下，已经满足题目要求</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                             </div>
@@ -241,7 +234,8 @@ var _hmt = _hmt || [];
 
     
     
-    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    <a href="/2023/11/22/GazeForensics/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
