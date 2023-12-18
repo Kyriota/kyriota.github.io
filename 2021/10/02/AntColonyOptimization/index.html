@@ -143,24 +143,20 @@ var _hmt = _hmt || [];
                                 
 
                                         <p>蚁群优化算法，最直观的一个示例用途是解决TPS（TravelingSealsmanProblem）问题，快速寻找一个可观的解，但需要你调的一手好参</p>
-<p><img src="/images/ACO_cover.gif" /></p>
+<p><img src="/images/ACO_cover.gif" alt=""></p>
 <span id="more"></span>
-<h1 id="ant-colony-optimization">Ant Colony Optimization</h1>
-<blockquote>
-<p>蚁群，退火，遗传，三大知名优化算法</p>
+<h1 id="Ant-Colony-Optimization"><a href="#Ant-Colony-Optimization" class="headerlink" title="Ant Colony Optimization"></a>Ant Colony Optimization</h1><blockquote>
+<p> 蚁群，退火，遗传，三大知名优化算法</p>
 </blockquote>
 <p>蚁群优化算法，启发在于蚂蚁觅食的行为，即一段时间后蚂蚁能够找到最短的路径到达食物的位置；核心在于对信息素的抽象，蚁群算法之所以能够快速优化，得益于算法已有的成果积累；一句话说明白这个算法，那就是在当前解的基础上去寻找更优解</p>
 <p>本文记录一下写这个算法的unity可视化实现过程，但是我还是建议您自己写一遍👼，体验一下令人非常不愉快的调参体验💢；如果你决定自己写一遍，可以在看了<strong>Getting Start</strong>理解算法原理后直接开干，卡住了再来参考一下后面的具体实现方法</p>
 <p>之后应该会先去学一些shader相关的内容，以免在很多之后想做的工程中受限</p>
-<h2 id="getting-start">Getting Start</h2>
-<h3 id="tps">TPS</h3>
-<p>旅行商人问题，一句话概括就是</p>
+<h2 id="Getting-Start"><a href="#Getting-Start" class="headerlink" title="Getting Start"></a>Getting Start</h2><h3 id="TPS"><a href="#TPS" class="headerlink" title="TPS"></a>TPS</h3><p>旅行商人问题，一句话概括就是</p>
 <blockquote>
-<p>找到一条长度最短的线串联起一些固定的点</p>
+<p> 找到一条长度最短的线串联起一些固定的点</p>
 </blockquote>
 <p>假设有n个点，那么将有<code>(n-1)!/2</code>种可能性，如果遍历所有结果，n稍微一大即刻计算不可行，蚁群优化算法的作用就是在短时间内找到一个可观的解，虽然这个解不一定会是最优解，但相对于算法消耗的算力与时间来说性价比高</p>
-<h3 id="process-outline">Process Outline</h3>
-<p>在用蚁群算法解决TPS问题时，有两个可以提高效率与结果质量的关键，这两个点不易被注意，所以放在开头就说</p>
+<h3 id="Process-Outline"><a href="#Process-Outline" class="headerlink" title="Process Outline"></a>Process Outline</h3><p>在用蚁群算法解决TPS问题时，有两个可以提高效率与结果质量的关键，这两个点不易被注意，所以放在开头就说</p>
 <ul>
 <li>一、将蚂蚁按组统计：不要在一只蚂蚁结束搜索后立即更新数据，而需要等待一定数量的蚂蚁均完成后再更新</li>
 <li>二、随机选取每只蚂蚁的起点：多数时候，蚂蚁多绕的路程均来自于蚂蚁在走到最后一个点后返回起点的那一条线段，如果设定每只蚂蚁的起点不变，效率会更低，多次迭代后的结果也还是会产生交叉路线（which is obviously not the best solution）</li>
@@ -174,51 +170,50 @@ var _hmt = _hmt || [];
 </ul>
 <p>一组蚂蚁跑完后更新信息素矩阵</p>
 <ul>
-<li>对信息素矩阵乘以一个系数使得已有的信息素浓度降低
-<ul>
+<li>对信息素矩阵乘以一个系数使得已有的信息素浓度降低<ul>
 <li>根据当前组蚂蚁跑出来的路径距离长度，当前组中路径最短的蚂蚁留下的信息素最多，而路径长的蚂蚁信息素少</li>
-</ul></li>
 </ul>
-<h2 id="process">Process</h2>
-<p>由于算法的计算过程比较零碎，就不拿出来说了，在最后会直接放源码，这里主要解释一些参数</p>
-<h3 id="misc">Misc</h3>
-<p>点之间距离的表格是对称的</p>
+</li>
+</ul>
+<h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><p>由于算法的计算过程比较零碎，就不拿出来说了，在最后会直接放源码，这里主要解释一些参数</p>
+<h3 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h3><p>点之间距离的表格是对称的</p>
 <p><img src="/images/ACO_disGraph.png" style="zoom:50%;" /></p>
 <p>为了只读写一个数据，只取表格的一半就够了，然后写一个函数，输入两个点的index，返回对应的表格中路径的index</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">int</span> <span class="title">GetPathIndex</span>(<span class="params"><span class="built_in">int</span> cur1, <span class="built_in">int</span> cur2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (cur1 &gt; cur2)&#123;</span><br><span class="line">        <span class="built_in">int</span> tmp = cur1;</span><br><span class="line">        cur1 = cur2;</span><br><span class="line">        cur2 = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">1</span>; i &lt;= cur1; i++) index += numPoint - i;</span><br><span class="line">    index += cur2 - cur1 - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="parameters">Parameters</h3>
-<p>首先需要介绍一下算法涉及的几个重要参数</p>
-<h4 id="ant">Ant</h4>
-<p><code>numInGroup</code>规定了一个轮次中的蚂蚁数量，一轮中的蚂蚁越少迭代频率越高，蚂蚁越多则在更短路径上留下信息素的可能越大</p>
+<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><p>首先需要介绍一下算法涉及的几个重要参数</p>
+<h4 id="Ant"><a href="#Ant" class="headerlink" title="Ant"></a>Ant</h4><p><code>numInGroup</code>规定了一个轮次中的蚂蚁数量，一轮中的蚂蚁越少迭代频率越高，蚂蚁越多则在更短路径上留下信息素的可能越大</p>
 <blockquote>
 <p>Recommended Value：5~25</p>
 </blockquote>
-<h4 id="pheromone">Pheromone</h4>
-<p>信息素的必要参数有：<strong>最小值，初始值，增量，衰减值</strong>，但我为了防止浓度过高也弄了个最大值</p>
+<h4 id="Pheromone"><a href="#Pheromone" class="headerlink" title="Pheromone"></a>Pheromone</h4><p>信息素的必要参数有：<strong>最小值，初始值，增量，衰减值</strong>，但我为了防止浓度过高也弄了个最大值</p>
 <ul>
 <li><p><code>deltaPhe</code>规定了信息素在迭代时的增量</p>
 <blockquote>
 <p>Recommended Value：10</p>
-</blockquote></li>
+</blockquote>
+</li>
 <li><p><code>pheMaxTimes</code>调整了信息素最大值，由于我的最大值还决定了初始值以及后面的一些对算法的tweak，所以我给出的推荐值会比较大，以制造出不同路径的差异性，从而更快地收敛到可观的解</p>
 <blockquote>
 <p>Recommended Value：25~50</p>
-</blockquote></li>
+</blockquote>
+</li>
 <li><p><code>pheDrop</code>即每次寻路后衰减的百分比</p>
-<p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pheromone[i] *= pheDrop;</span><br><span class="line"><span class="keyword">if</span> (pheromone[i] &lt; pheMin) pheromone[i] = pheMin;</span><br></pre></td></tr></table></figure></p>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pheromone[i] *= pheDrop;</span><br><span class="line"><span class="keyword">if</span> (pheromone[i] &lt; pheMin) pheromone[i] = pheMin;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>Recommended Value：0.7</p>
-</blockquote></li>
+</blockquote>
+</li>
 <li><p>其他几个参数为了省事就通过自己估计的公式计算了嗯</p>
-<p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// calculate pheromone parameters</span></span><br><span class="line">pheMax = deltaPhe * pheMaxTimes * numInGroup;</span><br><span class="line">pheInit = pheMax / <span class="number">5</span>;</span><br><span class="line">pheMin = pheInit * Mathf.Pow(pheDrop, <span class="number">5</span>);</span><br></pre></td></tr></table></figure></p></li>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// calculate pheromone parameters</span></span><br><span class="line">pheMax = deltaPhe * pheMaxTimes * numInGroup;</span><br><span class="line">pheInit = pheMax / <span class="number">5</span>;</span><br><span class="line">pheMin = pheInit * Mathf.Pow(pheDrop, <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+</li>
 <li><p><code>emphasizeBest</code>因为在一轮迭代中可能存在没有蚂蚁按照当前最优解行进的情况，从而导致目前已发现的最优解路径上的信息素浓度降低，故需要在每轮迭代中都假设有一定数量的蚂蚁经过了最优路线，此参数就是用于规定这一具体数量</p>
-<p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pheromone[i] += deltaPhe * emphasizeBest;</span><br></pre></td></tr></table></figure></p>
+  <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pheromone[i] += deltaPhe * emphasizeBest;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>Recommended Value：15</p>
-</blockquote></li>
+</blockquote>
+</li>
 </ul>
-<h4 id="weight">Weight</h4>
-<p>蚁群优化算法的核心就在于调整每条路径的概率，而概率由下面的公式决定</p>
+<h4 id="Weight"><a href="#Weight" class="headerlink" title="Weight"></a>Weight</h4><p>蚁群优化算法的核心就在于调整每条路径的概率，而概率由下面的公式决定</p>
 <p><img src="/images/ACO_formula.png" alt="ACO_formula" style="zoom: 50%;" /></p>
 <p>其中，<code>τ</code>=信息素浓度，<code>η</code>=1/距离，<code>α</code>与<code>β</code>就是俩权重的参数</p>
 <p><code>phePow</code>，即<code>α</code></p>
@@ -229,25 +224,20 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>Recommended Value：6</p>
 </blockquote>
-<h2 id="improvement">Improvement</h2>
-<h3 id="crossing">Crossing</h3>
-<p>最开始说过：交叉的路线明显不是最优解</p>
-<p><img src="/images/ACO_crossing.png" /></p>
+<h2 id="Improvement"><a href="#Improvement" class="headerlink" title="Improvement"></a>Improvement</h2><h3 id="Crossing"><a href="#Crossing" class="headerlink" title="Crossing"></a>Crossing</h3><p>最开始说过：交叉的路线明显不是最优解</p>
+<p><img src="/images/ACO_crossing.png" alt=""></p>
 <p>但通常在最开始的时候都会出现交叉路线，而且随着点的数目增加，交叉路线被消除的概率逐步减小。所以我每次在看到最优解的图中一直有一个交叉线半天不动时就会非常难受，所以我们需要考虑如何让蚂蚁自动规避交叉</p>
 <ul>
 <li>在寻路时规避交叉：降低选择到 会与已选择的路径交叉的 点的概率</li>
 <li>在强调最优解时规避交叉：不强调交叉路线的最优解，甚至反手将交叉的路线的信息素浓度降低，并提升不交叉线路的信息素浓度来引导</li>
 </ul>
 <p>应用以上两条，可以使路径快速迭代至一个没有交叉的状态</p>
-<h3 id="small-angle">Small Angle</h3>
-<p>路线中出现极小的角度也是非常不理想的一件事</p>
+<h3 id="Small-Angle"><a href="#Small-Angle" class="headerlink" title="Small Angle"></a>Small Angle</h3><p>路线中出现极小的角度也是非常不理想的一件事</p>
 <p><img src="/images/ACO_smallAngle.png" alt="ACO_smallAngle" style="zoom:67%;" /></p>
 <p>说实话目前没有什么很好的解决方案，目前我做的也仅仅是不去强化这个路径之类的，但不能快速处理掉这种情形</p>
-<h3 id="annealing">Annealing</h3>
-<p>调参时会发现许多参数需要动态调整，如初期应增加信息素浓度的权重，而后期却需要信息素与距离的平衡下进行优化，否则就容易自闭收敛，停滞不前；再比如初期应使信息素衰减速率较大，以促进收敛，而后期却需要额外的信息素来减少自闭的概率</p>
+<h3 id="Annealing"><a href="#Annealing" class="headerlink" title="Annealing"></a>Annealing</h3><p>调参时会发现许多参数需要动态调整，如初期应增加信息素浓度的权重，而后期却需要信息素与距离的平衡下进行优化，否则就容易自闭收敛，停滞不前；再比如初期应使信息素衰减速率较大，以促进收敛，而后期却需要额外的信息素来减少自闭的概率</p>
 <p>这些需求与另一优化算法：<strong>模拟退火算法</strong> 相呼应，在此我没有进行这已实现，但若将这两个算法相结合，则肯定能够使得效率与结果质量都得到提升</p>
-<h2 id="source-code">Source Code</h2>
-<div class='spoiler collapsed'>
+<h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><div class='spoiler collapsed'>
     <div class='spoiler-title'>
         Main
     </div>
@@ -337,7 +327,7 @@ var _hmt = _hmt || [];
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#ant-colony-optimization"><span class="toc-article-text">Ant Colony Optimization</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#getting-start"><span class="toc-article-text">Getting Start</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#tps"><span class="toc-article-text">TPS</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#process-outline"><span class="toc-article-text">Process Outline</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#process"><span class="toc-article-text">Process</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#misc"><span class="toc-article-text">Misc</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#parameters"><span class="toc-article-text">Parameters</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#ant"><span class="toc-article-text">Ant</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#pheromone"><span class="toc-article-text">Pheromone</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#weight"><span class="toc-article-text">Weight</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#improvement"><span class="toc-article-text">Improvement</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#crossing"><span class="toc-article-text">Crossing</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#small-angle"><span class="toc-article-text">Small Angle</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#annealing"><span class="toc-article-text">Annealing</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#source-code"><span class="toc-article-text">Source Code</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Ant-Colony-Optimization"><span class="toc-article-text">Ant Colony Optimization</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Getting-Start"><span class="toc-article-text">Getting Start</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#TPS"><span class="toc-article-text">TPS</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Process-Outline"><span class="toc-article-text">Process Outline</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Process"><span class="toc-article-text">Process</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Misc"><span class="toc-article-text">Misc</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Parameters"><span class="toc-article-text">Parameters</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Ant"><span class="toc-article-text">Ant</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Pheromone"><span class="toc-article-text">Pheromone</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Weight"><span class="toc-article-text">Weight</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Improvement"><span class="toc-article-text">Improvement</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Crossing"><span class="toc-article-text">Crossing</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Small-Angle"><span class="toc-article-text">Small Angle</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Annealing"><span class="toc-article-text">Annealing</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Source-Code"><span class="toc-article-text">Source Code</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>

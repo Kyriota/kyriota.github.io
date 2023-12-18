@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Meme</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        .light {
+            background: #666;
+            color: #fff;
+        }
+
+        .content .tagcloud {
+            display: inline-block;
+            margin: 20px;
+        }
+
+        ul {
+            display: inline-block;
+        }
+
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <!-- custom style -->
+    <style>
+        .tagcloud {
+            font-size: 16px;
+        }
+
+        .tagcloud--item {
+            padding: 2px 4px;
+            background-color: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .tagcloud--item:hover {
+            background-color: rgba(0, 0, 0, .1);
+            border: 1px solid #333;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            opacity: 1 !important;
+            z-index: 100 !important;
+        }
+
+        .light .tagcloud--item {
+            color: #fff;
+        }
+
+        .light .tagcloud--item:hover {
+            background-color: rgba(255, 255, 255, .1);
+            border: 1px solid #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Ingredients that compose Kyriota</h1>
+    <center>
+        <a href="#" onclick="pause()">Pause Auto Rotate</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="#" onclick="resume()">Resume Auto Rotate</a>
+    </center>
+    <font size="1px"><center> - Modified From <a href="https://github.com/cong-min/TagCloud">TagCloud</a> - </center></font>
+    <div class="content">
+        <!-- content -->
+    </div>
+    <script type="text/javascript" src="TagCloud.min.js"></script>
+    <script type="text/javascript" src="myTag.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script>
+        const randomColor = () => `hsl(${Math.random() * 360}, 100%, 70%)`;
+        var tc = TagCloud(
+            '.content',
+            getTag(),
+        );
+        console.log(tc);
+    </script>
+    <script>
+        // pause and resume tagcloud animation
+        function pause() {
+            tc.pause();
+        }
+        function resume() {
+            tc.resume();
+        }
+    </script>
+</body>
+
+</html>
