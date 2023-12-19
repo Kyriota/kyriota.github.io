@@ -21,252 +21,177 @@ function getTag() {
         //     function () { $(this).click(e => window.open('https://www.google.com')) }
         // ]
 
-        '<div> \
-            <img src=\'imgs/kafu.jpg\'/> \
-            <center> \
-                <a href="https://ja.wikipedia.org/wiki/%E5%8F%AF%E4%B8%8D(KAFU)"> \
-                    KAFU / 可不 \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'KAFU / 可不',
+            'imgs/kafu.jpg',
+            'https://ja.wikipedia.org/wiki/%E5%8F%AF%E4%B8%8D(KAFU)'
+        ),
 
-        '<div> \
-            <img src=\'imgs/cocoa.jpg\'/> \
-            <center> \
-                <a href="https://store.steampowered.com/app/400910/RabiRibi/"> \
-                    Rabi-Ribi \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Rabi-Ribi',
+            'imgs/cocoa.jpg',
+            'https://store.steampowered.com/app/400910/RabiRibi/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/tf2.webp\'/> \
-            <center> \
-                <a href="https://store.steampowered.com/app/440/Team_Fortress_2/"> \
-                    TeamFortress 2 \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'TeamFortress 2',
+            'imgs/tf2.webp',
+            'https://store.steampowered.com/app/440/Team_Fortress_2/'
+        ),
 
-        '<div> \
-            <img src=\'../../img/ApertureScienceLogo.png\'/> \
-            <center> \
-                <a href="https://store.steampowered.com/app/620/Portal_2/"> \
-                    Portal \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Portal',
+            '../../img/ApertureScienceLogo.png',
+            'https://store.steampowered.com/app/620/Portal_2/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/PsychoPass.jpg\'/> \
-            <center> \
-                <a href="https://en.wikipedia.org/wiki/Psycho-Pass"> \
-                    Psycho-Pass \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Psycho-Pass',
+            'imgs/PsychoPass.jpg',
+            'https://en.wikipedia.org/wiki/Psycho-Pass'
+        ),
 
-        '<div> \
-            <img src=\'imgs/hl2.jpg\'/> \
-            <center> \
-                <a href="https://store.steampowered.com/app/220/HalfLife_2/"> \
-                    Half-Life \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Half-Life',
+            'imgs/hl2.jpg',
+            'https://store.steampowered.com/app/220/HalfLife_2/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/overlord.jpg\'/> \
-            <center> \
-                <a href="https://en.wikipedia.org/wiki/Overlord_(novel_series)"> \
-                    Overlord \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Overlord',
+            'imgs/overlord.jpg',
+            'https://en.wikipedia.org/wiki/Overlord_(novel_series)'
+        ),
 
-        '<div> \
-            <img src=\'imgs/jojo.jpg\'/> \
-            <center> \
-                JOJO \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'JoJo',
+            'imgs/jojo.jpg',
+        ),
 
-        '<div> \
-            <img src=\'imgs/luckyStar.jpg\'/> \
-            <center> \
-                <a href="https://en.wikipedia.org/wiki/Lucky_Star_(manga)"> \
-                    Lucky Star \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Lucky Star',
+            'imgs/luckyStar.jpg',
+            'https://en.wikipedia.org/wiki/Lucky_Star_(manga)'
+        ),
 
-        '<div> \
-            <img src=\'imgs/mlp.webp\'/> \
-            <center> \
-                My Little Pony \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'My Little Pony',
+            'imgs/mlp.webp',
+        ),
 
-        '<div> \
-            <img src=\'imgs/tanya.jpg\'/> \
-            <center> \
-                <a href="https://ja.wikipedia.org/wiki/%E5%B9%BC%E5%A5%B3%E6%88%A6%E8%A8%98"> \
-                    Tanya / 幼女戦記 \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Tanya / 幼女戦記',
+            'imgs/tanya.jpg',
+            'https://ja.wikipedia.org/wiki/%E5%B9%BC%E5%A5%B3%E6%88%A6%E8%A8%98'
+        ),
 
-        '<div> \
-            <img src=\'imgs/mahjong.jpg\'/> \
-            <center> \
-                <a href="https://en.wikipedia.org/wiki/Japanese_mahjong"> \
-                    Mahjong \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Mahjong',
+            'imgs/mahjong.jpg',
+            'https://en.wikipedia.org/wiki/Japanese_mahjong'
+        ),
 
-        '<div> \
-            <img src=\'imgs/apex.webp\'/> \
-            <center> \
-                <a href="https://www.ea.com/games/apex-legends"> \
-                    Apex \
-                </a> \
-            </center> \
-        </div>',
-        
-        '<div> \
-            <img src=\'imgs/warframe.webp\'/> \
-            <center> \
-                <a href="https://www.warframe.com/"> \
-                    Warframe \
-                </a> \
-            </center> \
-        </div>',
-        
-        '<div> \
-            <img src=\'imgs/terraria.jpg\'/> \
-            <center> \
-                <a href="https://terraria.org/"> \
-                    Terraria \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Apex',
+            'imgs/apex.webp',
+            'https://www.ea.com/games/apex-legends'
+        ),
 
-        '<div> \
-            <img src=\'imgs/kaguya_luna.jpg\'/> \
-            <center> \
-            <a href="https://www.youtube.com/@kaguyaluna"> \
-                Kaguya Luna<br>(輝夜月) \
-            </a> \
-        </center> \
-        </div>',
+        createImgTextTag(
+            'Warframe',
+            'imgs/warframe.webp',
+            'https://www.warframe.com/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/skyrim.jpg\'/> \
-            <center> \
-                <a href="https://elderscrolls.bethesda.net/"> \
-                    The Elder Scrolls \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Terraria',
+            'imgs/terraria.jpg',
+            'https://terraria.org/'
+        ),
 
+        createImgTextTag(
+            'Kaguya Luna<br>(輝夜月)',
+            'imgs/kaguya_luna.jpg',
+            'https://www.youtube.com/@kaguyaluna'
+        ),
 
-        '<div> \
-            <img src=\'imgs/mc.jpg\'/> \
-            <center> \
-                <a href="https://www.minecraft.net/"> \
-                    Minecraft \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'The Elder Scrolls',
+            'imgs/skyrim.jpg',
+            'https://elderscrolls.bethesda.net/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/oneshot.jpg\'/> \
-            <center> \
-                <a href="https://store.steampowered.com/app/420530/OneShot/"> \
-                    OneShot \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Minecraft',
+            'imgs/mc.jpg',
+            'https://www.minecraft.net/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/houshou_marine.webp\'/> \
-            <center> \
-                <a href="https://www.youtube.com/channel/UCCzUftO8KOVkV4wQG1vkUvg"> \
-                    Houshou Marine<br>(宝鐘マリン) \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'OneShot',
+            'imgs/oneshot.jpg',
+            'https://store.steampowered.com/app/420530/OneShot/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/monstercat.jpg\'/> \
-            <center> \
-                <a href="https://www.monstercat.com/"> \
-                    Monstercat \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Houshou Marine<br>(宝鐘マリン)',
+            'imgs/houshou_marine.webp',
+            'https://www.youtube.com/channel/UCCzUftO8KOVkV4wQG1vkUvg'
+        ),
 
-        '<div> \
-            <img src=\'imgs/overwatch.webp\'/> \
-            <center> \
-                Overwatch 1 \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Monstercat',
+            'imgs/monstercat.jpg',
+            'https://www.monstercat.com/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/konosuba.jpg\'/> \
-            <center> \
-                <a href="https://en.wikipedia.org/wiki/KonoSuba"> \
-                    KonoSuba<br>(この素晴らしい世界に祝福を) \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Overwatch 1',
+            'imgs/overwatch.webp',
+        ),
 
-        '<div> \
-            <img src=\'imgs/payday2.jpg\'/> \
-            <center> \
-                <a href="https://www.paydaythegame.com/payday2/"> \
-                    PayDay 2 \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'KonoSuba<br><small>(この素晴らしい世界に祝福を)</small>',
+            'imgs/konosuba.jpg',
+            'https://en.wikipedia.org/wiki/KonoSuba'
+        ),
 
-        '<div> \
-            <img src=\'imgs/celeste.jpg\'/> \
-            <center> \
-                <a href="https://www.celestegame.com/"> \
-                    Celeste \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'PayDay 2',
+            'imgs/payday2.jpg',
+            'https://www.paydaythegame.com/payday2/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/mirrors_edge.jpg\'/> \
-            <center> \
-                <a href="https://store.steampowered.com/app/17410/Mirrors_Edge/"> \
-                    Mirror\'s Edge \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Celeste',
+            'imgs/celeste.jpg',
+            'https://www.celestegame.com/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/mirrors_edge.jpg\'/> \
-            <center> \
-                <a href="https://store.steampowered.com/app/17410/Mirrors_Edge/"> \
-                    Mirror\'s Edge \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Mirror\'s Edge',
+            'imgs/mirrors_edge.jpg',
+            'https://store.steampowered.com/app/17410/Mirrors_Edge/'
+        ),
 
-        '<div> \
-            <img src=\'imgs/dishonored.jpg\'/> \
-            <center> \
-                <a href="https://bethesda.net/en/game/dishonored"> \
-                    Dishonored \
-                </a> \
-            </center> \
-        </div>',
+        createImgTextTag(
+            'Dishonored',
+            'imgs/dishonored.jpg',
+            'https://bethesda.net/en/game/dishonored'
+        ),
 
     ];
+}
+
+function createImgTextTag(text, img, link = null) {
+    let tag = '<div>';
+    if (link) {
+        tag += '<a href="' + link + '">';
+    }
+    tag += '<img src="' + img + '"/>';
+    tag += '<center>' + text + '</center></div>';
+    if (link) {
+        tag += '</a>';
+    }
+    return tag;
 }

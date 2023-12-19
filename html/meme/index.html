@@ -38,6 +38,19 @@
         a:hover {
             text-decoration: underline;
         }
+
+        div {
+            user-select: none;
+        }
+
+        @media only screen and (max-width: 100px) {
+            div {
+                user-select: none;
+                position: fixed;
+                top: 0%;
+                left: 0%;
+            }
+        }
     </style>
     <!-- custom style -->
     <style>
@@ -82,7 +95,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: absolute;
+            position: fixed;
             top: -350px;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -94,19 +107,20 @@
 </head>
 
 <body>
-    <div style="user-select: none;">
+    <div>
         <h1>Ingredients that compose Kyriota</h1>
         <center>
-            <a href="#" onclick="pause()" style="color: #faff68;" draggable="false">Pause Auto Rotate</a>
+            <a href="#" onclick="pause()" style="color: #faff68;" draggable="false">Pause</a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" onclick="resume()" style="color: #faff68;" draggable="false">Resume Auto Rotate</a>
+            <a href="#" onclick="resume()" style="color: #faff68;" draggable="false">Resume</a>
         </center>
-        <font size="1px">
-            <center> - Modified From <a href="https://github.com/cong-min/TagCloud" style="color: #faff68;" draggable="false">TagCloud</a> - </center>
-        </font>
 
         <div class="circle">
         </div>
+    </div>
+
+    <div style="font-size: 10px; position: fixed; bottom: 5%; left: 50%; width: 640px; margin: 0% -320px;">
+        - Modified From <a href="https://github.com/cong-min/TagCloud" style="color: #faff68;" draggable="false">TagCloud</a> -
     </div>
 
     <div class="content">
