@@ -10,6 +10,9 @@
         body {
             font-family: sans-serif;
             text-align: center;
+            background: #23252F;
+            color: #fff;
+            overflow: hidden;
         }
 
         .light {
@@ -20,6 +23,7 @@
         .content .tagcloud {
             display: inline-block;
             margin: 20px;
+            z-index: -2;
         }
 
         ul {
@@ -27,7 +31,7 @@
         }
 
         a {
-            color: #0366d6;
+            color: #52b1ff;
             text-decoration: none;
         }
 
@@ -49,13 +53,13 @@
         }
 
         .tagcloud--item:hover {
-            background-color: rgba(0, 0, 0, .1);
-            border: 1px solid #333;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #ffffff;
             -webkit-border-radius: 2px;
             -moz-border-radius: 2px;
             border-radius: 2px;
-            opacity: 1 !important;
-            z-index: 100 !important;
+            /* opacity: 1 !important; */
+            /* z-index: 100 !important; */
         }
 
         .light .tagcloud--item {
@@ -66,25 +70,53 @@
             background-color: rgba(255, 255, 255, .1);
             border: 1px solid #fff;
         }
+
+        .circle {
+            width: 1000px;
+            height: 1000px;
+            /* background-color: #0042acb6; */
+            background-image: linear-gradient(to bottom, #0042ac 75%, #00000000);
+            /* Choose your desired background color */
+            border-radius: 50%;
+            /* Make sure border-radius is 50% to create a circle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: -350px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* This is to make the circle center aligned to the center of the screen */
+            z-index: -1;
+            /* This is to make sure the circle stays behind the text */
+        }
     </style>
 </head>
 
 <body>
-    <h1>Ingredients that compose Kyriota</h1>
-    <center>
-        <a href="#" onclick="pause()">Pause Auto Rotate</a>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="#" onclick="resume()">Resume Auto Rotate</a>
-    </center>
-    <font size="1px"><center> - Modified From <a href="https://github.com/cong-min/TagCloud">TagCloud</a> - </center></font>
+    <div style="user-select: none;">
+        <h1>Ingredients that compose Kyriota</h1>
+        <center>
+            <a href="#" onclick="pause()" style="color: #faff68;" draggable="false">Pause Auto Rotate</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" onclick="resume()" style="color: #faff68;" draggable="false">Resume Auto Rotate</a>
+        </center>
+        <font size="1px">
+            <center> - Modified From <a href="https://github.com/cong-min/TagCloud" style="color: #faff68;" draggable="false">TagCloud</a> - </center>
+        </font>
+
+        <div class="circle">
+        </div>
+    </div>
+
     <div class="content">
-        <!-- content -->
     </div>
     <script type="text/javascript" src="TagCloud.min.js"></script>
     <script type="text/javascript" src="myTag.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script>
-        const randomColor = () => `hsl(${Math.random() * 360}, 100%, 70%)`;
+        // const randomColor = () => `hsl(${Math.random() * 360}, 100%, 70%)`;
         var tc = TagCloud(
             '.content',
             getTag(),

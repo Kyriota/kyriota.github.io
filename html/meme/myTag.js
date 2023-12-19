@@ -25,7 +25,7 @@ function getTag() {
             <img src=\'imgs/kafu.jpg\'/> \
             <center> \
                 <a href="https://ja.wikipedia.org/wiki/%E5%8F%AF%E4%B8%8D(KAFU)"> \
-                    KAFU/可不 \
+                    KAFU / 可不 \
                 </a> \
             </center> \
         </div>',
@@ -40,16 +40,16 @@ function getTag() {
         </div>',
 
         '<div> \
-            <img src=\'imgs/tf2.png\'/> \
+            <img src=\'imgs/tf2.webp\'/> \
             <center> \
                 <a href="https://store.steampowered.com/app/440/Team_Fortress_2/"> \
-                    TeamFortress2 \
+                    TeamFortress 2 \
                 </a> \
             </center> \
         </div>',
 
         '<div> \
-            <img src=\'imgs/portal.png\'/> \
+            <img src=\'../../img/ApertureScienceLogo.png\'/> \
             <center> \
                 <a href="https://store.steampowered.com/app/620/Portal_2/"> \
                     Portal \
@@ -101,7 +101,7 @@ function getTag() {
         </div>',
 
         '<div> \
-            <img src=\'imgs/mlp.png\'/> \
+            <img src=\'imgs/mlp.webp\'/> \
             <center> \
                 My Little Pony \
             </center> \
@@ -155,7 +155,116 @@ function getTag() {
         '<div> \
             <img src=\'imgs/kaguya_luna.jpg\'/> \
             <center> \
-                Kaguya Luna \
+            <a href="https://www.youtube.com/@kaguyaluna"> \
+                Kaguya Luna<br>(輝夜月) \
+            </a> \
+        </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/skyrim.jpg\'/> \
+            <center> \
+                <a href="https://elderscrolls.bethesda.net/"> \
+                    The Elder Scrolls \
+                </a> \
+            </center> \
+        </div>',
+
+
+        '<div> \
+            <img src=\'imgs/mc.jpg\'/> \
+            <center> \
+                <a href="https://www.minecraft.net/"> \
+                    Minecraft \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/oneshot.jpg\'/> \
+            <center> \
+                <a href="https://store.steampowered.com/app/420530/OneShot/"> \
+                    OneShot \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/houshou_marine.webp\'/> \
+            <center> \
+                <a href="https://www.youtube.com/channel/UCCzUftO8KOVkV4wQG1vkUvg"> \
+                    Houshou Marine<br>(宝鐘マリン) \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/monstercat.jpg\'/> \
+            <center> \
+                <a href="https://www.monstercat.com/"> \
+                    Monstercat \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/overwatch.webp\'/> \
+            <center> \
+                Overwatch 1 \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/konosuba.jpg\'/> \
+            <center> \
+                <a href="https://en.wikipedia.org/wiki/KonoSuba"> \
+                    KonoSuba<br>(この素晴らしい世界に祝福を) \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/payday2.jpg\'/> \
+            <center> \
+                <a href="https://www.paydaythegame.com/payday2/"> \
+                    PayDay 2 \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/celeste.jpg\'/> \
+            <center> \
+                <a href="https://www.celestegame.com/"> \
+                    Celeste \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/mirrors_edge.jpg\'/> \
+            <center> \
+                <a href="https://store.steampowered.com/app/17410/Mirrors_Edge/"> \
+                    Mirror\'s Edge \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/mirrors_edge.jpg\'/> \
+            <center> \
+                <a href="https://store.steampowered.com/app/17410/Mirrors_Edge/"> \
+                    Mirror\'s Edge \
+                </a> \
+            </center> \
+        </div>',
+
+        '<div> \
+            <img src=\'imgs/dishonored.jpg\'/> \
+            <center> \
+                <a href="https://bethesda.net/en/game/dishonored"> \
+                    Dishonored \
+                </a> \
             </center> \
         </div>',
 
