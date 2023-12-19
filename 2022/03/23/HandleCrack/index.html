@@ -150,35 +150,27 @@ var _hmt = _hmt || [];
 
                                         <p>虎符签到题handle，连官方wp都叫你直接随便选一个看起来过得去的就行，确实是handle里对于开头的成语基本没啥讲究，但是反正做都做了不如做完做好，于是就又花了些时间跟着3b1b的wordle视频做了个这，主要是<b>信息论</b>的应用和对C++的顺便实操</p>
 <span id="more"></span>
-<h1 id="handlecrack信息论">HandleCrack[信息论]</h1>
-<p>为了文章长度尽量短点（懒），以下是我略过但读者应该知道的内容：</p>
+<h1 id="HandleCrack-信息论"><a href="#HandleCrack-信息论" class="headerlink" title="HandleCrack[信息论]"></a>HandleCrack[信息论]</h1><p>为了文章长度尽量短点（懒），以下是我略过但读者应该知道的内容：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://handle.antfu.me/">handle</a>和wordle的规则</li>
 <li>E = ∑ -p_i * log(p_i)</li>
 </ul>
 <p>（直接去看一遍<a href="www.bilibili.com/video/BV1zZ4y1k7Jw">3b1b视频</a>多好，以及另一个<a href="www.bilibili.com/video/BV1A3411p7Xv">3b1b的补充说明</a>）</p>
-<h2 id="qa">Q&amp;A</h2>
-<p>&gt;&gt; 问：原题不是py吗怎么要扯cpp？</p>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p>>> 问：原题不是py吗怎么要扯cpp？</p>
 <p>答：不会优化py所以我的cpp跑起来应该比py快（?），而且cpp的位操作和手动内存管理我看着要放心一点（执念（不要学我（呜</p>
-<p>&gt;&gt; 问：不是随便选一个当开头词就可以了吗，为什么还要费这么大力气整这些？</p>
+<p>>> 问：不是随便选一个当开头词就可以了吗，为什么还要费这么大力气整这些？</p>
 <p>答：一，看了wordle的视频自己也想实操一下；二，反正比赛都结束了不如做完善点；三，不求出来我会睡不着觉的。总之就是虽然确实根据最后的结果看来，只要选一个比较正常的成语，或者多试几个开头词，就能达到很好的效果了，但是我就是想做一下，因为挺有趣的</p>
-<h2 id="题面">题面</h2>
-<p>Handle在4轮内找到答案，重复512次，每次的选词由<code>random.choice()</code>产生</p>
+<h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><p>Handle在4轮内找到答案，重复512次，每次的选词由<code>random.choice()</code>产生</p>
 <p>然后就是他这个交互有点难受，由于你输入词语后它返回的拼音对错信息是以颜色标注的，虽然听群里说字节流下颜色可以比较方便的获取，但是反正后面我复现的时候是没有管这个的</p>
 <p><a target="_blank" rel="noopener" href="https://kyriota.com/html/DLfiles/%E8%99%8E%E7%AC%A6handle.zip">下载链接(github源)</a></p>
-<h2 id="handle杂谈">Handle杂谈</h2>
-<p>wordle是固定5个字母，每个字母框有三种情况，所以理论上总共的可能性是3^5种</p>
+<h2 id="Handle杂谈"><a href="#Handle杂谈" class="headerlink" title="Handle杂谈"></a>Handle杂谈</h2><p>wordle是固定5个字母，每个字母框有三种情况，所以理论上总共的可能性是3^5种</p>
 <p>handle是固定4个拼音，每个字的拼音分为声母，韵母，声调，所以可以看作是12个字母的wordle，也是每个拼音框有三种情况，理论可能性有3^12种</p>
-<h3 id="特殊韵母">特殊韵母</h3>
-<p>但是中文中包含特殊韵母，比如 en，er，ei 等，一个韵母就是一个注音的字。那比如这一轮猜了读音为 en 的一个字，则不管才没猜对，都损失了一个位置上声母的信息，特别是 en，ei 这些可以和声母搭配，又可以自己来的特殊韵母，对于 er 而言，由于 er 不能和声母组合，会更特殊一点（顺便一提，py的拼音库得出的拼音不知为何对“了”这个字也没有音调，所以有些时候不止会在声母上为空，声调也有可能为空）</p>
+<h3 id="特殊韵母"><a href="#特殊韵母" class="headerlink" title="特殊韵母"></a>特殊韵母</h3><p>但是中文中包含特殊韵母，比如 en，er，ei 等，一个韵母就是一个注音的字。那比如这一轮猜了读音为 en 的一个字，则不管才没猜对，都损失了一个位置上声母的信息，特别是 en，ei 这些可以和声母搭配，又可以自己来的特殊韵母，对于 er 而言，由于 er 不能和声母组合，会更特殊一点（顺便一提，py的拼音库得出的拼音不知为何对“了”这个字也没有音调，所以有些时候不止会在声母上为空，声调也有可能为空）</p>
 <p>但是我已经不想思考了，所以我就把 er 和 en，ei 之类的同等处理的，也许把 er 再单独分出来又会稍微不一样一捏捏，但是我真的已经停止思考了</p>
-<h3 id="词库">词库</h3>
-<p>其实我当时以为他题目没给代码，查了一下常用成语貌似也就几千个，我就去百度汉语扒了一个百度的成语词库，那也才4000个词啊，好家伙结果他给的那个列表有将近两万六千个词（？），看了一下是从<a target="_blank" rel="noopener" href="https://github.com/antfu/handle">这里面</a>搬的，里面甚至有<b>“可口可乐”</b>之类的特别奇怪的东西，哈哈 (^ ^)</p>
+<h3 id="词库"><a href="#词库" class="headerlink" title="词库"></a>词库</h3><p>其实我当时以为他题目没给代码，查了一下常用成语貌似也就几千个，我就去百度汉语扒了一个百度的成语词库，那也才4000个词啊，好家伙结果他给的那个列表有将近两万六千个词（？），看了一下是从<a target="_blank" rel="noopener" href="https://github.com/antfu/handle">这里面</a>搬的，里面甚至有<b>“可口可乐”</b>之类的特别奇怪的东西，哈哈 (^ ^)</p>
 <p><img src="/images/memes/TMDbloodpresure.jpg" height="100" width="100" /></p>
-<h2 id="exp">exp</h2>
-<p>这个exp里不包含对上面提到的特殊韵母的特殊处理，同时直接用的函数return的信息来反馈的，而<strong>不是题目环境下的颜色信息</strong></p>
-<h3 id="吐槽">吐槽</h3>
-<p>exp的思路很简单，的确只需要比较随便的选择开局的词语就可以了，甚至第一个词“一丁不识”在最后算出来的信息熵排名里面都很靠前，只要不是“可口可乐”这种奇怪的词，就可以在运气的加持下直接出flag，说实话这个flag是必须要运气的，因为就算是我最后算出来的信息熵最高的词他也不能保证4轮出结果，我得到的平均轮次大概是2.62轮（和题目条件一样随机抽取测试512次），而被我目击到的最大轮次是6轮，虽然我写的这个脚本优化比较烂，但是还是不影响我说：这个题他应该看你到最后的平均轮次是否合格，而不是看最大轮次 = =</p>
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><p>这个exp里不包含对上面提到的特殊韵母的特殊处理，同时直接用的函数return的信息来反馈的，而<strong>不是题目环境下的颜色信息</strong></p>
+<h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>exp的思路很简单，的确只需要比较随便的选择开局的词语就可以了，甚至第一个词“一丁不识”在最后算出来的信息熵排名里面都很靠前，只要不是“可口可乐”这种奇怪的词，就可以在运气的加持下直接出flag，说实话这个flag是必须要运气的，因为就算是我最后算出来的信息熵最高的词他也不能保证4轮出结果，我得到的平均轮次大概是2.62轮（和题目条件一样随机抽取测试512次），而被我目击到的最大轮次是6轮，虽然我写的这个脚本优化比较烂，但是还是不影响我说：这个题他应该看你到最后的平均轮次是否合格，而不是看最大轮次 = =</p>
 <p>在的<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU5Njg1NzMyNw==&amp;mid=2247484500&amp;idx=1&amp;sn=35e43e11b29119544045fa7dfd56c10a&amp;chksm=fe5d1cd4c92a95c208c93921a0b8f328cb92daf0630bc8a5ed7eaaafc30500fc44768beb0b6f&amp;mpshare=1&amp;scene=23&amp;srcid=0324Ct2tOV94yqxYEa60Rbey&amp;sharer_sharetime=1648094683578&amp;sharer_shareid=c69a4128c20e54a8749107dca4adf514#rd">官方wp</a>里对他自己的exp表示：</p>
 <blockquote>
 <p>这个脚本也不是必成功，但是体感成功率非常高，平均猜词次数 2.72，也许换个起始词可以把最大次数压到 3</p>
@@ -187,8 +179,7 @@ var _hmt = _hmt || [];
 <p>在我抽的512抽里面大概是这么个分布</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">猜中轮次 -| 一发入魂 |    2    |    3    |    4    |    5    |    6    |</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">发生次数 -|    1    |   230   |   247   |   32    |    1    |    1    |</span><br></pre></td></tr></table></figure>
 <p><img src="/images/handle_bar.png"/></p>
-<h3 id="source">Source</h3>
-<p>挺无脑的，py水平有限，有些地方不太优雅</p>
+<h3 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h3><p>挺无脑的，py水平有限，有些地方不太优雅</p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         exp
@@ -198,11 +189,9 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-<h2 id="最优开头">最优开头</h2>
-<p>我其实之前想过能不能直接构造一个最优开头，但是没什么思路，就决定从他给出的2.6w个词里面找一个最优开头</p>
+<h2 id="最优开头"><a href="#最优开头" class="headerlink" title="最优开头"></a>最优开头</h2><p>我其实之前想过能不能直接构造一个最优开头，但是没什么思路，就决定从他给出的2.6w个词里面找一个最优开头</p>
 <p>由于文章一开头说的优化问题，所以我就<code>py2cpp()</code>了</p>
-<h3 id="准备工作">准备工作</h3>
-<p>首先我把所有词的拼音都通过py的拼音库导出到了硬盘，无韵母无声调的地方用“#”进行了占位，然后为了之后不再重复统计一个词另一个词比较得出的pattern，我把所有partern导出，这样之后查表就完事了</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>首先我把所有词的拼音都通过py的拼音库导出到了硬盘，无韵母无声调的地方用“#”进行了占位，然后为了之后不再重复统计一个词另一个词比较得出的pattern，我把所有partern导出，这样之后查表就完事了</p>
 <p>这一块值得注意的应该也就是pattern的<strong>存储格式</strong>了</p>
 <p>因为每一个拼音位有4种情况：确定存在且位置正确，确定存在但位置错误，确定不存在，不确定是否存在（特殊韵母）；而总共4个汉字，每个汉字3个拼音位，由于状态共4种，两位就能表示完（00，01，10，11），总共需要<code>4 * 3 * 2 = 24(bit)</code>，刚好3字节，所以用3个<code>char</code>就可以塞下1个pattern，这部分详见下方折叠代码中的<code>CalPattern()</code></p>
 <div class='spoiler collapsed'>
@@ -214,8 +203,7 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-<h3 id="main">main</h3>
-<p>做好了patterns的准备工作，就可以开始求E了</p>
+<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><p>做好了patterns的准备工作，就可以开始求E了</p>
 <p>对于<code>GetEntropy()</code>总共就三步：</p>
 <ul>
 <li>根据最大E猜词</li>
@@ -235,8 +223,7 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-<h3 id="其他">其他</h3>
-<p>其实我是准备吧handle完整搬到c++上来的，结果代码弄完了发现我不知道怎么让c++支持中文输入（？</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>其实我是准备吧handle完整搬到c++上来的，结果代码弄完了发现我不知道怎么让c++支持中文输入（？</p>
 <p>但是不准备继续日了，放个之前的代码</p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
@@ -255,15 +242,12 @@ var _hmt = _hmt || [];
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">CheckTime</span><span class="params">(<span class="keyword">clock_t</span> &amp;start, <span class="keyword">clock_t</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> delta = <span class="keyword">double</span>(end - start) / CLOCKS_PER_SEC;</span><br><span class="line">    start = end;</span><br><span class="line">    <span class="keyword">return</span> delta;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">clock_t</span> clockStart;</span><br><span class="line">    clockStart = clock();</span><br><span class="line">    <span class="comment">// ... sth.</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;time length: &quot;</span> &lt;&lt; CheckTime(clockStart, clock()) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>windows下g++编译，<code>depth=0</code>跑完<code>16</code>个大约是<code>12s</code>，<code>depth=1</code>跑完<code>4</code>个大约是<code>32s</code>，我大概是花了4~5h跑完所有数据</p>
 <p><del>以及千万不要让测速度的脚本能覆盖结果，像我直接把之前算完的给覆盖了，全部重来</del></p>
-<h3 id="运行结果">运行结果</h3>
-<p>经过排序发现</p>
-<center>
-<b>研经铸史</b>
-</center>
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><p>经过排序发现</p>
+<center><b>研经铸史</b></center>
+
 <p><br></p>
 <p>是handle的最优开头，且在depth=1的情况下E=14.8701，以ΔE=0.03的巨大差值（笑）和第二名拉开距离</p>
-<h2 id="结果统计">结果统计</h2>
-<p>基本全部正常的词在d0的E都在10以上，少数如“可口可乐”，d0E=6.55192，这样的词拉低了整体下限，整体d0E分布如下</p>
+<h2 id="结果统计"><a href="#结果统计" class="headerlink" title="结果统计"></a>结果统计</h2><p>基本全部正常的词在d0的E都在10以上，少数如“可口可乐”，d0E=6.55192，这样的词拉低了整体下限，整体d0E分布如下</p>
 <p><img src="/images/handle_d0.png"/></p>
 <p>对于前d0E排名top100的词进行d1E的计算和排序，分布如下</p>
 <p><img src="/images/handle_d1.png"/></p>
@@ -348,7 +332,7 @@ var _hmt = _hmt || [];
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#handlecrack%E4%BF%A1%E6%81%AF%E8%AE%BA"><span class="toc-article-text">HandleCrack[信息论]</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#qa"><span class="toc-article-text">Q&amp;A</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%A2%98%E9%9D%A2"><span class="toc-article-text">题面</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#handle%E6%9D%82%E8%B0%88"><span class="toc-article-text">Handle杂谈</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%89%B9%E6%AE%8A%E9%9F%B5%E6%AF%8D"><span class="toc-article-text">特殊韵母</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%AF%8D%E5%BA%93"><span class="toc-article-text">词库</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#exp"><span class="toc-article-text">exp</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%90%90%E6%A7%BD"><span class="toc-article-text">吐槽</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#source"><span class="toc-article-text">Source</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9C%80%E4%BC%98%E5%BC%80%E5%A4%B4"><span class="toc-article-text">最优开头</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-article-text">准备工作</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#main"><span class="toc-article-text">main</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-article-text">其他</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-article-text">运行结果</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BB%93%E6%9E%9C%E7%BB%9F%E8%AE%A1"><span class="toc-article-text">结果统计</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#HandleCrack-%E4%BF%A1%E6%81%AF%E8%AE%BA"><span class="toc-article-text">HandleCrack[信息论]</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Q-amp-A"><span class="toc-article-text">Q&amp;A</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%A2%98%E9%9D%A2"><span class="toc-article-text">题面</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Handle%E6%9D%82%E8%B0%88"><span class="toc-article-text">Handle杂谈</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%89%B9%E6%AE%8A%E9%9F%B5%E6%AF%8D"><span class="toc-article-text">特殊韵母</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%AF%8D%E5%BA%93"><span class="toc-article-text">词库</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#exp"><span class="toc-article-text">exp</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%90%90%E6%A7%BD"><span class="toc-article-text">吐槽</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Source"><span class="toc-article-text">Source</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9C%80%E4%BC%98%E5%BC%80%E5%A4%B4"><span class="toc-article-text">最优开头</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-article-text">准备工作</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#main"><span class="toc-article-text">main</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-article-text">其他</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="toc-article-text">运行结果</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BB%93%E6%9E%9C%E7%BB%9F%E8%AE%A1"><span class="toc-article-text">结果统计</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>
