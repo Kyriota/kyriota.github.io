@@ -1,4 +1,18 @@
 function getTag() {
+
+    function createImgTextTag(text, img, link = null) {
+        let tag = '<div>';
+        if (link) {
+            tag += '<a href="' + link + '">';
+        }
+        tag += '<img src="' + img + '"/>';
+        tag += '<center>' + text + '</center></div>';
+        if (link) {
+            tag += '</a>';
+        }
+        return tag;
+    }
+
     return [
 
         // '<div> \
@@ -66,6 +80,7 @@ function getTag() {
         createImgTextTag(
             'JoJo',
             'imgs/jojo.jpg',
+            'https://en.wikipedia.org/wiki/JoJo%27s_Bizarre_Adventure'
         ),
 
         createImgTextTag(
@@ -77,6 +92,7 @@ function getTag() {
         createImgTextTag(
             'My Little Pony',
             'imgs/mlp.webp',
+            'https://en.wikipedia.org/wiki/My_Little_Pony'
         ),
 
         createImgTextTag(
@@ -180,18 +196,17 @@ function getTag() {
             'https://bethesda.net/en/game/dishonored'
         ),
 
-    ];
-}
+        createImgTextTag(
+            'P maru / P丸様',
+            'imgs/pmaru.webp',
+            'https://www.youtube.com/@Pmarusama'
+        ),
 
-function createImgTextTag(text, img, link = null) {
-    let tag = '<div>';
-    if (link) {
-        tag += '<a href="' + link + '">';
-    }
-    tag += '<img src="' + img + '"/>';
-    tag += '<center>' + text + '</center></div>';
-    if (link) {
-        tag += '</a>';
-    }
-    return tag;
+        createImgTextTag(
+            'Oshi no Ko / 推しの子',
+            'imgs/oshinoko.jpg',
+            'https://ja.wikipedia.org/wiki/%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91'
+        ),
+
+    ];
 }
