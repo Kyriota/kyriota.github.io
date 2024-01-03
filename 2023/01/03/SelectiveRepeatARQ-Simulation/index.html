@@ -154,16 +154,13 @@ var _hmt = _hmt || [];
 <p><img src='/images/ARQ_preview.png' style="zoom:40%;" ></p>
 <span id="more"></span>
 <!--toc-->
-<h1 id="selective-repeat-arq-simulation">Selective Repeat ARQ Simulation</h1>
-<p>First of all, you may wanna check the final result of the simulation: <a target="_blank" rel="noopener" href="https://kyriota.com/html/ARQ">Portal to the final result</a></p>
-<h2 id="theory">Theory</h2>
-<p>To understand how selective repeat ARQ algorithm was implemented in my program, I recommend you understand the algorithm itself first, so that the following content can be much easier to understand.</p>
+<h1 id="Selective-Repeat-ARQ-Simulation"><a href="#Selective-Repeat-ARQ-Simulation" class="headerlink" title="Selective Repeat ARQ Simulation"></a>Selective Repeat ARQ Simulation</h1><p>First of all, you may wanna check the final result of the simulation: <a target="_blank" rel="noopener" href="https://kyriota.com/html/ARQ">Portal to the final result</a></p>
+<h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><p>To understand how selective repeat ARQ algorithm was implemented in my program, I recommend you understand the algorithm itself first, so that the following content can be much easier to understand.</p>
 <blockquote>
-<p>I'll show this algorithm in the following example of two host communicating</p>
+<p>I’ll show this algorithm in the following example of two host communicating</p>
 </blockquote>
 <p><code>Host A</code> and <code>Host B</code> are connected with each other, and <code>A</code> has some data that needs to send to <code>B</code></p>
-<h3 id="framing">Framing</h3>
-<ul>
+<h3 id="Framing"><a href="#Framing" class="headerlink" title="Framing"></a>Framing</h3><ul>
 <li>Because the data is too long to be sent at one time (just assume so), <code>A</code> slice the data into several pieces, and give those data sequence numbers in order to tell the proper order to combine the data, in case that the datum are not received in original order</li>
 <li>Because the message could be corrupted when transferring, the message should contain some verification code related to the message content like CRC (Cyclic Redundancy Check)</li>
 <li>Because <code>B</code> only have information in binary, <code>B</code> needs to know where is the start of the message and so does the end. There should be flags wrapping the whole message and the flag never appear in the middle of the message</li>
@@ -171,68 +168,70 @@ var _hmt = _hmt || [];
 <li>Because <code>B</code> maybe not the receiver of the message but only the router to transmit the message, the true receiver information should be contained in the message</li>
 </ul>
 <p>So far, the message should be something like this:</p>
-<center>
-<code>| flag | destination | source | sequence | data | CRC | flag |</code>
-</center>
+<center><code>| flag | destination | source | sequence | data | CRC | flag |</code></center>
+
 <p>After such process, the message should be called as <em>frame</em>, which is a unit of communication in data link layer.</p>
 <blockquote>
 <p>As for how to make flags only appear in the start and the end of a frame:</p>
-<p>In my case, flag is 01111110 that occupies one byte of the frame. To deal with such type of flag, since there are six successive '1's in the flag, we can append a '0' every time the content of the frame appears five successive '1's. And in the decoding part, when five successive '1's was found, remove the '0' behind them, so makes the flag only appears in the start and the end of a frame</p>
+<p>In my case, flag is 01111110 that occupies one byte of the frame. To deal with such type of flag, since there are six successive ‘1’s in the flag, we can append a ‘0’ every time the content of the frame appears five successive ‘1’s. And in the decoding part, when five successive ‘1’s was found, remove the ‘0’ behind them, so makes the flag only appears in the start and the end of a frame</p>
 </blockquote>
-<h3 id="window-control-frame">Window &amp; Control Frame</h3>
-<p>But the sequence number could increase to infinite if <code>A</code> keeps sending messages, so sequence number should be limited in a specific range (usually in the range of 2^n, which makes best use of all bits).</p>
+<h3 id="Window-amp-Control-Frame"><a href="#Window-amp-Control-Frame" class="headerlink" title="Window &amp; Control Frame"></a>Window &amp; Control Frame</h3><p>But the sequence number could increase to infinite if <code>A</code> keeps sending messages, so sequence number should be limited in a specific range (usually in the range of 2^n, which makes best use of all bits).</p>
 <p>However, when sequence numbers are in a specific range, imagine such situation:</p>
 <ul>
-<li><p><code>A</code> send a frame with sequence <code>X</code> to <code>B</code></p></li>
-<li><p>frame corrupted when transmitting</p></li>
-<li><p><code>B</code> found it corrupted by doing CRC and dropped it</p></li>
-<li><p><code>A</code> keeps sending following frames, and comes with another frame with sequence <code>X</code></p></li>
-<li><p>Under such situation, <code>B</code> could take this frame and think it the frame that <code>B</code> found corrupted</p></li>
+<li><p><code>A</code> send a frame with sequence <code>X</code> to <code>B</code></p>
+</li>
+<li><p>frame corrupted when transmitting</p>
+</li>
+<li><code>B</code> found it corrupted by doing CRC and dropped it</li>
+<li><p><code>A</code> keeps sending following frames, and comes with another frame with sequence <code>X</code></p>
+</li>
+<li><p>Under such situation, <code>B</code> could take this frame and think it the frame that <code>B</code> found corrupted</p>
+</li>
 </ul>
-<p>In order to make the algorithm work properly, control frame and window are introduced. Here's how these things make <code>A</code> stop sending frames when frames are corrupted:</p>
+<p>In order to make the algorithm work properly, control frame and window are introduced. Here’s how these things make <code>A</code> stop sending frames when frames are corrupted:</p>
 <ul>
 <li><p>With window and ACK (Acknowledge character) frame implemented, pretend sequence number takes 3 bits, and windows size is 3. The following text indicates sequence of sender(L) and receiver(R), contents in brackets indicates frames that are in current window:</p>
 <ul>
 <li><p>At the beginning:</p>
-<center>
-<p><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... =&gt; &#123; |?|?|?| &#125;</code></p>
-</center></li>
-<li><p><code>A</code> sends frame 0 and starts a timer for frame 0</p></li>
+<center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => &#123; |?|?|?| &#125;</code></center>
+</li>
+<li><p><code>A</code> sends frame 0 and starts a timer for frame 0</p>
+</li>
 <li><p><code>B</code> received it properly</p>
-<center>
-<p><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... =&gt; &#123; |0|?|?| &#125;</code></p>
-</center></li>
+  <center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => &#123; |0|?|?| &#125;</code></center>
+</li>
 <li><p>Because frame 0 is in the correct order, <code>B</code> transmits frame 0 to upper layer to do further process and removes frame 0 from its buffer (in order to make the process clearer, the frame 0 is still texted in the buffer), at the same time, <code>B</code> shifts its window forward and sends ACK frame 0 to <code>A</code></p>
-<center>
-<p><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... =&gt; |0| &#123; |?|?|?| &#125;</code></p>
-</center></li>
+  <center><code>&#123; |0|1|2| &#125; |3|4|5|6|7|0|1|2|3|... => |0| &#123; |?|?|?| &#125;</code></center>
+</li>
 <li><p><code>A</code> received ACK frame 0, so <code>A</code> removes frame 0 from its buffer, stops timer for frame 0, and shifts the window forward</p>
-<center>
-<p><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... =&gt; |0| &#123; |?|?|?| &#125;</code></p>
-</center></li>
-<li><p><code>A</code> sends frame 1 and starts a timer for frame 1</p></li>
-<li><p>frame 1 corrupted when transmitting</p></li>
-<li><p><code>B</code> received corrupted frame and drops it</p></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |?|?|?| &#125;</code></center>
+</li>
+<li><p><code>A</code> sends frame 1 and starts a timer for frame 1</p>
+</li>
+<li><p>frame 1 corrupted when transmitting</p>
+</li>
+<li><p><code>B</code> received corrupted frame and drops it</p>
+</li>
 <li><p><code>A</code> sent frame 2, frame3, and <code>B</code> received them properly and sent ACK frame 2, 3 to <code>A</code>. But due to the first element in the window is not received, <code>B</code> could not shift the window</p>
-<center>
-<p><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... =&gt; |0| &#123; |?|2|3| &#125;</code></p>
-</center></li>
-<li><p>Also, because the first element in the window didn't receive an ACK frame, <code>A</code> cannot move the window neither. Because <code>A</code> finished sending mission in the window, <code>A</code> stops sending the next frame, which is frame 4, and waits for <code>B</code> to send ACK frame 1</p></li>
-<li><p>Timer for frame 1 found frame 1 overtime, so <code>A</code> sends frame 1 again</p></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |?|2|3| &#125;</code></center>
+</li>
+<li><p>Also, because the first element in the window didn’t receive an ACK frame, <code>A</code> cannot move the window neither. Because <code>A</code> finished sending mission in the window, <code>A</code> stops sending the next frame, which is frame 4, and waits for <code>B</code> to send ACK frame 1</p>
+</li>
+<li><p>Timer for frame 1 found frame 1 overtime, so <code>A</code> sends frame 1 again</p>
+</li>
 <li><p><code>B</code> received it properly</p>
-<center>
-<p><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... =&gt; |0| &#123; |1|2|3| &#125;</code></p>
-</center></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0| &#123; |1|2|3| &#125;</code></center>
+</li>
 <li><p><code>B</code> shifts the window, transmits frame 1, 2, 3 to upper layer, and sends ACK frame 1 to <code>A</code></p>
-<center>
-<p><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... =&gt; |0|1|2|3| &#123; |?|?|?| &#125;</code></p>
-</center></li>
+  <center><code>|0| &#123; |1|2|3| &#125; |4|5|6|7|0|1|2|3|... => |0|1|2|3| &#123; |?|?|?| &#125;</code></center>
+</li>
 <li><p><code>A</code> removes frame 1, 2, 3 from buffer and shifts the window</p>
-<center>
-<p><code>|0|1|2|3| &#123; |4|5|6| &#125; |7|0|1|2|3|... =&gt; |0|1|2|3| &#123; |?|?|?| &#125;</code></p>
-</center></li>
-</ul></li>
-<li><p>Under such implementation, there is nearly no problems for <code>A</code> and <code>B</code> can communicate with each other. But the overtime machinic seems too time consuming if ever time a frame is corrupted <code>A</code> will wait for a certain period. So we can make <code>B</code> send a NAK (Negative Acknowledgment) frame to make <code>A</code> resend faster (if <code>B</code> can recognize the sender and sequence number of the corrupted frame)</p></li>
+  <center><code>|0|1|2|3| &#123; |4|5|6| &#125; |7|0|1|2|3|... => |0|1|2|3| &#123; |?|?|?| &#125;</code></center>
+</li>
+</ul>
+</li>
+<li><p>Under such implementation, there is nearly no problems for <code>A</code> and <code>B</code> can communicate with each other. But the overtime machinic seems too time consuming if ever time a frame is corrupted <code>A</code> will wait for a certain period. So we can make <code>B</code> send a NAK (Negative Acknowledgment) frame to make <code>A</code> resend faster (if <code>B</code> can recognize the sender and sequence number of the corrupted frame)</p>
+</li>
 </ul>
 <p>We call ACK frames and NAK frames as control frames, and normal frames that sending data are called data frames</p>
 <p>I think you may have a brief knowledge to selective repeat ARQ after my explanation, now I propose following principles to enhance your knowledge:</p>
@@ -242,44 +241,49 @@ var _hmt = _hmt || [];
 <li>Control frames are dropped once confirmed</li>
 <li>Every frame has its timer, they are started once the frame is sent or resent</li>
 </ul>
-<h3 id="details">Details</h3>
-<ul>
-<li><p>Notice that the control frames should be sent with the <strong>highest priority</strong>. Imaging the frame sending buffer has a lot of data frames queuing to be sent. If let the control frames queue behind them, they will never get sent due to the window limit.</p></li>
-<li><p>In order to tell the frame type, it's better to add a segment in frame. In my program, the frame is coded as following:</p>
-<center>
-<p><code>|  flag  | type  | destination | source | sequence |      data       |  CRC   |  flag  |</code></p>
-</center>
-<center>
-<p><code>| 1 byte | 1 bit |   2 bits    | 2 bits |  4 bits  | at least 1 byte | 1 byte | 1 byte |</code></p>
-</center>
-<p>So the minimal length of the frame is 41 bits. And in order to make timeout a short time to wait, the maximal length shouldn't be too long. In my program, I set max length to 65 bits, which means the data has max length of 4 bytes. When the data size is bigger than max length, the data is sliced into pieces.</p></li>
-<li><p>When corruption rate of the channel is rather a big number, the max length of the frame should be shorter in order to avoid resending.</p></li>
+<h3 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h3><ul>
+<li><p>Notice that the control frames should be sent with the <strong>highest priority</strong>. Imaging the frame sending buffer has a lot of data frames queuing to be sent. If let the control frames queue behind them, they will never get sent due to the window limit.</p>
+</li>
+<li><p>In order to tell the frame type, it’s better to add a segment in frame. In my program, the frame is coded as following:</p>
+  <center><code>|&nbsp; flag&nbsp; | type &nbsp;| destination | source | sequence |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;CRC &nbsp;&nbsp;| &nbsp;flag&nbsp; |</code></center>
+  <center><code>| 1 byte | 1 bit | &nbsp;&nbsp;2 bits &nbsp;&nbsp;&nbsp;| 2 bits | &nbsp;4 bits &nbsp;| at least 1 byte | 1 byte | 1 byte |</code></center>
+
+<p>  So the minimal length of the frame is 41 bits. And in order to make timeout a short time to wait, the maximal length shouldn’t be too long. In my program, I set max length to 65 bits, which means the data has max length of 4 bytes. When the data size is bigger than max length, the data is sliced into pieces.</p>
+</li>
+<li><p>When corruption rate of the channel is rather a big number, the max length of the frame should be shorter in order to avoid resending.</p>
+</li>
 </ul>
-<h3 id="error-control">Error Control</h3>
-<p>In order to deal with flipping bit that may occur in any part of the frame, discuss every possible situation is necessary for robustness of the program</p>
+<h3 id="Error-Control"><a href="#Error-Control" class="headerlink" title="Error Control"></a>Error Control</h3><p>In order to deal with flipping bit that may occur in any part of the frame, discuss every possible situation is necessary for robustness of the program</p>
 <ul>
-<li><p><strong>How receiver's binary buffer deal with flags</strong></p>
-<p>If everything goes right, the binary buffer should receive: <code>01111110 ... 01111110</code>, then receiver will take it out from the buffer as a frame and delete those bits in buffer</p>
-<p>When the binary buffer receives following stuff: <code>... 01111110</code>, which means flag appears after some data. In such situation. The bin buffer should drop all the data before the flag and wait for following data</p>
-<p>When the binary buffer receives following stuff:<code>01111110 ...(only a few bits)... 01111110</code>, which means the second flag appears before the frame reaches it's minimal length. The bin buffer should drop all bits before the second flag and wait for following data</p></li>
+<li><p><strong>How receiver’s binary buffer deal with flags</strong></p>
+<p>  If everything goes right, the binary buffer should receive: <code>01111110 ... 01111110</code>, then receiver will take it out from the buffer as a frame and delete those bits in buffer</p>
+<p>  When the binary buffer receives following stuff: <code>... 01111110</code>, which means flag appears after some data. In such situation. The bin buffer should drop all the data before the flag and wait for following data</p>
+<p>  When the binary buffer receives following stuff:<code>01111110 ...(only a few bits)... 01111110</code>, which means the second flag appears before the frame reaches it’s minimal length. The bin buffer should drop all bits before the second flag and wait for following data</p>
+</li>
 <li><p><strong>Start Flag</strong></p>
-<p>When a bit was flipped in the start flag, receiver cannot recognize a frame anymore, the related frame drops, only waiting for timeout</p></li>
+<p>  When a bit was flipped in the start flag, receiver cannot recognize a frame anymore, the related frame drops, only waiting for timeout</p>
+</li>
 <li><p><strong>End Flag</strong></p>
-<p>When a bit was flipped in the end flag, receiver will take the start flag of the next frame as the end flag of the former one, which will break the current frame and the next frame</p>
-<p>However, the receiver can still get the sender address and the sequence of the first frame, so receiver will send NAK frame about the first frame to sender, but directly drop the next frame without sending NAK frame, only waiting for timeout</p></li>
+<p>  When a bit was flipped in the end flag, receiver will take the start flag of the next frame as the end flag of the former one, which will break the current frame and the next frame</p>
+<p>  However, the receiver can still get the sender address and the sequence of the first frame, so receiver will send NAK frame about the first frame to sender, but directly drop the next frame without sending NAK frame, only waiting for timeout</p>
+</li>
 <li><p><strong>Destination</strong></p>
-<p>When a bit was flipped in the destination, the receiver could not receive the frame at all, only waiting for timeout</p></li>
+<p>  When a bit was flipped in the destination, the receiver could not receive the frame at all, only waiting for timeout</p>
+</li>
 <li><p><strong>Source</strong></p>
-<p>When a bit was flipped in the source, the receiver will find CRC doesn't match and may send a NAK frame to a wrong host. If the wrong host happen to have connection to the receiver, it's also not a big deal since the worst situation is that the wrong host will send a frame to the receiver</p></li>
+<p>  When a bit was flipped in the source, the receiver will find CRC doesn’t match and may send a NAK frame to a wrong host. If the wrong host happen to have connection to the receiver, it’s also not a big deal since the worst situation is that the wrong host will send a frame to the receiver</p>
+</li>
 <li><p><strong>Sequence</strong></p>
-<p>When a bit was flipped in the sequence, the receiver will find CRC doesn't match and send a NAK frame about a wrong frame to the sender. Not a big deal since the worst situation is that the sender will repeat a frame and wait for the flipped frame until timeout</p></li>
+<p>  When a bit was flipped in the sequence, the receiver will find CRC doesn’t match and send a NAK frame about a wrong frame to the sender. Not a big deal since the worst situation is that the sender will repeat a frame and wait for the flipped frame until timeout</p>
+</li>
 <li><p><strong>Data</strong></p>
-<p>When a bit was flipped in the sequence, the receiver will find CRC doesn't match and send a NAK frame to the sender</p></li>
+<p>  When a bit was flipped in the sequence, the receiver will find CRC doesn’t match and send a NAK frame to the sender</p>
+</li>
 <li><p><strong>CRC</strong></p>
-<p>When a bit was flipped in the sequence, the receiver will find CRC doesn't match and send a NAK frame to the sender</p></li>
+<p>  When a bit was flipped in the sequence, the receiver will find CRC doesn’t match and send a NAK frame to the sender</p>
+</li>
 </ul>
-<h2 id="source">Source</h2>
-<p>For <code>ARQ_Simulator.js</code></p>
+<h2 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h2><p>For <code>ARQ_Simulator.js</code></p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         Utilities
@@ -326,8 +330,7 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-<h2 id="postscript">Postscript</h2>
-<p>I highly recommend using emoji or something intuitive in your log text when possible, which can increase your reading speed of log text significantly</p>
+<h2 id="Postscript"><a href="#Postscript" class="headerlink" title="Postscript"></a>Postscript</h2><p>I highly recommend using emoji or something intuitive in your log text when possible, which can increase your reading speed of log text significantly</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                             </div>
 
@@ -400,7 +403,7 @@ var _hmt = _hmt || [];
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#selective-repeat-arq-simulation"><span class="toc-article-text">Selective Repeat ARQ Simulation</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#theory"><span class="toc-article-text">Theory</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#framing"><span class="toc-article-text">Framing</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#window-control-frame"><span class="toc-article-text">Window &amp; Control Frame</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#details"><span class="toc-article-text">Details</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#error-control"><span class="toc-article-text">Error Control</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#source"><span class="toc-article-text">Source</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#postscript"><span class="toc-article-text">Postscript</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Selective-Repeat-ARQ-Simulation"><span class="toc-article-text">Selective Repeat ARQ Simulation</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Theory"><span class="toc-article-text">Theory</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Framing"><span class="toc-article-text">Framing</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Window-amp-Control-Frame"><span class="toc-article-text">Window &amp; Control Frame</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Details"><span class="toc-article-text">Details</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Error-Control"><span class="toc-article-text">Error Control</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Source"><span class="toc-article-text">Source</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Postscript"><span class="toc-article-text">Postscript</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>
@@ -441,7 +444,7 @@ var _hmt = _hmt || [];
   <footer> <p>
     
         &copy;
-        2023
+        2024
             KYRIOTA
                 
                                 Powered By <a href="http://hexo.io/" target="_blank">Hexo</a>, Modified From <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.

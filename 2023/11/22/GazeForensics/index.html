@@ -263,57 +263,46 @@ mjx-container[display="true"] + br {
                                         <p>Gaze Forensics is my first academic project. This post will briefly explain the motivation, key ideas, and results of our <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.07075">paper</a>.</p>
 <p><img src="/images/GazeForensics_Overview.png" style="zoom:60%;"></p>
 <span id="more"></span>
-<h1 id="gaze-forensics-explained">Gaze Forensics Explained</h1>
-<h2 id="deepfake-detection">DeepFake Detection</h2>
-<p>The goal of DeepFake detection is to find an effective model to discern the authenticity of face images.</p>
-<center>
-<code>model(image) -&gt; DeepFake/Authentic</code>
-</center>
-<h2 id="motivation">Motivation</h2>
-<p>When generating DeepFakes, it's hard to keep the details of the face consistent, especially in cross-frame scenarios.</p>
+<h1 id="Gaze-Forensics-Explained"><a href="#Gaze-Forensics-Explained" class="headerlink" title="Gaze Forensics Explained"></a>Gaze Forensics Explained</h1><h2 id="DeepFake-Detection"><a href="#DeepFake-Detection" class="headerlink" title="DeepFake Detection"></a>DeepFake Detection</h2><p>The goal of DeepFake detection is to find an effective model to discern the authenticity of face images.</p>
+<center><code>model(image) -&gt; DeepFake/Authentic</code></center>
+
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>When generating DeepFakes, it’s hard to keep the details of the face consistent, especially in cross-frame scenarios.</p>
 <p>We found details in the eye region abundant, e.g. highlights, geometry shape, iris color, etc.</p>
 <p>So we decided to utilize these features for DeepFake detection.</p>
 <table>
 <tr>
-<td>
-<img src="/images/GazeForensics_Motivation_0.png" style="zoom:70%;">
-</td>
-<td>
-<img src="/images/GazeForensics_Motivation_1.png" style="zoom:70%;">
-</td>
+  <td>
+      <img src="/images/GazeForensics_Motivation_0.png" style="zoom:70%;">
+  </td>
+  <td>
+      <img src="/images/GazeForensics_Motivation_1.png" style="zoom:70%;">
+  </td>
 </tr>
 </table>
-<h2 id="gaze-estimation">Gaze Estimation</h2>
-<p>To extract the aforementioned features, we found gaze estimation a suitable foundation.</p>
+
+<h2 id="Gaze-Estimation"><a href="#Gaze-Estimation" class="headerlink" title="Gaze Estimation"></a>Gaze Estimation</h2><p>To extract the aforementioned features, we found gaze estimation a suitable foundation.</p>
 <p>The goal of 3D gaze estimation is to find an effective model to find the relative direction between the human gaze and the camera.</p>
-<center>
-<code>model(image) -&gt; GazeDirection</code>
-</center>
-<p><img src="/images/GazeForensics_GazeEstimation.png"></p>
-<h2 id="key-ideas">Key Ideas</h2>
-<p>Add an MSE loss term to constrain the CNN part (backend) of the model. The leaky features are designed for an accuracy boost.</p>
+<center><code>model(image) -&gt; GazeDirection</code></center>
+
+<p><img src="/images/GazeForensics_GazeEstimation.png" alt=""></p>
+<h2 id="Key-Ideas"><a href="#Key-Ideas" class="headerlink" title="Key Ideas"></a>Key Ideas</h2><p>Add an MSE loss term to constrain the CNN part (backend) of the model. The leaky features are designed for an accuracy boost.</p>
 <p><img src="/images/GazeForensics_Overview.png" style="zoom:70%;"></p>
 <blockquote>
-<p>Q: Why don't we use the pretrained gaze estimation backend directly (why don't we use a frozen version)?</p>
-<p>A: It doesn't work unless the backend of the model is not frozen.</p>
-</blockquote>
-<blockquote>
-<p>Q: Why don't we finetune based on gaze estimation backend?</p>
+<p>Q: Why don’t we use the pretrained gaze estimation backend directly (why don’t we use a frozen version)?</p>
+<p>A: It doesn’t work unless the backend of the model is not frozen.</p>
+<p>Q: Why don’t we finetune based on gaze estimation backend?</p>
 <p>A: It indeed worked, but you lose control of the degree of reliance on the gaze information, it will concentrate on other features over training epochs rather than focus on the eye region. Also, the experimental result of this configuration is not as good as the MSE-constrained one.</p>
-</blockquote>
-<blockquote>
 <p>Q: Why does such an MSE constraint work better?</p>
-<p>A: Refer to Subsection 3.1 in our <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.07075">paper</a>, and see the explanation for the following formulation: <span class="math display"><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -0.667ex;" xmlns="http://www.w3.org/2000/svg" width="12.467ex" height="1.986ex" role="img" focusable="false" viewBox="0 -583 5510.4 878"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D42B" d="M405 293T374 293T324 312T305 361Q305 378 312 394Q315 397 315 399Q305 399 294 394T266 375T238 329T222 249Q221 241 221 149V62H308V0H298Q280 3 161 3Q47 3 38 0H29V62H98V210V303Q98 353 96 363T83 376Q69 380 42 380H29V442H32L118 446Q204 450 205 450H210V414L211 378Q247 449 315 449H321Q384 449 413 422T442 360Q442 332 424 313Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(507,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1202.5,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msub" transform="translate(2258.3,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D42B" d="M405 293T374 293T324 312T305 361Q305 378 312 394Q315 397 315 399Q305 399 294 394T266 375T238 329T222 249Q221 241 221 149V62H308V0H298Q280 3 161 3Q47 3 38 0H29V62H98V210V303Q98 353 96 363T83 376Q69 380 42 380H29V442H32L118 446Q204 450 205 450H210V414L211 378Q247 449 315 449H321Q384 449 413 422T442 360Q442 332 424 313Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(507,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g></g></g><g data-mml-node="mo" transform="translate(3374.8,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msub" transform="translate(4375,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D42B" d="M405 293T374 293T324 312T305 361Q305 378 312 394Q315 397 315 399Q305 399 294 394T266 375T238 329T222 249Q221 241 221 149V62H308V0H298Q280 3 161 3Q47 3 38 0H29V62H98V210V303Q98 353 96 363T83 376Q69 380 42 380H29V442H32L118 446Q204 450 205 450H210V414L211 378Q247 449 315 449H321Q384 449 413 422T442 360Q442 332 424 313Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(507,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(298,0)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></g></g></svg></mjx-container></span></p>
-</blockquote>
-<h2 id="model-structure">Model Structure</h2>
-<p>We used the attention mechanism to make an effective comparison between different frames, and it indeed works better than RNNs.</p>
+<p>A: Refer to Subsection 3.1 in our <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2311.07075">paper</a>, and see the explanation for the following formulation:</p>
+<script type="math/tex; mode=display">
+\mathbf{r}_{d} = \mathbf{r}_{g} + \mathbf{r}_{ld}</script></blockquote>
+<h2 id="Model-Structure"><a href="#Model-Structure" class="headerlink" title="Model Structure"></a>Model Structure</h2><p>We used the attention mechanism to make an effective comparison between different frames, and it indeed works better than RNNs.</p>
 <p><img src="/images/GazeForensics_ModelStructure.png" style="zoom:70%;"></p>
 <blockquote>
-<p>Q: Why don't we use the transformer or more layers of multi-head attention?</p>
+<p>Q: Why don’t we use the transformer or more layers of multi-head attention?</p>
 <p>A: The complexity and capacity of the datasets we used are not big enough for a more complex model.</p>
 </blockquote>
-<h2 id="results">Results</h2>
-<p>We achieved SOTA accuracy in the WildDeepfake and FaceForensics++ datasets.</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>We achieved SOTA accuracy in the WildDeepfake and FaceForensics++ datasets.</p>
 <p>The effectiveness of our method can also be proved by the occlusion sensitivity test shown in the following figure.</p>
 <p><img src="/images/GazeForensics_Occlusion.png" style="zoom:70%;"></p>
 <p>However, our model failed on cross-dataset evaluations. The test and explanation for this term are still mysterious.</p>
@@ -377,7 +366,7 @@ mjx-container[display="true"] + br {
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#gaze-forensics-explained"><span class="toc-article-text">Gaze Forensics Explained</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#deepfake-detection"><span class="toc-article-text">DeepFake Detection</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#motivation"><span class="toc-article-text">Motivation</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#gaze-estimation"><span class="toc-article-text">Gaze Estimation</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#key-ideas"><span class="toc-article-text">Key Ideas</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#model-structure"><span class="toc-article-text">Model Structure</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#results"><span class="toc-article-text">Results</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Gaze-Forensics-Explained"><span class="toc-article-text">Gaze Forensics Explained</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#DeepFake-Detection"><span class="toc-article-text">DeepFake Detection</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Motivation"><span class="toc-article-text">Motivation</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Gaze-Estimation"><span class="toc-article-text">Gaze Estimation</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Key-Ideas"><span class="toc-article-text">Key Ideas</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Model-Structure"><span class="toc-article-text">Model Structure</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Results"><span class="toc-article-text">Results</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>
@@ -418,7 +407,7 @@ mjx-container[display="true"] + br {
   <footer> <p>
     
         &copy;
-        2023
+        2024
             KYRIOTA
                 
                                 Powered By <a href="http://hexo.io/" target="_blank">Hexo</a>, Modified From <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.
