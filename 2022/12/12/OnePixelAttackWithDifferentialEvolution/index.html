@@ -151,15 +151,19 @@ var _hmt = _hmt || [];
                                         <p>RCTF出了个OnePixelAttack的题，很早就看见过这个攻击了，于是尝试一下</p>
 <span id="more"></span>
 <!--toc-->
-<h1 id="One-Pixel-Attack-With-Differential-Evolution"><a href="#One-Pixel-Attack-With-Differential-Evolution" class="headerlink" title="One Pixel Attack With Differential Evolution"></a>One Pixel Attack With Differential Evolution</h1><p>OnePixelAttack顾名思义，只修改一个像素来骗过Classfier，玩的非常极限，一开始我以为这样的攻击一定离不开梯度，但居然是用了差分演化这一优化算法，可以完全做到BlackBox攻击，只需要知道Classfier给出的Probability与Label即可</p>
+<h1 id="one-pixel-attack-with-differential-evolution">One Pixel Attack With Differential Evolution</h1>
+<p>OnePixelAttack顾名思义，只修改一个像素来骗过Classfier，玩的非常极限，一开始我以为这样的攻击一定离不开梯度，但居然是用了差分演化这一优化算法，可以完全做到BlackBox攻击，只需要知道Classfier给出的Probability与Label即可</p>
 <p>幸运的是，使用差分演化的OnePixelAttack在李宏毅的Channel上有过讲解，<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=tfpKIZIWidA">视频在此</a>，看两遍差分演化的部分后就可以尝试自己搓一个来解题了</p>
-<h2 id="题目复述"><a href="#题目复述" class="headerlink" title="题目复述"></a>题目复述</h2><p>本次RCTF给出的被攻击的model是ResNet50，分类结果的类别数量高达1000个，需要进行扰动的样本是一张60x60的猫咪图片，需要对其进行一个像素的扰动使其被分类为不是猫咪的类别，以下为原题前端代码：</p>
+<h2 id="题目复述">题目复述</h2>
+<p>本次RCTF给出的被攻击的model是ResNet50，分类结果的类别数量高达1000个，需要进行扰动的样本是一张60x60的猫咪图片，需要对其进行一个像素的扰动使其被分类为不是猫咪的类别，以下为原题前端代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request</span><br><span class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> resnet50, ResNet50_Weights</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> flag</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkImg</span>(<span class="params">Img</span>):</span></span><br><span class="line">    im = Image.<span class="built_in">open</span>(<span class="string">&#x27;static/start.png&#x27;</span>).convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">    Img = Img.convert(<span class="string">&#x27;RGB&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> Img.size != (<span class="number">60</span>, <span class="number">60</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>):</span><br><span class="line">            <span class="keyword">if</span> im.getpixel((i,j)) != Img.getpixel((i,j)):</span><br><span class="line">                count += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> count == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">divide</span>(<span class="params">img</span>):</span></span><br><span class="line">  <span class="comment"># Step 1: Initialize model with the best available weights</span></span><br><span class="line">  weights = ResNet50_Weights.DEFAULT</span><br><span class="line">  model = resnet50(weights=weights)</span><br><span class="line">  model.<span class="built_in">eval</span>()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Step 2: Initialize the inference transforms</span></span><br><span class="line">  preprocess = weights.transforms()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Step 3: Apply inference preprocessing transforms</span></span><br><span class="line">  batch = preprocess(img).unsqueeze(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Step 4: Use the model and print the predicted category</span></span><br><span class="line">  prediction = model(batch).squeeze(<span class="number">0</span>).softmax(<span class="number">0</span>)</span><br><span class="line">  class_id = prediction.argmax().item()</span><br><span class="line">  score = prediction[class_id].item()</span><br><span class="line">  category_name = weights.meta[<span class="string">&quot;categories&quot;</span>][class_id]</span><br><span class="line">  <span class="keyword">return</span> category_name,score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">welcome</span>():</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&quot;index.html&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/upload&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">upload</span>():</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        f = request.files[<span class="string">&#x27;file&#x27;</span>]</span><br><span class="line">        im = Image.<span class="built_in">open</span>(f)</span><br><span class="line">        <span class="keyword">if</span> checkImg(im) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;upload.html&#x27;</span>, error=<span class="string">&quot;image format error! the image size must be 60 x 60 and you can only change one pixel!&quot;</span>)</span><br><span class="line">        category_name,score = divide(im)</span><br><span class="line">        <span class="keyword">if</span> category_name == <span class="string">&#x27;tabby&#x27;</span> <span class="keyword">or</span> <span class="string">&quot;cat&quot;</span> <span class="keyword">in</span> category_name:</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;upload.html&#x27;</span>, res=category_name + <span class="string">&quot;  &quot;</span> + <span class="built_in">str</span>(score))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;upload.html&#x27;</span>, flag=flag)</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;upload.html&#x27;</span>,error=<span class="string">&#x27;please start attack!&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>, port=<span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
 <p>需要进行扰动的样本：</p>
-<p><img src="/images/OnePixelAttackWithDE_Sample.png" alt=""></p>
-<h2 id="差分演化"><a href="#差分演化" class="headerlink" title="差分演化"></a>差分演化</h2><p>首先认识差分演化，简称DE</p>
-<center><code>DE(func, cutoff, popSize, mut, CR, maxIter)</code></center>
-
+<p><img src="/images/OnePixelAttackWithDE_Sample.png" /></p>
+<h2 id="差分演化">差分演化</h2>
+<p>首先认识差分演化，简称DE</p>
+<center>
+<code>DE(func, cutoff, popSize, mut, CR, maxIter)</code>
+</center>
 <p>观察上述函数参数：</p>
 <ul>
 <li><code>func</code>：目标函数</li>
@@ -170,36 +174,38 @@ var _hmt = _hmt || [];
 <li><code>maxIter</code>：最大迭代次数</li>
 </ul>
 <p>我们期望上述函数在<code>maxIter</code>内找到一个向量<code>X</code>，使<code>func(X)</code>的值大于或小于（这取决于结果的需求）<code>cutoff</code></p>
-<h3 id="具体流程"><a href="#具体流程" class="headerlink" title="具体流程"></a>具体流程</h3><p>在此简述DE的流程，以免遗忘</p>
+<h3 id="具体流程">具体流程</h3>
+<p>在此简述DE的流程，以免遗忘</p>
 <blockquote>
 <p>现有一名为<code>func</code>的黑盒/白盒函数，其接受向量X作为参数</p>
 <p>现使用<code>DE()</code>求使得<code>func()</code>尽可能小的向量</p>
 </blockquote>
 <ul>
 <li>随机初始化<code>popSize</code>个向量作为族群<code>pop</code>，这些向量符合<code>func</code>对输入向量的要求</li>
-<li>当族群<code>pop</code>中不存在任何一个向量<code>x</code>满足<code>func(x)&lt;cutoff</code>：<ul>
-<li>使族群<code>pop</code>中的每一个向量<code>x</code>作为杂交父向量之一：<ul>
+<li>当族群<code>pop</code>中不存在任何一个向量<code>x</code>满足<code>func(x)&lt;cutoff</code>：
+<ul>
+<li>使族群<code>pop</code>中的每一个向量<code>x</code>作为杂交父向量之一：
+<ul>
 <li>随机选取3个<code>pop</code>中的向量<code>a,b,c</code>，且他们与<code>x</code>不相等</li>
 <li>令另一杂交父向量<code>mutant=a+mut*(b-c)</code></li>
 <li>随机生成长度与<code>x</code>相同的仅包含<code>True,False</code>的向量，每个元素为<code>True</code>的可能性为<code>CR</code>，称此01向量为<code>crossOver</code></li>
 <li>使<code>mutant</code>与<code>x</code>进行杂交，生成的杂交子向量为<code>child=x*(1-crossOver)+mutant*crossOver</code></li>
-<li>如果<code>child</code>中的元素越界，有几种处理办法：<ul>
+<li>如果<code>child</code>中的元素越界，有几种处理办法：
+<ul>
 <li>Clip（较为保守的办法，会一定程度降低多样性）</li>
 <li>取余（较为中庸的办法）</li>
 <li>取随机数（较为激进的办法，增加多样性但可能导致混乱程度增加，更难收敛）</li>
-</ul>
-</li>
-<li>当<code>func(child)&lt;func(x)</code><ul>
+</ul></li>
+<li>当<code>func(child)&lt;func(x)</code>
+<ul>
 <li>更新族群<code>x=child</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
+</ul></li>
 <li>返回满足<code>func(x)&lt;cutoff</code>的向量<code>x</code></li>
 </ul>
-<h2 id="调参"><a href="#调参" class="headerlink" title="调参"></a>调参</h2><p>可以先参考这篇<a target="_blank" rel="noopener" href="https://www.docin.com/p-2278988320.html">挂豆丁的中文论文</a>，里面介绍了各个参数的效果以及如何改进，但我觉得implement起来性价比最高的就是动态调整的<code>F</code>和随机生成的<code>CR</code></p>
+<h2 id="调参">调参</h2>
+<p>可以先参考这篇<a target="_blank" rel="noopener" href="https://www.docin.com/p-2278988320.html">挂豆丁的中文论文</a>，里面介绍了各个参数的效果以及如何改进，但我觉得implement起来性价比最高的就是动态调整的<code>F</code>和随机生成的<code>CR</code></p>
 <p>在此总结一下：</p>
 <ul>
 <li><code>F</code>∈[0,2]，最好设置成动态的</li>
@@ -207,19 +213,21 @@ var _hmt = _hmt || [];
 <li><code>popSize</code>：通常在50以内，但理论上越大则越有可能找到全局最优解，但太大了会导致收益不足以弥补计算速度过慢带来的损失</li>
 <li><code>maxIter</code>：如果采用动态<code>F</code>，则需要斟酌一下，例如我的<code>F</code>就与<code>maxIter</code>有关<code>F=alpha*(np.exp(maxIter/(maxIter+iterCnt))-1)</code></li>
 </ul>
-<h2 id="Copilot带来的问题"><a href="#Copilot带来的问题" class="headerlink" title="Copilot带来的问题"></a>Copilot带来的问题</h2><p>在最开始用魔改版Copilot生成的DE解决这个题目时，经常遇到的一个问题：在某一时刻（通常是演化的初期），突然整个族群都进行了一次演化，即在一次进化中，整个族群都更新了，但在这之后，就不再有任何一个向量在演化中改变</p>
+<h2 id="copilot带来的问题">Copilot带来的问题</h2>
+<p>在最开始用魔改版Copilot生成的DE解决这个题目时，经常遇到的一个问题：在某一时刻（通常是演化的初期），突然整个族群都进行了一次演化，即在一次进化中，整个族群都更新了，但在这之后，就不再有任何一个向量在演化中改变</p>
 <blockquote>
-<p>后记：对于上述现象，其实就是Copilot写的比较拉，在多次魔改后此bug凭空消失。感觉是因为Copilot写的代码中，对于待优化的函数定义模糊，变量关系混乱，参考的变量过于单一。详细地说，就是ResNet中的类别数量高达1000个，其Label中带有”cat”的就有十来个（不同品种的猫），也许在某一时刻，一个噪音成功更改了Label，但只是把Label从最初的Persian Cat改成了另一种Cat，这个成功的噪音顺利成为了最佳噪音；因为需要计算最佳噪音的fitness和预测结果，导致原本是Persian Cat的classID被改成另一种猫的classID；这一更改使得族群的fitness值整体大幅下降，整个族群或者绝大多数向量都接受了新的child，导致我们看到的突然大规模更新的现象，而因为另一种猫的概率本身就不高，梯度过于平缓甚至消失，DE在一片大平地上难以发挥作用，导致我们看到的在大规模更新后再无更新的现象</p>
+<p>后记：对于上述现象，其实就是Copilot写的比较拉，在多次魔改后此bug凭空消失。感觉是因为Copilot写的代码中，对于待优化的函数定义模糊，变量关系混乱，参考的变量过于单一。详细地说，就是ResNet中的类别数量高达1000个，其Label中带有"cat"的就有十来个（不同品种的猫），也许在某一时刻，一个噪音成功更改了Label，但只是把Label从最初的Persian Cat改成了另一种Cat，这个成功的噪音顺利成为了最佳噪音；因为需要计算最佳噪音的fitness和预测结果，导致原本是Persian Cat的classID被改成另一种猫的classID；这一更改使得族群的fitness值整体大幅下降，整个族群或者绝大多数向量都接受了新的child，导致我们看到的突然大规模更新的现象，而因为另一种猫的概率本身就不高，梯度过于平缓甚至消失，DE在一片大平地上难以发挥作用，导致我们看到的在大规模更新后再无更新的现象</p>
 <p>（找这个bug真的给我找麻了，虽然不是有意修复了bug，但我觉得bug成因应该是这样的</p>
 </blockquote>
 <p>虽然这个bug是Copilot造成的，但我之前也google了相关问题，找到了<a target="_blank" rel="noopener" href="https://www.researchgate.net/publication/2645446_On_Stagnation_Of_The_Differential_Evolution_Algorithm">On_Stagnation_Of_The_Differential_Evolution_Algorithm</a>，解释了一下为什么DE算法中存在族群停止演化的现象</p>
-<p><img src="/images/OnePixelAttackWithDE_Stagnant.png.png" alt=""></p>
+<p><img src="/images/OnePixelAttackWithDE_Stagnant.png.png" /></p>
 <p>感觉他说了挺多的，又感觉他什么也没说，总之在没有我这个bug的情况下，就是扩大种群规模，提供更广泛的多样性，就能使得停滞的概率减小，而停滞的成因则是陷入局部最优解（乐</p>
 <p>我还去问了ChatGPT，都是AI应该比较互相了解（乐：</p>
-<p><img src="/images/OnePixelAttackWithDE_GPT1.png" alt=""></p>
-<p><img src="/images/OnePixelAttackWithDE_GPT2.png" alt=""></p>
+<p><img src="/images/OnePixelAttackWithDE_GPT1.png" /></p>
+<p><img src="/images/OnePixelAttackWithDE_GPT2.png" /></p>
 <p>虽然点了很多次Try Again也没找出族群突然全体突变的bug，但倒是给我把另一个Copilot写的bug给我找出来了，就是target vector居然是随机取的而不是挨个儿来，毕竟这一堆东西里面<code>random</code>用的挺多的，我还真没看出来，于是立刻改掉然后做成标准的DE了</p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>说实话，特别是这种看运气的程序，盯着输出终端看感觉就像在产房门口等老婆一样紧张，所以记录几段输出，见证一下</p>
+<h2 id="输出">输出</h2>
+<p>说实话，特别是这种看运气的程序，盯着输出终端等success就很紧张，所以记录几段输出，见证一下</p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         alpha=0.4，popSize=20，maxIter=100
@@ -249,8 +257,9 @@ var _hmt = _hmt || [];
 </div>
 <p>通过以上各个参数的迭代次数可见，族群大小对这个算法的收效甚微，只要不是太小的族群，在算法正确的情况下一般是没有问题的，比如上述的不同族群大小中，<code>popSize=20</code>时两三秒就可以进行一次迭代，而<code>popSize=200</code>时一次迭代就要几分钟，故而盲目追求大族群是得不偿失的，不如用小族群多跑几遍</p>
 <p>然后是这个输出的结果，每次基本都是在猫耳朵的位置修改像素，得到goldfish的label，意味着Persian Cat的决策范围边上就是Goldfish，而且距离之近或者说梯度之大只需要一个像素就可以扰动成功</p>
-<p><img src="/images/OnePixelAttackWithDE_Out1.png" alt=""></p>
-<h2 id="性能比较"><a href="#性能比较" class="headerlink" title="性能比较"></a>性能比较</h2><p>copy了一份论文link的github上的<a target="_blank" rel="noopener" href="https://github.com/Hyperparticle/one-pixel-attack-keras">代码</a>，进行了一下性能的对比，这种带运气成分的算法需要大量统计才能做出比较，直观感觉上来说，相同种群大小下，他的一次迭代比我的慢得多，他的代码和我的一样有运气好几次迭代直接出和运气差迭代半天一直不出的情况，但是从原理上说，只要一直挂着跑，失败了自动重启继续跑，都肯定可以跑出来的</p>
+<p><img src="/images/OnePixelAttackWithDE_Out1.png" /></p>
+<h2 id="性能比较">性能比较</h2>
+<p>copy了一份论文link的github上的<a target="_blank" rel="noopener" href="https://github.com/Hyperparticle/one-pixel-attack-keras">代码</a>，进行了一下性能的对比，这种带运气成分的算法需要大量统计才能做出比较，直观感觉上来说，相同种群大小下，他的一次迭代比我的慢得多，他的代码和我的一样有运气好几次迭代直接出和运气差迭代半天一直不出的情况，但是从原理上说，只要一直挂着跑，失败了自动重启继续跑，都肯定可以跑出来的</p>
 <div class='spoiler collapsed'>
     <div class='spoiler-title'>
         popSize=15，maxIter=100
@@ -260,7 +269,8 @@ var _hmt = _hmt || [];
 
     </div>
 </div>
-<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><div class='spoiler collapsed'>
+<h2 id="exp">exp</h2>
+<div class='spoiler collapsed'>
     <div class='spoiler-title'>
         poc.py
     </div>
@@ -350,7 +360,7 @@ var _hmt = _hmt || [];
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#One-Pixel-Attack-With-Differential-Evolution"><span class="toc-article-text">One Pixel Attack With Differential Evolution</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%8D%E8%BF%B0"><span class="toc-article-text">题目复述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%B7%AE%E5%88%86%E6%BC%94%E5%8C%96"><span class="toc-article-text">差分演化</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%85%B7%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-article-text">具体流程</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%B0%83%E5%8F%82"><span class="toc-article-text">调参</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Copilot%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-article-text">Copilot带来的问题</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-article-text">输出</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83"><span class="toc-article-text">性能比较</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#exp"><span class="toc-article-text">exp</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#one-pixel-attack-with-differential-evolution"><span class="toc-article-text">One Pixel Attack With Differential Evolution</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%A2%98%E7%9B%AE%E5%A4%8D%E8%BF%B0"><span class="toc-article-text">题目复述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%B7%AE%E5%88%86%E6%BC%94%E5%8C%96"><span class="toc-article-text">差分演化</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%85%B7%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-article-text">具体流程</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%B0%83%E5%8F%82"><span class="toc-article-text">调参</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#copilot%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-article-text">Copilot带来的问题</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BE%93%E5%87%BA"><span class="toc-article-text">输出</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%80%A7%E8%83%BD%E6%AF%94%E8%BE%83"><span class="toc-article-text">性能比较</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#exp"><span class="toc-article-text">exp</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>
