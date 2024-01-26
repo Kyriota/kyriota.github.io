@@ -208,5 +208,23 @@ function getTag() {
             'https://ja.wikipedia.org/wiki/%E3%80%90%E6%8E%A8%E3%81%97%E3%81%AE%E5%AD%90%E3%80%91'
         ),
 
+        createImgTextTag(
+            'EVA',
+            'imgs/nerv.webp',
+            'https://ja.wikipedia.org/wiki/%E6%96%B0%E4%B8%96%E7%B4%80%E3%82%A8%E3%83%B4%E3%82%A1%E3%83%B3%E3%82%B2%E3%83%AA%E3%82%AA%E3%83%B3'
+        ),
+
+        createImgTextTag(
+            'Made In Abyss',
+            'imgs/Nanachi.webp',
+            'https://en.wikipedia.org/wiki/Made_in_Abyss'
+        ),
+
+        createImgTextTag(
+            'Pantheon',
+            'imgs/Laurie.jpg',
+            'https://www.imdb.com/title/tt11680642/'
+        ),
+
     ];
 }
