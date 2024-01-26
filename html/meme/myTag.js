@@ -162,7 +162,7 @@ function getTag() {
         ),
 
         createImgTextTag(
-            'Overwatch 1',
+            'Overwatch',
             'imgs/overwatch.webp',
         ),
 
@@ -224,6 +224,12 @@ function getTag() {
             'Pantheon',
             'imgs/Laurie.jpg',
             'https://www.imdb.com/title/tt11680642/'
+        ),
+
+        createImgTextTag(
+            '1984',
+            'imgs/1984.jpg',
+            'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four'
         ),
 
     ];
