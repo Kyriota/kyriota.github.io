@@ -8555,6 +8555,10 @@ p {
     margin: 0 0 20px
 }
 
+li {
+    margin: 0 0 10px;
+}
+
 .lead {
     margin-bottom: 20px;
     font-size: 18px;
