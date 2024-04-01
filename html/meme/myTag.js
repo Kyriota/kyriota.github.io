@@ -232,5 +232,17 @@ function getTag() {
             'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four'
         ),
 
+        createImgTextTag(
+            'Penguin Drum<br>(輪るピングドラム)',
+            'imgs/penguindrum.webp',
+            'http://penguindrum.jp/'
+        ),
+
+        createImgTextTag(
+            'FL Studio',
+            'imgs/flstudio.webp',
+            'https://www.image-line.com/'
+        ),
+
     ];
 }
