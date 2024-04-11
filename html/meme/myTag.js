@@ -164,6 +164,7 @@ function getTag() {
         createImgTextTag(
             'Overwatch',
             'imgs/overwatch.webp',
+            'https://overwatch.blizzard.com/'
         ),
 
         createImgTextTag(
@@ -242,6 +243,24 @@ function getTag() {
             'FL Studio',
             'imgs/flstudio.webp',
             'https://www.image-line.com/'
+        ),
+
+        createImgTextTag(
+            'Baki the Grappler / 刃牙',
+            'imgs/baki.webp',
+            'https://www.netflix.com/title/80204451'
+        ),
+
+        createImgTextTag(
+            'Guilty Crown<br>(ギルティクラウン)',
+            'imgs/egoist.webp',
+            'https://ja.wikipedia.org/wiki/%E3%82%AE%E3%83%AB%E3%83%86%E3%82%A3%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%B3'
+        ),
+
+        createImgTextTag(
+            'Nyaruko: Crawling with Love<br>(ニャル子さん)',
+            'imgs/Nyaruko.webp',
+            'https://ja.wikipedia.org/wiki/%E9%80%99%E3%81%84%E3%82%88%E3%82%8C!_%E3%83%8B%E3%83%A3%E3%83%AB%E5%AD%90%E3%81%95%E3%82%93'
         ),
 
     ];
