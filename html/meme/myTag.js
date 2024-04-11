@@ -259,7 +259,7 @@ function getTag() {
 
         createImgTextTag(
             'Nyaruko: Crawling with Love<br>(ニャル子さん)',
-            'imgs/Nyaruko.webp',
+            'imgs/nyaruko.webp',
             'https://ja.wikipedia.org/wiki/%E9%80%99%E3%81%84%E3%82%88%E3%82%8C!_%E3%83%8B%E3%83%A3%E3%83%AB%E5%AD%90%E3%81%95%E3%82%93'
         ),
 
