@@ -263,5 +263,23 @@ function getTag() {
             'https://ja.wikipedia.org/wiki/%E9%80%99%E3%81%84%E3%82%88%E3%82%8C!_%E3%83%8B%E3%83%A3%E3%83%AB%E5%AD%90%E3%81%95%E3%82%93'
         ),
 
+        createImgTextTag(
+            'Parasyte / 寄生獣',
+            'imgs/migi.webp',
+            'https://ja.wikipedia.org/wiki/%E5%AF%84%E7%94%9F%E7%8D%A3'
+        ),
+
+        createImgTextTag(
+            'ハカイジュウ / 破壊獣',
+            'imgs/hakaijuu.jpg',
+            'https://ja.wikipedia.org/wiki/%E3%83%8F%E3%82%AB%E3%82%A4%E3%82%B8%E3%83%A5%E3%82%A6'
+        ),
+
+        createImgTextTag(
+            'Attack on Titan<br>(進撃の巨人)',
+            'imgs/attackOnTitan.webp',
+            'https://ja.wikipedia.org/wiki/%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA'
+        ),
+
     ];
 }
