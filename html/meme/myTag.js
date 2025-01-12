@@ -241,7 +241,7 @@ function getTag() {
 
         createImgTextTag(
             'FL Studio',
-            'imgs/flstudio.webp',
+            'imgs/flstudio.jpg',
             'https://www.image-line.com/'
         ),
 
@@ -279,6 +279,24 @@ function getTag() {
             'Attack on Titan<br>(進撃の巨人)',
             'imgs/attackOnTitan.webp',
             'https://ja.wikipedia.org/wiki/%E9%80%B2%E6%92%83%E3%81%AE%E5%B7%A8%E4%BA%BA'
+        ),
+
+        createImgTextTag(
+            'MiSide',
+            'imgs/mila.webp',
+            'https://store.steampowered.com/app/2527500/_MiSide/'
+        ),
+
+        createImgTextTag(
+            'The Familiar of Zero<br>(ゼロの使い魔)',
+            'imgs/0.jpg',
+            'https://ja.wikipedia.org/wiki/%E3%82%BC%E3%83%AD%E3%81%AE%E4%BD%BF%E3%81%84%E9%AD%94'
+        ),
+
+        createImgTextTag(
+            'Toradora / とらドラ!',
+            'imgs/Toradora.jpg  ',
+            'https://ja.wikipedia.org/wiki/%E3%81%A8%E3%82%89%E3%83%89%E3%83%A9!'
         ),
 
     ];
