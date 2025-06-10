@@ -35,10 +35,10 @@
   <meta name="author" content="KYRIOTA">
   
   <meta name="description" content="记录题目扫盲，只有前三题，包含以下points：
-​    ①3.28 php.net后门
-​    ②3F(FatFreeFramework)框架
-​    ③SQL中md5()产生hex的’or’进行的注入
-​    ④SSRF与gopher协议">
+​ ①3.28 php.net后门
+​ ②3F(FatFreeFramework)框架
+​ ③SQL中md5()产生hex的&#39;or&#39;进行的注入
+​ ④SSRF与gopher协议">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -141,77 +141,85 @@
                                 
 
                                         <p>记录题目扫盲，只有前三题，包含以下points：</p>
-<p>​    ①3.28 php.net后门</p>
-<p>​    ②3F(FatFreeFramework)框架</p>
-<p>​    ③SQL中md5()产生hex的’or’进行的注入</p>
-<p>​    ④SSRF与gopher协议</p>
+<p>​ ①3.28 php.net后门</p>
+<p>​ ②3F(FatFreeFramework)框架</p>
+<p>​ ③SQL中md5()产生hex的'or'进行的注入</p>
+<p>​ ④SSRF与gopher协议</p>
 <span id="more"></span>
-<h1 id="i春秋虎符2021-web"><a href="#i春秋虎符2021-web" class="headerlink" title="i春秋虎符2021_web"></a>i春秋虎符2021_web</h1><h2 id="签到"><a href="#签到" class="headerlink" title="签到"></a>签到</h2><p>2021.3.28出了php官方git仓库git.php.net被插入恶意代码的事，若使用此源码进行开发，网站就会执行user_agentt头中以zerodium开始的任意代码，注意double t，没有打错</p>
-<p><img src="/images/虎符-签到github.png" alt=""></p>
-<center><a target="_blank" rel="noopener" href="https://github.com/php/php-src/commit/c730aa26bd52829a49f2ad284b181b7e82a68d7d">view on github</a></center>
-
+<h1 id="i春秋虎符2021_web">i春秋虎符2021_web</h1>
+<h2 id="签到">签到</h2>
+<p>2021.3.28出了php官方git仓库git.php.net被插入恶意代码的事，若使用此源码进行开发，网站就会执行user_agentt头中以zerodium开始的任意代码，注意double t，没有打错</p>
+<p><img src="/images/虎符-签到github.png" /></p>
+<center>
+<a target="_blank" rel="noopener" href="https://github.com/php/php-src/commit/c730aa26bd52829a49f2ad284b181b7e82a68d7d">view on github</a>
+</center>
 <p>题目环境是一个blog，最后一篇文章描述了博客搭建过程，在没有hint的情况下这是入手点</p>
-<p><img src="/images/虎符-签到blog.png" alt=""></p>
-<h2 id="unsetme"><a href="#unsetme" class="headerlink" title="unsetme"></a>unsetme</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Kickstart the framework</span></span><br><span class="line"><span class="variable">$f3</span> = <span class="keyword">require</span>(<span class="string">&#x27;1ib/base.php&#x27;</span>);</span><br><span class="line"><span class="variable">$f3</span>-&gt;set( <span class="string">&#x27;DEBUG&#x27;</span> ,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">if</span> ((<span class="keyword">float</span>)PCREVERSION &lt;<span class="number">8.0</span>)</span><br><span class="line">    trigger_error(<span class="string">&#x27;PCREversion is out date&#x27;</span>);</span><br><span class="line"><span class="comment">//Load configuration</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$a</span> = <span class="variable">$GET</span> [<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$f3</span>-&gt;<span class="variable">$a</span>);</span><br><span class="line"><span class="variable">$f3</span>-&gt;run();</span><br></pre></td></tr></table></figure>
-<p align='right'><small>关键字：framework，f3</small></p>
-
+<p><img src="/images/虎符-签到blog.png" /></p>
+<h2 id="unsetme">unsetme</h2>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Kickstart the framework</span></span><br><span class="line"><span class="variable">$f3</span> = <span class="keyword">require</span>(<span class="string">&#x27;1ib/base.php&#x27;</span>);</span><br><span class="line"><span class="variable">$f3</span>-&gt;set( <span class="string">&#x27;DEBUG&#x27;</span> ,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">if</span> ((<span class="keyword">float</span>)PCREVERSION &lt;<span class="number">8.0</span>)</span><br><span class="line">    trigger_error(<span class="string">&#x27;PCREversion is out date&#x27;</span>);</span><br><span class="line"><span class="comment">//Load configuration</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="variable">$a</span> = <span class="variable">$GET</span> [<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="keyword">unset</span>(<span class="variable">$f3</span>-&gt;<span class="variable">$a</span>);</span><br><span class="line"><span class="variable">$f3</span>-&gt;run();</span><br></pre></td></tr></table></figure>
+<p align="right">
+<small>关键字：framework，f3</small>
+</p>
 <p>此为基于f3框架编写的代码，拿到手时应先本地搭建此框架，对于本题，这样你才有了base.php，才可以解题，各种不熟悉导致找不到本题入手点</p>
-<p><img src="/images/虎符-unsetme-f3Framework.png" alt=""></p>
-<p>把题目代码copy过来，加上route指定路径后本地运行（也就是说要先设置<code>route</code>再<code>run</code>，不然框架跑都跑不起来，怎么设置查一下文档就知道了¯\\_(ツ)_/¯）</p>
+<p><img src="/images/虎符-unsetme-f3Framework.png" /></p>
+<p>把题目代码copy过来，加上route指定路径后本地运行（也就是说要先设置<code>route</code>再<code>run</code>，不然框架跑都跑不起来，怎么设置查一下文档就知道了¯\_(ツ)_/¯）</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$f3</span>-&gt;route(<span class="string">&#x27;GET /test.php&#x27;</span>,</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;route set successfully&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"><span class="variable">$f3</span>-&gt;run();</span><br></pre></td></tr></table></figure>
-<p><img src="/images/虎符-unsetme-f3run.png" alt=""></p>
+<p><img src="/images/虎符-unsetme-f3run.png" /></p>
 <p>直接报错了，看看530行eval的情况</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clear</span>(<span class="params"><span class="variable">$key</span></span>) </span>&#123;</span><br><span class="line">    <span class="comment">#...</span></span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable">$val</span>=preg_replace(<span class="string">&#x27;/^(\$hive)/&#x27;</span>,<span class="string">&#x27;$this-&gt;hive&#x27;</span>,</span><br><span class="line">                          <span class="keyword">$this</span>-&gt;compile(<span class="string">&#x27;@hive.&#x27;</span>.<span class="variable">$key</span>, <span class="literal">FALSE</span>));</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">&#x27;unset(&#x27;</span>.<span class="variable">$val</span>.<span class="string">&#x27;);&#x27;</span>);    <span class="comment">#第530行</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$parts</span>[<span class="number">0</span>]==<span class="string">&#x27;SESSION&#x27;</span>) &#123;</span><br><span class="line">            session_commit();</span><br><span class="line">            session_start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>追一下代码验证一下是不是<code>unset</code>触发的<code>clear()</code>，发现调用链条是<code>__unset($key)</code>→<code>offsetunset($key)</code>→<code>clear($key)</code>实锤</p>
 <p>见里面有一个<code>compile()</code>，康康</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params"><span class="variable">$str</span>, <span class="variable">$evaluate</span>=<span class="literal">TRUE</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (!<span class="variable">$evaluate</span>)</span><br><span class="line">        ? preg_replace_callback(</span><br><span class="line">            <span class="string">&#x27;/^@(\w+)((?:\..+|\[(?:(?:[^\[\]]*|(?R))*)\])*)/&#x27;</span>,</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"><span class="variable">$expr</span></span>) </span>&#123;</span><br><span class="line">                <span class="variable">$str</span>=<span class="string">&#x27;$&#x27;</span>.<span class="variable">$expr</span>[<span class="number">1</span>];</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$expr</span>[<span class="number">2</span>]))</span><br><span class="line">                    <span class="variable">$str</span>.=preg_replace_callback(</span><br><span class="line">                        <span class="string">&#x27;/\.([^.\[\]]+)|\[((?:[^\[\]\&#x27;&quot;]*|(?R))*)\]/&#x27;</span>,</span><br><span class="line">                        <span class="function"><span class="keyword">function</span>(<span class="params"><span class="variable">$sub</span></span>) </span>&#123;</span><br><span class="line">                            <span class="variable">$val</span>=<span class="keyword">isset</span>(<span class="variable">$sub</span>[<span class="number">2</span>]) ? <span class="variable">$sub</span>[<span class="number">2</span>] : <span class="variable">$sub</span>[<span class="number">1</span>];</span><br><span class="line">                            <span class="keyword">if</span> (ctype_digit(<span class="variable">$val</span>))</span><br><span class="line">                                <span class="variable">$val</span>=(<span class="keyword">int</span>)<span class="variable">$val</span>;</span><br><span class="line">                            <span class="variable">$out</span>=<span class="string">&#x27;[&#x27;</span>.<span class="keyword">$this</span>-&gt;export(<span class="variable">$val</span>).<span class="string">&#x27;]&#x27;</span>;</span><br><span class="line">                            <span class="keyword">return</span> <span class="variable">$out</span>;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="variable">$expr</span>[<span class="number">2</span>]</span><br><span class="line">                    );</span><br><span class="line">                <span class="keyword">return</span> <span class="variable">$str</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="variable">$str</span></span><br><span class="line">        )</span><br><span class="line"><span class="comment">#------------------下面这段都无关，毕竟clear()里传了FALSE------------------</span></span><br><span class="line">        : preg_replace_callback(</span><br><span class="line">        <span class="string">&#x27;/(?&lt;!\w)@(\w+(?:(?:\-&gt;|::)\w+)?)&#x27;</span>.</span><br><span class="line">        <span class="string">&#x27;((?:\.\w+|\[(?:(?:[^\[\]]*|(?R))*)\]|(?:\-&gt;|::)\w+|\()*)/&#x27;</span>,</span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params"><span class="variable">$expr</span></span>) </span>&#123;</span><br><span class="line">            <span class="variable">$str</span>=<span class="string">&#x27;$&#x27;</span>.<span class="variable">$expr</span>[<span class="number">1</span>];</span><br><span class="line">        <span class="comment">#...</span></span><br></pre></td></tr></table></figure>
 <p>看样子对输入做了改动，但其实不想分析<code>complie()</code>的话，直接<code>echo</code>即可知道到底eval了什么代码</p>
-<blockquote>当a=hello<br>[Out] unset('$this->hive['hello']');</blockquote>
-
+<blockquote>
+当a=hello<br>[Out] unset('$this-&gt;hive['hello']');
+</blockquote>
 <p>但现在既然比赛已经结束那还是稍微深入看一下<code>complie()</code>，遇到了我没见过的php：回调，匿名函数</p>
 <ul>
 <li><p>回调：在函数执行的过程中，一般是不能去干预他的行为的，当函数被设计成带有回调功能时，我们就有可能在函数的执行过程中，通过回调函数去干预他</p>
-  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"><span class="variable">$n</span>, <span class="variable">$f</span>=<span class="string">&#x27;&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$n</span> &lt; <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>; <span class="variable">$i</span>&lt;<span class="variable">$n</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$f</span> ? <span class="variable">$f</span>(<span class="variable">$i</span>) : <span class="variable">$i</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//无回调时</span></span><br><span class="line">foo(<span class="number">5</span>); <span class="comment">//01234</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//有回调时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"><span class="variable">$v</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$v</span> + <span class="variable">$v</span>;</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">5</span>, <span class="string">&#x27;f1&#x27;</span>); <span class="comment">//02468</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>匿名函数：允许临时创建一个没有指定名称的函数。最经常用作回调函数<code>callable</code>回调参数的值</p>
-</li>
+<p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"><span class="variable">$n</span>, <span class="variable">$f</span>=<span class="string">&#x27;&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$n</span> &lt; <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="variable">$i</span>=<span class="number">0</span>; <span class="variable">$i</span>&lt;<span class="variable">$n</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$f</span> ? <span class="variable">$f</span>(<span class="variable">$i</span>) : <span class="variable">$i</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//无回调时</span></span><br><span class="line">foo(<span class="number">5</span>); <span class="comment">//01234</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//有回调时</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"><span class="variable">$v</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$v</span> + <span class="variable">$v</span>;</span><br><span class="line">&#125;</span><br><span class="line">foo(<span class="number">5</span>, <span class="string">&#x27;f1&#x27;</span>); <span class="comment">//02468</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p>匿名函数：允许临时创建一个没有指定名称的函数。最经常用作回调函数<code>callable</code>回调参数的值</p></li>
 </ul>
 <p>而<code>preg_replace_callback</code>除了可以指定一个 <code>callback</code> 替代 <code>replacement</code> 进行替换字符串的计算，其他方面等同于<code>preg_replace</code></p>
 <p>至于什么<code>$this-&gt;hive</code>之类的杂七杂八的都是后面才加上去的，和<code>compile()</code>无关</p>
-<p>因为传参<code>a</code>会被<code>compile</code>处理为<code>[&#39;xxx&#39;]</code>的形式，所以需要打破这种格式，然后点号连接并闭合<code>unset</code>，最后<code>eval</code>执行任意代码</p>
-<p>看看这个正则<code>&#39;/\.([^.\[\]]+)|\[((?:[^\[\]\&#39;&quot;]*|(?R))*)\]/&#39;</code>，并没有匹配换行符，所以出了换行符这个正则就会被打断，于是便超度成功</p>
-<p><img src="/images/虎符-unsetme-换行符.png" alt=""></p>
-<h2 id="慢慢做管理系统"><a href="#慢慢做管理系统" class="headerlink" title="慢慢做管理系统"></a>慢慢做管理系统</h2><blockquote>描述：这个sql吧，有点ssrf的样子，首页是一个很普通的sql注入，没有什么花样，但是我的admin.php是一个内网的管理系统，只要你用“真-admin”的密码登录了，就可以拿到flag</blockquote>
-
-<blockquote>hint：第一步登录的sql语句是"SELECT * FROM users WHERE password = '".md5($password,true)."' limit 0,1";</blockquote>
-
+<p>因为传参<code>a</code>会被<code>compile</code>处理为<code>['xxx']</code>的形式，所以需要打破这种格式，然后点号连接并闭合<code>unset</code>，最后<code>eval</code>执行任意代码</p>
+<p>看看这个正则<code>'/\.([^.\[\]]+)|\[((?:[^\[\]\'"]*|(?R))*)\]/'</code>，并没有匹配换行符，所以出了换行符这个正则就会被打断，于是便超度成功</p>
+<p><img src="/images/虎符-unsetme-换行符.png" /></p>
+<h2 id="慢慢做管理系统">慢慢做管理系统</h2>
+<blockquote>
+描述：这个sql吧，有点ssrf的样子，首页是一个很普通的sql注入，没有什么花样，但是我的admin.php是一个内网的管理系统，只要你用“真-admin”的密码登录了，就可以拿到flag
+</blockquote>
+<blockquote>
+hint：第一步登录的sql语句是"SELECT * FROM users WHERE password = '".md5($password,true)."' limit 0,1";
+</blockquote>
 <p>这个题没有怎么动，目前也没找到复现，暂时只能面向wp扫盲</p>
-<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><p><img src="/images/虎符-慢慢做-登录.png" alt=""></p>
+<h3 id="登录">登录</h3>
+<p><img src="/images/虎符-慢慢做-登录.png" /></p>
 <p>关键字是<code>md5($password,true)</code>，第二个参数<code>raw=true</code>即转md5后又做一次<code>hex2str</code></p>
-<div class="table-container">
 <table>
 <thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
+<tr class="header">
+<th style="text-align: left;">参数</th>
+<th style="text-align: left;">描述</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><em>string</em></td>
-<td style="text-align:left">必需。规定要计算的字符串。</td>
+<tr class="odd">
+<td style="text-align: left;"><em>string</em></td>
+<td style="text-align: left;">必需。规定要计算的字符串。</td>
 </tr>
-<tr>
-<td style="text-align:left"><em>raw</em></td>
-<td style="text-align:left">可选。规定十六进制或二进制输出格式：TRUE - 原始 16 字符二进制格式FALSE - 默认。32 字符十六进制数</td>
+<tr class="even">
+<td style="text-align: left;"><em>raw</em></td>
+<td style="text-align: left;">可选。规定十六进制或二进制输出格式：TRUE - 原始 16 字符二进制格式FALSE - 默认。32 字符十六进制数</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p>所以hint描述的这一步其实是md5万能密码：<code>ffifdyop</code>与<code>129581926211651571912466741651878684928</code>在经过md5并转字符后均包含有<code>&#39;or&#39;</code>，只要<code>&#39;or&#39;</code>右边非零，即会判定整个表达式为true，以此便绕过了登录</p>
-<h3 id="gopher协议"><a href="#gopher协议" class="headerlink" title="gopher协议"></a>gopher协议</h3><p><img src="/images/虎符-慢慢做-gopher.png" alt=""></p>
-<blockquote>gopher协议支持发出GET、POST请求：可以先截获get请求包和post请求包，在构成符合gopher协议的请求。gopher协议是ssrf利用中最强大的协议</blockquote>
-
+<p>所以hint描述的这一步其实是md5万能密码：<code>ffifdyop</code>与<code>129581926211651571912466741651878684928</code>在经过md5并转字符后均包含有<code>'or'</code>，只要<code>'or'</code>右边非零，即会判定整个表达式为true，以此便绕过了登录</p>
+<h3 id="gopher协议">gopher协议</h3>
+<p><img src="/images/虎符-慢慢做-gopher.png" /></p>
+<blockquote>
+gopher协议支持发出GET、POST请求：可以先截获get请求包和post请求包，在构成符合gopher协议的请求。gopher协议是ssrf利用中最强大的协议
+</blockquote>
 <p>SSRF：Server-side Request Forge，服务端请求伪造；说白了就是：<i>因为是由服务端发起，从而能够请求到与它相连而与外网隔离的内部系统</i> 的一种攻击方式，比如通过file://，gopher://之类的协议来读本地文件什么的</p>
 <p>本题是屏蔽了<code>file://</code>的，只能用<code>gopher://</code></p>
 <p>Gopher协议格式：<code>URL:gopher://&lt;host&gt;:&lt;port&gt;/&lt;gopher-path&gt;_TCP数据流</code></p>
@@ -220,16 +228,14 @@
 <li>如果发起POST请求，请求体需要进行url编码，回车换行需要使用<code>%0d</code>或<code>%0a</code>代替</li>
 </ul>
 <p>payload：/ssrf.php?way=127.0.0.1/admin.php，发现admin.php不再302了</p>
-<p><img src="/images/虎符-慢慢做-admin.png" alt=""></p>
+<p><img src="/images/虎符-慢慢做-admin.png" /></p>
 <p>然后通过gopher协议给admin.php发POST数据，HTTP协议默认端口是80，所以是往<code>127.0.0.1:80</code>发包：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher:&#x2F;&#x2F;127.0.0.1:80&#x2F;_POST%20%2Fadmin.php%20HTTP%2F1.1%0aHost%3A%20127.0.0.1%0aContent-Type%3A%20application%2Fx-www-form-urlencoded%0aContent-Length%3A%2027%0ausername%3Dtest%26password%3Dtest%0a</span><br></pre></td></tr></table></figure>
-<blockquote>gopher://127.0.0.1:80/<br>_POST /admin.php HTTP/1.1<br>
-Host: 127.0.0.1<br>
-Content-Type: application/x-www-form-urlencoded<br>
-Content-Length: 27<br>
-username=test&password=test</blockquote>
-
-<h3 id="改表名"><a href="#改表名" class="headerlink" title="改表名"></a>改表名</h3><p>通过改表名获取数据@2019强网杯，也可以通过<code>prepare</code>预处理<code>concat</code>过滤的<code>select</code>，预处理的方法之前就记录过，不再重复</p>
+<blockquote>
+gopher://127.0.0.1:80/<br>_POST /admin.php HTTP/1.1<br> Host: 127.0.0.1<br> Content-Type: application/x-www-form-urlencoded<br> Content-Length: 27<br> username=test&amp;password=test
+</blockquote>
+<h3 id="改表名">改表名</h3>
+<p>通过改表名获取数据@2019强网杯，也可以通过<code>prepare</code>预处理<code>concat</code>过滤的<code>select</code>，预处理的方法之前就记录过，不再重复</p>
 <p>当过滤了<code>select</code>，就不能在查出表名列名后选中数据，但若查询的回显就是表中的字段，则可以通过<code>rename</code>将默认查询的表替换为目标表，从而直接从回显获取字段</p>
 <p>例如本题中<code>fake_admin</code>是默认被查询的表，<code>real_admin_here_do_you_find</code>是目标表</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$payload &#x3D; &quot;username&#x3D;admin&#39;&#x2F;**&#x2F;or&#x2F;**&#x2F;1&#x3D;2;RENAME TABLE &#96;fake_admin&#96; TO &#96;fake_admin1&#96;;RENAME TABLE &#96;real_admin_here_do_you_find&#96; TO &#96;fake_admin&#96;;##&amp;password&#x3D;129581926211651571912466741651878684928&quot;;</span><br></pre></td></tr></table></figure>
@@ -238,7 +244,8 @@ username=test&password=test</blockquote>
 <p>此处改列名<code>flag</code>为<code>id</code>是因为目标表中没有<code>id</code>列，而查询是根据id查询，避免了一开始无法查询的情况</p>
 <p><code>CHANGE</code>的语法为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE t1 CHANGE c_old c_new INTEGER ;#把名为c_old的列名改为c_new，类型为整数型</span><br></pre></td></tr></table></figure>
-<h2 id="Internal-System"><a href="#Internal-System" class="headerlink" title="Internal System"></a>Internal System</h2><p>超出能力范围的部分有点多，积累起来了再说</p>
+<h2 id="internal-system">Internal System</h2>
+<p>超出能力范围的部分有点多，积累起来了再说</p>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
                             </div>
 
@@ -319,7 +326,7 @@ username=test&password=test</blockquote>
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#i%E6%98%A5%E7%A7%8B%E8%99%8E%E7%AC%A62021-web"><span class="toc-article-text">i春秋虎符2021_web</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%AD%BE%E5%88%B0"><span class="toc-article-text">签到</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#unsetme"><span class="toc-article-text">unsetme</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%85%A2%E6%85%A2%E5%81%9A%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-article-text">慢慢做管理系统</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%99%BB%E5%BD%95"><span class="toc-article-text">登录</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#gopher%E5%8D%8F%E8%AE%AE"><span class="toc-article-text">gopher协议</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%94%B9%E8%A1%A8%E5%90%8D"><span class="toc-article-text">改表名</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Internal-System"><span class="toc-article-text">Internal System</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#i%E6%98%A5%E7%A7%8B%E8%99%8E%E7%AC%A62021_web"><span class="toc-article-text">i春秋虎符2021_web</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%AD%BE%E5%88%B0"><span class="toc-article-text">签到</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#unsetme"><span class="toc-article-text">unsetme</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%85%A2%E6%85%A2%E5%81%9A%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-article-text">慢慢做管理系统</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%99%BB%E5%BD%95"><span class="toc-article-text">登录</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#gopher%E5%8D%8F%E8%AE%AE"><span class="toc-article-text">gopher协议</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E6%94%B9%E8%A1%A8%E5%90%8D"><span class="toc-article-text">改表名</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#internal-system"><span class="toc-article-text">Internal System</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>

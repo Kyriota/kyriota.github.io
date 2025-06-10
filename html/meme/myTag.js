@@ -299,5 +299,17 @@ function getTag() {
             'https://ja.wikipedia.org/wiki/%E3%81%A8%E3%82%89%E3%83%89%E3%83%A9!'
         ),
 
+        createImgTextTag(
+            'HimeHina',
+            'imgs/himehina.webp',
+            'https://www.youtube.com/channel/UCFv2z4iM5vHrS8bZPq4fHQQ'
+        ),
+        
+        createImgTextTag(
+            'FX戦士くるみちゃん',
+            'imgs/FX戦士.webp',
+            'https://comic-walker.com/detail/KC_003160_S?episodeType=first'
+        ),
+
     ];
 }
