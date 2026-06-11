@@ -310,6 +310,29 @@ function getTag() {
             'imgs/FX戦士.webp',
             'https://comic-walker.com/detail/KC_003160_S?episodeType=first'
         ),
+        
+        createImgTextTag(
+            'Berserk',
+            'imgs/berserk_behelit.webp',
+            'https://en.wikipedia.org/wiki/Berserk_(manga)'
+        ),
 
+        createImgTextTag(
+            'FUWAMOCO',
+            'imgs/fuwamoco.webp',
+            'https://www.youtube.com/@FUWAMOCOch'
+        ),
+
+        createImgTextTag(
+            'Amane Kanata',
+            'imgs/amane_kanata.webp',
+            'https://www.youtube.com/channel/UCZlDXzGoo7d44bwdNObFacg'
+        ),
+
+        createImgTextTag(
+            'Future Diary / 未来日記',
+            'imgs/yuno_gasai.webp',
+            'https://ja.wikipedia.org/wiki/%E6%9C%AA%E6%9D%A5%E6%97%A5%E8%A8%98_(%E6%BC%AB%E7%94%BB)'
+        ),
     ];
 }
