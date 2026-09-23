@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            height: 100%;
+        }
+        canvas {
+        display: block;
+        }
+    </style>
+</head>
+<body>
+<script src="three.min.js"></script>
+<script src="OrbitControls.js"></script>
+<script src="dat.gui.min.js"></script>
+<script>
+    var dimension=4;
+    var rotationCount=0;
+    var addRotation;
+
+    var rotateAround=new Array();
+    var vAxis=new Array();
+    //rotateAround=[0,2];
+    //vAxis=       [ 3 ];
+
+    var Options = function() {
+        this.message = 'dat.gui';
+        this.speed = 0.8;
+        this.displayOutline = false;
+        this.button = function() {};
+    };
+
+    //创建控件对象变量
+    var gui = new dat.GUI();
+    var controls={
+        HELP:function(){
+            alert('@Kyriota\n\n理论上可渲染任意n维立方体\n基于实时渲染所需的性能，将维数控制在了一个较低的范围\n\n注意：\n透明度调整需先开启透明开关\n同一旋转中的两轴必须互异，如R0_1与R0_2不应相同\nR0_v为旋转速度');
+        },
+        透明:false,
+        透明度:0.4,
+        设定维度:4,
+        应用旋转:function(){
+            for(var i=0;i<rotationCount;i++){
+                var same=false;
+                eval("if(controls.R"+i+"_1==controls.R"+i+"_2) same=true;");
+                if(same){
+                    alert('==<!> 错误 <!>==\n同一旋转中的轴必须互异\n旋转未应用，请重新设置');
+                }
+                else{
+                    eval("if(controls.R"+i+"_1<controls.R"+i+"_2){rotateAround[i*2]=controls.R"+i+"_1;rotateAround[i*2+1]=controls.R"+i+"_2;}else{rotateAround[i*2]=controls.R"+i+"_2;rotateAround[i*2+1]=controls.R"+i+"_1;}vAxis[i]=controls.R"+i+"_v");
+                }
+            }
+        },
+        清空旋转:function(){
+            for(var i=0;i<rotationCount;i++){
+                eval("gui.remove(R"+i+"_1);gui.remove(R"+i+"_2);gui.remove(R"+i+"_v);");
+            }
+            rotationCount=0;
+            rotateAround=new Array();
+            vAxis=new Array();
+        },
+        增加旋转:function(){
+            gui.remove(addRotation);
+            eval("controls.R"+rotationCount+"_1=0;controls.R"+rotationCount+"_2=1;controls.R"+rotationCount+"_v=0;R"+rotationCount+"_1=gui.add(controls, 'R"+rotationCount+"_1').max(dimension-1).min(0).step(1);R"+rotationCount+"_2=gui.add(controls, 'R"+rotationCount+"_2').max(dimension-1).min(0).step(1);R"+rotationCount+"_v=gui.add(controls, 'R"+rotationCount+"_v').max(6).min(0).step(0.25);");
+            /*
+            controls.R0_1=0;
+            controls.R0_2=1;
+            controls.R0_v=0;
+            R0_1=gui.add(controls, 'R0_1').max(dimension-1).min(0).step(1);
+            R0_2=gui.add(controls, 'R0_2').max(dimension-1).min(0).step(1);
+            R0_v=gui.add(controls, 'R0_v').max(6).min(0).step(0.25);
+            */
+            addRotation=gui.add(controls, '增加旋转');
+            rotationCount++;
+        },
+    };
+    
+    function render() {
+        cubeMaterial.transparent=controls.透明;
+        cubeMaterial.depthTest=!controls.透明;
+        cubeMaterial.opacity=controls.透明度;
+        if(dimension!=controls.设定维度){
+            //清空旋转
+            for(var i=0;i<rotationCount;i++){
+                eval("gui.remove(R"+i+"_1);gui.remove(R"+i+"_2);gui.remove(R"+i+"_v);");
+            }
+            rotationCount=0;
+            rotateAround=new Array();
+            vAxis=new Array();
+
+            dimension=controls.设定维度;
+            a=20/(dimension*0.8);
+            vertex=new Array();
+            vertexNum=Math.pow(2,dimension)*dimension;
+            face=Math.pow(2,dimension-3)*dimension*(dimension-1);
+            for(var i=0;i<vertexNum;i++) vertex[i]=a;
+            vertexLink=new Array();
+            for(var i=0;i<vertexNum;i++) vertexLink[i]=-1;
+            normalLink=new Array();
+            for(var i=0;i<6*face;i++) normalLink[i]=-1;
+            vertexO=new Array();
+            vertexTemp=new Array();
+            vertexProjected=new Array();
+            getVertex();
+            getNearBy();
+            getFaceVertex();
+            setObj();
+        }
+        renderer.render(scene, camera);
+    }
+
+    var AA=true;
+    var angle=0;
+    var vAngle=0.005;
+    var opacityValue=0.4;
+    var a=20/dimension;
+    var lightSrcDis=5*a;
+    var maxframe=60;
+    maxframe=1000/maxframe;
+    var face=Math.pow(2,dimension-3)*dimension*(dimension-1);
+    var vertexNum=Math.pow(2,dimension)*dimension;
+    var vertex=new Array();
+    for(var i=0;i<vertexNum;i++) vertex[i]=a;
+    var vertexLink=new Array();
+    for(var i=0;i<vertexNum;i++) vertexLink[i]=-1;
+    var normalLink=new Array();
+    for(var i=0;i<6*face;i++) normalLink[i]=-1;
+    var vertexO=new Array();
+    var vertexTemp=new Array();
+    var vertexProjected=new Array();
+
+    window.onload = function() {
+        gui.add(controls, 'HELP');
+        gui.add(controls, '透明');
+        gui.add(controls, '透明度').min(0.2).max(0.6).step(0.05);
+        gui.add(controls, '设定维度').step(1).min(3).max(8);
+        gui.add(controls, '应用旋转');
+        gui.add(controls, '清空旋转');
+        addRotation=gui.add(controls, '增加旋转');
+        setInterval("setObj()",maxframe);
+        setInterval("render()",100)
+    };
+
+    function getVertex(){//得到顶点坐标
+    vertex[dimension]=-a;
+        for(var vertexIndex=2,difference,sign,i;vertexIndex*dimension<vertexNum;vertexIndex++){
+            for(sign=0;sign<dimension;sign++){//遍历尝试改变vertexIndex-1向量的每一单个元素正负号，执行条件：d为假
+                for(i=0;i<vertexIndex-1;i++){difference=0;//遍历每个向量，执行条件：d为真，每次初始化d为假
+                    for(var k=0;k<dimension&&!difference;k++)//遍历比较vertexIndex-1向量与之前向量的元素
+                        if(sign==k?vertex[i*dimension+k]!=-1*vertex[(vertexIndex-1)*dimension+k]:vertex[i*dimension+k]!=vertex[(vertexIndex-1)*dimension+k]) difference=1;
+                    if(!difference) break;
+                }
+                if(difference) break;
+            }
+            for(var k=0;k<dimension;k++) vertex[vertexIndex*dimension+k]=k==sign?-1*vertex[(vertexIndex-1)*dimension+k]:vertex[(vertexIndex-1)*dimension+k];
+        }
+        for(var i=0;i<vertexNum;i++) vertexO[i]=vertex[i];
+        console.log('vertex');
+        console.log(vertex);
+    }
+    getVertex();
+
+    function getNearBy(){//得到相邻顶点
+        for(var vertexIndex=0,n=0;vertexIndex*dimension<vertexNum;vertexIndex++,n=0){//vertexIndex：当前正在建立link的点 | n：已经建立到第几个link了
+            for(var linkIndex=0;linkIndex<vertexIndex;linkIndex++)
+                for(var i=0;i<dimension;i++)
+                    if(vertexLink[linkIndex*dimension+i]==vertexIndex) vertexLink[vertexIndex*dimension+n++]=linkIndex;
+            for(var i=vertexIndex+1,difference=0,tooManyDiff,sign;i*dimension<vertexNum&&n!=dimension;i++,difference=0){//遍历当前向量之后的每个向量 || difference：存在不一样的元素的数量
+                for(var k=0;k<dimension&&difference<=1;k++)//遍历被比较向量中的每个元素
+                    if(vertex[i*dimension+k]!=vertex[vertexIndex*dimension+k]) difference++;
+                if(difference==1) vertexLink[vertexIndex*dimension+n++]=i;
+            }
+        }
+        console.log('vertexLink');
+        console.log(vertexLink);
+    }
+    getNearBy();
+
+    function getFaceVertex(){//得到面对应的三个点
+        for(var cur1=0,normalIndex=0;cur1<vertexNum/dimension&&normalIndex!=2*face;cur1+=2)//cur n 表示指向第几个顶点，normalIndex表这是已经找到的第几个三角形
+            for(var cur2=0,pDiag=0;cur2<vertexNum/dimension&&normalIndex!=2*face;cur2++){//pDiag(Plane Diagonal)表是否为平面对角点，即cur1通过Link索引，在第二次可以索引到cur2
+                if(cur1==cur2) continue;
+                for(var i=0;i<dimension&&!pDiag;i++)//第一次索引的偏移
+                    for(var j=0;j<dimension&&!pDiag;j++)//第二次索引的偏移
+                        if(vertexLink[vertexLink[cur1*dimension+i]*dimension+j]==cur2) pDiag=1;
+                if(pDiag){
+                    var public=new Array();
+                    for(var i=0;i<dimension;i++) public[i]=-1;
+                    for(var i=0,k=0;i<dimension&&k<dimension-1;i++)
+                        for(var j=0;j<dimension&&k<dimension-1;j++)
+                            if(vertexLink[cur1*dimension+i]==vertexLink[cur2*dimension+j]) public[k++]=vertexLink[cur1*dimension+i];
+                    for(var i=0;i<=normalIndex;i++)//i指向normalLink中的向量
+                        if  (   (cur1==normalLink[i*3]||cur1==normalLink[i*3+1]||cur1==normalLink[i*3+2])//cur1与第i个normalLink中存在元素重合？
+                            &&  (cur2==normalLink[i*3]||cur2==normalLink[i*3+1]||cur2==normalLink[i*3+2]))//cur2与第i个normalLink中存在元素重合？
+                            for(var j=0;j<dimension-1;j++)
+                                if(public[j]==normalLink[i*3]||public[j]==normalLink[i*3+1]||public[j]==normalLink[i*3+2]) public[j]=-1;//public[j]与第i个normalLink中存在元素重合？
+                    for(var i=0;i<dimension-1;i++)
+                        if(public[i]!=-1){
+                            for(var j=0;j<3;j++)normalLink[normalIndex*3+j]=j==0?cur1:j==1?cur2:public[i];
+                            normalIndex++;
+                        }
+                }
+            }
+        console.log('normalLink');
+        console.log(normalLink);
+    }
+    getFaceVertex();
+
+    //*
+    function setObj(){
+
+        scene.remove(cube);
+
+        for(var i=0;i<vertexNum;i++) vertex[i]=vertexO[i];
+        for(var vertexIndex=0;vertexIndex<vertexNum/dimension;vertexIndex++)
+            for(var rotationIndex=0,r_i=0;rotationIndex<rotateAround.length/2;rotationIndex++,r_i=0){//限定旋转次数；rotateAround每行2个元素，j的作用是选取他们
+                for(var i=0;i<vertexNum;i++) vertexTemp[i]=vertex[i];
+                for(var i=0;i<dimension;i++)//遍历所有的轴
+                    if(i==rotateAround[rotationIndex*2+r_i])//当前轴是被旋转轴时，结果符合旋转矩阵计算结果
+                        vertex[vertexIndex*dimension+i]=vertexTemp[vertexIndex*dimension+i]*Math.cos(vAxis[rotationIndex]*angle)+vertexTemp[vertexIndex*dimension+rotateAround[rotationIndex*2+!r_i]]*Math.sin(vAxis[rotationIndex]*angle)*(1-2*r_i++);
+            }
+        for(var i=0;i<vertexNum;i++) vertexProjected[i]=vertex[i];
+        for(var d=dimension-1;d>2;d--)//d+1 = 当前维数
+            for(var vertexIndex=0;vertexIndex<vertexNum/dimension;vertexIndex++)//vertexIndex：第几个向量，axis：该向量的第几个元素
+                for(var axis=0;axis<d;axis++) vertexProjected[vertexIndex*dimension+axis]=vertexProjected[vertexIndex*dimension+axis]*lightSrcDis/(lightSrcDis-vertexProjected[vertexIndex*dimension+d]);
+        
+        angle+=vAngle;
+        
+        initModel();
+        scene.add(cube);
+        renderer.render(scene, camera);
+    }
+    //*/
+
+    var renderer;
+    function initRender() {
+        renderer = new THREE.WebGLRenderer({antialias:AA});//抗锯齿的关键是传的那个参数
+        renderer.setPixelRatio (devicePixelRatio)
+        renderer.setClearColor(0x000084);//设置背景颜色
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+    }
+    
+    var camera;
+    function initCamera(){
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(40, 25, 40);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+    }
+
+    var scene;
+    function initScene(){
+        scene = new THREE.Scene();
+    }
+
+    var lightR;
+    var lightG;
+    var lightB;
+    function initLight(){
+        scene.add(new THREE.AmbientLight(0x555555));
+
+        lightR = new THREE.PointLight(0xEE5BB6);
+        lightR.position.set(20, 34, 30);
+        scene.add(lightR);
+
+        lightG = new THREE.PointLight(0x80E9C8);
+        lightG.position.set(0, -40, 30);
+        scene.add(lightG);
+
+        lightB = new THREE.PointLight(0x3D43D9);
+        lightB.position.set(-20, 34, 30);
+        scene.add(lightB);
+    }
+
+    var cube;
+    var cubeGeometry;
+    var vertices = new Array();
+    var faces = new Array();
+    var cubeMaterial = new THREE.MeshStandardMaterial({
+        color:0xffffff,
+        roughness:0.75,
+        metalness:0.75,
+        side:THREE.DoubleSide,
+        transparent:false,
+        opacity:opacityValue,
+        depthTest:true,
+    });
+    function initModel(){
+        vertices = new Array();
+        faces = new Array();
+        cubeGeometry = new THREE.Geometry();
+        //创建立方体的顶点
+        for(var i=0;i<vertexNum/dimension;i++) vertices[i]=new THREE.Vector3(vertexProjected[i*dimension],vertexProjected[i*dimension+1],vertexProjected[i*dimension+2]);
+        //console.log(vertices);
+        cubeGeometry.vertices = vertices;
+
+        //创建立方的面
+        for(var i=0;i<2*face;i++) faces[i]=new THREE.Face3(normalLink[i*3],normalLink[i*3+1],normalLink[i*3+2]);
+        //console.log(faces);
+        cubeGeometry.faces = faces;
+
+        //生成法向量
+        cubeGeometry.computeFaceNormals();
+
+        cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        scene.add(cube);
+    }
+    //用户交互插件 鼠标左键按住旋转，右键按住平移，滚轮缩放
+    var controlsC;
+    var controlsLR;
+    var controlsLG;
+    var controlsLB;
+    function initControls() {
+        controlsC = new THREE.OrbitControls(camera);
+        controlsLR = new THREE.OrbitControls(lightR);
+        controlsLG = new THREE.OrbitControls(lightG);
+        controlsLB = new THREE.OrbitControls(lightB);
+        controlsC.enablePan = false;
+        controlsLR.enablePan = false;
+        controlsLG.enablePan = false;
+        controlsLB.enablePan = false;
+        controlsC.addEventListener('change', render, false);
+        controlsLR.addEventListener('change', render, false);
+        controlsLG.addEventListener('change', render, false);
+        controlsLB.addEventListener('change', render, false);//监听鼠标、键盘事件
+    }
+
+    window.addEventListener('resize',onResize, false);
+    function onResize(){
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth,window.innerHeight)
+        render();
+    }
+
+    initRender();
+    initScene();
+    initCamera();
+    initLight();
+    initControls();
+    setObj();
+    render();
+</script>
+</body>
+</html>
